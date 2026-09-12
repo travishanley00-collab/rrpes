@@ -441,8 +441,8 @@
   .principle-list p{font-size:.9rem;margin:0;}
 
   /* ---------- also built ---------- */
-  .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-  .project-card{border:1px solid var(--line);border-radius:12px;padding:22px;background:var(--surface);box-shadow:var(--shadow);}
+  .project-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .project-card{border:1px solid var(--line);border-radius:12px;padding:22px;background:var(--surface);box-shadow:var(--shadow);display:flex;flex-direction:column;}
   .project-icon{
     width:32px;height:32px;border-radius:8px;background:var(--accent-warm-bg);color:var(--accent-warm);
     display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;margin-bottom:12px;
@@ -451,6 +451,8 @@
   .project-card p{font-size:.86rem;margin:0 0 12px;}
   .project-meta{display:flex;gap:8px;flex-wrap:wrap;}
   .chip{font-size:.72rem;padding:4px 10px;border-radius:999px;background:var(--surface-2);color:var(--ink-500);}
+  .project-card .project-link{margin-top:auto;padding-top:14px;font-size:.84rem;font-weight:700;color:var(--accent);text-decoration:none;}
+  .project-card .project-link:hover{text-decoration:underline;}
 
   /* ---------- contact ---------- */
   .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:start;}
@@ -714,7 +716,7 @@
         </tbody>
       </table>
     </div>
-    <p class="cmp-foot">✓ built-in &nbsp;·&nbsp; ~ partial / generic / in development or migrating from the legacy system &nbsp;·&nbsp; ✕ not covered</p>
+    <p class="cmp-foot">✓ built-in &nbsp;·&nbsp; ~ partial / generic / in development or being brought in as a module &nbsp;·&nbsp; ✕ not covered</p>
   </div>
 </section>
 
@@ -910,7 +912,7 @@
     <div class="section-head">
       <span class="kicker">On the roadmap</span>
       <h2>The schedule is about to get a lot smarter</h2>
-      <p>These ten pieces build directly on data the platform already captures — they're next up, not a wish list. Two of them are further along than "planned": onboarding/reviews and machine maintenance are proven modules already running in the legacy system, now being migrated in rather than built from zero.</p>
+      <p>These ten pieces build directly on data the platform already captures — they're next up, not a wish list. Two of them are further along than "planned": onboarding/reviews and machine maintenance are proven modules, already built and running, now being brought into Project Center 2.0 rather than built from zero.</p>
     </div>
 
     <div class="roadmap-grid">
@@ -942,12 +944,12 @@
       <div class="roadmap-card">
         <div class="roadmap-top"><h3>Onboarding, SOP library &amp; review cycles</h3><span class="roadmap-status built">Built — migrating to 2.0</span></div>
         <p>A role-based onboarding plan that builds itself from an SOP library — required items block onboarding from being marked complete — plus a review log per employee that calculates its own next-due date from hire date and review cycle, so reviews are logged as often as a manager actually writes one, not just once a year.</p>
-        <div class="roadmap-foundation proven"><span class="arrow">↳</span><p>Proven in production: this exact module already runs today in the legacy system Project Center 2.0 is replacing, with real onboarding plans, an editable SOP library, and a logged review history — it's being migrated into the new platform, not designed from scratch.</p></div>
+        <div class="roadmap-foundation proven"><span class="arrow">↳</span><p>Proven in production: this exact module already runs today as one of Rock River Consulting's tools, with real onboarding plans, an editable SOP library, and a logged review history — it's being brought into Project Center 2.0 as a module, not designed from scratch.</p></div>
       </div>
       <div class="roadmap-card">
         <div class="roadmap-top"><h3>Machine &amp; asset maintenance (CMMS)</h3><span class="roadmap-status built">Built — migrating to 2.0</span></div>
         <p>A real asset register — tagged and serial-numbered machines, preventive-maintenance tasks on a calendar, hour-meter-triggered service, repair history, safety alerts, and lifetime cost per asset — landing on the same operational calendar as the production schedule, time off, and project milestones.</p>
-        <div class="roadmap-foundation proven"><span class="arrow">↳</span><p>Proven in production: this is a working CMMS already running in the legacy system — asset records, a PM task engine, and a maintenance calendar all exist today. What's still ahead is bringing it into Project Center 2.0 and putting it on the same timeline as production milestones and % complete.</p></div>
+        <div class="roadmap-foundation proven"><span class="arrow">↳</span><p>Proven in production: this is a working CMMS, already built — asset records, a PM task engine, and a maintenance calendar all exist today. What's still ahead is bringing it into Project Center 2.0 as a module and putting it on the same timeline as production milestones and % complete.</p></div>
       </div>
       <div class="roadmap-card">
         <div class="roadmap-top"><h3>Labor budgeting &amp; capital equipment (CapEx) planning</h3><span class="roadmap-status">In development</span></div>
@@ -1078,6 +1080,13 @@
         <p>Configuration tool for laying out and speccing custom cabinetry and millwork by room.</p>
         <div class="project-meta"><span class="chip">Design</span><span class="chip">Cabinetry</span></div>
       </div>
+      <div class="project-card">
+        <div class="project-icon">M</div>
+        <h3>Maintenance &amp; Asset Manager</h3>
+        <p>A real CMMS — asset register, preventive-maintenance scheduling, repair history, and safety alerts for every machine on the floor.</p>
+        <div class="project-meta"><span class="chip">CMMS</span><span class="chip">Maintenance</span></div>
+        <a class="project-link" href="maintenance.html">See the module →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1136,6 +1145,7 @@
     <div class="footer-links">
       <a href="#top">Home</a>
       <a href="#flythrough">Project Center 2.0</a>
+      <a href="maintenance.html">Maintenance Module</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
