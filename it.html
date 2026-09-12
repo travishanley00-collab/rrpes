@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For IT: System Requirements &amp; Architecture — Rock River Consulting</title>
+<meta name="description" content="What Project Center 2.0 actually is under the hood: a web-based .NET Blazor Server application on a single PostgreSQL database, with schema-managed migrations, server-enforced role-based access, and a full audit trail — for the IT team evaluating it." />
+<style>
+  :root{
+    --bg:#f5f7fb;
+    --surface:#ffffff;
+    --surface-2:#eef1f7;
+    --ink-900:#101827;
+    --ink-700:#3d4a5f;
+    --ink-500:#6b7686;
+    --accent:#2563eb;
+    --accent-dark:#1d4fc4;
+    --accent-2:#0d9268;
+    --accent-warm:#b45309;
+    --accent-warm-bg:#fdf1e2;
+    --bad:#dc2626;
+    --bad-bg:#fdeaea;
+    --line:#e3e8f0;
+    --radius:14px;
+    --maxw:1180px;
+    --shadow:0 1px 2px rgba(16,24,39,0.04), 0 10px 28px -14px rgba(16,24,39,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink-700);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{max-width:100%;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:24px;}
+  a{color:inherit;text-decoration:none;}
+  ul{margin:0;padding:0;list-style:none;}
+  h1,h2,h3,h4{margin:0;line-height:1.15;letter-spacing:-0.01em;color:var(--ink-900);}
+  p{color:var(--ink-500);}
+  button{font-family:inherit;}
+  code{background:rgba(37,99,235,0.1);padding:1px 6px;border-radius:5px;font-size:.9em;color:var(--accent-dark);font-family:ui-monospace,Consolas,monospace;}
+
+  /* ---------- header ---------- */
+  .site-header{
+    position:sticky;top:0;z-index:60;
+    background:rgba(255,255,255,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:var(--maxw);margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.02rem;color:var(--ink-900);white-space:nowrap;}
+  .brand-mark{
+    width:36px;height:36px;border-radius:9px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:flex;align-items:center;justify-content:center;
+    font-size:.78rem;font-weight:800;color:#fff;letter-spacing:.02em;flex:none;
+  }
+  .brand-text{display:flex;flex-direction:column;line-height:1.15;}
+  .brand-text small{font-weight:500;font-size:.68rem;color:var(--ink-500);letter-spacing:.03em;}
+  .nav-links{display:flex;align-items:center;gap:22px;font-size:.88rem;}
+  .nav-links a{color:var(--ink-500);transition:color .15s ease;padding:6px 0;}
+  .nav-links a:hover{color:var(--ink-900);}
+  .nav-cta{
+    background:var(--accent);color:#fff !important;padding:9px 18px;border-radius:999px;
+    font-weight:600;transition:background .15s ease, transform .15s ease;
+  }
+  .nav-cta:hover{background:var(--accent-dark);transform:translateY(-1px);}
+  .nav-toggle{display:none;background:none;border:0;width:34px;height:34px;position:relative;cursor:pointer;}
+  .nav-toggle span,.nav-toggle::before,.nav-toggle::after{
+    content:"";position:absolute;left:6px;right:6px;height:2px;background:var(--ink-900);border-radius:2px;
+  }
+  .nav-toggle::before{top:11px;}
+  .nav-toggle span{top:17px;}
+  .nav-toggle::after{top:23px;}
+  .nav-drop{position:relative;}
+  .nav-drop-toggle{
+    display:inline-flex;align-items:center;gap:5px;background:none;border:0;cursor:pointer;
+    font:inherit;color:var(--ink-500);padding:6px 0;transition:color .15s ease;
+  }
+  .nav-drop-toggle:hover{color:var(--ink-900);}
+  .nav-drop-toggle .caret{font-size:.62em;transition:transform .15s ease;}
+  .nav-drop.open .nav-drop-toggle .caret{transform:rotate(180deg);}
+  .nav-drop-menu{
+    position:absolute;top:100%;left:0;margin-top:12px;min-width:290px;
+    background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);
+    padding:8px;display:none;flex-direction:column;gap:2px;z-index:70;
+  }
+  .nav-drop-menu a{display:block;padding:9px 12px;border-radius:8px;color:var(--ink-900) !important;}
+  .nav-drop-menu a:hover{background:var(--surface-2);}
+  .nav-drop-menu a strong{display:block;font-size:.85rem;font-weight:600;}
+  .nav-drop-menu a span{display:block;font-size:.73rem;color:var(--ink-500);margin-top:2px;}
+  .nav-drop.open .nav-drop-menu{display:flex;}
+  @media (hover:hover){
+    .nav-drop:hover .nav-drop-menu{display:flex;}
+    .nav-drop:hover .nav-drop-toggle .caret{transform:rotate(180deg);}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    padding:96px 0 64px;
+    background:
+      radial-gradient(900px 480px at 85% -10%, rgba(37,99,235,0.10), transparent 60%),
+      radial-gradient(700px 420px at -10% 30%, rgba(13,146,104,0.08), transparent 60%);
+  }
+  .hero-inner{max-width:var(--maxw);margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:600;
+    color:var(--accent-2);letter-spacing:.03em;text-transform:uppercase;margin-bottom:18px;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 4px rgba(13,146,104,0.15);}
+  .hero h1{font-size:clamp(2.1rem,4vw,3.2rem);}
+  .hero h1 span{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .lead{font-size:1.1rem;max-width:600px;margin:20px 0 30px;color:var(--ink-700);}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:40px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:10px;
+    font-weight:600;font-size:.95rem;transition:transform .15s ease, background .15s ease, border-color .15s ease;
+    border:1px solid transparent;cursor:pointer;
+  }
+  .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff;}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{background:var(--surface);border-color:var(--line);color:var(--ink-900);}
+  .btn-ghost:hover{border-color:var(--ink-500);}
+  .hero-stats{display:flex;flex-wrap:wrap;gap:34px;}
+  .hero-stat strong{display:block;font-size:1.5rem;color:var(--ink-900);}
+  .hero-stat span{font-size:.82rem;color:var(--ink-500);}
+
+  .hero-card{
+    border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--surface);overflow:hidden;box-shadow:var(--shadow);
+  }
+  .hero-card-top{
+    display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);
+    background:var(--surface-2);
+  }
+  .hero-card-dot{width:9px;height:9px;border-radius:50%;flex:none;}
+  .hero-card-dot.a{background:#ff6159;}.hero-card-dot.b{background:#ffbd2e;}.hero-card-dot.c{background:#28c940;}
+  .hero-card-title{margin-left:8px;font-size:.78rem;color:var(--ink-500);font-family:ui-monospace,Consolas,monospace;}
+  .hero-card-body{padding:18px 20px;display:flex;flex-direction:column;gap:12px;}
+  .hero-card-row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:.9rem;color:var(--ink-500);}
+  .hero-card-row b{color:var(--ink-900);font-weight:600;white-space:nowrap;}
+  .tag{font-size:.73rem;padding:3px 10px;border-radius:999px;background:var(--surface-2);color:var(--ink-700);white-space:nowrap;}
+  .tag.green{background:#e2f7ee;color:var(--accent-2);}
+  .tag.blue{background:#e7effe;color:var(--accent);}
+  .tag.warm{background:var(--accent-warm-bg);color:var(--accent-warm);}
+  .tag.bad{background:var(--bad-bg);color:var(--bad);}
+
+  .wave{display:block;width:100%;height:56px;margin-top:-2px;}
+
+  /* ---------- generic sections ---------- */
+  section{padding:84px 0;}
+  section.soft{background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .section-head{max-width:700px;margin:0 auto 46px;text-align:center;}
+  .kicker{display:block;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.15rem);margin-bottom:14px;}
+  .section-head p{font-size:1.02rem;}
+
+  /* ---------- feature grid ---------- */
+  .module-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .module-card{
+    position:relative;border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--surface);
+    box-shadow:var(--shadow);
+  }
+  .module-card .m-icon{
+    width:34px;height:34px;border-radius:8px;background:#e2f7ee;color:var(--accent-2);
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;margin-bottom:12px;
+  }
+  .module-card h4{font-size:.96rem;margin-bottom:6px;}
+  .module-card p{font-size:.85rem;margin:0;color:var(--ink-500);}
+
+  /* ---------- how it works ---------- */
+  .how-steps{display:flex;flex-direction:column;gap:18px;max-width:820px;margin:0 auto;}
+  .how-step{display:flex;gap:18px;align-items:flex-start;border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;background:var(--surface);box-shadow:var(--shadow);}
+  .how-num{
+    flex:none;width:34px;height:34px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-weight:700;font-size:.9rem;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .how-step h3{font-size:1.02rem;margin-bottom:6px;}
+  .how-step p{font-size:.92rem;margin:0;}
+
+  /* ---------- comparison table ---------- */
+  .cmp-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow);}
+  table.cmp{width:100%;border-collapse:collapse;min-width:640px;}
+  table.cmp th,table.cmp td{padding:14px 18px;text-align:left;font-size:.9rem;border-bottom:1px solid var(--line);}
+  table.cmp th{background:var(--surface-2);color:var(--ink-900);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;}
+  table.cmp td:first-child{color:var(--ink-900);font-weight:500;}
+  table.cmp tr:last-child td{border-bottom:none;}
+  table.cmp td.center{text-align:center;}
+  .badge{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:.85rem;font-weight:700;}
+  .badge.yes{background:#e2f7ee;color:var(--accent-2);}
+  .badge.no{background:var(--bad-bg);color:var(--bad);}
+  .badge.partial{background:var(--accent-warm-bg);color:var(--accent-warm);}
+  .cmp-foot{text-align:center;font-size:.82rem;color:var(--ink-500);margin-top:14px;}
+
+  /* ---------- module / SaaS framing ---------- */
+  .module-note{
+    display:flex;gap:16px;align-items:flex-start;max-width:820px;margin:0 auto;
+    border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px;background:var(--surface);box-shadow:var(--shadow);
+  }
+  .module-note .n-ico{flex:none;font-size:1.3rem;}
+  .module-note h3{font-size:1.05rem;margin-bottom:8px;}
+  .module-note p{margin:0;font-size:.94rem;}
+
+  /* ---------- spec list ---------- */
+  .spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px;margin:0 auto;}
+  .spec-card{border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;background:var(--surface);box-shadow:var(--shadow);}
+  .spec-card h4{font-size:.86rem;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin-bottom:10px;}
+  .spec-card dl{margin:0;display:flex;flex-direction:column;gap:9px;}
+  .spec-card dt{font-size:.82rem;font-weight:600;color:var(--ink-900);}
+  .spec-card dd{margin:0;font-size:.86rem;color:var(--ink-500);}
+
+  /* ---------- contact ---------- */
+  .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:start;}
+  .contact-info h2{font-size:1.6rem;margin-bottom:14px;}
+  .contact-methods{margin-top:26px;display:flex;flex-direction:column;gap:16px;}
+  .contact-method{display:flex;gap:14px;align-items:center;}
+  .contact-method .cm-icon{
+    width:38px;height:38px;border-radius:10px;background:var(--surface-2);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;font-size:1rem;flex:none;
+  }
+  .contact-method b{display:block;color:var(--ink-900);font-size:.95rem;}
+  .contact-method span{font-size:.84rem;color:var(--ink-500);}
+  .contact-form{border:1px solid var(--line);border-radius:var(--radius);padding:28px;background:var(--surface);box-shadow:var(--shadow);}
+  .form-row{margin-bottom:16px;}
+  .form-row label{display:block;font-size:.82rem;color:var(--ink-700);margin-bottom:6px;font-weight:600;}
+  .form-row input,.form-row textarea{
+    width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-size:.92rem;
+    font-family:inherit;background:var(--surface-2);color:var(--ink-900);
+  }
+  .form-row input:focus,.form-row textarea:focus{outline:none;border-color:var(--accent);background:var(--surface);}
+  .form-row textarea{resize:vertical;min-height:110px;}
+  .form-note{font-size:.78rem;color:var(--ink-500);margin-top:10px;}
+  .form-success{
+    display:none;margin-top:14px;padding:12px 14px;border-radius:9px;background:#e2f7ee;color:var(--accent-2);font-size:.88rem;font-weight:600;
+  }
+  .form-success.show{display:block;}
+
+  /* ---------- footer ---------- */
+  .site-footer{border-top:1px solid var(--line);padding:34px 0;}
+  .footer-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;}
+  .footer-inner p{margin:0;font-size:.85rem;color:var(--ink-500);}
+  .footer-links{display:flex;gap:22px;font-size:.85rem;}
+  .footer-links a{color:var(--ink-500);}
+  .footer-links a:hover{color:var(--ink-900);}
+
+  @media (max-width:960px){
+    .hero-inner{grid-template-columns:1fr;}
+    .module-grid{grid-template-columns:1fr 1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .spec-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:720px){
+    .nav-links{
+      position:absolute;top:100%;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);
+      flex-direction:column;align-items:flex-start;padding:18px 24px;gap:16px;display:none;
+    }
+    .nav-links.open{display:flex;}
+    .nav-toggle{display:block;}
+    .module-grid{grid-template-columns:1fr;}
+    .how-step{flex-direction:column;}
+    .nav-drop-menu{position:static;box-shadow:none;border:none;padding:0 0 0 10px;margin-top:8px;width:100%;}
+    .nav-drop-menu a{padding:8px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">RR</span>
+      <span class="brand-text">Rock River Consulting<small>For IT: Requirements &amp; Architecture</small></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Project Center 2.0</a>
+      <a href="#features">Architecture</a>
+      <a href="#how">What to verify</a>
+      <a href="#compare">Compare</a>
+      <a href="#specs">Requirements</a>
+      <div class="nav-drop" id="offeringsDrop">
+        <button type="button" class="nav-drop-toggle" id="offeringsToggle" aria-haspopup="true" aria-expanded="false">Our Offerings <span class="caret">▾</span></button>
+        <div class="nav-drop-menu">
+          <a href="maintenance.html"><strong>Maintenance &amp; Asset Manager</strong><span>CMMS for machines &amp; assets</span></a>
+          <a href="hrcenter.html"><strong>HR Onboarding, SOPs &amp; Reviews</strong><span>Onboarding, SOP library, review cycles</span></a>
+          <a href="admincenter.html"><strong>AdminCenter</strong><span>Company-wide admin &amp; access control</span></a>
+          <a href="roomdesigner.html"><strong>RoomDesigner</strong><span>Cabinetry &amp; millwork layout</span></a>
+          <a href="financecenter.html"><strong>FinanceCenter</strong><span>Draws, commissions &amp; breakeven</span></a>
+          <a href="it.html"><strong>For IT</strong><span>System requirements &amp; architecture</span></a>
+        </div>
+      </div>
+      <a href="#contact" class="nav-cta">Get in touch</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span></button>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> For the person who has to support this</span>
+      <h1>It's a standard web app. <span>Here's what's under it.</span></h1>
+      <p class="lead">
+        Project Center 2.0 is a browser-based line-of-business application —
+        nothing to push to workstations, one relational database as the
+        single source of truth, schema changes that ship as reviewable code,
+        and access control that's enforced on the server, not just hidden in
+        the UI. This page is written for whoever on your team has to say yes
+        to it.
+      </p>
+      <div class="hero-actions">
+        <a href="#specs" class="btn btn-primary">Jump to requirements →</a>
+        <a href="#contact" class="btn btn-ghost">Talk to our team</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>0</strong><span>Client software to install</span></div>
+        <div class="hero-stat"><strong>1</strong><span>Database, single source of truth</span></div>
+        <div class="hero-stat"><strong>100%</strong><span>Migrations tracked as code</span></div>
+      </div>
+    </div>
+
+    <div class="hero-card" aria-hidden="true">
+      <div class="hero-card-top">
+        <span class="hero-card-dot a"></span>
+        <span class="hero-card-dot b"></span>
+        <span class="hero-card-dot c"></span>
+        <span class="hero-card-title">projectcenter.internal / settings / architecture</span>
+      </div>
+      <div class="hero-card-body">
+        <div class="hero-card-row"><span>Application</span><b>.NET, Blazor Server</b></div>
+        <div class="hero-card-row"><span>Database</span><b>PostgreSQL, one instance</b></div>
+        <div class="hero-card-row"><span>Client requirement</span><span class="tag green">Any modern browser</span></div>
+        <div class="hero-card-row"><span>Schema changes</span><span class="tag blue">Reviewable EF Core migrations</span></div>
+        <div class="hero-card-row"><span>Access control</span><b>Role matrix + PIN gates, server-enforced</b></div>
+        <div class="hero-card-row"><span>Hosting</span><b>Your infrastructure, or ours</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,30 C240,60 480,0 720,20 C960,40 1200,10 1440,30 L1440,60 L0,60 Z" fill="rgba(37,99,235,0.08)"></path>
+</svg>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Architecture</span>
+      <h2>What the platform actually is</h2>
+      <p>No proprietary runtime, no black-box data format — a standard, well-understood stack your team can evaluate the normal way.</p>
+    </div>
+
+    <div class="module-grid">
+      <div class="module-card">
+        <div class="m-icon">WEB</div>
+        <h4>Web-Based, No Client Install</h4>
+        <p>A Blazor Server application — users open it in a browser. Nothing to package, push, or keep updated across individual workstations.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">DB</div>
+        <h4>Single Relational Database</h4>
+        <p>Every module — CRM, estimating, scheduling, production, billing, and every add-on module — reads and writes the same PostgreSQL database. One source of truth, not five exports that drift apart.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">MIG</div>
+        <h4>Schema-Managed Migrations</h4>
+        <p>Every schema change ships as a reviewable, reversible migration and is applied deliberately — never a hand-run <code>ALTER TABLE</code> against production.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">ACC</div>
+        <h4>Server-Enforced Access Control</h4>
+        <p>The role-based screen access matrix and the PIN gates on sensitive centers are checked server-side — not client-side hiding that a curious user could bypass.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">AUD</div>
+        <h4>Full Audit Trail</h4>
+        <p>Every meaningful change across every module writes to an activity log, viewable by date range and printable — a real record, not just recent browser history.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">BG</div>
+        <h4>Background Automation Service</h4>
+        <p>A background service checks stage timers once a minute and moves or archives cards on its own when a configured rule is met — no external cron job or scheduled task to babysit.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">RT</div>
+        <h4>Real-Time, Multi-User</h4>
+        <p>Everyone works against the same live database with presence shown — no shared spreadsheet lock file, no "who has it open" guessing game.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">HOST</div>
+        <h4>Hosting Flexibility</h4>
+        <p>Runs on your own infrastructure or cloud account, or hosted by Rock River Consulting — either way, the database and its backups belong to you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="soft" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">What to verify before saying yes</span>
+      <h2>The questions an IT reviewer actually asks</h2>
+    </div>
+
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-num">1</div>
+        <div>
+          <h3>Where does the data live, and who can get to it directly?</h3>
+          <p>One PostgreSQL database is the single source of truth for the whole platform — your team can connect with any standard PostgreSQL client or reporting tool if direct access is ever needed, and back it up the same way you back up any other database.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">2</div>
+        <div>
+          <h3>How do schema changes get applied?</h3>
+          <p>Through EF Core migrations — each one a reviewable file, applied with a deliberate, logged step. Nothing changes the schema silently in the background.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">3</div>
+        <div>
+          <h3>Is access control real, or just hidden menus?</h3>
+          <p>The role-based access matrix and the PIN gates on HR, Finance, and Admin centers are checked on the server on every request — not just menu items hidden in the browser.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">4</div>
+        <div>
+          <h3>What does an end user actually need on their machine?</h3>
+          <p>A modern browser and network access to wherever the application is hosted — nothing installed, nothing to keep patched on individual workstations.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">5</div>
+        <div>
+          <h3>Who hosts it, and what happens if the relationship ends?</h3>
+          <p>You can run it on your own infrastructure from day one, or have Rock River Consulting host it and migrate later — the database is a standard PostgreSQL instance either way, so there's no proprietary export step to worry about.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How this compares</span>
+      <h2>What IT ends up supporting, either way</h2>
+    </div>
+
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead>
+          <tr><th>Capability</th><th class="center">Typical desktop LOB software</th><th class="center">Generic no-code SaaS platform</th><th class="center">Project Center 2.0</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Runs in a browser, no per-machine install</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Standard relational database you can query directly</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Schema changes tracked as reviewable code</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Role-based access enforced server-side</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Full audit trail across every module</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>You own the database &amp; backups outright</td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Proprietary data format / vendor lock-in</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge no">✕</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cmp-foot">✓ present &nbsp;·&nbsp; ~ partial / depends on vendor &nbsp;·&nbsp; ✕ not covered — for the last row, ✕ is the good outcome</p>
+  </div>
+</section>
+
+<section class="soft" id="specs">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Requirements</span>
+      <h2>What has to be true on each end</h2>
+      <p>No exotic requirements — a standard web application and a standard database, either self-hosted or hosted for you.</p>
+    </div>
+
+    <div class="spec-grid">
+      <div class="spec-card">
+        <h4>For end users</h4>
+        <dl>
+          <dt>Device</dt><dd>Any desktop, laptop, or tablet with a modern browser — no OS restriction.</dd>
+          <dt>Software</dt><dd>Nothing to install. No plugins, no client app, no updates to push.</dd>
+          <dt>Connectivity</dt><dd>Network access to wherever the application is hosted — your LAN/VPN for on-premises hosting, or standard internet access for cloud hosting.</dd>
+        </dl>
+      </div>
+      <div class="spec-card">
+        <h4>For hosting the application</h4>
+        <dl>
+          <dt>Runtime</dt><dd>.NET, running as a Blazor Server application — deployable behind IIS, a container, or a standard cloud app-hosting service.</dd>
+          <dt>Database</dt><dd>A PostgreSQL database instance — self-hosted, or a managed cloud PostgreSQL service.</dd>
+          <dt>Hosting choice</dt><dd>Your own servers or cloud account, or hosted by Rock River Consulting — the database stays a standard PostgreSQL instance either way, so nothing is locked to a proprietary format.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How this fits together</span>
+      <h2>Modules, not separate systems to secure</h2>
+    </div>
+    <div class="module-note">
+      <span class="n-ico">🧩</span>
+      <div>
+        <h3>One application, one database, one set of access rules</h3>
+        <p>Every module Rock River Consulting turns on — HR onboarding, machine maintenance, room design, finance, the GM home page — runs inside this same application, against this same database, under the same access matrix and audit trail. There's no separate system per module to individually secure, patch, or back up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="kicker">Get in touch</span>
+        <h2>Want to talk through the architecture directly?</h2>
+        <p>Bring your questions about hosting, data ownership, migrations, or access control — we'll walk through the actual setup, not a sales deck.</p>
+        <div class="contact-methods">
+          <div class="contact-method">
+            <div class="cm-icon">☎</div>
+            <div><b>Call or text</b><span>720.412.3639</span></div>
+          </div>
+          <div class="contact-method">
+            <div class="cm-icon">✉</div>
+            <div><b>Send an inquiry</b><span>Use the form — we'll reply directly to you</span></div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" id="inquiryForm">
+        <!-- Submits via Formspree (see FORMSPREE_ENDPOINT below) — no email address
+             appears anywhere in this page's markup. Formspree sets the subject
+             line from the hidden _subject field and uses the "email" field to
+             set Reply-To automatically, so replying just works. If Formspree
+             isn't connected yet, or a submission ever fails, this automatically
+             falls back to opening the visitor's own email app instead. -->
+        <input type="hidden" name="_subject" value="IT / System Requirements Inquiry" />
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+        <div class="form-row">
+          <label for="cName">Name</label>
+          <input type="text" id="cName" name="Name" required />
+        </div>
+        <div class="form-row">
+          <label for="cEmail">Your email</label>
+          <input type="email" id="cEmail" name="email" required />
+        </div>
+        <div class="form-row">
+          <label for="cMsg">What are you looking to solve?</label>
+          <textarea id="cMsg" name="Message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Submit Inquiry</button>
+        <p class="form-note" id="formNote">Sent straight to our team — we'll reply to the email address you enter above.</p>
+        <div class="form-success" id="formSuccess">Thanks — your message has been sent. We'll be in touch shortly.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>© <span data-year>2026</span> Rock River Consulting</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#modules">Project Center 2.0</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---------- nav toggle ----------
+  document.getElementById('navToggle').addEventListener('click', function(){
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  var yearEl = document.querySelector('[data-year]');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // ---------- "Our Offerings" nav dropdown ----------
+  (function(){
+    var drop = document.getElementById('offeringsDrop');
+    var toggle = document.getElementById('offeringsToggle');
+    if (!drop || !toggle) return;
+    toggle.addEventListener('click', function(e){
+      e.preventDefault();
+      var open = drop.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function(e){
+      if (!drop.contains(e.target)){
+        drop.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+
+  // ---------- contact form ----------
+  // Primary path: Formspree (silent submit, no email address in this page's markup).
+  //   1. Sign up free at https://formspree.io using travishanley00@gmail.com
+  //   2. Create a form there and verify it from the confirmation email Formspree sends
+  //   3. Copy the endpoint it gives you (looks like https://formspree.io/f/xxxxabcd)
+  //   4. Paste it in place of the placeholder below
+  // Until that's done (or if the request ever fails), the form automatically falls
+  // back to opening the visitor's own email app, addressed to us — so "Submit
+  // Inquiry" always does SOMETHING useful, never just sits there looking broken.
+  var FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_ENDPOINT_ID';
+  var FALLBACK_USER = ['t','r','a','v','i','s','h','a','n','l','e','y','0','0'].join('');
+  var FALLBACK_DOMAIN = ['gmail','com'].join('.');
+  var FALLBACK_ADDRESS = FALLBACK_USER + '@' + FALLBACK_DOMAIN;
+
+  (function(){
+    var form = document.getElementById('inquiryForm');
+    var note = document.getElementById('formNote');
+    var success = document.getElementById('formSuccess');
+    var formspreeReady = FORMSPREE_ENDPOINT.indexOf('YOUR_ENDPOINT_ID') === -1;
+
+    function sendByMailto(){
+      var name = document.getElementById('cName').value.trim();
+      var from = document.getElementById('cEmail').value.trim();
+      var msg = document.getElementById('cMsg').value.trim();
+      var subject = encodeURIComponent('IT / System Requirements Inquiry');
+      var body = encodeURIComponent('Name: ' + name + '\nReply-to: ' + from + '\n\n' + msg);
+      success.textContent = 'Thanks — your email app should now be open with your message ready to send.';
+      success.classList.add('show');
+      window.location.href = 'mailto:' + FALLBACK_ADDRESS + '?subject=' + subject + '&body=' + body;
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      success.classList.remove('show');
+      note.style.color = '';
+
+      if (!formspreeReady){
+        sendByMailto();
+        return;
+      }
+
+      var btn = form.querySelector('button[type="submit"]');
+      var originalLabel = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function(res){
+        if (res.ok){
+          success.textContent = 'Thanks — your message has been sent. We\'ll be in touch shortly.';
+          success.classList.add('show');
+          form.reset();
+        } else {
+          sendByMailto();
+        }
+      }).catch(function(){
+        sendByMailto();
+      }).finally(function(){
+        btn.disabled = false;
+        btn.textContent = originalLabel;
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
