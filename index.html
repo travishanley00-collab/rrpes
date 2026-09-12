@@ -221,6 +221,23 @@
   .module-card h4{font-size:.96rem;color:#fff;margin-bottom:6px;}
   .module-card p{font-size:.85rem;margin:0;color:var(--ink-500);}
 
+  /* ---------- roadmap ---------- */
+  .roadmap-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  .roadmap-card{border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;background:var(--card);}
+  .roadmap-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;}
+  .roadmap-top h3{font-size:1.05rem;color:#fff;}
+  .roadmap-status{
+    flex:none;font-size:.7rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
+    padding:4px 10px;border-radius:999px;background:rgba(255,182,72,0.16);color:var(--accent-warm);white-space:nowrap;
+  }
+  .roadmap-card p{font-size:.92rem;margin:0 0 14px;}
+  .roadmap-foundation{
+    display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:10px;
+    background:rgba(61,139,255,0.08);border:1px solid rgba(61,139,255,0.22);
+  }
+  .roadmap-foundation .arrow{color:var(--accent);font-weight:700;flex:none;}
+  .roadmap-foundation p{margin:0;font-size:.82rem;color:var(--ink-100);}
+
   /* ---------- why different ---------- */
   .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
   .why-card{border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;background:var(--card);}
@@ -328,6 +345,7 @@
       <a href="#problem">The Problem</a>
       <a href="#flythrough">Project Center 2.0</a>
       <a href="#modules">Platform</a>
+      <a href="#roadmap">Roadmap</a>
       <a href="#about">About</a>
       <a href="#contact" class="nav-cta">Get in touch</a>
     </div>
@@ -476,6 +494,39 @@
   </div>
 </section>
 
+<section id="roadmap">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">On the roadmap</span>
+      <h2>The schedule is about to get a lot smarter</h2>
+      <p>These four pieces build directly on data the platform already captures — they're next up, not a wish list.</p>
+    </div>
+
+    <div class="roadmap-grid">
+      <div class="roadmap-card">
+        <div class="roadmap-top"><h3>Dynamic scheduling from Estimate &amp; Bill of Operations</h3><span class="roadmap-status">In development</span></div>
+        <p>Instead of typing in milestone dates by hand, the schedule projects them from what was actually sold and how long it takes to build — run time, setup time, and lag time per operation, multiplied by real quantities.</p>
+        <div class="roadmap-foundation"><span class="arrow">↳</span><p>Already in place: every Bill of Operations line already stores standard run, setup, and lag time per unit — the exact numbers a projected date needs.</p></div>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-top"><h3>Buy vs. Make workflow</h3><span class="roadmap-status">In development</span></div>
+        <p>Route each Bill of Operations line to your own shop or flag it for outside purchase before the job starts — so "should we build this or buy it" is a decision made once, on purpose, not re-argued mid-production.</p>
+        <div class="roadmap-foundation"><span class="arrow">↳</span><p>Already in place: the Bill of Operations and Purchasing modules already track shop operations and vendor orders separately — this connects the two into one decision point.</p></div>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-top"><h3>Field service &amp; field scheduling</h3><span class="roadmap-status">In development</span></div>
+        <p>Dispatch and schedule install crews the same way shop operations are scheduled — against real milestones, with real completion tracking, instead of a text thread with the lead installer.</p>
+        <div class="roadmap-foundation"><span class="arrow">↳</span><p>Already in place: the schedule already separates Preconstruction, Production, and Field as distinct phases — Field just needs its own crew-facing view.</p></div>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-top"><h3>Dynamic Gantt by area &amp; phase</h3><span class="roadmap-status">In development</span></div>
+        <p>A live Gantt chart projecting completion dates broken out by project area and by phase — so "when does the lobby finish" has a real answer instead of a guess.</p>
+        <div class="roadmap-foundation"><span class="arrow">↳</span><p>Already in place: projects are already broken into Areas, and the schedule already runs on phases — the Gantt is a new view on data that already exists.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap">
     <div class="section-head">
@@ -595,31 +646,37 @@
         <div class="contact-methods">
           <div class="contact-method">
             <div class="cm-icon">☎</div>
-            <div><b>Call or text</b><span><a href="tel:7204123639" style="color:var(--ink-500);">720.412.3639</a></span></div>
+            <div><b>Call or text</b><span>720.412.3639</span></div>
           </div>
           <div class="contact-method">
             <div class="cm-icon">✉</div>
-            <div><b>Send an inquiry</b><span>Use the form — we'll reply from there</span></div>
+            <div><b>Send an inquiry</b><span>Use the form — we'll reply directly to you</span></div>
           </div>
         </div>
       </div>
 
       <form class="contact-form" id="inquiryForm">
+        <!-- Submits via Formspree (see FORMSPREE_ENDPOINT below) — no email address
+             appears anywhere in this page's markup. Formspree sets the subject
+             line from the hidden _subject field and uses the "email" field to
+             set Reply-To automatically, so replying just works. -->
+        <input type="hidden" name="_subject" value="Project Center 2.0 Inquiry" />
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
         <div class="form-row">
           <label for="cName">Name</label>
-          <input type="text" id="cName" required />
+          <input type="text" id="cName" name="Name" required />
         </div>
         <div class="form-row">
           <label for="cEmail">Your email</label>
-          <input type="email" id="cEmail" required />
+          <input type="email" id="cEmail" name="email" required />
         </div>
         <div class="form-row">
           <label for="cMsg">What are you looking to solve?</label>
-          <textarea id="cMsg" required></textarea>
+          <textarea id="cMsg" name="Message" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Submit Inquiry</button>
-        <p class="form-note">Submitting opens your email app with a pre-filled message addressed to us — nothing is posted anywhere else.</p>
-        <div class="form-success" id="formSuccess">Thanks — your email app should now be open with your message ready to send.</div>
+        <p class="form-note" id="formNote">Sent straight to our team — we'll reply to the email address you enter above.</p>
+        <div class="form-success" id="formSuccess">Thanks — your message has been sent. We'll be in touch shortly.</div>
       </form>
     </div>
   </div>
@@ -948,21 +1005,52 @@
     });
   });
 
-  // ---------- contact form: mailto handoff, address never printed as text ----------
-  (function(){
-    var userPart = ['t','r','a','v','i','s','h','a','n','l','e','y','0','0'].join('');
-    var domainPart = ['gmail','com'].join('.');
-    var address = userPart + '@' + domainPart;
+  // ---------- contact form: real submission via Formspree, no email address in this page ----------
+  // 1. Sign up free at https://formspree.io using travishanley00@gmail.com
+  // 2. Create a form there and verify it from the confirmation email
+  // 3. Copy the endpoint it gives you (looks like https://formspree.io/f/xxxxabcd)
+  // 4. Paste it in place of the placeholder below
+  var FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_ENDPOINT_ID';
 
-    document.getElementById('inquiryForm').addEventListener('submit', function(e){
+  (function(){
+    var form = document.getElementById('inquiryForm');
+    var note = document.getElementById('formNote');
+    var success = document.getElementById('formSuccess');
+
+    form.addEventListener('submit', function(e){
       e.preventDefault();
-      var name = document.getElementById('cName').value.trim();
-      var from = document.getElementById('cEmail').value.trim();
-      var msg = document.getElementById('cMsg').value.trim();
-      var subject = encodeURIComponent('Project Center 2.0 Inquiry');
-      var body = encodeURIComponent('Name: ' + name + '\nReply-to: ' + from + '\n\n' + msg);
-      document.getElementById('formSuccess').classList.add('show');
-      window.location.href = 'mailto:' + address + '?subject=' + subject + '&body=' + body;
+
+      if (FORMSPREE_ENDPOINT.indexOf('YOUR_ENDPOINT_ID') !== -1){
+        note.textContent = 'Form isn\'t connected yet — set FORMSPREE_ENDPOINT in the page source.';
+        note.style.color = 'var(--bad)';
+        return;
+      }
+
+      var btn = form.querySelector('button[type="submit"]');
+      var originalLabel = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      success.classList.remove('show');
+
+      fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function(res){
+        if (res.ok){
+          success.classList.add('show');
+          form.reset();
+        } else {
+          note.textContent = 'Something went wrong sending your message — please try again in a moment.';
+          note.style.color = 'var(--bad)';
+        }
+      }).catch(function(){
+        note.textContent = 'Something went wrong sending your message — please try again in a moment.';
+        note.style.color = 'var(--bad)';
+      }).finally(function(){
+        btn.disabled = false;
+        btn.textContent = originalLabel;
+      });
     });
   })();
 </script>
