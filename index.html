@@ -154,6 +154,17 @@
   .mto-row.good .mto-bar{background:linear-gradient(90deg,var(--accent),var(--accent-2));}
   .mto-row.good .mto-seg{background:transparent;border-right:1px solid rgba(255,255,255,0.3);font-size:.76rem;}
   .mto-row.good .mto-seg:last-child{border-right:none;}
+  .mto-seg.partial{background:var(--accent-warm);flex:1;}
+  .mto-seg.nogap{
+    flex:1;background:repeating-linear-gradient(135deg,rgba(220,38,38,0.85),rgba(220,38,38,0.85) 6px,rgba(220,38,38,0.6) 6px,rgba(220,38,38,0.6) 12px);
+    font-size:.72rem;text-transform:uppercase;letter-spacing:.02em;
+  }
+  .mto-legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:2px;font-size:.78rem;color:var(--ink-500);}
+  .mto-legend span{display:inline-flex;align-items:center;gap:6px;}
+  .mto-legend i{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none;}
+  .mto-legend i.amber{background:var(--accent-warm);}
+  .mto-legend i.red{background:#dc2626;}
+  .mto-legend i.grad{background:linear-gradient(90deg,var(--accent),var(--accent-2));}
   @media (max-width:720px){
     .mto-bar{flex-wrap:wrap;}
     .mto-seg{flex:1 1 45%;min-height:50px;}
@@ -588,6 +599,16 @@
           <div class="mto-seg">Shop Floor (paper &amp; whiteboards)</div>
         </div>
       </div>
+      <div class="mto-row">
+        <div class="mto-row-label">Procore / BuilderTrend — strong in the field, stops before the shop</div>
+        <div class="mto-bar">
+          <div class="mto-seg partial">Bidding &amp; Contracts</div>
+          <div class="mto-seg nogap">No Priced Catalog</div>
+          <div class="mto-seg partial">Field Docs &amp; Submittals</div>
+          <div class="mto-seg nogap">No Shop Floor</div>
+          <div class="mto-seg partial">Owner Billing</div>
+        </div>
+      </div>
       <div class="mto-row good">
         <div class="mto-row-label">Project Center 2.0 — one continuous record</div>
         <div class="mto-bar">
@@ -597,6 +618,11 @@
           <div class="mto-seg">Production</div>
           <div class="mto-seg">Billing</div>
         </div>
+      </div>
+      <div class="mto-legend">
+        <span><i class="grad"></i> Fully built for make-to-order manufacturing</span>
+        <span><i class="amber"></i> Covers the general-contractor side, not the shop</span>
+        <span><i class="red"></i> No coverage at all</span>
       </div>
     </div>
 
@@ -879,7 +905,7 @@
     <div class="section-head">
       <span class="kicker">On the roadmap</span>
       <h2>The schedule is about to get a lot smarter</h2>
-      <p>These five pieces build directly on data the platform already captures — they're next up, not a wish list.</p>
+      <p>These eight pieces build directly on data the platform already captures — they're next up, not a wish list.</p>
     </div>
 
     <div class="roadmap-grid">
@@ -907,6 +933,21 @@
         <div class="roadmap-top"><h3>Jobsite documentation &amp; QMS corrective/preventive action</h3><span class="roadmap-status">In development</span></div>
         <p>Field crews log jobsite documentation — photos, forms, checklists — straight against the project's board card. When the same defect or punch-list item keeps showing up across jobs, it opens a corrective/preventive action instead of just another ticket, so recurring issues get fixed at the root instead of re-punched every time.</p>
         <div class="roadmap-foundation"><span class="arrow">↳</span><p>Already in place: Production &amp; Field Service already has its own board with a Field Service stage and a Punch List stage, Quality Control already has sign-off checkpoints, and every action already writes to a full activity log — this adds the recurring-issue detection and the CAPA workflow on top.</p></div>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-top"><h3>Onboarding, job descriptions &amp; continuous reviews</h3><span class="roadmap-status">In development</span></div>
+        <p>A dedicated onboarding checklist and job-description library for new hires, plus a review cycle that isn't just a once-a-year form — manager observations get logged against an employee through the year, so the annual review is a summary of real notes instead of a blank page in December.</p>
+        <div class="roadmap-foundation"><span class="arrow">↳</span><p>Already in place: Training Mode already gives new hires a fully-seeded sandbox to learn the platform in, and the activity-log pattern used everywhere else in the app is exactly the mechanism ongoing observations would use.</p></div>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-top"><h3>Safety &amp; machine maintenance on the operational schedule</h3><span class="roadmap-status">In development</span></div>
+        <p>Safety checks and scheduled machine maintenance sitting on the same calendar as the production schedule — alongside time off, planned downtime, project milestone dates, and % complete — instead of a separate binder for safety and a different one for equipment.</p>
+        <div class="roadmap-foundation"><span class="arrow">↳</span><p>Already in place: the schedule already runs on real phases and milestones, and Time Tracking already ties crew hours to real jobs and operations — this adds equipment and safety calendars onto that same timeline.</p></div>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-top"><h3>Labor budgeting &amp; capital equipment (CapEx) planning</h3><span class="roadmap-status">In development</span></div>
+        <p>A workbook for the operations team to build the case for new equipment — projected ROI, payback period, and budget vs. actual — plus labor budgets modeled against real job costs, in the same system that already tracks the work that equipment and that labor would go toward.</p>
+        <div class="roadmap-foundation"><span class="arrow">↳</span><p>Already in place: Cost Type Splits already break labor out from every billed dollar, and the GM Command Center already rolls up margin across every job — this adds forward-looking budgets and a CapEx business case on top of numbers already being tracked.</p></div>
       </div>
     </div>
   </div>
@@ -1358,6 +1399,7 @@
       key: 'governance', label: 'Oversight & Governance',
       modules: [
         ['GM', 'GM Command Center', 'A single company-wide home page — sales, estimating, production, field, and billing KPIs rolled up in one place.', 'gm'],
+        ['ARC', 'IT & Data Architecture', 'Your own SQL database, schema-managed migrations, role-based access, and a full audit trail — deploys the way your infrastructure already works.', 'itarch'],
         ['BRD', 'Project Board', 'Multiple Kanban pipelines (Bid Pipeline, Engineering, Production & Field Service) with configurable, self-advancing automation between them.'],
         ['AUD', 'Activity & Presence Logs', 'Who changed what, and who else has a project open right now.'],
         ['INT', 'Data Integrity Tools', 'Governed reference data with rename tracking, impact preview, and revert history.', 'int'],
@@ -1414,6 +1456,9 @@
     gm: { active: 6, kicker: 'Oversight & Governance', title: 'GM Command Center', screen: 'reporting / gm-command',
       stats: [['22%', 'Avg. gross margin'], ['18', 'Jobs tracked live']],
       rows: [['Punch List', '2 open items', 'warm'], ['Margin Health', 'On target', 'green'], ['Breakeven', 'On track', 'green'], ['Activity Log', 'Full audit trail', '']] },
+    itarch: { active: 6, kicker: 'Oversight & Governance', title: 'IT & Data Architecture', screen: 'settings / architecture',
+      stats: [['PostgreSQL', 'Database engine'], ['100%', 'Schema-tracked migrations']],
+      rows: [['Hosting', 'Your infrastructure or ours', ''], ['Data Ownership', 'Your database, your backups', 'green'], ['Access Control', 'Role-based, per module', 'blue'], ['Every Change', 'Written to the audit trail', '']] },
     int: { active: 6, kicker: 'Oversight & Governance', title: 'Data Integrity Tools', screen: 'settings / building-types',
       stats: [['100%', 'Renames logged'], ['0', 'Records silently lost']],
       rows: [['Change', '"Hospital / Medical" → "Healthcare Facilities"', ''], ['Projects Affected', '12', 'warm'], ['Status', 'Applied — reversible', 'blue'], ['History', 'Full rename log kept', '']] }
