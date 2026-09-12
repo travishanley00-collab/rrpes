@@ -286,7 +286,7 @@
           <a href="it.html"><strong>For IT</strong><span>System requirements &amp; architecture</span></a>
         </div>
       </div>
-      <a href="#contact" class="nav-cta">Get in touch</a>
+      <a href="contact.html" class="nav-cta">Get in touch</a>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span></button>
   </nav>
@@ -306,7 +306,7 @@
       </p>
       <div class="hero-actions">
         <a href="#how" class="btn btn-primary">See how it works →</a>
-        <a href="#contact" class="btn btn-ghost">Talk to us</a>
+        <a href="contact.html" class="btn btn-ghost">Talk to us</a>
       </div>
       <div class="hero-stats">
         <div class="hero-stat"><strong>G702</strong><span>/ G703 draw requests, printable</span></div>
@@ -505,53 +505,6 @@
   </div>
 </section>
 
-<section id="contact">
-  <div class="wrap">
-    <div class="contact-grid">
-      <div class="contact-info">
-        <span class="kicker">Get in touch</span>
-        <h2>Want to see a draw request built and printed live?</h2>
-        <p>Tell us how your team handles draws, commissions, and breakeven today, and we'll show you what it looks like running inside Project Center 2.0 instead.</p>
-        <div class="contact-methods">
-          <div class="contact-method">
-            <div class="cm-icon">☎</div>
-            <div><b>Call or text</b><span>720.412.3639</span></div>
-          </div>
-          <div class="contact-method">
-            <div class="cm-icon">✉</div>
-            <div><b>Send an inquiry</b><span>Use the form — we'll reply directly to you</span></div>
-          </div>
-        </div>
-      </div>
-
-      <form class="contact-form" id="inquiryForm">
-        <!-- Submits via Formspree (see FORMSPREE_ENDPOINT below) — no email address
-             appears anywhere in this page's markup. Formspree sets the subject
-             line from the hidden _subject field and uses the "email" field to
-             set Reply-To automatically, so replying just works. If Formspree
-             isn't connected yet, or a submission ever fails, this automatically
-             falls back to opening the visitor's own email app instead. -->
-        <input type="hidden" name="_subject" value="FinanceCenter Inquiry" />
-        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-        <div class="form-row">
-          <label for="cName">Name</label>
-          <input type="text" id="cName" name="Name" required />
-        </div>
-        <div class="form-row">
-          <label for="cEmail">Your email</label>
-          <input type="email" id="cEmail" name="email" required />
-        </div>
-        <div class="form-row">
-          <label for="cMsg">What are you looking to solve?</label>
-          <textarea id="cMsg" name="Message" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Submit Inquiry</button>
-        <p class="form-note" id="formNote">Sent straight to our team — we'll reply to the email address you enter above.</p>
-        <div class="form-success" id="formSuccess">Thanks — your message has been sent. We'll be in touch shortly.</div>
-      </form>
-    </div>
-  </div>
-</section>
 
 <footer class="site-footer">
   <div class="wrap footer-inner">
@@ -559,7 +512,7 @@
     <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="index.html#modules">Project Center 2.0</a>
-      <a href="#contact">Contact</a>
+      <a href="contact.html">Contact</a>
     </div>
   </div>
 </footer>
@@ -590,72 +543,6 @@
     });
   })();
 
-  // ---------- contact form ----------
-  // Primary path: Formspree (silent submit, no email address in this page's markup).
-  //   1. Sign up free at https://formspree.io using travishanley00@gmail.com
-  //   2. Create a form there and verify it from the confirmation email Formspree sends
-  //   3. Copy the endpoint it gives you (looks like https://formspree.io/f/xxxxabcd)
-  //   4. Paste it in place of the placeholder below
-  // Until that's done (or if the request ever fails), the form automatically falls
-  // back to opening the visitor's own email app, addressed to us — so "Submit
-  // Inquiry" always does SOMETHING useful, never just sits there looking broken.
-  var FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_ENDPOINT_ID';
-  var FALLBACK_USER = ['t','r','a','v','i','s','h','a','n','l','e','y','0','0'].join('');
-  var FALLBACK_DOMAIN = ['gmail','com'].join('.');
-  var FALLBACK_ADDRESS = FALLBACK_USER + '@' + FALLBACK_DOMAIN;
-
-  (function(){
-    var form = document.getElementById('inquiryForm');
-    var note = document.getElementById('formNote');
-    var success = document.getElementById('formSuccess');
-    var formspreeReady = FORMSPREE_ENDPOINT.indexOf('YOUR_ENDPOINT_ID') === -1;
-
-    function sendByMailto(){
-      var name = document.getElementById('cName').value.trim();
-      var from = document.getElementById('cEmail').value.trim();
-      var msg = document.getElementById('cMsg').value.trim();
-      var subject = encodeURIComponent('FinanceCenter Inquiry');
-      var body = encodeURIComponent('Name: ' + name + '\nReply-to: ' + from + '\n\n' + msg);
-      success.textContent = 'Thanks — your email app should now be open with your message ready to send.';
-      success.classList.add('show');
-      window.location.href = 'mailto:' + FALLBACK_ADDRESS + '?subject=' + subject + '&body=' + body;
-    }
-
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      success.classList.remove('show');
-      note.style.color = '';
-
-      if (!formspreeReady){
-        sendByMailto();
-        return;
-      }
-
-      var btn = form.querySelector('button[type="submit"]');
-      var originalLabel = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = 'Sending…';
-
-      fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
-      }).then(function(res){
-        if (res.ok){
-          success.textContent = 'Thanks — your message has been sent. We\'ll be in touch shortly.';
-          success.classList.add('show');
-          form.reset();
-        } else {
-          sendByMailto();
-        }
-      }).catch(function(){
-        sendByMailto();
-      }).finally(function(){
-        btn.disabled = false;
-        btn.textContent = originalLabel;
-      });
-    });
-  })();
 </script>
 
 </body>
