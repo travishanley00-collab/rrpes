@@ -78,6 +78,28 @@
   .nav-toggle::before{top:11px;}
   .nav-toggle span{top:17px;}
   .nav-toggle::after{top:23px;}
+  .nav-drop{position:relative;}
+  .nav-drop-toggle{
+    display:inline-flex;align-items:center;gap:5px;background:none;border:0;cursor:pointer;
+    font:inherit;color:var(--ink-500);padding:6px 0;transition:color .15s ease;
+  }
+  .nav-drop-toggle:hover{color:var(--ink-900);}
+  .nav-drop-toggle .caret{font-size:.62em;transition:transform .15s ease;}
+  .nav-drop.open .nav-drop-toggle .caret{transform:rotate(180deg);}
+  .nav-drop-menu{
+    position:absolute;top:100%;left:0;margin-top:12px;min-width:290px;
+    background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);
+    padding:8px;display:none;flex-direction:column;gap:2px;z-index:70;
+  }
+  .nav-drop-menu a{display:block;padding:9px 12px;border-radius:8px;color:var(--ink-900) !important;}
+  .nav-drop-menu a:hover{background:var(--surface-2);}
+  .nav-drop-menu a strong{display:block;font-size:.85rem;font-weight:600;}
+  .nav-drop-menu a span{display:block;font-size:.73rem;color:var(--ink-500);margin-top:2px;}
+  .nav-drop.open .nav-drop-menu{display:flex;}
+  @media (hover:hover){
+    .nav-drop:hover .nav-drop-menu{display:flex;}
+    .nav-drop:hover .nav-drop-toggle .caret{transform:rotate(180deg);}
+  }
 
   /* ---------- hero ---------- */
   .hero{
@@ -199,6 +221,8 @@
   .badge.yes{background:#e2f7ee;color:var(--accent-2);}
   .badge.no{background:var(--bad-bg);color:var(--bad);}
   .badge.partial{background:var(--accent-warm-bg);color:var(--accent-warm);}
+  a.badge{text-decoration:none;transition:transform .15s ease;}
+  a.badge:hover{transform:scale(1.12);}
   .cmp-foot{text-align:center;font-size:.82rem;color:var(--ink-500);margin-top:14px;}
 
   /* ---------- fly-through ---------- */
@@ -248,32 +272,12 @@
     width:34px;height:34px;border-radius:8px;background:#e2f7ee;color:var(--accent-2);
     display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;margin-bottom:12px;
   }
-  .module-card h4{font-size:.96rem;margin-bottom:6px;padding-right:26px;}
+  .module-card h4{font-size:.96rem;margin-bottom:6px;}
   .module-card p{font-size:.85rem;margin:0;color:var(--ink-500);}
-  .module-card.has-preview{cursor:pointer;border-color:#c7dafc;}
-  .module-card.has-preview:hover{border-color:var(--accent);transform:translateY(-2px);}
-  .preview-badge{
-    position:absolute;top:14px;right:14px;width:26px;height:26px;border-radius:7px;flex:none;
-    background:#e7effe;border:1px solid #c7dafc;color:var(--accent);
-    font-size:.72rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
-    transition:transform .15s ease, background .15s ease;
-  }
-  .preview-badge:hover{background:var(--accent);color:#fff;transform:scale(1.08);}
 
-  /* ---------- module screenshot preview modal ---------- */
-  .mp-overlay{
-    position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;
-    background:rgba(16,24,39,0.55);backdrop-filter:blur(2px);
-  }
-  .mp-overlay.show{display:flex;}
-  .mp-modal{
-    width:100%;max-width:760px;border:1px solid var(--line);border-radius:16px;overflow:hidden;
-    background:var(--surface);box-shadow:0 40px 80px -30px rgba(16,24,39,0.45);
-  }
+  /* ---------- shared "app chrome" mock used by the GM home preview ---------- */
   .mp-chrome{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--surface-2);}
   .mp-url{margin-left:8px;font-size:.76rem;color:var(--ink-500);font-family:ui-monospace,Consolas,monospace;flex:1;}
-  .mp-close{background:none;border:none;color:var(--ink-500);font-size:1.2rem;cursor:pointer;padding:2px 6px;line-height:1;}
-  .mp-close:hover{color:var(--ink-900);}
   .mp-body{display:flex;min-height:320px;}
   .mp-sidebar{width:150px;flex:none;border-right:1px solid var(--line);padding:16px 10px;background:var(--surface-2);}
   .mp-nav-item{padding:9px 12px;border-radius:8px;font-size:.79rem;color:var(--ink-500);margin-bottom:2px;}
@@ -281,10 +285,6 @@
   .mp-content{flex:1;padding:22px 26px;min-width:0;}
   .mp-kicker{font-size:.74rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent-2);margin-bottom:8px;display:block;}
   .mp-content h4{font-size:1.1rem;margin-bottom:14px;}
-  .mp-stats{display:flex;gap:26px;margin-bottom:18px;}
-  .mp-stat strong{display:block;font-size:1.35rem;color:var(--ink-900);}
-  .mp-stat span{font-size:.74rem;color:var(--ink-500);}
-  .mp-rows{display:flex;flex-direction:column;gap:11px;border-top:1px solid var(--line);padding-top:14px;}
   @media (max-width:600px){
     .mp-sidebar{display:none;}
     .mp-content{padding:18px;}
@@ -407,6 +407,9 @@
   .roi-field-hd label{font-size:.86rem;font-weight:600;color:var(--ink-700);}
   .roi-field-hd output{font-size:.95rem;font-weight:700;color:var(--accent-dark);}
   .roi-field input[type="range"]{width:100%;accent-color:var(--accent);}
+  .roi-field-hd output{transition:color .2s ease, transform .2s ease;}
+  .roi-field-hd output.nudged{color:var(--accent-warm);transform:scale(1.12);}
+  .roi-dep-hint{font-size:.72rem;color:var(--ink-500);margin:-10px 0 22px;font-style:italic;}
   .roi-output{display:flex;flex-direction:column;justify-content:center;gap:18px;background:var(--surface-2);border-radius:14px;padding:26px;}
   .roi-stat{}
   .roi-stat span{display:block;font-size:.8rem;color:var(--ink-500);margin-bottom:4px;}
@@ -515,6 +518,8 @@
     .nav-toggle{display:block;}
     .problem-grid,.why-grid,.project-grid,.module-grid{grid-template-columns:1fr;}
     .stats-band{grid-template-columns:1fr 1fr;}
+    .nav-drop-menu{position:static;box-shadow:none;border:none;padding:0 0 0 10px;margin-top:8px;width:100%;}
+    .nav-drop-menu a{padding:8px 0;}
   }
 </style>
 </head>
@@ -530,6 +535,17 @@
       <a href="#problem">The Problem</a>
       <a href="#flythrough">Project Center 2.0</a>
       <a href="#modules">Platform</a>
+      <div class="nav-drop" id="offeringsDrop">
+        <button type="button" class="nav-drop-toggle" id="offeringsToggle" aria-haspopup="true" aria-expanded="false">Our Offerings <span class="caret">▾</span></button>
+        <div class="nav-drop-menu">
+          <a href="maintenance.html"><strong>Maintenance &amp; Asset Manager</strong><span>CMMS for machines &amp; assets</span></a>
+          <a href="hrcenter.html"><strong>HR Onboarding, SOPs &amp; Reviews</strong><span>Onboarding, SOP library, review cycles</span></a>
+          <a href="admincenter.html"><strong>AdminCenter</strong><span>Company-wide admin &amp; access control</span></a>
+          <a href="roomdesigner.html"><strong>RoomDesigner</strong><span>Cabinetry &amp; millwork layout</span></a>
+          <a href="financecenter.html"><strong>FinanceCenter</strong><span>Draws, commissions &amp; breakeven</span></a>
+          <a href="it.html"><strong>For IT</strong><span>System requirements &amp; architecture</span></a>
+        </div>
+      </div>
       <a href="#gm-home">GM Home</a>
       <a href="#kanban-demo">Automation</a>
       <a href="#roi">ROI</a>
@@ -716,8 +732,8 @@
           <tr><td>Delivery &amp; logistics manifests</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
           <tr><td>AIA G702 / G703 billing</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
           <tr><td>Real-time margin &amp; breakeven reporting</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
-          <tr><td>Employee onboarding, SOP library &amp; reviews</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td></tr>
-          <tr><td>Machine &amp; asset maintenance (CMMS)</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td></tr>
+          <tr><td>Employee onboarding, SOP library &amp; reviews</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><a class="badge yes" href="hrcenter.html" title="See the HR onboarding &amp; reviews module">✓</a></td></tr>
+          <tr><td>Machine &amp; asset maintenance (CMMS)</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><a class="badge yes" href="maintenance.html" title="See the Maintenance &amp; Asset Manager module">✓</a></td></tr>
           <tr><td>Corrective / preventive action on recurring issues</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge partial">~</span></td></tr>
           <tr><td>Data integrity &amp; audit trail</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
           <tr><td>One database, real-time multi-user</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
@@ -845,10 +861,10 @@
 
     <div class="automation-note">
       <span class="a-ico">⚙️</span>
-      <p>In the real app, every stage can carry its own automation rule: a background job checks every project once a minute, and when a card has sat in a stage past its configured time, it moves itself — logging <code>System (auto-advance)</code> to that project's activity log, the same as a person moving it by hand. Right now, <b>Awarded</b> is wired to auto-advance onto the Engineering board's <b>Engineering Review</b> stage 5 minutes after a project lands there. Drop a card into Awarded below to see it happen (sped way up for the demo).</p>
+      <p>In the real app, every stage can carry its own automation rule: a background job checks every project once a minute, and when a card has sat in a stage past its configured time, it moves or archives itself — logging <code>System (auto-advance)</code> to that project's activity log, the same as a person doing it by hand. Right now, <b>Awarded</b> is wired to auto-advance onto the Engineering board's <b>Engineering Review</b> stage 5 minutes after a project lands there, and <b>Lost</b> is wired to auto-archive 2 days after a project lands there. Both rules count plain calendar days, not business days. Drop a card into either column below to see it happen (sped way up for the demo).</p>
     </div>
 
-    <p class="kb-hint">Try it — drag <b>any card</b> into <b>Awarded</b>, or use the ↻ arrow on a card</p>
+    <p class="kb-hint">Try it — drag <b>any card</b> into <b>Awarded</b> or <b>Lost</b>, or use the ↻ arrow on a card</p>
 
     <div class="kb-board" id="kbBoard"></div>
 
@@ -861,8 +877,8 @@
 
 <div class="kb-toast-overlay" id="kbToastOverlay">
   <div class="kb-toast">
-    <div class="kt-ico">🔧</div>
-    <h4>Handed off automatically</h4>
+    <div class="kt-ico" id="kbToastIcon">🔧</div>
+    <h4 id="kbToastTitle">Handed off automatically</h4>
     <p id="kbToastText">This project is now in project management and engineering's hands — moved onto the Engineering board's "Engineering Review" stage without anyone lifting a finger.</p>
     <button class="btn btn-primary" id="kbToastClose">Got it</button>
   </div>
@@ -879,6 +895,7 @@
     <div class="roi-shell">
       <div class="roi-inputs">
         <h3>Your numbers</h3>
+        <p class="roi-dep-hint">These sliders are linked, not independent — move <b>Active projects</b> or <b>People</b> and the others will suggest a realistic value for your situation. Fine-tune any of them afterward; your adjustment sticks until the next slider you move recalculates it.</p>
         <div class="roi-field">
           <div class="roi-field-hd"><label for="roiProjects">Active projects at once</label><output id="roiProjectsOut">12</output></div>
           <input type="range" id="roiProjects" min="2" max="60" value="12" />
@@ -892,7 +909,7 @@
           <input type="range" id="roiHours" min="1" max="25" value="6" />
         </div>
         <div class="roi-field">
-          <div class="roi-field-hd"><label for="roiRate">Fully-loaded hourly cost</label><output id="roiRateOut">$45</output></div>
+          <div class="roi-field-hd"><label for="roiRate">General cost per employee (fully-loaded hourly rate)</label><output id="roiRateOut">$45</output></div>
           <input type="range" id="roiRate" min="20" max="120" step="5" value="45" />
         </div>
       </div>
@@ -1073,20 +1090,23 @@
       <div class="project-card">
         <div class="project-icon">A</div>
         <h3>AdminCenter</h3>
-        <p>Central hub for company-wide admin: documents, approvals, and cross-team visibility for leadership.</p>
-        <div class="project-meta"><span class="chip">Operations</span><span class="chip">Admin</span></div>
+        <p>Team accounts, a role-based screen-access matrix, PIN-gated sensitive centers, and shared file locations for leadership to manage directly.</p>
+        <div class="project-meta"><span class="chip">Operations</span><span class="chip">Access control</span></div>
+        <a class="project-link" href="admincenter.html">See the module →</a>
       </div>
       <div class="project-card">
         <div class="project-icon">H</div>
-        <h3>HRCenter</h3>
-        <p>Employee management, PTO accrual, onboarding/SOPs, and a crew self-service time &amp; requests screen.</p>
+        <h3>HR Onboarding, SOPs &amp; Reviews</h3>
+        <p>Role-based onboarding plans built from an SOP library, review cycles with auto-calculated due dates, PTO accrual, and time-off requests.</p>
         <div class="project-meta"><span class="chip">HR</span><span class="chip">Self-service</span></div>
+        <a class="project-link" href="hrcenter.html">See the module →</a>
       </div>
       <div class="project-card">
         <div class="project-icon">R</div>
         <h3>RoomDesigner</h3>
-        <p>Configuration tool for laying out and speccing custom cabinetry and millwork by room.</p>
+        <p>Configuration tool for laying out and speccing custom cabinetry and millwork by room, with a live priced bill of materials.</p>
         <div class="project-meta"><span class="chip">Design</span><span class="chip">Cabinetry</span></div>
+        <a class="project-link" href="roomdesigner.html">See the module →</a>
       </div>
       <div class="project-card">
         <div class="project-icon">M</div>
@@ -1094,6 +1114,20 @@
         <p>A real CMMS — asset register, preventive-maintenance scheduling, repair history, and safety alerts for every machine on the floor.</p>
         <div class="project-meta"><span class="chip">CMMS</span><span class="chip">Maintenance</span></div>
         <a class="project-link" href="maintenance.html">See the module →</a>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">F</div>
+        <h3>FinanceCenter</h3>
+        <p>AIA G702/G703 draw requests, per-person commission plans, and a monthly breakeven calculator.</p>
+        <div class="project-meta"><span class="chip">Finance</span><span class="chip">Billing</span></div>
+        <a class="project-link" href="financecenter.html">See the module →</a>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">IT</div>
+        <h3>For IT</h3>
+        <p>System requirements, architecture, and what to verify before your team says yes to the platform.</p>
+        <div class="project-meta"><span class="chip">Architecture</span><span class="chip">Requirements</span></div>
+        <a class="project-link" href="it.html">See the details →</a>
       </div>
     </div>
   </div>
@@ -1159,10 +1193,6 @@
   </div>
 </footer>
 
-<div class="mp-overlay" id="mpOverlay">
-  <div class="mp-modal" id="mpModal"></div>
-</div>
-
 <script>
   // ---------- nav toggle ----------
   document.getElementById('navToggle').addEventListener('click', function(){
@@ -1170,6 +1200,24 @@
   });
   var yearEl = document.querySelector('[data-year]');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // ---------- "Our Offerings" nav dropdown ----------
+  (function(){
+    var drop = document.getElementById('offeringsDrop');
+    var toggle = document.getElementById('offeringsToggle');
+    if (!drop || !toggle) return;
+    toggle.addEventListener('click', function(e){
+      e.preventDefault();
+      var open = drop.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function(e){
+      if (!drop.contains(e.target)){
+        drop.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
 
   // ---------- fly-through ----------
   var stages = [
@@ -1378,7 +1426,7 @@
     {
       key: 'sales', label: 'Sales & CRM',
       modules: [
-        ['CRM', 'Client & Bid Directory', 'Companies, contacts, and every bid tied directly to the project it becomes.', 'crm'],
+        ['CRM', 'Client & Bid Directory', 'Companies, contacts, and every bid tied directly to the project it becomes.'],
         ['LOG', 'Bid Log', 'A running record of every bid submitted, win/loss outcome, and margin on award.'],
         ['CMP', 'Campaigns', 'Outreach sequences to prospects and past clients, tracked from one place.'],
         ['DL', 'Distribution Lists', 'Reusable contact groups for transmittals, addenda, and outreach.']
@@ -1387,7 +1435,7 @@
     {
       key: 'estimating', label: 'Estimating & Specs',
       modules: [
-        ['EST', 'Estimate Builder', 'Line-item pricing from a tiered catalog, with full cost breakdowns per item.', 'est'],
+        ['EST', 'Estimate Builder', 'Line-item pricing from a tiered catalog, with full cost breakdowns per item.'],
         ['PB', 'Price Book', 'The controlled catalog of rates every estimate pulls from.'],
         ['RM', 'Room Registry & Types', 'Rooms and repeated room templates, priced and specified as a set.'],
         ['SPC', 'Spec Engine & Review', 'Baseline specifications with by-area variations tracked as differences, not full re-writes.'],
@@ -1397,7 +1445,7 @@
     {
       key: 'proposals', label: 'Proposals & Contracts',
       modules: [
-        ['PRO', 'Proposal Generator', 'Client-facing proposals built from live pricing, specs, and room data.', 'pro'],
+        ['PRO', 'Proposal Generator', 'Client-facing proposals built from live pricing, specs, and room data.'],
         ['SET', 'Proposal Branding', 'Company settings and templates so every proposal looks consistent.'],
         ['REV', 'Revision Control', 'Tracked changes to a project’s scope and pricing over time, not silent overwrites.']
       ]
@@ -1405,7 +1453,7 @@
     {
       key: 'field', label: 'Scheduling & Field Ops',
       modules: [
-        ['SCH', 'Schedule & Milestones', 'The dates every other module reads from — contract to closeout.', 'sch'],
+        ['SCH', 'Schedule & Milestones', 'The dates every other module reads from — contract to closeout.'],
         ['SUB', 'Submittals & Shop Drawings', 'Approval workflows with one-click client sign-off requests.'],
         ['DOC', 'Document Control', 'Addenda, RFIs, and transmittals in one shared, versioned register.']
       ]
@@ -1413,7 +1461,7 @@
     {
       key: 'production', label: 'Production & Shop Floor',
       modules: [
-        ['CUT', 'Cutlist & Optimizer', 'Material-optimized cut lists generated from the actual line items sold.', 'cut'],
+        ['CUT', 'Cutlist & Optimizer', 'Material-optimized cut lists generated from the actual line items sold.'],
         ['OPS', 'Bill of Operations', 'Standard shop operations — cut, edge-band, assemble, finish, pack.'],
         ['QC', 'Quality Control', 'Sign-off checkpoints before anything ships to site.'],
         ['TIM', 'Time Tracking', 'Crew clock-ins tied to real jobs and operations, rolling into actual cost.'],
@@ -1424,18 +1472,18 @@
       key: 'financials', label: 'Logistics & Financials',
       modules: [
         ['TRK', 'Truck Lots & Manifests', 'Delivery loads and manifests generated from finished production records.'],
-        ['BIL', 'Billing (AIA)', 'G702/G703 payment applications built from the live schedule of values.', 'bil'],
+        ['BIL', 'Billing (AIA)', 'G702/G703 payment applications built from the live schedule of values.'],
         ['CTS', 'Cost Type Splits', 'Labor/material/sub/overhead breakdowns behind every billed dollar.']
       ]
     },
     {
       key: 'governance', label: 'Oversight & Governance',
       modules: [
-        ['GM', 'GM Command Center', 'A single company-wide home page — sales, estimating, production, field, and billing KPIs rolled up in one place.', 'gm'],
-        ['ARC', 'IT & Data Architecture', 'Your own SQL database, schema-managed migrations, role-based access, and a full audit trail — deploys the way your infrastructure already works.', 'itarch'],
+        ['GM', 'GM Command Center', 'A single company-wide home page — sales, estimating, production, field, and billing KPIs rolled up in one place.'],
+        ['ARC', 'IT & Data Architecture', 'Your own SQL database, schema-managed migrations, role-based access, and a full audit trail — deploys the way your infrastructure already works.'],
         ['BRD', 'Project Board', 'Multiple Kanban pipelines (Bid Pipeline, Engineering, Production & Field Service) with configurable, self-advancing automation between them.'],
         ['AUD', 'Activity & Presence Logs', 'Who changed what, and who else has a project open right now.'],
-        ['INT', 'Data Integrity Tools', 'Governed reference data with rename tracking, impact preview, and revert history.', 'int'],
+        ['INT', 'Data Integrity Tools', 'Governed reference data with rename tracking, impact preview, and revert history.'],
         ['TRN', 'Training Mode', 'A fully-seeded sandbox so new hires learn the platform without touching live data.']
       ]
     }
@@ -1446,11 +1494,7 @@
   categories.forEach(function(cat, i){
     tabBarHtml += '<button class="tab-btn' + (i === 0 ? ' active' : '') + '" data-key="' + cat.key + '">' + cat.label + '</button>';
     var cardsHtml = cat.modules.map(function(m){
-      var previewKey = m[3];
-      var badge = previewKey ? '<button class="preview-badge" data-preview="' + previewKey + '" title="See a preview" aria-label="See a preview">📷</button>' : '';
-      var cardCls = 'module-card' + (previewKey ? ' has-preview' : '');
-      var attr = previewKey ? ' data-preview="' + previewKey + '"' : '';
-      return '<div class="' + cardCls + '"' + attr + '>' + badge + '<div class="m-icon">' + m[0] + '</div><h4>' + m[1] + '</h4><p>' + m[2] + '</p></div>';
+      return '<div class="module-card"><div class="m-icon">' + m[0] + '</div><h4>' + m[1] + '</h4><p>' + m[2] + '</p></div>';
     }).join('');
     panelsHtml += '<div class="tab-panel module-grid' + (i === 0 ? ' active' : '') + '" data-key="' + cat.key + '">' + cardsHtml + '</div>';
   });
@@ -1464,80 +1508,6 @@
       document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.toggle('active', p.getAttribute('data-key') === key); });
     });
   });
-
-  // ---------- flagship module "screenshot" preview ----------
-  var sidebarNav = ['CRM & Bids', 'Estimating', 'Proposals', 'Schedule', 'Production', 'Billing', 'Reporting'];
-  var previewData = {
-    crm: { active: 0, kicker: 'Sales & CRM', title: 'Client & Bid Directory', screen: 'crm / directory',
-      stats: [['128', 'Active bids'], ['34%', 'Win rate this year']],
-      rows: [['Company', 'Turner Construction', ''], ['Contact', 'Sarah Lee — PM', ''], ['Stage', 'Invited to Bid', 'blue'], ['Source', 'BuildingConnected', '']] },
-    est: { active: 1, kicker: 'Estimating & Specs', title: 'Estimate Builder', screen: 'estimate / line-items',
-      stats: [['482', 'Price book items'], ['3', 'Pricing tiers']],
-      rows: [['Category', 'Interior Doors', ''], ['Quantity', '42 units', ''], ['Rate Tier', 'Standard', ''], ['Subtotal', 'Auto-calculated', 'green']] },
-    pro: { active: 2, kicker: 'Proposals & Contracts', title: 'Proposal Generator', screen: 'proposal / preview',
-      stats: [['18', 'Sent this month'], ['62%', 'Close rate']],
-      rows: [['Prepared For', 'Turner Construction — Sarah Lee', ''], ['Room Types', 'Queen Suite × 42 rooms', ''], ['Spec Variations Flagged', '3 areas', 'warm'], ['Proposal Total', 'Calculated live', 'green']] },
-    sch: { active: 3, kicker: 'Scheduling & Field Ops', title: 'Schedule & Milestones', screen: 'schedule / milestones',
-      stats: [['6', 'Milestones tracked'], ['3', 'Phases: Precon · Production · Field']],
-      rows: [['Contract Executed', 'Complete', 'green'], ['Shop Drawings Ready', 'Planned: Sep 22', ''], ['Submittals Approved', 'Pending', 'warm'], ['Released to Production', '—', '']] },
-    cut: { active: 4, kicker: 'Production & Shop Floor', title: 'Cutlist & Optimizer', screen: 'production / traveler',
-      stats: [['3.2%', 'Avg. material waste'], ['5', 'Standard operations']],
-      rows: [['Cut List', 'Optimized — 3.2% waste', 'green'], ['Operations', 'Cut → Edge-Band → Assemble → Finish → Pack', ''], ['QC Checkpoint', 'Passed', 'green'], ['Traveler', 'Printed with QR code', '']] },
-    bil: { active: 5, kicker: 'Logistics & Financials', title: 'Billing (AIA)', screen: 'billing / pay-application',
-      stats: [['$4.2M', 'Billed year-to-date'], ['10%', 'Standard retainage']],
-      rows: [['Application #', '6', ''], ['Schedule of Values', 'Synced from Estimate', 'blue'], ['Retainage', '10%', ''], ['Status', 'Ready to Submit', 'green']] },
-    gm: { active: 6, kicker: 'Oversight & Governance', title: 'GM Command Center', screen: 'reporting / gm-command',
-      stats: [['22%', 'Avg. gross margin'], ['18', 'Jobs tracked live']],
-      rows: [['Punch List', '2 open items', 'warm'], ['Margin Health', 'On target', 'green'], ['Breakeven', 'On track', 'green'], ['Activity Log', 'Full audit trail', '']] },
-    itarch: { active: 6, kicker: 'Oversight & Governance', title: 'IT & Data Architecture', screen: 'settings / architecture',
-      stats: [['PostgreSQL', 'Database engine'], ['100%', 'Schema-tracked migrations']],
-      rows: [['Hosting', 'Your infrastructure or ours', ''], ['Data Ownership', 'Your database, your backups', 'green'], ['Access Control', 'Role-based, per module', 'blue'], ['Every Change', 'Written to the audit trail', '']] },
-    int: { active: 6, kicker: 'Oversight & Governance', title: 'Data Integrity Tools', screen: 'settings / building-types',
-      stats: [['100%', 'Renames logged'], ['0', 'Records silently lost']],
-      rows: [['Change', '"Hospital / Medical" → "Healthcare Facilities"', ''], ['Projects Affected', '12', 'warm'], ['Status', 'Applied — reversible', 'blue'], ['History', 'Full rename log kept', '']] }
-  };
-
-  function openPreview(key){
-    var d = previewData[key];
-    if (!d) return;
-    var navHtml = sidebarNav.map(function(label, i){
-      return '<div class="mp-nav-item' + (i === d.active ? ' active' : '') + '">' + label + '</div>';
-    }).join('');
-    var statsHtml = d.stats.map(function(s){
-      return '<div class="mp-stat"><strong>' + s[0] + '</strong><span>' + s[1] + '</span></div>';
-    }).join('');
-    var rowsHtml = d.rows.map(function(r){
-      var valueHtml = r[2] ? '<span class="tag ' + r[2] + '">' + r[1] + '</span>' : '<b>' + r[1] + '</b>';
-      return '<div class="hero-card-row"><span>' + r[0] + '</span>' + valueHtml + '</div>';
-    }).join('');
-
-    document.getElementById('mpModal').innerHTML =
-      '<div class="mp-chrome">' +
-        '<span class="hero-card-dot a"></span><span class="hero-card-dot b"></span><span class="hero-card-dot c"></span>' +
-        '<span class="mp-url">projectcenter.internal / ' + d.screen + '</span>' +
-        '<button class="mp-close" id="mpClose" aria-label="Close preview">✕</button>' +
-      '</div>' +
-      '<div class="mp-body">' +
-        '<div class="mp-sidebar">' + navHtml + '</div>' +
-        '<div class="mp-content">' +
-          '<span class="mp-kicker">' + d.kicker + '</span>' +
-          '<h4>' + d.title + '</h4>' +
-          '<div class="mp-stats">' + statsHtml + '</div>' +
-          '<div class="mp-rows">' + rowsHtml + '</div>' +
-        '</div>' +
-      '</div>';
-
-    document.getElementById('mpOverlay').classList.add('show');
-    document.getElementById('mpClose').addEventListener('click', closePreview);
-  }
-  function closePreview(){ document.getElementById('mpOverlay').classList.remove('show'); }
-
-  document.getElementById('tabPanels').addEventListener('click', function(e){
-    var card = e.target.closest('.module-card.has-preview');
-    if (card) openPreview(card.getAttribute('data-preview'));
-  });
-  document.getElementById('mpOverlay').addEventListener('click', function(e){ if (e.target === this) closePreview(); });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closePreview(); });
 
   // ---------- working Kanban demo: the app's real default Bid Pipeline ----------
   var kbColumns = [
@@ -1600,12 +1570,17 @@
     if (targetCol === 'awarded'){
       setTimeout(function(){ kbTriggerAutoAdvance(cardId); }, 900);
     }
+    if (targetCol === 'lost'){
+      setTimeout(function(){ kbTriggerAutoArchive(cardId); }, 900);
+    }
   }
 
   function kbTriggerAutoAdvance(cardId){
     var card = kbCards.find(function(c){ return c.id === cardId; });
     if (!card || card.col !== 'awarded') return;
 
+    document.getElementById('kbToastIcon').textContent = '🔧';
+    document.getElementById('kbToastTitle').textContent = 'Handed off automatically';
     document.getElementById('kbToastText').textContent =
       card.num + ' — ' + card.name + ' is now in project management and engineering\'s hands. In the real app this happens 5 minutes after a card lands in Awarded; here, it\'s instant so you can see it.';
     document.getElementById('kbToastOverlay').classList.add('show');
@@ -1617,6 +1592,26 @@
       kbCards = kbCards.filter(function(c){ return c.id !== cardId; });
       kbRender();
       kbLog('Auto-advanced ' + card.num + ' from Awarded to Engineering Review (Engineering board)', true);
+    }, 350);
+  }
+
+  function kbTriggerAutoArchive(cardId){
+    var card = kbCards.find(function(c){ return c.id === cardId; });
+    if (!card || card.col !== 'lost') return;
+
+    document.getElementById('kbToastIcon').textContent = '🗄️';
+    document.getElementById('kbToastTitle').textContent = 'Auto-archived after 2 days';
+    document.getElementById('kbToastText').textContent =
+      card.num + ' — ' + card.name + ' has been archived off the active board. In the real app this happens 2 days after a card lands in Lost (counted as calendar days, not business days); here, it\'s instant so you can see it.';
+    document.getElementById('kbToastOverlay').classList.add('show');
+
+    var cardEl = document.querySelector('.kb-card[data-card="' + cardId + '"]');
+    if (cardEl) cardEl.classList.add('leaving');
+
+    setTimeout(function(){
+      kbCards = kbCards.filter(function(c){ return c.id !== cardId; });
+      kbRender();
+      kbLog('Auto-archived ' + card.num + ' from Lost (2 days elapsed)', true);
     }, 350);
   }
 
@@ -1672,7 +1667,55 @@
   function kbFmtMoney(n){
     return '$' + Math.round(n).toLocaleString('en-US');
   }
-  function roiRecalc(){
+
+  // ---- slider interdependency ----
+  // These four sliders aren't independent in the real world: a shop running
+  // more active projects at once needs more people covering re-entry and
+  // reconciliation, and how many hours each of those people loses per week
+  // depends on how many projects they're splitting that work across. So
+  // dragging "Active projects" nudges "People" to a realistic staffing level
+  // for that load, and dragging either "Active projects" or "People"
+  // recalculates "Hours per week" from the resulting workload. Only the
+  // sliders directly downstream of the one you're touching move — "Fully-
+  // loaded cost" never changes on its own, and once the dependents move you
+  // can still drag them yourself to fine-tune.
+  var ROI_REENTRY_HOURS_PER_PROJECT_PER_WEEK = 2.5; // total team hours/week of re-entry work one active project tends to generate
+  var ROI_PROJECTS_PER_PERSON = 6; // rough staffing rule of thumb: 1 person covering re-entry per ~6 concurrent projects
+
+  function roiClamp(id, val){
+    var el = document.getElementById(id);
+    var min = parseInt(el.min, 10), max = parseInt(el.max, 10);
+    return Math.max(min, Math.min(max, Math.round(val)));
+  }
+  function roiSetSlider(id, val){
+    document.getElementById(id).value = roiClamp(id, val);
+    var out = document.getElementById(id + 'Out');
+    if (out){
+      out.classList.remove('nudged');
+      void out.offsetWidth; // restart the CSS animation on repeat nudges
+      out.classList.add('nudged');
+    }
+  }
+
+  function roiApplyDependencies(sourceId){
+    var projects = parseInt(document.getElementById('roiProjects').value, 10);
+
+    if (sourceId === 'roiProjects'){
+      var suggestedPeople = roiClamp('roiPeople', projects / ROI_PROJECTS_PER_PERSON);
+      roiSetSlider('roiPeople', suggestedPeople);
+    }
+    if (sourceId === 'roiProjects' || sourceId === 'roiPeople'){
+      var people = parseInt(document.getElementById('roiPeople').value, 10);
+      var totalWeeklyWorkload = projects * ROI_REENTRY_HOURS_PER_PROJECT_PER_WEEK;
+      var suggestedHours = roiClamp('roiHours', totalWeeklyWorkload / people);
+      roiSetSlider('roiHours', suggestedHours);
+    }
+    // roiHours and roiRate are leaves — moving them only recalculates the totals below.
+  }
+
+  function roiRecalc(sourceId){
+    if (sourceId) roiApplyDependencies(sourceId);
+
     var people = parseInt(document.getElementById('roiPeople').value, 10);
     var hours = parseInt(document.getElementById('roiHours').value, 10);
     var rate = parseInt(document.getElementById('roiRate').value, 10);
@@ -1701,7 +1744,7 @@
     document.getElementById('roiHalf').textContent = kbFmtMoney(costYear / 2) + ' / year';
   }
   ['roiProjects','roiPeople','roiHours','roiRate'].forEach(function(id){
-    document.getElementById(id).addEventListener('input', roiRecalc);
+    document.getElementById(id).addEventListener('input', function(){ roiRecalc(id); });
   });
   roiRecalc();
 
