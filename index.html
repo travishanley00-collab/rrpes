@@ -144,20 +144,20 @@
   .mto-row-label{font-size:.82rem;font-weight:700;letter-spacing:.02em;color:var(--ink-500);margin-bottom:10px;text-transform:uppercase;}
   .mto-bar{display:flex;border-radius:12px;overflow:hidden;min-height:64px;}
   .mto-seg{
-    flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px 12px;
-    font-size:.82rem;font-weight:600;color:#fff;background:#586376;
+    flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px 8px;
+    font-size:.74rem;font-weight:600;color:#fff;background:#586376;
   }
   .mto-seg.gap{
-    flex:0 0 13%;background:repeating-linear-gradient(135deg,rgba(220,38,38,0.85),rgba(220,38,38,0.85) 6px,rgba(220,38,38,0.6) 6px,rgba(220,38,38,0.6) 12px);
-    color:#fff;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;
+    flex:0 0 8%;background:repeating-linear-gradient(135deg,rgba(220,38,38,0.85),rgba(220,38,38,0.85) 6px,rgba(220,38,38,0.6) 6px,rgba(220,38,38,0.6) 12px);
+    color:#fff;font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:.01em;padding:10px 4px;
   }
   .mto-row.good .mto-bar{background:linear-gradient(90deg,var(--accent),var(--accent-2));}
-  .mto-row.good .mto-seg{background:transparent;border-right:1px solid rgba(255,255,255,0.3);font-size:.76rem;}
+  .mto-row.good .mto-seg{background:transparent;border-right:1px solid rgba(255,255,255,0.3);font-size:.72rem;}
   .mto-row.good .mto-seg:last-child{border-right:none;}
   .mto-seg.partial{background:var(--accent-warm);flex:1;}
   .mto-seg.nogap{
     flex:1;background:repeating-linear-gradient(135deg,rgba(220,38,38,0.85),rgba(220,38,38,0.85) 6px,rgba(220,38,38,0.6) 6px,rgba(220,38,38,0.6) 12px);
-    font-size:.72rem;text-transform:uppercase;letter-spacing:.02em;
+    font-size:.68rem;text-transform:uppercase;letter-spacing:.01em;
   }
   .mto-legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:2px;font-size:.78rem;color:var(--ink-500);}
   .mto-legend span{display:inline-flex;align-items:center;gap:6px;}
@@ -167,8 +167,8 @@
   .mto-legend i.grad{background:linear-gradient(90deg,var(--accent),var(--accent-2));}
   @media (max-width:720px){
     .mto-bar{flex-wrap:wrap;}
-    .mto-seg{flex:1 1 45%;min-height:50px;}
-    .mto-seg.gap{flex:1 1 100%;min-height:30px;}
+    .mto-seg{flex:1 1 45%;min-height:50px;font-size:.78rem;}
+    .mto-seg.gap,.mto-seg.nogap{flex:1 1 100%;min-height:30px;}
   }
   .trade-adapt{margin-top:34px;padding-top:30px;border-top:1px solid var(--line);}
   .trade-adapt h3{font-size:1.15rem;margin-bottom:10px;color:var(--ink-900);}
@@ -595,13 +595,17 @@
 
     <div class="mto-compare">
       <div class="mto-row">
-        <div class="mto-row-label">The typical approach — three tools, two gaps</div>
+        <div class="mto-row-label">The typical approach — five tools, four gaps</div>
         <div class="mto-bar">
           <div class="mto-seg">CRM / Bid Tool</div>
-          <div class="mto-seg gap">Re-typed by hand</div>
+          <div class="mto-seg gap">Re-typed</div>
           <div class="mto-seg">Estimating Spreadsheet</div>
-          <div class="mto-seg gap">Re-typed by hand</div>
+          <div class="mto-seg gap">Re-typed</div>
           <div class="mto-seg">Shop Floor (paper &amp; whiteboards)</div>
+          <div class="mto-seg gap">Re-typed</div>
+          <div class="mto-seg">Field Service (calls &amp; texts)</div>
+          <div class="mto-seg gap">Re-typed</div>
+          <div class="mto-seg">Reporting (manual rollup)</div>
         </div>
       </div>
       <div class="mto-row">
@@ -611,7 +615,9 @@
           <div class="mto-seg nogap">No Priced Catalog</div>
           <div class="mto-seg partial">Field Docs &amp; Submittals</div>
           <div class="mto-seg nogap">No Shop Floor</div>
+          <div class="mto-seg partial">Field Service Dispatch</div>
           <div class="mto-seg partial">Owner Billing</div>
+          <div class="mto-seg partial">Reporting &amp; Dashboards</div>
         </div>
       </div>
       <div class="mto-row good">
@@ -621,7 +627,9 @@
           <div class="mto-seg">Estimating</div>
           <div class="mto-seg">Proposals</div>
           <div class="mto-seg">Production</div>
+          <div class="mto-seg">Field Service</div>
           <div class="mto-seg">Billing</div>
+          <div class="mto-seg">Reporting</div>
         </div>
       </div>
       <div class="mto-legend">
@@ -633,7 +641,7 @@
 
     <div class="trade-adapt">
       <h3>Not just millwork — any project-based, make-to-order trade</h3>
-      <p>This started as a system built for one shop's custom millwork and cabinetry work. But the spine underneath it — CRM &amp; Bids → Estimate → Bill of Operations → Production → Billing — doesn't know or care what you're building. The price book, the shop operations, the units, and the costing are things Rock River Consulting configures to your workflow; they're not hard-coded to ours. That makes it a fit for any team that bids, builds, and bills project-based, make-to-order work at scale.</p>
+      <p>This started as a system built for one shop's custom millwork and cabinetry work. But the spine underneath it — CRM &amp; Bids → Estimate → Bill of Operations → Production → Field Service → Billing → Reporting — doesn't know or care what you're building. The price book, the shop operations, the units, and the costing are things Rock River Consulting configures to your workflow; they're not hard-coded to ours. That makes it a fit for any team that bids, builds, and bills project-based, make-to-order work at scale.</p>
       <div class="trade-tags">
         <span class="trade-tag">Millwork &amp; cabinetry</span>
         <span class="trade-tag">Metal fabrication</span>
