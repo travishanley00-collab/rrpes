@@ -326,6 +326,9 @@
     flex:none;font-size:.7rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
     padding:4px 10px;border-radius:999px;background:var(--accent-warm-bg);color:var(--accent-warm);white-space:nowrap;
   }
+  .roadmap-status.built{background:#e2f7ee;color:var(--accent-2);}
+  .roadmap-foundation.proven{background:#e2f7ee;border-color:#bfe9d4;}
+  .roadmap-foundation.proven .arrow{color:var(--accent-2);}
   .roadmap-card p{font-size:.92rem;margin:0 0 14px;}
   .roadmap-foundation{
     display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:10px;
@@ -703,13 +706,15 @@
           <tr><td>Delivery &amp; logistics manifests</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
           <tr><td>AIA G702 / G703 billing</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
           <tr><td>Real-time margin &amp; breakeven reporting</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Employee onboarding, SOP library &amp; reviews</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td></tr>
+          <tr><td>Machine &amp; asset maintenance (CMMS)</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td></tr>
           <tr><td>Corrective / preventive action on recurring issues</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge partial">~</span></td></tr>
           <tr><td>Data integrity &amp; audit trail</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
           <tr><td>One database, real-time multi-user</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
         </tbody>
       </table>
     </div>
-    <p class="cmp-foot">✓ built-in &nbsp;·&nbsp; ~ partial / generic / in development &nbsp;·&nbsp; ✕ not covered</p>
+    <p class="cmp-foot">✓ built-in &nbsp;·&nbsp; ~ partial / generic / in development or migrating from the legacy system &nbsp;·&nbsp; ✕ not covered</p>
   </div>
 </section>
 
@@ -905,7 +910,7 @@
     <div class="section-head">
       <span class="kicker">On the roadmap</span>
       <h2>The schedule is about to get a lot smarter</h2>
-      <p>These eight pieces build directly on data the platform already captures — they're next up, not a wish list.</p>
+      <p>These ten pieces build directly on data the platform already captures — they're next up, not a wish list. Two of them are further along than "planned": onboarding/reviews and machine maintenance are proven modules already running in the legacy system, now being migrated in rather than built from zero.</p>
     </div>
 
     <div class="roadmap-grid">
@@ -935,19 +940,29 @@
         <div class="roadmap-foundation"><span class="arrow">↳</span><p>Already in place: Production &amp; Field Service already has its own board with a Field Service stage and a Punch List stage, Quality Control already has sign-off checkpoints, and every action already writes to a full activity log — this adds the recurring-issue detection and the CAPA workflow on top.</p></div>
       </div>
       <div class="roadmap-card">
-        <div class="roadmap-top"><h3>Onboarding, job descriptions &amp; continuous reviews</h3><span class="roadmap-status">In development</span></div>
-        <p>A dedicated onboarding checklist and job-description library for new hires, plus a review cycle that isn't just a once-a-year form — manager observations get logged against an employee through the year, so the annual review is a summary of real notes instead of a blank page in December.</p>
-        <div class="roadmap-foundation"><span class="arrow">↳</span><p>Already in place: Training Mode already gives new hires a fully-seeded sandbox to learn the platform in, and the activity-log pattern used everywhere else in the app is exactly the mechanism ongoing observations would use.</p></div>
+        <div class="roadmap-top"><h3>Onboarding, SOP library &amp; review cycles</h3><span class="roadmap-status built">Built — migrating to 2.0</span></div>
+        <p>A role-based onboarding plan that builds itself from an SOP library — required items block onboarding from being marked complete — plus a review log per employee that calculates its own next-due date from hire date and review cycle, so reviews are logged as often as a manager actually writes one, not just once a year.</p>
+        <div class="roadmap-foundation proven"><span class="arrow">↳</span><p>Proven in production: this exact module already runs today in the legacy system Project Center 2.0 is replacing, with real onboarding plans, an editable SOP library, and a logged review history — it's being migrated into the new platform, not designed from scratch.</p></div>
       </div>
       <div class="roadmap-card">
-        <div class="roadmap-top"><h3>Safety &amp; machine maintenance on the operational schedule</h3><span class="roadmap-status">In development</span></div>
-        <p>Safety checks and scheduled machine maintenance sitting on the same calendar as the production schedule — alongside time off, planned downtime, project milestone dates, and % complete — instead of a separate binder for safety and a different one for equipment.</p>
-        <div class="roadmap-foundation"><span class="arrow">↳</span><p>Already in place: the schedule already runs on real phases and milestones, and Time Tracking already ties crew hours to real jobs and operations — this adds equipment and safety calendars onto that same timeline.</p></div>
+        <div class="roadmap-top"><h3>Machine &amp; asset maintenance (CMMS)</h3><span class="roadmap-status built">Built — migrating to 2.0</span></div>
+        <p>A real asset register — tagged and serial-numbered machines, preventive-maintenance tasks on a calendar, hour-meter-triggered service, repair history, safety alerts, and lifetime cost per asset — landing on the same operational calendar as the production schedule, time off, and project milestones.</p>
+        <div class="roadmap-foundation proven"><span class="arrow">↳</span><p>Proven in production: this is a working CMMS already running in the legacy system — asset records, a PM task engine, and a maintenance calendar all exist today. What's still ahead is bringing it into Project Center 2.0 and putting it on the same timeline as production milestones and % complete.</p></div>
       </div>
       <div class="roadmap-card">
         <div class="roadmap-top"><h3>Labor budgeting &amp; capital equipment (CapEx) planning</h3><span class="roadmap-status">In development</span></div>
         <p>A workbook for the operations team to build the case for new equipment — projected ROI, payback period, and budget vs. actual — plus labor budgets modeled against real job costs, in the same system that already tracks the work that equipment and that labor would go toward.</p>
         <div class="roadmap-foundation"><span class="arrow">↳</span><p>Already in place: Cost Type Splits already break labor out from every billed dollar, and the GM Command Center already rolls up margin across every job — this adds forward-looking budgets and a CapEx business case on top of numbers already being tracked.</p></div>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-top"><h3>Commission calculation by territory &amp; product</h3><span class="roadmap-status">In development</span></div>
+        <p>Commission calculated automatically from what was actually sold and where — by sales territory and by product line — instead of a spreadsheet someone reconciles by hand every pay period.</p>
+        <div class="roadmap-foundation"><span class="arrow">↳</span><p>Already in place: the CRM already tracks a client's city, state, and multiple office locations, and Cost Type Splits already break out exactly what was sold behind every billed dollar — the two pieces a commission rule needs.</p></div>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-top"><h3>Multi-site production fit &amp; landed-cost planning</h3><span class="roadmap-status">In development</span></div>
+        <p>For operations running production across more than one site: a model that weighs each site's open capacity, picks the best fit for a given job, and adds projected shipping cost on top — so the number compared against project budget is true landed cost, not just shop cost, before production ever starts.</p>
+        <div class="roadmap-foundation"><span class="arrow">↳</span><p>Already in place: Truck Lots &amp; Manifests already generate shipping loads and manifests from finished production records — this adds the site-selection model and folds projected shipping into the landed-cost comparison earlier, at the planning stage.</p></div>
       </div>
     </div>
   </div>
