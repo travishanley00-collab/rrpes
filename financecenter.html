@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>FinanceCenter — Rock River Consulting</title>
-<meta name="description" content="FinanceCenter is Rock River Consulting's financial operations module for Project Center 2.0 — AIA G702/G703 draw requests, per-person commission plans, and a monthly breakeven calculator, on the same platform as estimating and production." />
+<meta name="description" content="FinanceCenter is Rock River Consulting's financial operations module for Project Center 2.0 — AIA G702/G703 draw requests, per-person commission plans, a monthly breakeven calculator, and material requisition/PO/receiving tied to job costing, on the same platform as estimating and production." />
 <style>
   :root{
     --bg:#f5f7fb;
@@ -387,6 +387,21 @@
         <h4>Shared, Multi-User Data</h4>
         <p>One shared financial record everyone with access reads from — not a spreadsheet on someone's laptop that only reflects last week.</p>
       </div>
+      <div class="module-card">
+        <div class="m-icon">PO</div>
+        <h4>Material Requisition, PO &amp; Receiving</h4>
+        <p>Request materials against a specific job, turn the request into a purchase order, and receive it in against that same project — including customer-supplied or job-specific materials tracked at zero cost alongside anything Max Craft buys.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">RPL</div>
+        <h4>Stock Reorder &amp; Replenishment</h4>
+        <p>Stock materials carry their own reorder point and reorder quantity — when a job draws stock down, the system flags what needs replenishing, the same way a traditional ERP handles inventory, not a separate spreadsheet to babysit.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">JC</div>
+        <h4>Job Costing on Real Material Cost</h4>
+        <p>Every receipt posts its actual cost back to the project it was ordered for, so a job's real material spend — not just the estimate — feeds directly into margin and breakeven.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -434,6 +449,13 @@
           <p>Update overhead or margin assumptions and see the revenue needed to break even recalculate immediately.</p>
         </div>
       </div>
+      <div class="how-step">
+        <div class="how-num">6</div>
+        <div>
+          <h3>Requisition, order, and receive materials against the job</h3>
+          <p>Turn a material requisition into a purchase order, print or email it to the vendor, and receive it in against the same project — customer-supplied and job-specific materials log the same way at zero cost, and stock items replenish from the same reorder logic instead of a separate system.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -457,6 +479,7 @@
           <tr><td>Commission plans tied to the CRM's won-bid value</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
           <tr><td>Monthly breakeven from your own overhead &amp; margin</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
           <tr><td>Printable, standard-format draw certificates</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Material requisition → PO → receiving, tied to job costing</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
           <tr><td>Full general-ledger accounting &amp; tax filing</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge no">✕</span></td></tr>
           <tr><td>Same login &amp; database as estimating and production</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
         </tbody>
