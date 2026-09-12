@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maintenance & Asset Manager — Rock River Consulting</title>
+<meta name="description" content="Maintenance & Asset Manager is Rock River Consulting's CMMS module for Project Center 2.0 — an asset register, preventive-maintenance scheduling, hour-meter triggers, repair history, and safety alerts for every machine on the floor, on the same platform as production." />
+<style>
+  :root{
+    --bg:#f5f7fb;
+    --surface:#ffffff;
+    --surface-2:#eef1f7;
+    --ink-900:#101827;
+    --ink-700:#3d4a5f;
+    --ink-500:#6b7686;
+    --accent:#2563eb;
+    --accent-dark:#1d4fc4;
+    --accent-2:#0d9268;
+    --accent-warm:#b45309;
+    --accent-warm-bg:#fdf1e2;
+    --bad:#dc2626;
+    --bad-bg:#fdeaea;
+    --line:#e3e8f0;
+    --radius:14px;
+    --maxw:1180px;
+    --shadow:0 1px 2px rgba(16,24,39,0.04), 0 10px 28px -14px rgba(16,24,39,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink-700);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{max-width:100%;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:24px;}
+  a{color:inherit;text-decoration:none;}
+  ul{margin:0;padding:0;list-style:none;}
+  h1,h2,h3,h4{margin:0;line-height:1.15;letter-spacing:-0.01em;color:var(--ink-900);}
+  p{color:var(--ink-500);}
+  button{font-family:inherit;}
+
+  /* ---------- header ---------- */
+  .site-header{
+    position:sticky;top:0;z-index:60;
+    background:rgba(255,255,255,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:var(--maxw);margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.02rem;color:var(--ink-900);white-space:nowrap;}
+  .brand-mark{
+    width:36px;height:36px;border-radius:9px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:flex;align-items:center;justify-content:center;
+    font-size:.78rem;font-weight:800;color:#fff;letter-spacing:.02em;flex:none;
+  }
+  .brand-text{display:flex;flex-direction:column;line-height:1.15;}
+  .brand-text small{font-weight:500;font-size:.68rem;color:var(--ink-500);letter-spacing:.03em;}
+  .nav-links{display:flex;align-items:center;gap:22px;font-size:.88rem;}
+  .nav-links a{color:var(--ink-500);transition:color .15s ease;padding:6px 0;}
+  .nav-links a:hover{color:var(--ink-900);}
+  .nav-cta{
+    background:var(--accent);color:#fff !important;padding:9px 18px;border-radius:999px;
+    font-weight:600;transition:background .15s ease, transform .15s ease;
+  }
+  .nav-cta:hover{background:var(--accent-dark);transform:translateY(-1px);}
+  .nav-toggle{display:none;background:none;border:0;width:34px;height:34px;position:relative;cursor:pointer;}
+  .nav-toggle span,.nav-toggle::before,.nav-toggle::after{
+    content:"";position:absolute;left:6px;right:6px;height:2px;background:var(--ink-900);border-radius:2px;
+  }
+  .nav-toggle::before{top:11px;}
+  .nav-toggle span{top:17px;}
+  .nav-toggle::after{top:23px;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    padding:96px 0 64px;
+    background:
+      radial-gradient(900px 480px at 85% -10%, rgba(37,99,235,0.10), transparent 60%),
+      radial-gradient(700px 420px at -10% 30%, rgba(13,146,104,0.08), transparent 60%);
+  }
+  .hero-inner{max-width:var(--maxw);margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:600;
+    color:var(--accent-2);letter-spacing:.03em;text-transform:uppercase;margin-bottom:18px;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 4px rgba(13,146,104,0.15);}
+  .hero h1{font-size:clamp(2.1rem,4vw,3.2rem);}
+  .hero h1 span{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .lead{font-size:1.1rem;max-width:600px;margin:20px 0 30px;color:var(--ink-700);}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:40px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:10px;
+    font-weight:600;font-size:.95rem;transition:transform .15s ease, background .15s ease, border-color .15s ease;
+    border:1px solid transparent;cursor:pointer;
+  }
+  .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff;}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{background:var(--surface);border-color:var(--line);color:var(--ink-900);}
+  .btn-ghost:hover{border-color:var(--ink-500);}
+  .hero-stats{display:flex;flex-wrap:wrap;gap:34px;}
+  .hero-stat strong{display:block;font-size:1.5rem;color:var(--ink-900);}
+  .hero-stat span{font-size:.82rem;color:var(--ink-500);}
+
+  .hero-card{
+    border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--surface);overflow:hidden;box-shadow:var(--shadow);
+  }
+  .hero-card-top{
+    display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);
+    background:var(--surface-2);
+  }
+  .hero-card-dot{width:9px;height:9px;border-radius:50%;flex:none;}
+  .hero-card-dot.a{background:#ff6159;}.hero-card-dot.b{background:#ffbd2e;}.hero-card-dot.c{background:#28c940;}
+  .hero-card-title{margin-left:8px;font-size:.78rem;color:var(--ink-500);font-family:ui-monospace,Consolas,monospace;}
+  .hero-card-body{padding:18px 20px;display:flex;flex-direction:column;gap:12px;}
+  .hero-card-row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:.9rem;color:var(--ink-500);}
+  .hero-card-row b{color:var(--ink-900);font-weight:600;white-space:nowrap;}
+  .tag{font-size:.73rem;padding:3px 10px;border-radius:999px;background:var(--surface-2);color:var(--ink-700);white-space:nowrap;}
+  .tag.green{background:#e2f7ee;color:var(--accent-2);}
+  .tag.blue{background:#e7effe;color:var(--accent);}
+  .tag.warm{background:var(--accent-warm-bg);color:var(--accent-warm);}
+  .tag.bad{background:var(--bad-bg);color:var(--bad);}
+
+  .wave{display:block;width:100%;height:56px;margin-top:-2px;}
+
+  /* ---------- generic sections ---------- */
+  section{padding:84px 0;}
+  section.soft{background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .section-head{max-width:700px;margin:0 auto 46px;text-align:center;}
+  .kicker{display:block;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.15rem);margin-bottom:14px;}
+  .section-head p{font-size:1.02rem;}
+
+  /* ---------- feature grid (reused module-card look) ---------- */
+  .module-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .module-card{
+    position:relative;border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--surface);
+    box-shadow:var(--shadow);
+  }
+  .module-card .m-icon{
+    width:34px;height:34px;border-radius:8px;background:#e2f7ee;color:var(--accent-2);
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;margin-bottom:12px;
+  }
+  .module-card h4{font-size:.96rem;margin-bottom:6px;}
+  .module-card p{font-size:.85rem;margin:0;color:var(--ink-500);}
+
+  /* ---------- how it works ---------- */
+  .how-steps{display:flex;flex-direction:column;gap:18px;max-width:820px;margin:0 auto;}
+  .how-step{display:flex;gap:18px;align-items:flex-start;border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;background:var(--surface);box-shadow:var(--shadow);}
+  .how-num{
+    flex:none;width:34px;height:34px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-weight:700;font-size:.9rem;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .how-step h3{font-size:1.02rem;margin-bottom:6px;}
+  .how-step p{font-size:.92rem;margin:0;}
+
+  /* ---------- comparison table ---------- */
+  .cmp-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow);}
+  table.cmp{width:100%;border-collapse:collapse;min-width:640px;}
+  table.cmp th,table.cmp td{padding:14px 18px;text-align:left;font-size:.9rem;border-bottom:1px solid var(--line);}
+  table.cmp th{background:var(--surface-2);color:var(--ink-900);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;}
+  table.cmp td:first-child{color:var(--ink-900);font-weight:500;}
+  table.cmp tr:last-child td{border-bottom:none;}
+  table.cmp td.center{text-align:center;}
+  .badge{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:.85rem;font-weight:700;}
+  .badge.yes{background:#e2f7ee;color:var(--accent-2);}
+  .badge.no{background:var(--bad-bg);color:var(--bad);}
+  .badge.partial{background:var(--accent-warm-bg);color:var(--accent-warm);}
+  .cmp-foot{text-align:center;font-size:.82rem;color:var(--ink-500);margin-top:14px;}
+
+  /* ---------- module / SaaS framing ---------- */
+  .module-note{
+    display:flex;gap:16px;align-items:flex-start;max-width:820px;margin:0 auto;
+    border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px;background:var(--surface);box-shadow:var(--shadow);
+  }
+  .module-note .n-ico{flex:none;font-size:1.3rem;}
+  .module-note h3{font-size:1.05rem;margin-bottom:8px;}
+  .module-note p{margin:0;font-size:.94rem;}
+
+  /* ---------- contact ---------- */
+  .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:start;}
+  .contact-info h2{font-size:1.6rem;margin-bottom:14px;}
+  .contact-methods{margin-top:26px;display:flex;flex-direction:column;gap:16px;}
+  .contact-method{display:flex;gap:14px;align-items:center;}
+  .contact-method .cm-icon{
+    width:38px;height:38px;border-radius:10px;background:var(--surface-2);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;font-size:1rem;flex:none;
+  }
+  .contact-method b{display:block;color:var(--ink-900);font-size:.95rem;}
+  .contact-method span{font-size:.84rem;color:var(--ink-500);}
+  .contact-form{border:1px solid var(--line);border-radius:var(--radius);padding:28px;background:var(--surface);box-shadow:var(--shadow);}
+  .form-row{margin-bottom:16px;}
+  .form-row label{display:block;font-size:.82rem;color:var(--ink-700);margin-bottom:6px;font-weight:600;}
+  .form-row input,.form-row textarea{
+    width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-size:.92rem;
+    font-family:inherit;background:var(--surface-2);color:var(--ink-900);
+  }
+  .form-row input:focus,.form-row textarea:focus{outline:none;border-color:var(--accent);background:var(--surface);}
+  .form-row textarea{resize:vertical;min-height:110px;}
+  .form-note{font-size:.78rem;color:var(--ink-500);margin-top:10px;}
+  .form-success{
+    display:none;margin-top:14px;padding:12px 14px;border-radius:9px;background:#e2f7ee;color:var(--accent-2);font-size:.88rem;font-weight:600;
+  }
+  .form-success.show{display:block;}
+
+  /* ---------- footer ---------- */
+  .site-footer{border-top:1px solid var(--line);padding:34px 0;}
+  .footer-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;}
+  .footer-inner p{margin:0;font-size:.85rem;color:var(--ink-500);}
+  .footer-links{display:flex;gap:22px;font-size:.85rem;}
+  .footer-links a{color:var(--ink-500);}
+  .footer-links a:hover{color:var(--ink-900);}
+
+  @media (max-width:960px){
+    .hero-inner{grid-template-columns:1fr;}
+    .module-grid{grid-template-columns:1fr 1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:720px){
+    .nav-links{
+      position:absolute;top:100%;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);
+      flex-direction:column;align-items:flex-start;padding:18px 24px;gap:16px;display:none;
+    }
+    .nav-links.open{display:flex;}
+    .nav-toggle{display:block;}
+    .module-grid{grid-template-columns:1fr;}
+    .how-step{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">RR</span>
+      <span class="brand-text">Rock River Consulting<small>Maintenance &amp; Asset Manager</small></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Project Center 2.0</a>
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#compare">Compare</a>
+      <a href="#contact" class="nav-cta">Get in touch</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span></button>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Rock River Consulting · A Project Center 2.0 module</span>
+      <h1>Know what's due <span>before it breaks down.</span></h1>
+      <p class="lead">
+        Maintenance &amp; Asset Manager is a real CMMS for the shop floor — an
+        asset register with tags and serial numbers, preventive-maintenance
+        scheduling by calendar or by hour meter, repair history, and safety
+        alerts — running on the same platform and the same database as
+        estimating, scheduling, and production. No separate system to buy,
+        license, or log into.
+      </p>
+      <div class="hero-actions">
+        <a href="#how" class="btn btn-primary">See how it works →</a>
+        <a href="#contact" class="btn btn-ghost">Talk to us</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>1</strong><span>Asset register, tagged &amp; serialized</span></div>
+        <div class="hero-stat"><strong>0</strong><span>Separate CMMS logins</span></div>
+        <div class="hero-stat"><strong>24/7</strong><span>Due-now visibility</span></div>
+      </div>
+    </div>
+
+    <div class="hero-card" aria-hidden="true">
+      <div class="hero-card-top">
+        <span class="hero-card-dot a"></span>
+        <span class="hero-card-dot b"></span>
+        <span class="hero-card-dot c"></span>
+        <span class="hero-card-title">projectcenter.internal / maintenance / due-now</span>
+      </div>
+      <div class="hero-card-body">
+        <div class="hero-card-row"><span>Edgebander — MC-014</span><span class="tag bad">Overdue · safety flag</span></div>
+        <div class="hero-card-row"><span>CNC Router — MC-021</span><span class="tag warm">240 run hrs to service</span></div>
+        <div class="hero-card-row"><span>Table Saw #2 — MC-007</span><span class="tag blue">PM due in 3 days</span></div>
+        <div class="hero-card-row"><span>Dust Collector — MC-030</span><span class="tag green">Serviced — up to date</span></div>
+        <div class="hero-card-row"><span>Assets tracked</span><b>34 machines</b></div>
+        <div class="hero-card-row"><span>Lifetime cost view</span><b>Per asset, always current</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,30 C240,60 480,0 720,20 C960,40 1200,10 1440,30 L1440,60 L0,60 Z" fill="rgba(37,99,235,0.08)"></path>
+</svg>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">What it does</span>
+      <h2>Everything a shop's maintenance program actually needs</h2>
+      <p>Not a checklist app bolted on after the fact — a real asset register and PM engine built for a shop that runs machines every day.</p>
+    </div>
+
+    <div class="module-grid">
+      <div class="module-card">
+        <div class="m-icon">TAG</div>
+        <h4>Asset Register</h4>
+        <p>Every machine tagged with a unique asset code and serial number — searchable, retireable, and tied to every task and repair logged against it.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">PM</div>
+        <h4>Preventive Maintenance Engine</h4>
+        <p>Recurring PM tasks per asset, with a due list that surfaces automatically — nothing to remember, nothing tracked on a clipboard.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">CAL</div>
+        <h4>Maintenance Calendar</h4>
+        <p>A rolling calendar view of what's due and what's coming — the same way project milestones show up on the production schedule.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">HRS</div>
+        <h4>Hour-Meter Triggers</h4>
+        <p>Service intervals that fire off actual run hours, not just calendar days — for equipment that wears by use, not by the clock.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">REP</div>
+        <h4>Repair History &amp; Downtime</h4>
+        <p>Every repair logged against the asset it happened to, so you can see a machine's full history — and what its downtime has actually cost.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">ALT</div>
+        <h4>Safety Alerts</h4>
+        <p>A maintenance issue can be flagged major or minor with a safety callout — so a real hazard doesn't sit quietly in a routine ticket queue.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">$</div>
+        <h4>Lifetime Cost per Asset</h4>
+        <p>Parts, labor, and downtime roll up into one running number per machine — the real cost of keeping it, not just what it cost to buy.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">SHR</div>
+        <h4>Shared, Multi-User Data</h4>
+        <p>One shared record everyone on the floor and in the office reads from — not a spreadsheet on one machine that only shows its own day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="soft" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>From "tag the machine" to "know its full history"</h2>
+    </div>
+
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-num">1</div>
+        <div>
+          <h3>Tag the asset</h3>
+          <p>Every machine gets an asset code and serial number the first time it's added to the register — from a table saw to a dust collector.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">2</div>
+        <div>
+          <h3>Set the maintenance schedule</h3>
+          <p>Pick calendar-based service (every 90 days) or hour-meter-based service (every 500 run hours) — whichever actually matches how that machine wears.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">3</div>
+        <div>
+          <h3>The due list builds itself</h3>
+          <p>Nobody has to remember. What's due — and what's overdue — surfaces on its own, the same way a billing application or a submittal shows up when it's ready.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">4</div>
+        <div>
+          <h3>Log the work, flag what's unsafe</h3>
+          <p>A completed task or repair gets logged against the asset. Anything that's a real hazard gets flagged major or minor so it doesn't wait quietly in line.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">5</div>
+        <div>
+          <h3>Cost rolls up automatically</h3>
+          <p>Every logged repair adds to that asset's lifetime cost — visible on its own, and available to roll into the same margin reporting the rest of the platform already does.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Why not just use a whiteboard, or a separate CMMS?</span>
+      <h2>One more login is one more silo</h2>
+      <p>A dedicated CMMS product will do some of this too — but it's yet another system, another login, and another database that doesn't know what your production schedule already knows.</p>
+    </div>
+
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead>
+          <tr><th>Capability</th><th class="center">Paper / whiteboard</th><th class="center">Standalone CMMS software</th><th class="center">Maintenance &amp; Asset Manager</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Asset register with tags &amp; serial numbers</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>PM scheduling — calendar or hour-meter</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Repair history &amp; downtime log</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Safety alerts tied to a specific asset</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Lifetime cost per asset</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Same login &amp; database as production scheduling</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Feeds the same GM-level margin reporting</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Requires its own vendor contract &amp; login</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge no">✕</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cmp-foot">✓ present &nbsp;·&nbsp; ~ partial / manual &nbsp;·&nbsp; ✕ not covered — for the last row, ✕ is the good outcome</p>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How this fits together</span>
+      <h2>A module, not a separate product</h2>
+    </div>
+    <div class="module-note">
+      <span class="n-ico">🧩</span>
+      <div>
+        <h3>Project Center 2.0 is built to grow module by module</h3>
+        <p>Every deployment starts with the core platform — CRM, estimating, scheduling, production, billing. Maintenance &amp; Asset Manager is one of the modules Rock River Consulting turns on based on what your operation actually runs and needs, alongside things like HR onboarding, the GM home page, and jobsite documentation. Same database, same users, same login — nothing new to stand up or administer separately.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="kicker">Get in touch</span>
+        <h2>Want to see the maintenance module in action?</h2>
+        <p>Tell us how your team tracks machine maintenance today — a whiteboard, a spreadsheet, a separate CMMS — and we'll show you what it looks like running inside Project Center 2.0 instead.</p>
+        <div class="contact-methods">
+          <div class="contact-method">
+            <div class="cm-icon">☎</div>
+            <div><b>Call or text</b><span>720.412.3639</span></div>
+          </div>
+          <div class="contact-method">
+            <div class="cm-icon">✉</div>
+            <div><b>Send an inquiry</b><span>Use the form — we'll reply directly to you</span></div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" id="inquiryForm">
+        <!-- Submits via Formspree (see FORMSPREE_ENDPOINT below) — no email address
+             appears anywhere in this page's markup. Formspree sets the subject
+             line from the hidden _subject field and uses the "email" field to
+             set Reply-To automatically, so replying just works. If Formspree
+             isn't connected yet, or a submission ever fails, this automatically
+             falls back to opening the visitor's own email app instead. -->
+        <input type="hidden" name="_subject" value="Maintenance & Asset Manager Inquiry" />
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+        <div class="form-row">
+          <label for="cName">Name</label>
+          <input type="text" id="cName" name="Name" required />
+        </div>
+        <div class="form-row">
+          <label for="cEmail">Your email</label>
+          <input type="email" id="cEmail" name="email" required />
+        </div>
+        <div class="form-row">
+          <label for="cMsg">What are you looking to solve?</label>
+          <textarea id="cMsg" name="Message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Submit Inquiry</button>
+        <p class="form-note" id="formNote">Sent straight to our team — we'll reply to the email address you enter above.</p>
+        <div class="form-success" id="formSuccess">Thanks — your message has been sent. We'll be in touch shortly.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>© <span data-year>2026</span> Rock River Consulting</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#modules">Project Center 2.0</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---------- nav toggle ----------
+  document.getElementById('navToggle').addEventListener('click', function(){
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  var yearEl = document.querySelector('[data-year]');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // ---------- contact form ----------
+  // Primary path: Formspree (silent submit, no email address in this page's markup).
+  //   1. Sign up free at https://formspree.io using travishanley00@gmail.com
+  //   2. Create a form there and verify it from the confirmation email Formspree sends
+  //   3. Copy the endpoint it gives you (looks like https://formspree.io/f/xxxxabcd)
+  //   4. Paste it in place of the placeholder below
+  // Until that's done (or if the request ever fails), the form automatically falls
+  // back to opening the visitor's own email app, addressed to us — so "Submit
+  // Inquiry" always does SOMETHING useful, never just sits there looking broken.
+  var FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_ENDPOINT_ID';
+  var FALLBACK_USER = ['t','r','a','v','i','s','h','a','n','l','e','y','0','0'].join('');
+  var FALLBACK_DOMAIN = ['gmail','com'].join('.');
+  var FALLBACK_ADDRESS = FALLBACK_USER + '@' + FALLBACK_DOMAIN;
+
+  (function(){
+    var form = document.getElementById('inquiryForm');
+    var note = document.getElementById('formNote');
+    var success = document.getElementById('formSuccess');
+    var formspreeReady = FORMSPREE_ENDPOINT.indexOf('YOUR_ENDPOINT_ID') === -1;
+
+    function sendByMailto(){
+      var name = document.getElementById('cName').value.trim();
+      var from = document.getElementById('cEmail').value.trim();
+      var msg = document.getElementById('cMsg').value.trim();
+      var subject = encodeURIComponent('Maintenance & Asset Manager Inquiry');
+      var body = encodeURIComponent('Name: ' + name + '\nReply-to: ' + from + '\n\n' + msg);
+      success.textContent = 'Thanks — your email app should now be open with your message ready to send.';
+      success.classList.add('show');
+      window.location.href = 'mailto:' + FALLBACK_ADDRESS + '?subject=' + subject + '&body=' + body;
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      success.classList.remove('show');
+      note.style.color = '';
+
+      if (!formspreeReady){
+        sendByMailto();
+        return;
+      }
+
+      var btn = form.querySelector('button[type="submit"]');
+      var originalLabel = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function(res){
+        if (res.ok){
+          success.textContent = 'Thanks — your message has been sent. We\'ll be in touch shortly.';
+          success.classList.add('show');
+          form.reset();
+        } else {
+          sendByMailto();
+        }
+      }).catch(function(){
+        sendByMailto();
+      }).finally(function(){
+        btn.disabled = false;
+        btn.textContent = originalLabel;
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
