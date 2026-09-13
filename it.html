@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>For IT: System Requirements &amp; Architecture — Rock River Consulting</title>
-<meta name="description" content="What Project Center 2.0 actually is under the hood: a web-based .NET Blazor Server application on a single PostgreSQL database, with schema-managed migrations, server-enforced role-based access, and a full audit trail — for the IT team evaluating it." />
+<meta name="description" content="What Project Center 2.0 actually is under the hood: a web-based .NET Blazor Server application on a multi-tenant SQL backend, with schema-managed migrations, Single Sign-On (SSO), Dual Authentication (MFA), and a full audit trail." />
 <style>
   :root{
     --bg:#f5f7fb;
@@ -310,11 +310,10 @@
       <h1>It's a standard web app. <span>Here's what's under it.</span></h1>
       <p class="lead">
         Project Center 2.0 is a browser-based line-of-business application —
-        nothing to push to workstations, one relational database as the
-        single source of truth, schema changes that ship as reviewable code,
-        and access control that's enforced on the server, not just hidden in
-        the UI. This page is written for whoever on your team has to say yes
-        to it.
+        nothing to push to workstations, running on a secure multi-tenant SQL
+        database as the single source of truth. Built for the enterprise with Single Sign-On (SSO),
+        Multi-Factor Authentication (MFA), and access control enforced strictly on the
+        server. This page is written for whoever on your team has to say yes to it.
       </p>
       <div class="hero-actions">
         <a href="#specs" class="btn btn-primary">Jump to requirements →</a>
@@ -322,7 +321,7 @@
       </div>
       <div class="hero-stats">
         <div class="hero-stat"><strong>0</strong><span>Client software to install</span></div>
-        <div class="hero-stat"><strong>1</strong><span>Database, single source of truth</span></div>
+        <div class="hero-stat"><strong>1</strong><span>Secure multi-tenant DB</span></div>
         <div class="hero-stat"><strong>100%</strong><span>Migrations tracked as code</span></div>
       </div>
     </div>
@@ -336,10 +335,10 @@
       </div>
       <div class="hero-card-body">
         <div class="hero-card-row"><span>Application</span><b>.NET, Blazor Server</b></div>
-        <div class="hero-card-row"><span>Database</span><b>PostgreSQL, one instance</b></div>
+        <div class="hero-card-row"><span>Database</span><b>SQL backend, isolated multi-tenant</b></div>
         <div class="hero-card-row"><span>Client requirement</span><span class="tag green">Any modern browser</span></div>
         <div class="hero-card-row"><span>Schema changes</span><span class="tag blue">Reviewable EF Core migrations</span></div>
-        <div class="hero-card-row"><span>Access control</span><b>Role matrix + PIN gates, server-enforced</b></div>
+        <div class="hero-card-row"><span>Access control</span><b>SSO, MFA &amp; server-enforced role matrix</b></div>
         <div class="hero-card-row"><span>Hosting</span><b>Your infrastructure, or ours</b></div>
       </div>
     </div>
@@ -366,8 +365,8 @@
       </div>
       <div class="module-card">
         <div class="m-icon">DB</div>
-        <h4>Single Relational Database</h4>
-        <p>Every module — CRM, estimating, scheduling, production, billing, and every add-on module — reads and writes the same PostgreSQL database. One source of truth, not five exports that drift apart.</p>
+        <h4>Multi-Tenant SQL Database</h4>
+        <p>Every module reads and writes to a secure, logically isolated SQL database. Designed for scale, it acts as a single source of truth without the risk of data drift.</p>
       </div>
       <div class="module-card">
         <div class="m-icon">MIG</div>
@@ -376,8 +375,8 @@
       </div>
       <div class="module-card">
         <div class="m-icon">ACC</div>
-        <h4>Server-Enforced Access Control</h4>
-        <p>The role-based screen access matrix and the PIN gates on sensitive centers are checked server-side — not client-side hiding that a curious user could bypass.</p>
+        <h4>SSO &amp; Dual Authentication</h4>
+        <p>Integrates directly with your Single Sign-On provider (Entra ID, Okta, Google) with Multi-Factor Authentication enforcement. Role matrices are checked strictly server-side.</p>
       </div>
       <div class="module-card">
         <div class="m-icon">AUD</div>
@@ -414,8 +413,8 @@
       <div class="how-step">
         <div class="how-num">1</div>
         <div>
-          <h3>Where does the data live, and who can get to it directly?</h3>
-          <p>One PostgreSQL database is the single source of truth for the whole platform — your team can connect with any standard PostgreSQL client or reporting tool if direct access is ever needed, and back it up the same way you back up any other database.</p>
+          <h3>Where does the data live, and how is it isolated?</h3>
+          <p>It runs on a robust multi-tenant SQL backend (PostgreSQL). Tenant data is strictly isolated by schema and query-level filters. Your team can connect with any standard SQL client or reporting tool if direct access is ever needed, and back it up the same way you back up any other database.</p>
         </div>
       </div>
       <div class="how-step">
@@ -429,7 +428,7 @@
         <div class="how-num">3</div>
         <div>
           <h3>Is access control real, or just hidden menus?</h3>
-          <p>The role-based access matrix and the PIN gates on HR, Finance, and Admin centers are checked on the server on every request — not just menu items hidden in the browser.</p>
+          <p>Access relies on enterprise standards. It supports Single Sign-On (SSO) and Dual Authentication (MFA), pushing identity management to your trusted IdP (Entra, Okta). The role-based access matrix and PIN gates are checked continuously on the server — not just menu items hidden in the browser.</p>
         </div>
       </div>
       <div class="how-step">
@@ -443,7 +442,7 @@
         <div class="how-num">5</div>
         <div>
           <h3>Who hosts it, and what happens if the relationship ends?</h3>
-          <p>You can run it on your own infrastructure from day one, or have Rock River Consulting host it and migrate later — the database is a standard PostgreSQL instance either way, so there's no proprietary export step to worry about.</p>
+          <p>You can run it on your own infrastructure from day one, or have Rock River Consulting host it and migrate later — the database is a standard SQL instance either way, so there's no proprietary export step to worry about.</p>
         </div>
       </div>
     </div>
@@ -464,7 +463,8 @@
         </thead>
         <tbody>
           <tr><td>Runs in a browser, no per-machine install</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
-          <tr><td>Standard relational database you can query directly</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Enterprise SSO &amp; Multi-Factor Auth (MFA)</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Multi-tenant SQL backend with strict isolation</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
           <tr><td>Schema changes tracked as reviewable code</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
           <tr><td>Role-based access enforced server-side</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
           <tr><td>Full audit trail across every module</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
@@ -495,11 +495,11 @@
         </dl>
       </div>
       <div class="spec-card">
-        <h4>For hosting the application</h4>
+        <h4>For hosting &amp; security</h4>
         <dl>
           <dt>Runtime</dt><dd>.NET, running as a Blazor Server application — deployable behind IIS, a container, or a standard cloud app-hosting service.</dd>
-          <dt>Database</dt><dd>A PostgreSQL database instance — self-hosted, or a managed cloud PostgreSQL service.</dd>
-          <dt>Hosting choice</dt><dd>Your own servers or cloud account, or hosted by Rock River Consulting — the database stays a standard PostgreSQL instance either way, so nothing is locked to a proprietary format.</dd>
+          <dt>Database</dt><dd>A SQL database instance (PostgreSQL) — self-hosted, or a managed cloud service.</dd>
+          <dt>Identity &amp; Auth</dt><dd>SAML 2.0 or OpenID Connect (OIDC) compatible identity provider (IdP) for Single Sign-On and Multi-Factor Authentication.</dd>
         </dl>
       </div>
     </div>
@@ -516,7 +516,7 @@
       <span class="n-ico">🧩</span>
       <div>
         <h3>One application, one database, one set of access rules</h3>
-        <p>Every module Rock River Consulting turns on — HR onboarding, machine maintenance, room design, finance, the GM home page — runs inside this same application, against this same database, under the same access matrix and audit trail. There's no separate system per module to individually secure, patch, or back up.</p>
+        <p>Every module Rock River Consulting turns on — HR onboarding, machine maintenance, room design, finance, the GM home page — runs inside this same application, against this same database, securely isolated within its tenant. It shares the same Single Sign-On, access matrix, and audit trail. There's no separate system per module to individually secure, patch, or back up.</p>
       </div>
     </div>
   </div>
