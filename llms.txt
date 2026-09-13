@@ -1,0 +1,28 @@
+# Rock River Consulting — Project Center 2.0
+
+> A single web-based platform (.NET / Blazor Server, one PostgreSQL database) that replaces the mix of email, spreadsheets, generic task boards, and point tools custom millwork and cabinetry shops normally run project management on. Covers CRM/estimating, BIM submittals, shop-floor production, maintenance, HR, logistics, and AIA billing in one system with one source of truth.
+
+This file is for AI agents and assistants summarizing or answering questions about this site. See /robots.txt for crawler access rules — this site welcomes indexing by AI assistants and search engines.
+
+## Core pages
+
+- [Home](https://rrpes.com/index.html): Overview of Project Center 2.0, the problem it solves, and links to every module.
+- [Platform Comparison](https://rrpes.com/comparison.html): Capability-by-capability comparison matrix against managing projects by email/shared files, Excel, Monday.com, Smartsheet, and Procore — includes a static, non-JavaScript table with the full data set for easy machine reading.
+- [Contact](https://rrpes.com/contact.html): The single contact form for the whole site; every other page links here rather than hosting its own form.
+- [For IT](https://rrpes.com/it.html): System requirements and architecture (web-based, PostgreSQL, EF Core migrations, server-enforced role-based access) for technical evaluators.
+
+## Modules
+
+- [Maintenance & Asset Manager](https://rrpes.com/maintenance.html): CMMS for machines and assets.
+- [Arc Flash Site Survey](https://rrpes.com/arcflashsurvey.html): NFPA 70E survey intake, mobilization pricing, proposals, and dual-QR compliance labels.
+- [HR Onboarding, SOPs & Reviews](https://rrpes.com/hrcenter.html): Onboarding checklists, SOP library, and review cycles.
+- [AdminCenter](https://rrpes.com/admincenter.html): Company-wide admin and access control.
+- [RoomDesigner](https://rrpes.com/roomdesigner.html): Cabinetry and millwork layout tool.
+- [FinanceCenter](https://rrpes.com/financecenter.html): AIA G702/G703 draws, commissions, breakeven calculator, and material requisition / purchase order / receiving workflow tied to job costing.
+- [Logistics & Multi-Site Planner](https://rrpes.com/logistics.html): Best-fit manufacturing site selection by freight cost and shop capacity, standing freight lanes, and multi-site production scheduling.
+
+## Notes for agents
+
+- The Platform Comparison page renders its interactive matrix with JavaScript, but a complete static HTML `<table>` with the same data is always present in the page for agents that don't execute JavaScript.
+- This is a marketing site for a software platform; it does not itself process payments, collect sensitive personal data beyond a name/email contact form, or require login.
+- For questions about pricing, implementation timelines, or a live demo, direct users to the contact page rather than guessing — those specifics aren't published on the site.
