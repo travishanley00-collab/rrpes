@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Comparison: Project Center 2.0 vs. Email, Excel &amp; Point Tools — Rock River Consulting</title>
+    <meta name="description" content="How Project Center 2.0 compares to running a millwork shop on email, Excel, Monday.com, Smartsheet, and Procore — capability by capability, from estimating through AIA billing.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Structured data so AI agents and search engines can read this page's content without executing JavaScript -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Platform Comparison: Project Center 2.0 vs. Email, Excel & Point Tools",
+      "description": "A capability-by-capability comparison of Project Center 2.0 against email/shared files, Excel, Monday.com, Smartsheet, and Procore for custom millwork and cabinetry shop operations.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Rock River Consulting",
+        "url": "https://rrpes.com/"
+      },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "Project Center 2.0",
+        "applicationCategory": "BusinessApplication",
+        "description": "A single web-based ERP-style platform for custom millwork and cabinetry shops covering estimating, BIM submittals, shop floor production, logistics, and AIA billing."
+      },
+      "mainEntity": {
+        "@type": "ItemList",
+        "name": "Platform capability comparison",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Tiered Millwork Price Book & Assembly Engine"},
+          {"@type": "ListItem", "position": 2, "name": "Dynamo / Revit BIM Parameter Ingestion"},
+          {"@type": "ListItem", "position": 3, "name": "Automatic Proposal & Spec Document Generation"},
+          {"@type": "ListItem", "position": 4, "name": "Dynamic Architect Submittal Package Creation"},
+          {"@type": "ListItem", "position": 5, "name": "Revision Control & One Outdated Sheet Prevention"},
+          {"@type": "ListItem", "position": 6, "name": "Architect RFI & Approval Tracking"},
+          {"@type": "ListItem", "position": 7, "name": "Bill of Operations & Station Routing"},
+          {"@type": "ListItem", "position": 8, "name": "Automated Cut-List & CNC Part Tagging"},
+          {"@type": "ListItem", "position": 9, "name": "Interactive Sheet Optimizer & Yield Calculator"},
+          {"@type": "ListItem", "position": 10, "name": "Shop Floor Kiosk & Barcode / Touch Tracking"},
+          {"@type": "ListItem", "position": 11, "name": "AIA G702 / G703 Billing Application Engine"},
+          {"@type": "ListItem", "position": 12, "name": "Change Order Sync & Scope Margin Protection"},
+          {"@type": "ListItem", "position": 13, "name": "Actual vs. Estimated Labor & Material Margin Reporting"}
+        ]
+      }
+    }
+    </script>
+
+    <!-- Tailwind CSS (utility classes for the interactive matrix table below) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root{
+            --bg:#f5f7fb;
+            --surface:#ffffff;
+            --surface-2:#eef1f7;
+            --ink-900:#101827;
+            --ink-700:#3d4a5f;
+            --ink-500:#6b7686;
+            --accent:#2563eb;
+            --accent-dark:#1d4fc4;
+            --accent-2:#0d9268;
+            --accent-warm:#b45309;
+            --accent-warm-bg:#fdf1e2;
+            --bad:#dc2626;
+            --bad-bg:#fdeaea;
+            --line:#e3e8f0;
+            --radius:14px;
+            --maxw:1180px;
+            --shadow:0 1px 2px rgba(16,24,39,0.04), 0 10px 28px -14px rgba(16,24,39,0.12);
+        }
+        *{box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body {
+            margin:0;
+            font-family:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+            background-color: var(--bg);
+            color: var(--ink-700);
+            line-height:1.55;
+            -webkit-font-smoothing:antialiased;
+        }
+        img,svg{max-width:100%;}
+        a{color:inherit;text-decoration:none;}
+        ul{margin:0;padding:0;list-style:none;}
+        h1,h2,h3,h4{margin:0;line-height:1.15;letter-spacing:-0.01em;}
+
+        .header-font { font-family:'Segoe UI',system-ui,sans-serif; letter-spacing:0.02em; }
+        .mono { font-family: ui-monospace, Consolas, 'JetBrains Mono', monospace; }
+
+        /* ---------- shared site header (matches index.html / it.html / etc.) ---------- */
+        .site-header{
+            position:sticky;top:0;z-index:60;
+            background:rgba(255,255,255,0.86);
+            backdrop-filter:blur(10px);
+            border-bottom:1px solid var(--line);
+        }
+        .nav{
+            max-width:var(--maxw);margin:0 auto;padding:14px 24px;
+            display:flex;align-items:center;justify-content:space-between;gap:24px;
+        }
+        .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.02rem;color:var(--ink-900);white-space:nowrap;}
+        .brand-mark{
+            width:36px;height:36px;border-radius:9px;
+            background:linear-gradient(135deg,var(--accent),var(--accent-2));
+            display:flex;align-items:center;justify-content:center;
+            font-size:.78rem;font-weight:800;color:#fff;letter-spacing:.02em;flex:none;
+        }
+        .brand-text{display:flex;flex-direction:column;line-height:1.15;}
+        .brand-text small{font-weight:500;font-size:.68rem;color:var(--ink-500);letter-spacing:.03em;}
+        .nav-links{display:flex;align-items:center;gap:22px;font-size:.88rem;}
+        .nav-links > a{color:var(--ink-500);transition:color .15s ease;padding:6px 0;}
+        .nav-links > a:hover{color:var(--ink-900);}
+        .nav-cta{
+            background:var(--accent);color:#fff !important;padding:9px 18px;border-radius:999px;
+            font-weight:600;transition:background .15s ease, transform .15s ease;
+        }
+        .nav-cta:hover{background:var(--accent-dark);transform:translateY(-1px);}
+        .nav-toggle{display:none;background:none;border:0;width:34px;height:34px;position:relative;cursor:pointer;}
+        .nav-toggle span,.nav-toggle::before,.nav-toggle::after{
+            content:"";position:absolute;left:6px;right:6px;height:2px;background:var(--ink-900);border-radius:2px;
+        }
+        .nav-toggle::before{top:11px;}
+        .nav-toggle span{top:17px;}
+        .nav-toggle::after{top:23px;}
+        .nav-drop{position:relative;}
+        .nav-drop-toggle{
+            display:inline-flex;align-items:center;gap:5px;background:none;border:0;cursor:pointer;
+            font:inherit;color:var(--ink-500);padding:6px 0;transition:color .15s ease;
+        }
+        .nav-drop-toggle:hover{color:var(--ink-900);}
+        .nav-drop-toggle .caret{font-size:.62em;transition:transform .15s ease;}
+        .nav-drop.open .nav-drop-toggle .caret{transform:rotate(180deg);}
+        .nav-drop-menu{
+            position:absolute;top:100%;left:0;margin-top:12px;min-width:290px;
+            background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);
+            padding:8px;display:none;flex-direction:column;gap:2px;z-index:70;
+        }
+        .nav-drop-menu a{display:block;padding:9px 12px;border-radius:8px;color:var(--ink-900) !important;}
+        .nav-drop-menu a:hover{background:var(--surface-2);}
+        .nav-drop-menu a strong{display:block;font-size:.85rem;font-weight:600;}
+        .nav-drop-menu a span{display:block;font-size:.73rem;color:var(--ink-500);margin-top:2px;}
+        .nav-drop.open .nav-drop-menu{display:flex;}
+        @media (hover:hover){
+            .nav-drop:hover .nav-drop-menu{display:flex;}
+            .nav-drop:hover .nav-drop-toggle .caret{transform:rotate(180deg);}
+        }
+        @media (max-width:720px){
+            .nav-links{
+                position:absolute;top:100%;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);
+                flex-direction:column;align-items:flex-start;padding:18px 24px;gap:16px;display:none;
+            }
+            .nav-links.open{display:flex;}
+            .nav-toggle{display:block;}
+            .nav-drop-menu{position:static;box-shadow:none;border:none;padding:0 0 0 10px;margin-top:8px;width:100%;}
+            .nav-drop-menu a{padding:8px 0;}
+        }
+
+        /* Custom scrollbar for matrix table */
+        .matrix-scroll::-webkit-scrollbar { height: 8px; width: 8px; }
+        .matrix-scroll::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .matrix-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .matrix-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        .sticky-col { position: sticky; left: 0; z-index: 20; background-color: white; }
+        .sticky-col-header { position: sticky; left: 0; z-index: 30; background-color: var(--ink-900); }
+
+        .modal-blur { backdrop-filter: blur(6px); background: rgba(16, 24, 39, 0.75); }
+
+        .badge-full { background-color: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+        .badge-partial { background-color: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+        .badge-none { background-color: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+        .badge-silo { background-color: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+        /* Static, always-rendered fallback table for non-JS clients (crawlers, AI agents, accessibility tools) */
+        #matrix-fallback{display:block;}
+        #matrix-fallback table{width:100%;border-collapse:collapse;font-size:.82rem;}
+        #matrix-fallback caption{text-align:left;font-size:.85rem;color:var(--ink-500);margin-bottom:10px;}
+        #matrix-fallback th,#matrix-fallback td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+        #matrix-fallback th{background:var(--surface-2);font-size:.75rem;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-900);}
+        .js-only{display:none;}
+        html.js-ready .js-only{display:block;}
+        html.js-ready #matrix-fallback{display:none;}
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+            .matrix-scroll { overflow: visible !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+<!-- ============ shared site header ============ -->
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">RR</span>
+      <span class="brand-text">Rock River Consulting<small>Platform Comparison</small></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Project Center 2.0</a>
+      <a href="#matrix">Comparison Matrix</a>
+      <a href="#silo-summary">Why Point Tools Fail</a>
+      <div class="nav-drop" id="offeringsDrop">
+        <button type="button" class="nav-drop-toggle" id="offeringsToggle" aria-haspopup="true" aria-expanded="false">Our Offerings <span class="caret">▾</span></button>
+        <div class="nav-drop-menu">
+          <a href="maintenance.html"><strong>Maintenance &amp; Asset Manager</strong><span>CMMS for machines &amp; assets</span></a>
+          <a href="arcflashsurvey.html"><strong>Arc Flash Site Survey</strong><span>NFPA 70E survey, labels &amp; proposals</span></a>
+          <a href="hrcenter.html"><strong>HR Onboarding, SOPs &amp; Reviews</strong><span>Onboarding, SOP library, review cycles</span></a>
+          <a href="admincenter.html"><strong>AdminCenter</strong><span>Company-wide admin &amp; access control</span></a>
+          <a href="roomdesigner.html"><strong>RoomDesigner</strong><span>Cabinetry &amp; millwork layout</span></a>
+          <a href="financecenter.html"><strong>FinanceCenter</strong><span>Draws, commissions &amp; breakeven</span></a>
+          <a href="logistics.html"><strong>Logistics &amp; Multi-Site Planner</strong><span>Site selection, freight &amp; scheduling</span></a>
+          <a href="it.html"><strong>For IT</strong><span>System requirements &amp; architecture</span></a>
+          <a href="comparison.html"><strong>Platform Comparison</strong><span>vs. email, Excel, Monday &amp; more</span></a>
+        </div>
+      </div>
+      <a href="contact.html" class="nav-cta">Get in touch</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span></button>
+  </nav>
+</header>
+
+    <!-- Hero & Description -->
+    <section class="bg-slate-900 text-white pt-8 pb-10 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <span class="text-xs font-bold text-red-500 uppercase tracking-widest block mb-2 font-mono">Operational Gap Breakdown</span>
+                <h1 class="text-3xl sm:text-4xl font-extrabold header-font tracking-tight text-white leading-tight">
+                    Every Point Tool Solves One Job — <br class="hidden sm:inline"/><span class="text-teal-400">And Creates A New Silo</span>
+                </h1>
+                <p class="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed">
+                    Custom millwork and architectural woodworking shops lose margins when data gets re-typed across disconnected tools. Compare how generic spreadsheets, task boards, GC field apps, and email threads stack up against Project Center 2.0 — a platform built specifically for the way shop operations run.
+                </p>
+            </div>
+
+            <!-- Global Scorecard Chips -->
+            <div class="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3.5 text-center">
+                    <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Email & Files</span>
+                    <span class="text-xl font-black text-red-400 font-mono">12%</span>
+                    <span class="text-[10px] text-slate-500 block">Fatal Version Risk</span>
+                </div>
+                <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3.5 text-center">
+                    <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Excel</span>
+                    <span class="text-xl font-black text-amber-400 font-mono">28%</span>
+                    <span class="text-[10px] text-slate-500 block">Formula & Chaos Risk</span>
+                </div>
+                <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3.5 text-center">
+                    <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Monday.com</span>
+                    <span class="text-xl font-black text-amber-400 font-mono">35%</span>
+                    <span class="text-[10px] text-slate-500 block">Task Board Only</span>
+                </div>
+                <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3.5 text-center">
+                    <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Smartsheet</span>
+                    <span class="text-xl font-black text-amber-400 font-mono">42%</span>
+                    <span class="text-[10px] text-slate-500 block">Better Spreadsheet</span>
+                </div>
+                <div class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3.5 text-center">
+                    <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Procore</span>
+                    <span class="text-xl font-black text-amber-400 font-mono">55%</span>
+                    <span class="text-[10px] text-slate-500 block">Built for GC Field</span>
+                </div>
+                <div class="bg-teal-950/60 border border-teal-500/50 rounded-xl p-3.5 text-center relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-teal-500 text-slate-900 text-[9px] font-black px-1.5 py-0.5 rounded-bl">PURPOSE BUILT</div>
+                    <span class="text-[10px] uppercase font-bold text-teal-300 block mb-1">Project Center 2.0</span>
+                    <span class="text-xl font-black text-teal-400 font-mono">100%</span>
+                    <span class="text-[10px] text-teal-300 block">End-to-End Precision</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Toolbar -->
+    <section class="bg-white border-b border-slate-200 py-4 no-print sticky top-[65px] z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+
+            <!-- Category Filter Tabs -->
+            <div class="flex items-center space-x-1 overflow-x-auto w-full md:w-auto pb-2 md:pb-0" id="category-filters">
+                <button onclick="setFilterCategory('ALL')" id="filter-btn-ALL" class="px-3 py-1.5 rounded-lg text-xs font-bold transition bg-slate-900 text-white shrink-0">
+                    All Capabilities (<span id="count-all">13</span>)
+                </button>
+                <button onclick="setFilterCategory('Estimating & Engineering')" id="filter-btn-Estimating & Engineering" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-100 transition shrink-0">
+                    Estimating & Engineering
+                </button>
+                <button onclick="setFilterCategory('Submittals & BIM')" id="filter-btn-Submittals & BIM" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-100 transition shrink-0">
+                    Submittals & BIM
+                </button>
+                <button onclick="setFilterCategory('Production & Shop')" id="filter-btn-Production & Shop" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-100 transition shrink-0">
+                    Shop Floor & Production
+                </button>
+                <button onclick="setFilterCategory('Billing & Financials')" id="filter-btn-Billing & Financials" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-100 transition shrink-0">
+                    AIA Billing & Financials
+                </button>
+            </div>
+
+            <!-- Search Bar & Gap Highlight Toggle -->
+            <div class="flex items-center space-x-3 w-full md:w-auto justify-end">
+                <div class="relative w-full md:w-64">
+                    <input type="text" id="matrix-search" oninput="filterMatrix()" placeholder="Search capability or keyword..." class="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                    <svg class="w-4 h-4 text-slate-400 absolute left-2.5 top-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+
+                <label class="inline-flex items-center cursor-pointer shrink-0">
+                    <input type="checkbox" id="toggle-gaps-only" onchange="filterMatrix()" class="sr-only peer">
+                    <div class="relative w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600"></div>
+                    <span class="ms-2 text-xs font-semibold text-slate-700">Show Fatal Gaps Only</span>
+                </label>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Static fallback table: always in the HTML so a crawler, AI agent, or a browser with -->
+    <!-- JavaScript disabled can still read every row. Hidden once JS renders the interactive version. -->
+    <section id="matrix-fallback" class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+        <table>
+            <caption>Full capability comparison: Email &amp; Shared Files, Excel/Sheets, Monday.com, Smartsheet, Procore, and Project Center 2.0. Legend: Native Support = full built-in capability, Workaround = possible with manual effort, Fatal Gap = not supported.</caption>
+            <thead>
+                <tr>
+                    <th>Category</th><th>Capability</th><th>Email &amp; Shared Files</th><th>Excel / Sheets</th><th>Monday.com</th><th>Smartsheet</th><th>Procore</th><th>Project Center 2.0</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Estimating &amp; Engineering</td><td>Tiered Millwork Price Book &amp; Assembly Engine</td><td>Fatal Gap — buried in PDF quotes</td><td>Workaround — manual formulas</td><td>Fatal Gap — no pricing logic</td><td>Fatal Gap — no assembly math</td><td>Fatal Gap — field SOV only</td><td>Native Support — assembly engine</td></tr>
+                <tr><td>Estimating &amp; Engineering</td><td>Dynamo / Revit BIM Parameter Ingestion</td><td>Fatal Gap</td><td>Fatal Gap — manual re-entry</td><td>Fatal Gap</td><td>Fatal Gap</td><td>Workaround — BIM viewer only, no data extract</td><td>Native Support — Dynamo bridge</td></tr>
+                <tr><td>Estimating &amp; Engineering</td><td>Automatic Proposal &amp; Spec Document Generation</td><td>Workaround — manual export</td><td>Workaround — clunky print ranges</td><td>Workaround — basic templates</td><td>Workaround — basic doc merge</td><td>Workaround — standard GC formats</td><td>Native Support — instant branded proposal</td></tr>
+                <tr><td>Submittals &amp; BIM</td><td>Dynamic Architect Submittal Package Creation</td><td>Fatal Gap</td><td>Fatal Gap — can't render drawings</td><td>Fatal Gap — attachment column only</td><td>Fatal Gap</td><td>Workaround — RFI/submittal routing only</td><td>Native Support — live submittal engine</td></tr>
+                <tr><td>Submittals &amp; BIM</td><td>Revision Control &amp; "One Outdated Sheet" Prevention</td><td>Fatal Gap — high risk</td><td>Fatal Gap — version chaos</td><td>Workaround — manual status tag</td><td>Workaround — manual status cell</td><td>Workaround — document revision log</td><td>Native Support — single source of truth lock</td></tr>
+                <tr><td>Submittals &amp; BIM</td><td>Architect RFI &amp; Approval Tracking</td><td>Fatal Gap</td><td>Workaround — manual log</td><td>Workaround — custom board</td><td>Workaround — custom grid</td><td>Native Support — strong GC RFI tool</td><td>Native Support — integrated workflow</td></tr>
+                <tr><td>Production &amp; Shop</td><td>Bill of Operations &amp; Station Routing</td><td>Fatal Gap</td><td>Fatal Gap — static text notes</td><td>Fatal Gap — status columns only</td><td>Fatal Gap</td><td>Fatal Gap — no shop floor routing</td><td>Native Support — station routing engine</td></tr>
+                <tr><td>Production &amp; Shop</td><td>Automated Cut-List &amp; CNC Part Tagging</td><td>Fatal Gap</td><td>Workaround — risky manual math</td><td>Fatal Gap</td><td>Fatal Gap</td><td>Fatal Gap</td><td>Native Support — automated cut-list engine</td></tr>
+                <tr><td>Production &amp; Shop</td><td>Interactive Sheet Optimizer &amp; Yield Calculator</td><td>Fatal Gap</td><td>Workaround — basic square-foot math</td><td>Fatal Gap</td><td>Fatal Gap</td><td>Fatal Gap</td><td>Native Support — visual nesting yield engine</td></tr>
+                <tr><td>Production &amp; Shop</td><td>Shop Floor Kiosk &amp; Barcode / Touch Tracking</td><td>Fatal Gap</td><td>Fatal Gap</td><td>Fatal Gap — clunky mobile board</td><td>Fatal Gap — clunky mobile board</td><td>Fatal Gap — field app only</td><td>Native Support — rugged kiosk UI</td></tr>
+                <tr><td>Billing &amp; Financials</td><td>AIA G702 / G703 Billing Application Engine</td><td>Fatal Gap — manual PDF forms</td><td>Workaround — fragile templates</td><td>Fatal Gap</td><td>Fatal Gap</td><td>Workaround — GC-side payment application</td><td>Native Support — automated AIA G702/G703</td></tr>
+                <tr><td>Billing &amp; Financials</td><td>Change Order Sync &amp; Scope Margin Protection</td><td>Fatal Gap — scope creep unbilled</td><td>Workaround — manual tracking sheet</td><td>Workaround — custom board item</td><td>Workaround — custom board row</td><td>Native Support — GC change order tool</td><td>Native Support — full end-to-end sync</td></tr>
+                <tr><td>Billing &amp; Financials</td><td>Actual vs. Estimated Labor &amp; Material Margin Reporting</td><td>Fatal Gap</td><td>Workaround — post-job manual autopsy</td><td>Fatal Gap — high-level time tracking</td><td>Fatal Gap — high-level time tracking</td><td>Workaround — job costing integration</td><td>Native Support — real-time job profit tracking</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Main Interactive Comparison Table (progressive enhancement over the static table above) -->
+    <main class="js-only flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8" id="matrix">
+        <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+
+            <div class="overflow-x-auto matrix-scroll">
+                <table class="w-full text-left border-collapse min-w-[1000px]">
+                    <!-- Table Header -->
+                    <thead>
+                        <tr class="bg-slate-900 text-white text-xs border-b border-slate-800">
+                            <th class="p-4 w-72 sticky-col-header font-bold uppercase tracking-wider text-slate-300">
+                                Core Operational Capability
+                            </th>
+
+                            <!-- Email & Shared Files Header -->
+                            <th class="p-4 w-44 text-center border-l border-slate-800 bg-slate-900">
+                                <div class="font-bold text-red-400 uppercase tracking-wide text-[11px]">Email & Shared Files</div>
+                                <div class="text-[10px] font-normal text-slate-400 mt-0.5">Inbox & Attachments</div>
+                            </th>
+
+                            <!-- Excel Header -->
+                            <th class="p-4 w-44 text-center border-l border-slate-800 bg-slate-900">
+                                <div class="font-bold text-slate-200 uppercase tracking-wide text-[11px]">Excel / Sheets</div>
+                                <div class="text-[10px] font-normal text-slate-400 mt-0.5">Static Workbook Grids</div>
+                            </th>
+
+                            <!-- Monday.com Header -->
+                            <th class="p-4 w-44 text-center border-l border-slate-800 bg-slate-900">
+                                <div class="font-bold text-slate-200 uppercase tracking-wide text-[11px]">Monday.com</div>
+                                <div class="text-[10px] font-normal text-slate-400 mt-0.5">Generic Task Boards</div>
+                            </th>
+
+                            <!-- Smartsheet Header -->
+                            <th class="p-4 w-44 text-center border-l border-slate-800 bg-slate-900">
+                                <div class="font-bold text-slate-200 uppercase tracking-wide text-[11px]">Smartsheet</div>
+                                <div class="text-[10px] font-normal text-slate-400 mt-0.5">Relational Grid Boards</div>
+                            </th>
+
+                            <!-- Procore Header -->
+                            <th class="p-4 w-44 text-center border-l border-slate-800 bg-slate-900">
+                                <div class="font-bold text-slate-200 uppercase tracking-wide text-[11px]">Procore</div>
+                                <div class="text-[10px] font-normal text-slate-400 mt-0.5">GC Field Management</div>
+                            </th>
+
+                            <!-- Project Center 2.0 Header -->
+                            <th class="p-4 w-48 text-center border-l-2 border-teal-500 bg-slate-950 relative">
+                                <div class="absolute top-0 left-0 right-0 bg-teal-500 text-slate-950 font-black text-[9px] uppercase tracking-widest py-0.5 text-center">PURPOSE BUILT</div>
+                                <div class="font-extrabold text-teal-400 uppercase tracking-wide text-sm mt-1">Project Center 2.0</div>
+                                <div class="text-[10px] font-medium text-teal-200/80 mt-0.5">Millwork Operating System</div>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <!-- Table Body (Dynamically Populated) -->
+                    <tbody id="matrix-body" class="divide-y divide-slate-200 text-xs">
+                        <!-- Rendered via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Empty State for Filters -->
+            <div id="empty-state" class="hidden p-12 text-center">
+                <svg class="w-12 h-12 text-slate-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <h3 class="font-bold text-slate-700 text-sm">No matching capabilities found</h3>
+                <p class="text-xs text-slate-500 mt-1">Try relaxing your search terms or unchecking "Show Fatal Gaps Only".</p>
+                <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-800 transition">Reset All Filters</button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Silo Problem & Pivot Section -->
+    <section id="silo-summary" class="bg-slate-100 py-12 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="text-xs font-bold text-red-600 uppercase tracking-widest block mb-2 font-mono">The Silo Problem</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 header-font leading-tight">
+                    Why Adding Another Point Tool Doesn't Fix Your Operation
+                </h2>
+                <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+                    Most architectural millwork and cabinetry shops run the same project through 3 or 4 disconnected software packages. Information is re-entered manually into each one, introducing massive operational drag.
+                </p>
+            </div>
+
+            <!-- Cards Grid for Each Tool's Core Flaw -->
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+
+                <!-- Email Card -->
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <span class="text-[10px] font-black uppercase text-red-600 tracking-wider block mb-1">Email & Attachments</span>
+                        <h3 class="font-bold text-slate-900 text-sm leading-snug mb-2">"Where critical project data goes to die"</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Estimates, spec revisions, and approvals get buried in inbox threads. When critical job decisions live inside PDF attachments, your shop is always one outdated revision away from a $10k mistake.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-red-600 flex items-center">
+                        <span>Fatal Flaw:</span>
+                        <span class="ml-1 text-slate-700 font-normal">Zero revision control</span>
+                    </div>
+                </div>
+
+                <!-- Excel Card -->
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <span class="text-[10px] font-black uppercase text-red-600 tracking-wider block mb-1">Excel</span>
+                        <h3 class="font-bold text-slate-900 text-sm leading-snug mb-2">"Version chaos, no shared source of truth"</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Estimates, cost breakdowns, and schedules live in files emailed back and forth — the <span class="mono text-slate-800">"final_v3_ACTUAL.xlsx"</span> problem, multiplied across every active job in the shop.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-red-600 flex items-center">
+                        <span>Fatal Flaw:</span>
+                        <span class="ml-1 text-slate-700 font-normal">Fragile disconnected logic</span>
+                    </div>
+                </div>
+
+                <!-- Monday.com Card -->
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <span class="text-[10px] font-black uppercase text-red-600 tracking-wider block mb-1">Monday.com</span>
+                        <h3 class="font-bold text-slate-900 text-sm leading-snug mb-2">"Tracks tasks, not the millwork operation"</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Great for a high-level status board. It has no idea what's in your price book, can't generate a proposal from real spec data, and can't produce an AIA billing application.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-red-600 flex items-center">
+                        <span>Fatal Flaw:</span>
+                        <span class="ml-1 text-slate-700 font-normal">No shop domain logic</span>
+                    </div>
+                </div>
+
+                <!-- Smartsheet Card -->
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <span class="text-[10px] font-black uppercase text-red-600 tracking-wider block mb-1">Smartsheet</span>
+                        <h3 class="font-bold text-slate-900 text-sm leading-snug mb-2">"A better spreadsheet is still a spreadsheet"</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Grids and automations help, but production tracking, shop-floor time, and margin reporting still live somewhere else entirely — usually back in manual Excel sheets.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-red-600 flex items-center">
+                        <span>Fatal Flaw:</span>
+                        <span class="ml-1 text-slate-700 font-normal">No CNC / Nesting bridge</span>
+                    </div>
+                </div>
+
+                <!-- Procore Card -->
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <span class="text-[10px] font-black uppercase text-red-600 tracking-wider block mb-1">Procore</span>
+                        <h3 class="font-bold text-slate-900 text-sm leading-snug mb-2">"Built for the GC's field, not your shop floor"</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Strong at jobsite submittals and RFIs on the GC side. But it carries no tiered price book, Bill of Operations, cut-list engine, or shop floor kiosk — because that's not its job.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-red-600 flex items-center">
+                        <span>Fatal Flaw:</span>
+                        <span class="ml-1 text-slate-700 font-normal">Ignores manufacturing</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Pivot Banner -->
+            <div class="mt-10 bg-slate-900 rounded-2xl p-6 sm:p-8 text-white text-center shadow-xl relative overflow-hidden border border-slate-800">
+                <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-teal-500/10 rounded-full blur-3xl"></div>
+                <div class="relative z-10 max-w-3xl mx-auto">
+                    <h3 class="text-xl sm:text-2xl font-bold header-font text-white">
+                        The Solution Isn't A Fourth Task Board. <span class="text-teal-400">It's One Unified Platform.</span>
+                    </h3>
+                    <p class="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Project Center 2.0 understands what a millwork bid, spec revision, cut list, submittal package, and AIA G702 billing application actually are — because it was built specifically for the way shop operations run.
+                    </p>
+                    <a href="contact.html" class="inline-block mt-5 px-6 py-2.5 rounded-lg text-sm font-bold bg-teal-500 text-slate-950 hover:bg-teal-400 transition">Talk to our team →</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Detailed Feature Modal -->
+    <div id="feature-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="modal-blur absolute inset-0" onclick="closeModal()"></div>
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full relative z-10 overflow-hidden border border-slate-200">
+            <div class="bg-slate-900 p-5 text-white flex justify-between items-start">
+                <div>
+                    <span id="modal-category" class="text-[10px] font-bold text-teal-400 uppercase tracking-widest block mb-1">Category</span>
+                    <h3 id="modal-title" class="text-lg font-bold header-font">Feature Title</h3>
+                </div>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white text-2xl font-bold leading-none">&times;</button>
+            </div>
+
+            <div class="p-6 space-y-4 max-h-[75vh] overflow-y-auto text-xs">
+                <div>
+                    <h4 class="font-bold text-slate-900 uppercase tracking-wider text-[11px] mb-1">Capability Description</h4>
+                    <p id="modal-desc" class="text-slate-600 leading-relaxed">Detailed breakdown of this feature.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                    <div class="bg-red-50 p-3.5 rounded-xl border border-red-200">
+                        <span class="text-[10px] font-bold uppercase text-red-700 block mb-1">The Point Tool Impact (Email / Excel / Generic PM)</span>
+                        <p id="modal-impact-legacy" class="text-slate-700 leading-relaxed">How legacy options fail.</p>
+                    </div>
+
+                    <div class="bg-teal-50 p-3.5 rounded-xl border border-teal-200">
+                        <span class="text-[10px] font-bold uppercase text-teal-800 block mb-1">The Project Center 2.0 Advantage</span>
+                        <p id="modal-impact-cabinetos" class="text-slate-800 leading-relaxed font-medium">How Project Center 2.0 solves this seamlessly.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <h5 class="font-bold text-slate-800 text-[11px] uppercase mb-2">Platform Status Comparison</h5>
+                    <div id="modal-scores-list" class="space-y-1.5">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-100 px-6 py-3 border-t border-slate-200 flex justify-end">
+                <button onclick="closeModal()" class="px-4 py-2 bg-slate-900 text-white font-bold text-xs rounded-lg hover:bg-slate-800 transition">Close</button>
+            </div>
+        </div>
+    </div>
+
+<footer class="site-footer border-t" style="border-color:var(--line);padding:34px 0;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-3">
+    <p style="margin:0;font-size:.85rem;color:var(--ink-500);">© <span data-year>2026</span> Rock River Consulting</p>
+    <div style="display:flex;gap:22px;font-size:.85rem;">
+      <a href="index.html" style="color:var(--ink-500);">Home</a>
+      <a href="index.html#modules" style="color:var(--ink-500);">Project Center 2.0</a>
+      <a href="contact.html" style="color:var(--ink-500);">Contact</a>
+    </div>
+  </div>
+</footer>
+
+    <script>
+        // Mark that JS is running so the CSS can swap the static fallback table
+        // for the interactive one. Crawlers/agents that don't execute JS keep
+        // seeing the always-present static table above.
+        document.documentElement.classList.add('js-ready');
+
+        // ---------- shared site header behavior ----------
+        document.getElementById('navToggle').addEventListener('click', function(){
+          document.getElementById('navLinks').classList.toggle('open');
+        });
+        var yearEl = document.querySelector('[data-year]');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+        (function(){
+          var drop = document.getElementById('offeringsDrop');
+          var toggle = document.getElementById('offeringsToggle');
+          if (!drop || !toggle) return;
+          toggle.addEventListener('click', function(e){
+            e.preventDefault();
+            var open = drop.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          });
+          document.addEventListener('click', function(e){
+            if (!drop.contains(e.target)){
+              drop.classList.remove('open');
+              toggle.setAttribute('aria-expanded', 'false');
+            }
+          });
+        })();
+
+        // Capabilities Data Set
+        const capabilities = [
+            // Category 1: Estimating & Engineering
+            {
+                id: 'cap-1',
+                category: 'Estimating & Engineering',
+                name: 'Tiered Millwork Price Book & Assembly Engine',
+                description: 'Pre-configured rates for casework, counter tops, trim, hardware, and finishes based on shop labor rates and material costs.',
+                email: { status: 'none', note: 'Buried in PDF quotes' },
+                excel: { status: 'partial', note: 'Requires manual formulas' },
+                monday: { status: 'none', note: 'No pricing logic' },
+                smartsheet: { status: 'none', note: 'No assembly math' },
+                procore: { status: 'none', note: 'Field SOV only' },
+                cabinetos: { status: 'full', note: 'Native assembly engine' },
+                legacyImpact: 'Estimators constantly rebuild prices from scratch or copy-paste broken spreadsheet formulas.',
+                cabinetosImpact: 'Instant accurate estimate generation built from verified species, box construction, and hardware rules.'
+            },
+            {
+                id: 'cap-2',
+                category: 'Estimating & Engineering',
+                name: 'Dynamo / Revit BIM Parameter Ingestion',
+                description: 'Extracts cabinet tags, dimensions, species, and hardware specs directly from 3D Revit models via automated Dynamo pipeline.',
+                email: { status: 'none', note: 'No CAD integration' },
+                excel: { status: 'none', note: 'Manual re-entry required' },
+                monday: { status: 'none', note: 'No CAD integration' },
+                smartsheet: { status: 'none', note: 'No CAD integration' },
+                procore: { status: 'partial', note: 'BIM viewer only (no data extract)' },
+                cabinetos: { status: 'full', note: 'Direct Dynamo WebSocket bridge' },
+                legacyImpact: 'Engineers spend hundreds of hours redrawing architectural BIM models into separate cabinet software.',
+                cabinetosImpact: 'Zero manual redrawing. BIM parameters automatically seed the submittals, estimates, and cut-lists.'
+            },
+            {
+                id: 'cap-3',
+                category: 'Estimating & Engineering',
+                name: 'Automatic Proposal & Spec Document Generation',
+                description: 'Generates professional customer-facing proposal documents with complete finish and scope matrices.',
+                email: { status: 'partial', note: 'Manual Word/PDF export' },
+                excel: { status: 'partial', note: 'Clunky print ranges' },
+                monday: { status: 'partial', note: 'Basic doc templates' },
+                smartsheet: { status: 'partial', note: 'Basic doc merge' },
+                procore: { status: 'partial', note: 'Standard GC contract formats' },
+                cabinetos: { status: 'full', note: 'Instant branded spec proposal' },
+                legacyImpact: 'Creating a bid proposal requires copying data from 3 files and re-formatting in Word.',
+                cabinetosImpact: 'Click one button to issue a live interactive proposal tied directly to live project data.'
+            },
+
+            // Category 2: Submittals & BIM
+            {
+                id: 'cap-4',
+                category: 'Submittals & BIM',
+                name: 'Dynamic Architect Submittal Package Creation',
+                description: 'Generates formal submittal drawings, finish schedules, and specification matrices for architect review.',
+                email: { status: 'none', note: 'Attachments buried in threads' },
+                excel: { status: 'none', note: 'Cannot render drawing views' },
+                monday: { status: 'none', note: 'Attachment column only' },
+                smartsheet: { status: 'none', note: 'Attachment column only' },
+                procore: { status: 'partial', note: 'RFI/Submittal routing only' },
+                cabinetos: { status: 'full', note: 'Live dynamic submittal engine' },
+                legacyImpact: 'Drafters manually stitch together PDFs, Excel specs, and cut sheets for submittal packages.',
+                cabinetosImpact: 'Submittal views are live data visualizations generated straight from model parameters.'
+            },
+            {
+                id: 'cap-5',
+                category: 'Submittals & BIM',
+                name: 'Revision Control & "One Outdated Sheet" Prevention',
+                description: 'Ensures the shop floor, drafters, and field installers are always viewing the exact same approved submittal revision.',
+                email: { status: 'none', note: 'High risk: Wrong PDF built' },
+                excel: { status: 'none', note: 'Version chaos in email' },
+                monday: { status: 'partial', note: 'Manual status tag' },
+                smartsheet: { status: 'partial', note: 'Manual status cell' },
+                procore: { status: 'partial', note: 'Document revision log' },
+                cabinetos: { status: 'full', note: 'Single source of truth lock' },
+                legacyImpact: 'A shop builds a $15,000 reception desk off Revision 2 because Revision 3 was sitting in an unread email.',
+                cabinetosImpact: 'New revisions automatically update across all submittals, CNC tags, and station kiosks instantly.'
+            },
+            {
+                id: 'cap-6',
+                category: 'Submittals & BIM',
+                name: 'Architect RFI & Approval Tracking',
+                description: 'Tracks pending submittals, architect markups, and line-item approval statuses in real time.',
+                email: { status: 'none', note: 'Scattered across inboxes' },
+                excel: { status: 'partial', note: 'Manual tracking log' },
+                monday: { status: 'partial', note: 'Custom board columns' },
+                smartsheet: { status: 'partial', note: 'Custom board grid' },
+                procore: { status: 'full', note: 'Strong GC RFI tool' },
+                cabinetos: { status: 'full', note: 'Integrated submittal workflow' },
+                legacyImpact: 'RFIs get lost in email chains, causing project delays and unbilled change orders.',
+                cabinetosImpact: 'RFIs link directly to specific cabinet assemblies and automatically lock affected items from production.'
+            },
+
+            // Category 3: Production & Shop
+            {
+                id: 'cap-7',
+                category: 'Production & Shop',
+                name: 'Bill of Operations & Station Routing (BOO)',
+                description: 'Defines exact manufacturing steps (Breakout, CNC Router, Edgebanding, Assembly, Finishing, QC).',
+                email: { status: 'none', note: 'Impossible' },
+                excel: { status: 'none', note: 'Static text notes' },
+                monday: { status: 'none', note: 'High-level status columns' },
+                smartsheet: { status: 'none', note: 'High-level status columns' },
+                procore: { status: 'none', note: 'No shop floor routing' },
+                cabinetos: { status: 'full', note: 'Native station routing engine' },
+                legacyImpact: 'Shop floor workers guess sequence or rely on paper traveler sheets that get greasy or lost.',
+                cabinetosImpact: 'Every assembly has a digital traveler that guides parts through exact station routing.'
+            },
+
+            {
+                id: 'cap-8',
+                category: 'Production & Shop',
+                name: 'Automated Cut-List & CNC Part Tagging',
+                description: 'Generates exact component part dimensions, edgebanding callouts, and CNC DXF program tags.',
+                email: { status: 'none', note: 'N/A' },
+                excel: { status: 'partial', note: 'Risky manual math' },
+                monday: { status: 'none', note: 'N/A' },
+                smartsheet: { status: 'none', note: 'N/A' },
+                procore: { status: 'none', note: 'N/A' },
+                cabinetos: { status: 'full', note: 'Automated cut-list engine' },
+                legacyImpact: 'Engineers re-type dimensions from drawings into optimizer software, making human errors.',
+                cabinetosImpact: 'Cut-lists are derived directly from approved BIM submittal parameters with zero re-entry.'
+            },
+
+            {
+                id: 'cap-9',
+                category: 'Production & Shop',
+                name: 'Interactive Sheet Optimizer & Yield Calculator',
+                description: 'Calculates exact 4x8 sheet stock yields (plywood, MDF, laminate) and waste percentages.',
+                email: { status: 'none', note: 'N/A' },
+                excel: { status: 'partial', note: 'Basic square foot math' },
+                monday: { status: 'none', note: 'N/A' },
+                smartsheet: { status: 'none', note: 'N/A' },
+                procore: { status: 'none', note: 'N/A' },
+                cabinetos: { status: 'full', note: 'Visual nesting yield engine' },
+                legacyImpact: 'Estimators guess sheet counts, leading to material shortages or bloated material budgets.',
+                cabinetosImpact: 'Visual 2D nesting previews calculate exact sheet requirements and scrap rates instantly.'
+            },
+
+            {
+                id: 'cap-10',
+                category: 'Production & Shop',
+                name: 'Shop Floor Kiosk & Barcode / Touch Tracking',
+                description: 'Touchscreen kiosk interfaces on the shop floor for real-time part scanning, clock-in, and QC pass/fail.',
+                email: { status: 'none', note: 'N/A' },
+                excel: { status: 'none', note: 'N/A' },
+                monday: { status: 'none', note: 'Mobile web board (clunky)' },
+                smartsheet: { status: 'none', note: 'Mobile web board (clunky)' },
+                procore: { status: 'none', note: 'Field app only' },
+                cabinetos: { status: 'full', note: 'Rugged kiosk UI built for shop' },
+                legacyImpact: 'No real-time visibility into whether a job is on the router, in finishing, or packed for shipping.',
+                cabinetosImpact: 'Shop floor workers tap kiosks to instantly log labor hours and update job status.'
+            },
+
+            // Category 4: Billing & Financials
+            {
+                id: 'cap-11',
+                category: 'Billing & Financials',
+                name: 'AIA G702 / G703 Billing Application Engine',
+                description: 'Automatically formats monthly progress billings into standard construction AIA G702/G703 Schedule of Values.',
+                email: { status: 'none', note: 'Manual PDF forms' },
+                excel: { status: 'partial', note: 'Fragile template sheets' },
+                monday: { status: 'none', note: 'No AIA logic' },
+                smartsheet: { status: 'none', note: 'No AIA logic' },
+                procore: { status: 'partial', note: 'GC-side payment application' },
+                cabinetos: { status: 'full', note: 'Automated AIA G702/G703' },
+                legacyImpact: 'Project managers spend 2 days every month re-calculating percent complete across 15 Excel SOVs.',
+                cabinetosImpact: 'AIA billing applications generate in seconds based on verified shop completion milestones.'
+            },
+
+            {
+                id: 'cap-12',
+                category: 'Billing & Financials',
+                name: 'Change Order Sync & Scope Margin Protection',
+                description: 'Ties scope changes directly from submittal revisions into pricing, shop travelers, and billing.',
+                email: { status: 'none', note: 'Scope creep unbilled' },
+                excel: { status: 'partial', note: 'Manual tracking sheet' },
+                monday: { status: 'partial', note: 'Custom board item' },
+                smartsheet: { status: 'partial', note: 'Custom board row' },
+                procore: { status: 'full', note: 'GC Change Order tool' },
+                cabinetos: { status: 'full', note: 'Full end-to-end scope sync' },
+                legacyImpact: 'The shop builds a change requested by the architect in an email thread without ever getting a paid change order.',
+                cabinetosImpact: 'Scope changes automatically generate pending change orders before production can move forward.'
+            },
+
+            {
+                id: 'cap-13',
+                category: 'Billing & Financials',
+                name: 'Actual vs. Estimated Labor & Material Margin Reporting',
+                description: 'Compares estimated shop hours and material yields against actual logged kiosk time and purchasing.',
+                email: { status: 'none', note: 'N/A' },
+                excel: { status: 'partial', note: 'Post-job manual autopsy' },
+                monday: { status: 'none', note: 'High-level time tracking' },
+                smartsheet: { status: 'none', note: 'High-level time tracking' },
+                procore: { status: 'partial', note: 'Job costing integration' },
+                cabinetos: { status: 'full', note: 'Real-time job profit tracking' },
+                legacyImpact: 'Shop owners only find out a job lost money 3 weeks after it was installed.',
+                cabinetosImpact: 'Live margin alerts notify managers the moment sanding or finishing exceeds estimated hours.'
+            }
+        ];
+
+        let activeCategory = 'ALL';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMatrix();
+        });
+
+        function setFilterCategory(cat) {
+            activeCategory = cat;
+
+            // Update filter button styling
+            const buttons = document.querySelectorAll('#category-filters button');
+            buttons.forEach(btn => {
+                if (btn.id === `filter-btn-${cat}`) {
+                    btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition bg-slate-900 text-white shrink-0';
+                } else {
+                    btn.className = 'px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-100 transition shrink-0';
+                }
+            });
+
+            filterMatrix();
+        }
+
+        function filterMatrix() {
+            renderMatrix();
+        }
+
+        function resetFilters() {
+            document.getElementById('matrix-search').value = '';
+            document.getElementById('toggle-gaps-only').checked = false;
+            setFilterCategory('ALL');
+        }
+
+        function renderMatrix() {
+            const tbody = document.getElementById('matrix-body');
+            const searchVal = document.getElementById('matrix-search').value.toLowerCase();
+            const gapsOnly = document.getElementById('toggle-gaps-only').checked;
+
+            let filtered = capabilities.filter(cap => {
+                const matchesCategory = (activeCategory === 'ALL' || cap.category === activeCategory);
+                const matchesSearch = cap.name.toLowerCase().includes(searchVal) ||
+                                      cap.description.toLowerCase().includes(searchVal) ||
+                                      cap.category.toLowerCase().includes(searchVal);
+
+                // Gap condition: Email or Excel or Monday has 'none' or 'partial'
+                const isGap = (cap.email.status === 'none' || cap.excel.status === 'none' || cap.monday.status === 'none');
+                const matchesGaps = gapsOnly ? isGap : true;
+
+                return matchesCategory && matchesSearch && matchesGaps;
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '';
+                document.getElementById('empty-state').classList.remove('hidden');
+                return;
+            } else {
+                document.getElementById('empty-state').classList.add('hidden');
+            }
+
+            let currentCategory = '';
+            let html = '';
+
+            filtered.forEach(cap => {
+                // Insert category divider row if changed
+                if (cap.category !== currentCategory && activeCategory === 'ALL') {
+                    currentCategory = cap.category;
+                    html += `
+                        <tr class="bg-slate-100/90 font-bold text-slate-800 border-y border-slate-300">
+                            <td colspan="7" class="py-2.5 px-4 text-xs font-black uppercase tracking-wider text-slate-700 bg-slate-200/70">
+                                ${currentCategory}
+                            </td>
+                        </tr>
+                    `;
+                }
+
+                html += `
+                    <tr class="hover:bg-slate-50 transition cursor-pointer group" onclick="openModal('${cap.id}')">
+                        <!-- Capability Info Column -->
+                        <td class="p-4 sticky-col border-r border-slate-200">
+                            <span class="text-[9px] font-bold uppercase text-slate-400 block mb-0.5">${cap.category}</span>
+                            <div class="font-bold text-slate-900 group-hover:text-teal-600 transition flex items-center justify-between">
+                                <span>${cap.name}</span>
+                                <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-teal-500 ml-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <p class="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">${cap.description}</p>
+                        </td>
+
+                        <!-- Email Column -->
+                        <td class="p-3 text-center border-l border-slate-200">
+                            ${renderStatusBadge(cap.email)}
+                        </td>
+
+                        <!-- Excel Column -->
+                        <td class="p-3 text-center border-l border-slate-200">
+                            ${renderStatusBadge(cap.excel)}
+                        </td>
+
+                        <!-- Monday Column -->
+                        <td class="p-3 text-center border-l border-slate-200">
+                            ${renderStatusBadge(cap.monday)}
+                        </td>
+
+                        <!-- Smartsheet Column -->
+                        <td class="p-3 text-center border-l border-slate-200">
+                            ${renderStatusBadge(cap.smartsheet)}
+                        </td>
+
+                        <!-- Procore Column -->
+                        <td class="p-3 text-center border-l border-slate-200">
+                            ${renderStatusBadge(cap.procore)}
+                        </td>
+
+                        <!-- Project Center 2.0 Column -->
+                        <td class="p-3 text-center border-l-2 border-teal-500 bg-teal-50/30">
+                            ${renderStatusBadge(cap.cabinetos, true)}
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        function renderStatusBadge(obj, isCabinetOs = false) {
+            if (obj.status === 'full') {
+                return `
+                    <div class="inline-flex flex-col items-center">
+                        <span class="status-pill badge-full px-2 py-0.5 rounded font-bold text-[10px] flex items-center">
+                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            Native Support
+                        </span>
+                        <span class="text-[9.5px] text-slate-500 mt-1 line-clamp-1 font-medium">${obj.note}</span>
+                    </div>
+                `;
+            } else if (obj.status === 'partial') {
+                return `
+                    <div class="inline-flex flex-col items-center">
+                        <span class="status-pill badge-partial px-2 py-0.5 rounded font-bold text-[10px] flex items-center">
+                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            Workaround
+                        </span>
+                        <span class="text-[9.5px] text-slate-500 mt-1 line-clamp-1 font-medium">${obj.note}</span>
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="inline-flex flex-col items-center">
+                        <span class="status-pill badge-none px-2 py-0.5 rounded font-bold text-[10px] flex items-center">
+                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            Fatal Gap
+                        </span>
+                        <span class="text-[9.5px] text-slate-400 mt-1 line-clamp-1 font-medium">${obj.note}</span>
+                    </div>
+                `;
+            }
+        }
+
+        function openModal(id) {
+            const cap = capabilities.find(c => c.id === id);
+            if (!cap) return;
+
+            document.getElementById('modal-category').innerText = cap.category;
+            document.getElementById('modal-title').innerText = cap.name;
+            document.getElementById('modal-desc').innerText = cap.description;
+            document.getElementById('modal-impact-legacy').innerText = cap.legacyImpact;
+            document.getElementById('modal-impact-cabinetos').innerText = cap.cabinetosImpact;
+
+            const scoresList = document.getElementById('modal-scores-list');
+            scoresList.innerHTML = `
+                <div class="flex items-center justify-between py-1 border-b border-slate-200">
+                    <span class="font-bold text-slate-700">Email & Attachments:</span>
+                    <span class="text-xs font-semibold ${cap.email.status === 'full' ? 'text-green-600' : cap.email.status === 'partial' ? 'text-amber-600' : 'text-red-600'}">${cap.email.note}</span>
+                </div>
+                <div class="flex items-center justify-between py-1 border-b border-slate-200">
+                    <span class="font-bold text-slate-700">Excel / Spreadsheets:</span>
+                    <span class="text-xs font-semibold ${cap.excel.status === 'full' ? 'text-green-600' : cap.excel.status === 'partial' ? 'text-amber-600' : 'text-red-600'}">${cap.excel.note}</span>
+                </div>
+                <div class="flex items-center justify-between py-1 border-b border-slate-200">
+                    <span class="font-bold text-slate-700">Monday.com:</span>
+                    <span class="text-xs font-semibold ${cap.monday.status === 'full' ? 'text-green-600' : cap.monday.status === 'partial' ? 'text-amber-600' : 'text-red-600'}">${cap.monday.note}</span>
+                </div>
+                <div class="flex items-center justify-between py-1 border-b border-slate-200">
+                    <span class="font-bold text-slate-700">Smartsheet:</span>
+                    <span class="text-xs font-semibold ${cap.smartsheet.status === 'full' ? 'text-green-600' : cap.smartsheet.status === 'partial' ? 'text-amber-600' : 'text-red-600'}">${cap.smartsheet.note}</span>
+                </div>
+                <div class="flex items-center justify-between py-1 border-b border-slate-200">
+                    <span class="font-bold text-slate-700">Procore:</span>
+                    <span class="text-xs font-semibold ${cap.procore.status === 'full' ? 'text-green-600' : cap.procore.status === 'partial' ? 'text-amber-600' : 'text-red-600'}">${cap.procore.note}</span>
+                </div>
+                <div class="flex items-center justify-between py-1 font-bold text-teal-800 bg-teal-100/60 px-2 rounded">
+                    <span>Project Center 2.0:</span>
+                    <span>${cap.cabinetos.note}</span>
+                </div>
+            `;
+
+            document.getElementById('feature-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('feature-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
