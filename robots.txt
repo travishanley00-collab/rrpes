@@ -1,0 +1,48 @@
+# robots.txt for rrpes.com — Rock River Consulting / Project Center 2.0
+# Allows standard search engines and known AI assistant / agent crawlers to
+# read and index this site, including the Platform Comparison page.
+
+User-agent: *
+Allow: /
+
+# --- AI assistants & agents (explicit allow, several also match "*" above) ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+Sitemap: https://rrpes.com/sitemap.xml
