@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Maintenance & Asset Manager — Rock River Consulting</title>
-<meta name="description" content="Maintenance & Asset Manager is Rock River Consulting's CMMS module integrated directly with MES and production scheduling. Features QR-code daily checks, operator issue logging, automated vendor routing, and spare part procurement." />
+<meta name="description" content="Maintenance & Asset Manager is Rock River Consulting's CMMS module for Project Center 2.0 — an asset register, preventive-maintenance scheduling, hour-meter triggers, repair history, and safety alerts for every machine on the floor, on the same platform as production." />
 <style>
   :root{
     --bg:#f5f7fb;
@@ -162,7 +162,7 @@
   .section-head h2{font-size:clamp(1.6rem,3vw,2.15rem);margin-bottom:14px;}
   .section-head p{font-size:1.02rem;}
 
-  /* ---------- feature grid ---------- */
+  /* ---------- feature grid (reused module-card look) ---------- */
   .module-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
   .module-card{
     position:relative;border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--surface);
@@ -275,11 +275,12 @@
       <a href="#features">Features</a>
       <a href="#how">How it works</a>
       <a href="#compare">Compare</a>
-      <a href="#realtime">MES &amp; Procurement</a>
+      <a href="#realtime">Real-Time Monitoring</a>
       <div class="nav-drop" id="offeringsDrop">
         <button type="button" class="nav-drop-toggle" id="offeringsToggle" aria-haspopup="true" aria-expanded="false">Our Offerings <span class="caret">▾</span></button>
         <div class="nav-drop-menu">
           <a href="maintenance.html"><strong>Maintenance &amp; Asset Manager</strong><span>CMMS for machines &amp; assets</span></a>
+          <a href="arcflashsurvey.html"><strong>Arc Flash Site Survey</strong><span>NFPA 70E survey, labels &amp; proposals</span></a>
           <a href="hrcenter.html"><strong>HR Onboarding, SOPs &amp; Reviews</strong><span>Onboarding, SOP library, review cycles</span></a>
           <a href="admincenter.html"><strong>AdminCenter</strong><span>Company-wide admin &amp; access control</span></a>
           <a href="roomdesigner.html"><strong>RoomDesigner</strong><span>Cabinetry &amp; millwork layout</span></a>
@@ -297,17 +298,22 @@
   <div class="hero-inner">
     <div>
       <span class="eyebrow"><span class="dot"></span> Rock River Consulting · A Project Center 2.0 module</span>
-      <h1>Production runs when <span>maintenance is connected.</span></h1>
+      <h1>Know what's due <span>before it breaks down.</span></h1>
       <p class="lead">
-        Maintenance &amp; Asset Manager is a real CMMS for the shop floor. Features QR-based daily checks, operator issue logging, automated vendor routing, and spare parts procurement—all directly integrated with your MES and active production schedule so maintenance never blind-sides the shop floor.
+        Maintenance &amp; Asset Manager is a real CMMS for the shop floor — an
+        asset register with tags and serial numbers, preventive-maintenance
+        scheduling by calendar or by hour meter, repair history, and safety
+        alerts — running on the same platform and the same database as
+        estimating, scheduling, and production. No separate system to buy,
+        license, or log into.
       </p>
       <div class="hero-actions">
         <a href="#how" class="btn btn-primary">See how it works →</a>
         <a href="contact.html" class="btn btn-ghost">Talk to us</a>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat"><strong>MES</strong><span>Production schedule sync</span></div>
-        <div class="hero-stat"><strong>QR</strong><span>Instant operator logs</span></div>
+        <div class="hero-stat"><strong>1</strong><span>Asset register, tagged &amp; serialized</span></div>
+        <div class="hero-stat"><strong>0</strong><span>Separate CMMS logins</span></div>
         <div class="hero-stat"><strong>24/7</strong><span>Due-now visibility</span></div>
       </div>
     </div>
@@ -320,11 +326,11 @@
         <span class="hero-card-title">projectcenter.internal / maintenance / due-now</span>
       </div>
       <div class="hero-card-body">
-        <div class="hero-card-row"><span>Forklift — FL-04</span><span class="tag bad">Failed daily check</span></div>
-        <div class="hero-card-row"><span>Edgebander — MC-014</span><span class="tag bad">Production Down — Safety Flag</span></div>
+        <div class="hero-card-row"><span>Edgebander — MC-014</span><span class="tag bad">Overdue · safety flag</span></div>
         <div class="hero-card-row"><span>CNC Router — MC-021</span><span class="tag warm">240 run hrs to service</span></div>
-        <div class="hero-card-row"><span>Production Schedule Sync</span><span class="tag green">Active</span></div>
-        <div class="hero-card-row"><span>Vendor Routing</span><b>Auto-queuing active</b></div>
+        <div class="hero-card-row"><span>Table Saw #2 — MC-007</span><span class="tag blue">PM due in 3 days</span></div>
+        <div class="hero-card-row"><span>Dust Collector — MC-030</span><span class="tag green">Serviced — up to date</span></div>
+        <div class="hero-card-row"><span>Assets tracked</span><b>34 machines</b></div>
         <div class="hero-card-row"><span>Lifetime cost view</span><b>Per asset, always current</b></div>
       </div>
     </div>
@@ -340,49 +346,49 @@
     <div class="section-head">
       <span class="kicker">What it does</span>
       <h2>Everything a shop's maintenance program actually needs</h2>
-      <p>Not a checklist app bolted on after the fact — an MES-integrated asset register and PM engine built for a shop that runs machines every day.</p>
+      <p>Not a checklist app bolted on after the fact — a real asset register and PM engine built for a shop that runs machines every day.</p>
     </div>
 
     <div class="module-grid">
       <div class="module-card">
-        <div class="m-icon">QR</div>
-        <h4>QR-Tagged Asset Register</h4>
-        <p>Every machine and vehicle is tagged with a QR code. Scan it from any mobile device to open its history, start a work order, or log a daily shift check.</p>
+        <div class="m-icon">TAG</div>
+        <h4>Asset Register</h4>
+        <p>Every machine tagged with a unique asset code and serial number — searchable, retireable, and tied to every task and repair logged against it.</p>
       </div>
       <div class="module-card">
-        <div class="m-icon">MES</div>
-        <h4>MES &amp; Production Sync</h4>
-        <p>Maintenance doesn't live in a vacuum. PMs sync directly with the manufacturing schedule, ensuring scheduled downtime minimizes impact to actual production.</p>
+        <div class="m-icon">PM</div>
+        <h4>Preventive Maintenance Engine</h4>
+        <p>Recurring PM tasks per asset, with a due list that surfaces automatically — nothing to remember, nothing tracked on a clipboard.</p>
       </div>
       <div class="module-card">
-        <div class="m-icon">LOG</div>
-        <h4>Operator Daily Checks</h4>
-        <p>Shift starts with a QR scan. Operators complete daily safety and operational logs (like forklift checks). A failed check instantly flags the maintenance manager.</p>
+        <div class="m-icon">CAL</div>
+        <h4>Maintenance Calendar</h4>
+        <p>A rolling calendar view of what's due and what's coming — the same way project milestones show up on the production schedule.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">HRS</div>
+        <h4>Hour-Meter Triggers</h4>
+        <p>Service intervals that fire off actual run hours, not just calendar days — for equipment that wears by use, not by the clock.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">REP</div>
+        <h4>Repair History &amp; Downtime</h4>
+        <p>Every repair logged against the asset it happened to, so you can see a machine's full history — and what its downtime has actually cost.</p>
       </div>
       <div class="module-card">
         <div class="m-icon">ALT</div>
-        <h4>Operator-Triggered Issue Logs</h4>
-        <p>Production workers can scan a machine, signal it’s down, and start an issue log that instantly feeds the maintenance queue and flags the production schedule.</p>
-      </div>
-      <div class="module-card">
-        <div class="m-icon">PO</div>
-        <h4>Integrated Procurement</h4>
-        <p>Need a spare part? Scan the machine, check the integrated inventory, and trigger a quick Purchase Order straight to the procurement module.</p>
-      </div>
-      <div class="module-card">
-        <div class="m-icon">VND</div>
-        <h4>Automated Vendor Routing</h4>
-        <p>When an asset fails a check, the system automatically queues an internal work order—or instantly drafts a request to your preferred external vendor.</p>
-      </div>
-      <div class="module-card">
-        <div class="m-icon">SAF</div>
-        <h4>Closed-Loop Safety &amp; Repair</h4>
-        <p>Safety flags halt production. Technicians log the fix, attach photo evidence of repair, and clear the safety block in real-time, leaving a permanent audit trail.</p>
+        <h4>Safety Alerts</h4>
+        <p>A maintenance issue can be flagged major or minor with a safety callout — so a real hazard doesn't sit quietly in a routine ticket queue.</p>
       </div>
       <div class="module-card">
         <div class="m-icon">$</div>
-        <h4>Lifetime Cost &amp; Downtime</h4>
+        <h4>Lifetime Cost per Asset</h4>
         <p>Parts, labor, and downtime roll up into one running number per machine — the real cost of keeping it, not just what it cost to buy.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">SHR</div>
+        <h4>Shared, Multi-User Data</h4>
+        <p>One shared record everyone on the floor and in the office reads from — not a spreadsheet on one machine that only shows its own day.</p>
       </div>
     </div>
   </div>
@@ -392,43 +398,43 @@
   <div class="wrap">
     <div class="section-head">
       <span class="kicker">How it works</span>
-      <h2>A connected lifecycle, from daily check to final repair</h2>
+      <h2>From "tag the machine" to "know its full history"</h2>
     </div>
 
     <div class="how-steps">
       <div class="how-step">
         <div class="how-num">1</div>
         <div>
-          <h3>Scan to start the shift</h3>
-          <p>Operators use a wireless device to scan an asset's QR code (like a forklift) at the start of their shift. This instantly opens the required daily safety and operational log.</p>
+          <h3>Tag the asset</h3>
+          <p>Every machine gets an asset code and serial number the first time it's added to the register — from a table saw to a dust collector.</p>
         </div>
       </div>
       <div class="how-step">
         <div class="how-num">2</div>
         <div>
-          <h3>Operators signal issues instantly</h3>
-          <p>If a daily check fails, or if a machine breaks mid-shift, production workers flag it as "down." This instantly alerts the maintenance manager, flags the production schedule, and creates a work order tagged for safety hazards.</p>
+          <h3>Set the maintenance schedule</h3>
+          <p>Pick calendar-based service (every 90 days) or hour-meter-based service (every 500 run hours) — whichever actually matches how that machine wears.</p>
         </div>
       </div>
       <div class="how-step">
         <div class="how-num">3</div>
         <div>
-          <h3>Procure parts and auto-route vendors</h3>
-          <p>The failure triggers action: the system queues an internal ticket or automatically routes an alert to your preferred external vendor. If a spare part is needed internally, technicians scan the machine and create a quick PO in the procurement platform instantly.</p>
+          <h3>The due list builds itself</h3>
+          <p>Nobody has to remember. What's due — and what's overdue — surfaces on its own, the same way a billing application or a submittal shows up when it's ready.</p>
         </div>
       </div>
       <div class="how-step">
         <div class="how-num">4</div>
         <div>
-          <h3>Fix and prove safety</h3>
-          <p>Maintenance performs the fix, logging their time and attaching photo evidence of the repair directly to the work order. This clears the safety block and re-authorizes the asset for production use.</p>
+          <h3>Log the work, flag what's unsafe</h3>
+          <p>A completed task or repair gets logged against the asset. Anything that's a real hazard gets flagged major or minor so it doesn't wait quietly in line.</p>
         </div>
       </div>
       <div class="how-step">
         <div class="how-num">5</div>
         <div>
-          <h3>Plan PMs around production (MES Sync)</h3>
-          <p>For preventive maintenance, the scheduled downtime talks to the MES. PMs are planned intelligently around active manufacturing jobs to ensure a routine oil change doesn't blow up a client's delivery date.</p>
+          <h3>Cost rolls up automatically</h3>
+          <p>Every logged repair adds to that asset's lifetime cost — visible on its own, and available to roll into the same margin reporting the rest of the platform already does.</p>
         </div>
       </div>
     </div>
@@ -449,12 +455,13 @@
           <tr><th>Capability</th><th class="center">Paper / whiteboard</th><th class="center">Standalone CMMS software</th><th class="center">Maintenance &amp; Asset Manager</th></tr>
         </thead>
         <tbody>
-          <tr><td>Direct sync with production schedule (MES)</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
-          <tr><td>QR-code daily operator checks &amp; safety logs</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
-          <tr><td>Spare parts procurement / quick POs</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
-          <tr><td>Operator-triggered production down flags</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
-          <tr><td>Automated routing to external vendors</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Asset register with tags &amp; serial numbers</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>PM scheduling — calendar or hour-meter</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Repair history &amp; downtime log</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Safety alerts tied to a specific asset</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Lifetime cost per asset</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
           <tr><td>Same login &amp; database as production scheduling</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Feeds the same GM-level margin reporting</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
           <tr><td>Requires its own vendor contract &amp; login</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge no">✕</span></td></tr>
         </tbody>
       </table>
@@ -466,7 +473,7 @@
 <section class="soft" id="realtime">
   <div class="wrap">
     <div class="section-head">
-      <span class="kicker">MES &amp; Procurement Integration</span>
+      <span class="kicker">Real-time monitoring</span>
       <h2>Feed live equipment data back into the system</h2>
       <p>Beyond scheduled PM tasks, a machine can report its own condition back into its asset record as it happens — so a problem shows up the moment it starts, not at the next scheduled check.</p>
     </div>
@@ -492,6 +499,13 @@
       <div>
         <h3>Project Center 2.0 is built to grow module by module</h3>
         <p>Every deployment starts with the core platform — CRM, estimating, scheduling, production, billing. Maintenance &amp; Asset Manager is one of the modules Rock River Consulting turns on based on what your operation actually runs and needs, alongside things like HR onboarding, the GM home page, and jobsite documentation. Same database, same users, same login — nothing new to stand up or administer separately.</p>
+      </div>
+    </div>
+    <div class="module-note" style="margin-top:16px;">
+      <span class="n-ico">⚡</span>
+      <div>
+        <h3>Connects to Arc Flash Site Survey</h3>
+        <p>If your team also runs electrical arc flash surveys, the panels and switchgear cataloged during a survey feed the same asset register this module uses — so the equipment you just labeled with a compliant NFPA 70E dual-QR label already has its preventive-maintenance schedule and repair history tracked here, instead of being entered twice. See the <a href="arcflashsurvey.html" style="color:var(--accent);font-weight:600;text-decoration:underline;">Arc Flash Site Survey</a> module.</p>
       </div>
     </div>
   </div>
