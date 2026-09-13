@@ -374,7 +374,7 @@
   // Until the endpoint below is set (or if a submission ever fails), this falls
   // back to opening the visitor's own email app instead — "Submit Inquiry"
   // always does SOMETHING useful, never just sits there looking broken.
-  var APPS_SCRIPT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwtZsJgDtISjt5fCybacJL6-QGkaUd8ZdqQLULHghiRSGPd74IbPA5OtE2YwveMSMXu-Q/exec';
+  var APPS_SCRIPT_ENDPOINT = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
   var FALLBACK_USER = ['t','r','a','v','i','s','h','a','n','l','e','y','0','0'].join('');
   var FALLBACK_DOMAIN = ['gmail','com'].join('.');
   var FALLBACK_ADDRESS = FALLBACK_USER + '@' + FALLBACK_DOMAIN;
@@ -430,16 +430,35 @@
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ name: name, email: email, message: message })
       }).then(function(res){
-        return res.json();
+        // DIAGNOSTIC: log the raw response so the browser console shows exactly
+        // what Apps Script sent back (or that the browser never got a usable
+        // response at all). Safe to remove once this is confirmed working.
+        console.log('[contact form] HTTP status:', res.status, res.statusText);
+        return res.text().then(function(raw){
+          console.log('[contact form] raw response body:', raw);
+          try {
+            return JSON.parse(raw);
+          } catch (parseErr){
+            console.error('[contact form] response was not valid JSON — Apps Script likely returned an HTML page (often a sign-in/permission page) instead of your doPost() output. Raw body logged above.', parseErr);
+            throw parseErr;
+          }
+        });
       }).then(function(json){
+        console.log('[contact form] parsed JSON:', json);
         if (json && json.status === 'success'){
           success.textContent = 'Thanks — your message has been sent. We\'ll be in touch shortly.';
           success.classList.add('show');
           form.reset();
         } else {
+          console.error('[contact form] Apps Script responded but did not report success:', json);
           sendByMailto(name, email, message);
         }
-      }).catch(function(){
+      }).catch(function(err){
+        // A TypeError with message like "Failed to fetch" here almost always
+        // means the browser blocked or couldn't complete the request itself
+        // (CORS rejection, no network, wrong/undeployed URL) — the request may
+        // not have even reached Apps Script. Check this message first.
+        console.error('[contact form] fetch to Apps Script failed before/while getting a response:', err);
         sendByMailto(name, email, message);
       }).finally(function(){
         btn.disabled = false;
