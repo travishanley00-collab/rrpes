@@ -210,6 +210,7 @@
         <button type="button" class="nav-drop-toggle" id="offeringsToggle" aria-haspopup="true" aria-expanded="false">Our Offerings <span class="caret">▾</span></button>
         <div class="nav-drop-menu">
           <a href="maintenance.html"><strong>Maintenance &amp; Asset Manager</strong><span>CMMS for machines &amp; assets</span></a>
+          <a href="arcflashsurvey.html"><strong>Arc Flash Site Survey</strong><span>NFPA 70E survey, labels &amp; proposals</span></a>
           <a href="hrcenter.html"><strong>HR Onboarding, SOPs &amp; Reviews</strong><span>Onboarding, SOP library, review cycles</span></a>
           <a href="admincenter.html"><strong>AdminCenter</strong><span>Company-wide admin &amp; access control</span></a>
           <a href="roomdesigner.html"><strong>RoomDesigner</strong><span>Cabinetry &amp; millwork layout</span></a>
@@ -250,19 +251,16 @@
         </div>
       </div>
 
-      <form class="contact-form" id="inquiryForm" action="https://formspree.io/f/YOUR_ENDPOINT_ID" method="POST">
-        <!-- Submits via Formspree (see FORMSPREE_ENDPOINT below) — no email address
-             appears anywhere in this page's markup. Formspree sets the subject
-             line from the hidden _subject field and uses the "email" field to
-             set Reply-To automatically, so replying just works. The form's own
-             action/method attributes are a plain-HTML fallback: if the page's
-             JavaScript ever fails to load, the browser still submits the form
-             to Formspree directly (just without the inline "thanks" message
-             below — the visitor lands on Formspree's own confirmation page
-             instead). If Formspree isn't connected yet, or a JS-driven
-             submission ever fails outright, this automatically falls back to
-             opening the visitor's own email app instead. -->
-        <input type="hidden" name="_subject" value="Project Center 2.0 Inquiry" />
+      <form class="contact-form" id="inquiryForm">
+        <!-- Submits to a Google Apps Script Web App bound to travishanley00@gmail.com
+             (see APPS_SCRIPT_ENDPOINT below) — no email address appears anywhere in
+             this page's markup, and MailApp sends straight from that Gmail account
+             with Reply-To set to whatever the visitor typed, so replying just works.
+             Unlike Formspree, Apps Script has no plain-HTML form-post fallback that
+             matches its JSON contract, so this form has no action/method attribute —
+             it's JS-only. If Apps Script isn't deployed yet, or a submission ever
+             fails outright, this automatically falls back to opening the visitor's
+             own email app instead. -->
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
         <div class="form-row">
           <label for="cName">Name</label>
@@ -335,18 +333,48 @@
   })();
 
   // ---------- contact form ----------
-  // Primary path: Formspree (silent, in-page submit — no email address appears
-  //   anywhere in this page's markup, and the form is never redirected away).
-  //   1. Sign up free at https://formspree.io using travishanley00@gmail.com
-  //   2. Create a form there and verify it from the confirmation email Formspree sends
-  //   3. Copy the endpoint it gives you (looks like https://formspree.io/f/xxxxabcd)
-  //   4. Paste it in place of BOTH placeholders below — the JS constant here,
-  //      AND the <form action="..."> attribute above (they must match, since
-  //      the action attribute is what a no-JS visitor's browser actually submits to).
-  // Until that's done (or if a submission ever fails), this falls back to
-  // opening the visitor's own email app instead — "Submit Inquiry" always
-  // does SOMETHING useful, never just sits there looking broken.
-  var FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_ENDPOINT_ID';
+  // Primary path: a Google Apps Script Web App bound to travishanley00@gmail.com,
+  //   sending mail natively through MailApp — no email address appears anywhere
+  //   in this page's markup, and the visitor never leaves the page.
+  //
+  //   1. Go to https://script.google.com while signed in as travishanley00@gmail.com
+  //      and create a new project with this doPost(e) function:
+  //
+  //        function doPost(e) {
+  //          try {
+  //            var data = JSON.parse(e.postData.contents);
+  //            MailApp.sendEmail({
+  //              to: "travishanley00@gmail.com",
+  //              replyTo: data.email,
+  //              subject: "New Project Center Inquiry from " + data.name,
+  //              body: "Name: " + data.name + "\nEmail: " + data.email + "\n\nMessage:\n" + data.message
+  //            });
+  //            return ContentService.createTextOutput(JSON.stringify({status:"success"}))
+  //              .setMimeType(ContentService.MimeType.JSON);
+  //          } catch (error) {
+  //            return ContentService.createTextOutput(JSON.stringify({status:"error", message: error.toString()}))
+  //              .setMimeType(ContentService.MimeType.JSON);
+  //          }
+  //        }
+  //
+  //   2. Deploy → New deployment → type "Web app" → Execute as "Me"
+  //      → Who has access "Anyone" → Deploy. Authorize it when Google prompts.
+  //   3. Copy the /exec URL it gives you (looks like
+  //      https://script.google.com/macros/s/AKfycb.../exec) and paste it in
+  //      place of the placeholder below.
+  //
+  //   Note the request below is sent with Content-Type: text/plain rather than
+  //   application/json — that's deliberate. Apps Script has no way to answer a
+  //   CORS preflight (an OPTIONS request), so a "real" JSON content-type would
+  //   make the browser preflight the request and the whole thing would silently
+  //   fail. text/plain is one of the browser's built-in "simple request" types,
+  //   so no preflight is sent — Apps Script still reads the raw text body fine
+  //   and JSON.parses it itself in doPost, exactly like the reference function above.
+  //
+  // Until the endpoint below is set (or if a submission ever fails), this falls
+  // back to opening the visitor's own email app instead — "Submit Inquiry"
+  // always does SOMETHING useful, never just sits there looking broken.
+  var APPS_SCRIPT_ENDPOINT = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
   var FALLBACK_USER = ['t','r','a','v','i','s','h','a','n','l','e','y','0','0'].join('');
   var FALLBACK_DOMAIN = ['gmail','com'].join('.');
   var FALLBACK_ADDRESS = FALLBACK_USER + '@' + FALLBACK_DOMAIN;
@@ -356,12 +384,9 @@
     var note = document.getElementById('formNote');
     var success = document.getElementById('formSuccess');
     var errorBox = document.getElementById('formError');
-    var formspreeReady = FORMSPREE_ENDPOINT.indexOf('YOUR_ENDPOINT_ID') === -1;
+    var endpointReady = APPS_SCRIPT_ENDPOINT.indexOf('YOUR_DEPLOYMENT_ID') === -1;
 
-    function sendByMailto(){
-      var name = document.getElementById('cName').value.trim();
-      var from = document.getElementById('cEmail').value.trim();
-      var msg = document.getElementById('cMsg').value.trim();
+    function sendByMailto(name, from, msg){
       var subject = encodeURIComponent('Project Center 2.0 Inquiry');
       var body = encodeURIComponent('Name: ' + name + '\nReply-to: ' + from + '\n\n' + msg);
       success.textContent = 'Thanks — your email app should now be open with your message ready to send.';
@@ -370,18 +395,28 @@
       window.location.href = 'mailto:' + FALLBACK_ADDRESS + '?subject=' + subject + '&body=' + body;
     }
 
-    // Even if Formspree isn't configured yet, once the JS below has loaded
-    // and attached this listener, e.preventDefault() always fires first —
-    // so the plain-HTML action/method on the <form> tag is a fallback for a
-    // JS failure specifically, never a second, competing submit path.
     form.addEventListener('submit', function(e){
       e.preventDefault();
       success.classList.remove('show');
       errorBox.classList.remove('show');
       note.style.color = '';
 
-      if (!formspreeReady){
-        sendByMailto();
+      var name = document.getElementById('cName').value.trim();
+      var email = document.getElementById('cEmail').value.trim();
+      var message = document.getElementById('cMsg').value.trim();
+
+      // Honeypot: a real visitor never fills this in. A bot that does gets a
+      // fake "success" and nothing is actually sent anywhere.
+      var honeypot = form.querySelector('[name="_gotcha"]');
+      if (honeypot && honeypot.value){
+        success.textContent = 'Thanks — your message has been sent. We\'ll be in touch shortly.';
+        success.classList.add('show');
+        form.reset();
+        return;
+      }
+
+      if (!endpointReady){
+        sendByMailto(name, email, message);
         return;
       }
 
@@ -390,20 +425,22 @@
       btn.disabled = true;
       btn.textContent = 'Sending…';
 
-      fetch(FORMSPREE_ENDPOINT, {
+      fetch(APPS_SCRIPT_ENDPOINT, {
         method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ name: name, email: email, message: message })
       }).then(function(res){
-        if (res.ok){
+        return res.json();
+      }).then(function(json){
+        if (json && json.status === 'success'){
           success.textContent = 'Thanks — your message has been sent. We\'ll be in touch shortly.';
           success.classList.add('show');
           form.reset();
         } else {
-          sendByMailto();
+          sendByMailto(name, email, message);
         }
       }).catch(function(){
-        sendByMailto();
+        sendByMailto(name, email, message);
       }).finally(function(){
         btn.disabled = false;
         btn.textContent = originalLabel;
