@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Logistics &amp; Multi-Site Manufacturing Planner — Rock River Consulting</title>
+<meta name="description" content="Find the best-fit manufacturing site and distribution route for every job, and schedule production across multiple shops from one board — freight cost modeling, site scoring, and capacity-aware multi-site scheduling built into Project Center 2.0." />
+<style>
+  :root{
+    --bg:#f5f7fb;
+    --surface:#ffffff;
+    --surface-2:#eef1f7;
+    --ink-900:#101827;
+    --ink-700:#3d4a5f;
+    --ink-500:#6b7686;
+    --accent:#2563eb;
+    --accent-dark:#1d4fc4;
+    --accent-2:#0d9268;
+    --accent-warm:#b45309;
+    --accent-warm-bg:#fdf1e2;
+    --bad:#dc2626;
+    --bad-bg:#fdeaea;
+    --line:#e3e8f0;
+    --radius:14px;
+    --maxw:1180px;
+    --shadow:0 1px 2px rgba(16,24,39,0.04), 0 10px 28px -14px rgba(16,24,39,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink-700);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{max-width:100%;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:24px;}
+  a{color:inherit;text-decoration:none;}
+  ul{margin:0;padding:0;list-style:none;}
+  h1,h2,h3,h4{margin:0;line-height:1.15;letter-spacing:-0.01em;color:var(--ink-900);}
+  p{color:var(--ink-500);}
+  button{font-family:inherit;}
+  code{background:rgba(37,99,235,0.1);padding:1px 6px;border-radius:5px;font-size:.9em;color:var(--accent-dark);font-family:ui-monospace,Consolas,monospace;}
+
+  /* ---------- header ---------- */
+  .site-header{
+    position:sticky;top:0;z-index:60;
+    background:rgba(255,255,255,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:var(--maxw);margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.02rem;color:var(--ink-900);white-space:nowrap;}
+  .brand-mark{
+    width:36px;height:36px;border-radius:9px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:flex;align-items:center;justify-content:center;
+    font-size:.78rem;font-weight:800;color:#fff;letter-spacing:.02em;flex:none;
+  }
+  .brand-text{display:flex;flex-direction:column;line-height:1.15;}
+  .brand-text small{font-weight:500;font-size:.68rem;color:var(--ink-500);letter-spacing:.03em;}
+  .nav-links{display:flex;align-items:center;gap:22px;font-size:.88rem;}
+  .nav-links a{color:var(--ink-500);transition:color .15s ease;padding:6px 0;}
+  .nav-links a:hover{color:var(--ink-900);}
+  .nav-cta{
+    background:var(--accent);color:#fff !important;padding:9px 18px;border-radius:999px;
+    font-weight:600;transition:background .15s ease, transform .15s ease;
+  }
+  .nav-cta:hover{background:var(--accent-dark);transform:translateY(-1px);}
+  .nav-toggle{display:none;background:none;border:0;width:34px;height:34px;position:relative;cursor:pointer;}
+  .nav-toggle span,.nav-toggle::before,.nav-toggle::after{
+    content:"";position:absolute;left:6px;right:6px;height:2px;background:var(--ink-900);border-radius:2px;
+  }
+  .nav-toggle::before{top:11px;}
+  .nav-toggle span{top:17px;}
+  .nav-toggle::after{top:23px;}
+  .nav-drop{position:relative;}
+  .nav-drop-toggle{
+    display:inline-flex;align-items:center;gap:5px;background:none;border:0;cursor:pointer;
+    font:inherit;color:var(--ink-500);padding:6px 0;transition:color .15s ease;
+  }
+  .nav-drop-toggle:hover{color:var(--ink-900);}
+  .nav-drop-toggle .caret{font-size:.62em;transition:transform .15s ease;}
+  .nav-drop.open .nav-drop-toggle .caret{transform:rotate(180deg);}
+  .nav-drop-menu{
+    position:absolute;top:100%;left:0;margin-top:12px;min-width:290px;
+    background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);
+    padding:8px;display:none;flex-direction:column;gap:2px;z-index:70;
+  }
+  .nav-drop-menu a{display:block;padding:9px 12px;border-radius:8px;color:var(--ink-900) !important;}
+  .nav-drop-menu a:hover{background:var(--surface-2);}
+  .nav-drop-menu a strong{display:block;font-size:.85rem;font-weight:600;}
+  .nav-drop-menu a span{display:block;font-size:.73rem;color:var(--ink-500);margin-top:2px;}
+  .nav-drop.open .nav-drop-menu{display:flex;}
+  @media (hover:hover){
+    .nav-drop:hover .nav-drop-menu{display:flex;}
+    .nav-drop:hover .nav-drop-toggle .caret{transform:rotate(180deg);}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    padding:96px 0 64px;
+    background:
+      radial-gradient(900px 480px at 85% -10%, rgba(37,99,235,0.10), transparent 60%),
+      radial-gradient(700px 420px at -10% 30%, rgba(13,146,104,0.08), transparent 60%);
+  }
+  .hero-inner{max-width:var(--maxw);margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:600;
+    color:var(--accent-2);letter-spacing:.03em;text-transform:uppercase;margin-bottom:18px;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 4px rgba(13,146,104,0.15);}
+  .hero h1{font-size:clamp(2.1rem,4vw,3.2rem);}
+  .hero h1 span{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .lead{font-size:1.1rem;max-width:600px;margin:20px 0 30px;color:var(--ink-700);}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:40px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:10px;
+    font-weight:600;font-size:.95rem;transition:transform .15s ease, background .15s ease, border-color .15s ease;
+    border:1px solid transparent;cursor:pointer;
+  }
+  .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff;}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{background:var(--surface);border-color:var(--line);color:var(--ink-900);}
+  .btn-ghost:hover{border-color:var(--ink-500);}
+  .hero-stats{display:flex;flex-wrap:wrap;gap:34px;}
+  .hero-stat strong{display:block;font-size:1.5rem;color:var(--ink-900);}
+  .hero-stat span{font-size:.82rem;color:var(--ink-500);}
+
+  .hero-card{
+    border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--surface);overflow:hidden;box-shadow:var(--shadow);
+  }
+  .hero-card-top{
+    display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);
+    background:var(--surface-2);
+  }
+  .hero-card-dot{width:9px;height:9px;border-radius:50%;flex:none;}
+  .hero-card-dot.a{background:#ff6159;}.hero-card-dot.b{background:#ffbd2e;}.hero-card-dot.c{background:#28c940;}
+  .hero-card-title{margin-left:8px;font-size:.78rem;color:var(--ink-500);font-family:ui-monospace,Consolas,monospace;}
+  .hero-card-body{padding:18px 20px;display:flex;flex-direction:column;gap:12px;}
+  .hero-card-row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:.9rem;color:var(--ink-500);}
+  .hero-card-row b{color:var(--ink-900);font-weight:600;white-space:nowrap;}
+  .tag{font-size:.73rem;padding:3px 10px;border-radius:999px;background:var(--surface-2);color:var(--ink-700);white-space:nowrap;}
+  .tag.green{background:#e2f7ee;color:var(--accent-2);}
+  .tag.blue{background:#e7effe;color:var(--accent);}
+  .tag.warm{background:var(--accent-warm-bg);color:var(--accent-warm);}
+  .tag.bad{background:var(--bad-bg);color:var(--bad);}
+
+  .wave{display:block;width:100%;height:56px;margin-top:-2px;}
+
+  /* ---------- generic sections ---------- */
+  section{padding:84px 0;}
+  section.soft{background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .section-head{max-width:700px;margin:0 auto 46px;text-align:center;}
+  .kicker{display:block;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.15rem);margin-bottom:14px;}
+  .section-head p{font-size:1.02rem;}
+
+  /* ---------- network map ---------- */
+  .map-card{
+    border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow);
+    padding:28px;max-width:960px;margin:0 auto;
+  }
+  .map-legend{display:flex;flex-wrap:wrap;gap:22px;justify-content:center;margin-top:18px;font-size:.85rem;color:var(--ink-700);}
+  .map-legend span{display:inline-flex;align-items:center;gap:8px;}
+  .map-legend i{width:11px;height:11px;border-radius:50%;display:inline-block;}
+  .map-legend i.mfg{background:var(--accent-warm);}
+  .map-legend i.hub{background:var(--accent);}
+  .map-legend i.job{background:var(--accent-2);}
+  .map-note{text-align:center;font-size:.82rem;color:var(--ink-500);margin-top:8px;}
+
+  /* ---------- feature grid ---------- */
+  .module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .module-card{
+    position:relative;border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--surface);
+    box-shadow:var(--shadow);
+  }
+  .module-card .m-icon{
+    width:34px;height:34px;border-radius:8px;background:#e2f7ee;color:var(--accent-2);
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;margin-bottom:12px;
+  }
+  .module-card h4{font-size:.96rem;margin-bottom:6px;}
+  .module-card p{font-size:.85rem;margin:0;color:var(--ink-500);}
+
+  /* ---------- how it works ---------- */
+  .how-steps{display:flex;flex-direction:column;gap:18px;max-width:820px;margin:0 auto;}
+  .how-step{display:flex;gap:18px;align-items:flex-start;border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;background:var(--surface);box-shadow:var(--shadow);}
+  .how-num{
+    flex:none;width:34px;height:34px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-weight:700;font-size:.9rem;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .how-step h3{font-size:1.02rem;margin-bottom:6px;}
+  .how-step p{font-size:.92rem;margin:0;}
+
+  /* ---------- comparison table ---------- */
+  .cmp-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow);}
+  table.cmp{width:100%;border-collapse:collapse;min-width:640px;}
+  table.cmp th,table.cmp td{padding:14px 18px;text-align:left;font-size:.9rem;border-bottom:1px solid var(--line);}
+  table.cmp th{background:var(--surface-2);color:var(--ink-900);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;}
+  table.cmp td:first-child{color:var(--ink-900);font-weight:500;}
+  table.cmp tr:last-child td{border-bottom:none;}
+  table.cmp td.center{text-align:center;}
+  .badge{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:.85rem;font-weight:700;}
+  .badge.yes{background:#e2f7ee;color:var(--accent-2);}
+  .badge.no{background:var(--bad-bg);color:var(--bad);}
+  .badge.partial{background:var(--accent-warm-bg);color:var(--accent-warm);}
+  .cmp-foot{text-align:center;font-size:.82rem;color:var(--ink-500);margin-top:14px;}
+
+  /* ---------- module / SaaS framing ---------- */
+  .module-note{
+    display:flex;gap:16px;align-items:flex-start;max-width:820px;margin:0 auto;
+    border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px;background:var(--surface);box-shadow:var(--shadow);
+  }
+  .module-note .n-ico{flex:none;font-size:1.3rem;}
+  .module-note h3{font-size:1.05rem;margin-bottom:8px;}
+  .module-note p{margin:0;font-size:.94rem;}
+  .module-note + .module-note{margin-top:16px;}
+
+  /* ---------- spec list ---------- */
+  .spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px;margin:0 auto;}
+  .spec-card{border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;background:var(--surface);box-shadow:var(--shadow);}
+  .spec-card h4{font-size:.86rem;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin-bottom:10px;}
+  .spec-card dl{margin:0;display:flex;flex-direction:column;gap:9px;}
+  .spec-card dt{font-size:.82rem;font-weight:600;color:var(--ink-900);}
+  .spec-card dd{margin:0;font-size:.86rem;color:var(--ink-500);}
+
+  /* ---------- footer ---------- */
+  .site-footer{border-top:1px solid var(--line);padding:34px 0;}
+  .footer-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;}
+  .footer-inner p{margin:0;font-size:.85rem;color:var(--ink-500);}
+  .footer-links{display:flex;gap:22px;font-size:.85rem;}
+  .footer-links a{color:var(--ink-500);}
+  .footer-links a:hover{color:var(--ink-900);}
+
+  @media (max-width:960px){
+    .hero-inner{grid-template-columns:1fr;}
+    .module-grid{grid-template-columns:1fr 1fr;}
+    .spec-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:720px){
+    .nav-links{
+      position:absolute;top:100%;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);
+      flex-direction:column;align-items:flex-start;padding:18px 24px;gap:16px;display:none;
+    }
+    .nav-links.open{display:flex;}
+    .nav-toggle{display:block;}
+    .module-grid{grid-template-columns:1fr;}
+    .how-step{flex-direction:column;}
+    .nav-drop-menu{position:static;box-shadow:none;border:none;padding:0 0 0 10px;margin-top:8px;width:100%;}
+    .nav-drop-menu a{padding:8px 0;}
+    .map-card{padding:16px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">RR</span>
+      <span class="brand-text">Rock River Consulting<small>Logistics &amp; Multi-Site Planner</small></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Project Center 2.0</a>
+      <a href="#network">Network</a>
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#compare">Compare</a>
+      <div class="nav-drop" id="offeringsDrop">
+        <button type="button" class="nav-drop-toggle" id="offeringsToggle" aria-haspopup="true" aria-expanded="false">Our Offerings <span class="caret">▾</span></button>
+        <div class="nav-drop-menu">
+          <a href="maintenance.html"><strong>Maintenance &amp; Asset Manager</strong><span>CMMS for machines &amp; assets</span></a>
+          <a href="arcflashsurvey.html"><strong>Arc Flash Site Survey</strong><span>NFPA 70E survey, labels &amp; proposals</span></a>
+          <a href="hrcenter.html"><strong>HR Onboarding, SOPs &amp; Reviews</strong><span>Onboarding, SOP library, review cycles</span></a>
+          <a href="admincenter.html"><strong>AdminCenter</strong><span>Company-wide admin &amp; access control</span></a>
+          <a href="roomdesigner.html"><strong>RoomDesigner</strong><span>Cabinetry &amp; millwork layout</span></a>
+          <a href="financecenter.html"><strong>FinanceCenter</strong><span>Draws, commissions &amp; breakeven</span></a>
+          <a href="logistics.html"><strong>Logistics &amp; Multi-Site Planner</strong><span>Site selection, freight &amp; scheduling</span></a>
+          <a href="it.html"><strong>For IT</strong><span>System requirements &amp; architecture</span></a>
+        </div>
+      </div>
+      <a href="contact.html" class="nav-cta">Get in touch</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span></button>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Logistics &amp; Multi-Site Planner</span>
+      <h1>Find the best shop for the job. <span>Then schedule it there.</span></h1>
+      <p class="lead">
+        Every job has a manufacturing site, a delivery destination, and a
+        schedule — and when you run more than one shop, the "which site"
+        question is really a freight-and-capacity question in disguise. This
+        module scores each candidate site against the job's destination and
+        every shop's current load, so the site that wins is the one that's
+        actually cheapest and fastest to ship from and has room on the
+        floor — not just whichever one is closest to headquarters.
+      </p>
+      <div class="hero-actions">
+        <a href="#network" class="btn btn-primary">See the network model →</a>
+        <a href="contact.html" class="btn btn-ghost">Talk to our team</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>1</strong><span>Job costing ledger, freight included</span></div>
+        <div class="hero-stat"><strong>N</strong><span>Manufacturing sites scheduled together</span></div>
+        <div class="hero-stat"><strong>Live</strong><span>Capacity by site, by week</span></div>
+      </div>
+    </div>
+
+    <div class="hero-card" aria-hidden="true">
+      <div class="hero-card-top">
+        <span class="hero-card-dot a"></span>
+        <span class="hero-card-dot b"></span>
+        <span class="hero-card-dot c"></span>
+        <span class="hero-card-title">logistics / site-fit / job #4482</span>
+      </div>
+      <div class="hero-card-body">
+        <div class="hero-card-row"><span>Job destination</span><b>Tampa, FL</b></div>
+        <div class="hero-card-row"><span>Best-fit site</span><span class="tag green">Atlanta, GA — 96 pts</span></div>
+        <div class="hero-card-row"><span>Runner-up</span><span class="tag blue">Charlotte, NC — 81 pts</span></div>
+        <div class="hero-card-row"><span>Freight estimate</span><b>$1,140 · 1-day LTL</b></div>
+        <div class="hero-card-row"><span>Site capacity this week</span><span class="tag warm">Atlanta: 78% booked</span></div>
+        <div class="hero-card-row"><span>Job cost impact</span><b>Freight posts to job #4482 live</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,30 C240,60 480,0 720,20 C960,40 1200,10 1440,30 L1440,60 L0,60 Z" fill="rgba(37,99,235,0.08)"></path>
+</svg>
+
+<section id="network">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">The network, as the system sees it</span>
+      <h2>Manufacturing sites, freight lanes, and jobs — one map</h2>
+      <p>Every shop, every open job, and every lane between them lives in one model, so "which site should build this" and "who has room this week" are answered from the same live data instead of a phone call to each shop.</p>
+    </div>
+
+    <div class="map-card">
+      <svg viewBox="0 0 620 380" role="img" aria-labelledby="netTitle netDesc" style="width:100%;height:auto;">
+        <title id="netTitle">Multi-site manufacturing and freight network diagram</title>
+        <desc id="netDesc">Three manufacturing sites connect via freight lanes to distribution hubs and active job sites across the region.</desc>
+
+        <!-- soft backdrop grid, standing in for a regional map -->
+        <rect x="0" y="0" width="620" height="380" rx="16" fill="var(--surface-2)"></rect>
+        <g stroke="rgba(16,24,39,0.06)" stroke-width="1">
+          <line x1="0" y1="76" x2="620" y2="76"></line>
+          <line x1="0" y1="152" x2="620" y2="152"></line>
+          <line x1="0" y1="228" x2="620" y2="228"></line>
+          <line x1="0" y1="304" x2="620" y2="304"></line>
+          <line x1="124" y1="0" x2="124" y2="380"></line>
+          <line x1="248" y1="0" x2="248" y2="380"></line>
+          <line x1="372" y1="0" x2="372" y2="380"></line>
+          <line x1="496" y1="0" x2="496" y2="380"></line>
+        </g>
+
+        <!-- freight lanes: manufacturing sites -> job sites -->
+        <g stroke="#2563eb" stroke-width="2" fill="none" opacity="0.55">
+          <path d="M300,190 L460,120"></path>
+          <path d="M300,190 L470,260"></path>
+          <path d="M300,190 L210,300"></path>
+          <path d="M300,190 L120,110"></path>
+          <path d="M120,110 L470,260" stroke-dasharray="4 5" opacity="0.5"></path>
+        </g>
+        <g stroke="#b45309" stroke-width="2" fill="none" opacity="0.5">
+          <path d="M470,80 L460,120"></path>
+          <path d="M470,80 L470,260"></path>
+        </g>
+
+        <!-- job site nodes (green) -->
+        <g fill="#0d9268">
+          <circle cx="460" cy="120" r="7"></circle>
+          <circle cx="470" cy="260" r="7"></circle>
+          <circle cx="210" cy="300" r="7"></circle>
+        </g>
+        <g font-size="12" font-family="Segoe UI, sans-serif" fill="#101827">
+          <text x="472" y="116">Charlotte job</text>
+          <text x="482" y="264">Orlando job</text>
+          <text x="140" y="316">Nashville job</text>
+        </g>
+
+        <!-- distribution hub (blue) -->
+        <g fill="#2563eb">
+          <circle cx="470" cy="80" r="8"></circle>
+        </g>
+        <text x="484" y="76" font-size="12" font-family="Segoe UI, sans-serif" fill="#101827">Regional freight hub</text>
+
+        <!-- manufacturing sites (warm/orange, larger, "AC" style ring like reference) -->
+        <g>
+          <circle cx="300" cy="190" r="17" fill="none" stroke="#b45309" stroke-width="2"></circle>
+          <circle cx="300" cy="190" r="9" fill="#b45309"></circle>
+          <text x="270" y="216" font-size="13" font-weight="700" font-family="Segoe UI, sans-serif" fill="#101827">Atlanta — HQ shop</text>
+        </g>
+        <g>
+          <circle cx="120" cy="110" r="14" fill="none" stroke="#b45309" stroke-width="2"></circle>
+          <circle cx="120" cy="110" r="7" fill="#b45309"></circle>
+          <text x="60" y="94" font-size="13" font-weight="700" font-family="Segoe UI, sans-serif" fill="#101827">Nashville shop</text>
+        </g>
+        <g>
+          <circle cx="470" cy="260" r="12" fill="none" stroke="#b45309" stroke-width="2" opacity="0.7"></circle>
+          <circle cx="470" cy="260" r="6" fill="#b45309" opacity="0.85"></circle>
+        </g>
+      </svg>
+
+      <div class="map-legend">
+        <span><i class="mfg"></i> Manufacturing site (with open capacity)</span>
+        <span><i class="hub"></i> Freight / distribution hub</span>
+        <span><i class="job"></i> Active job destination</span>
+      </div>
+      <p class="map-note">Illustrative network — every site, hub, and job on this map is a real row in the database, scored and re-ranked as jobs, freight rates, and shop schedules change.</p>
+    </div>
+  </div>
+</section>
+
+<section class="soft" id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">What the module does</span>
+      <h2>Site selection, freight, and scheduling — together</h2>
+      <p>These aren't three separate spreadsheets. Picking a site changes the freight estimate, which changes the job cost, which changes whether that site's schedule can absorb the job.</p>
+    </div>
+
+    <div class="module-grid">
+      <div class="module-card">
+        <div class="m-icon">FIT</div>
+        <h4>Best-Fit Site Scoring</h4>
+        <p>For a given job destination, every eligible manufacturing site is scored on freight distance and cost, current capacity, crew skill match, and material availability — ranked, not guessed at.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">FRT</div>
+        <h4>Freight &amp; Landed-Cost Modeling</h4>
+        <p>Distance-based freight and delivery-mode estimates (LTL, FTL, company truck, or crew-carried) per lane, so the "cheapest site to build at" and "cheapest site to ship from" get reconciled before you commit.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">CAP</div>
+        <h4>Capacity-Aware Multi-Site Scheduling</h4>
+        <p>One production calendar across every shop — see what percentage of each site's near-term capacity is already booked before assigning a new job there, not after.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">LANE</div>
+        <h4>Standing Freight Lanes</h4>
+        <p>Recurring routes between a shop and a job cluster (a metro area, a GC's regional footprint) can be saved as a lane with a known rate, so repeat business skips the estimate step entirely.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">JC</div>
+        <h4>Job Costing Tie-In</h4>
+        <p>Whichever site and freight lane get selected for a job, the actual freight and site-labor cost post straight to that job's cost record in FinanceCenter — no separate reconciliation later.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">RE</div>
+        <h4>Re-Score on Change</h4>
+        <p>A shop goes over capacity, a freight rate changes, or a job's destination moves — re-run the fit score and see whether a different site now wins, before material gets cut at the wrong one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>From a new job to an assigned shop and route</h2>
+    </div>
+
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-num">1</div>
+        <div>
+          <h3>Job destination and requirements come in</h3>
+          <p>Delivery address, target install date, and any crew/skill or material requirements attach to the job as soon as it's won — the same job record FinanceCenter and the material requisition workflow already use.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">2</div>
+        <div>
+          <h3>Every eligible site gets scored</h3>
+          <p>Freight distance and mode, current booked capacity for the target week, and material/crew fit are weighed together into one fit score per site — ties broken in favor of the site with more open capacity.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">3</div>
+        <div>
+          <h3>The best-fit site (and a runner-up) is presented</h3>
+          <p>The recommendation shows its reasoning — freight estimate, capacity load, and score breakdown — so a scheduler can accept it or override it with a documented reason.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">4</div>
+        <div>
+          <h3>The job lands on that site's production calendar</h3>
+          <p>Assigning the job books capacity at the chosen site immediately, so the next job's fit score sees the updated load — no two jobs get double-booked into the same week by two different estimators.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">5</div>
+        <div>
+          <h3>Freight and site cost post to the job automatically</h3>
+          <p>The freight estimate — and the actual carrier cost once shipped — write straight to the job's cost record, so the delivered job cost reflects exactly which shop built it and how it got there.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="soft" id="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How this compares</span>
+      <h2>What multi-site shops usually do instead</h2>
+    </div>
+
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead>
+          <tr><th>Capability</th><th class="center">Gut-feel / "whoever has room"</th><th class="center">Separate spreadsheet per shop</th><th class="center">Logistics &amp; Multi-Site Planner</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Site choice weighs freight cost, not just proximity to HQ</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Site choice weighs real-time capacity at each shop</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>One production calendar across every site</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Freight cost flows into job costing automatically</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Standing lanes with known rates for repeat routes</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Decision reasoning documented, not just remembered</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cmp-foot">✓ present &nbsp;·&nbsp; ~ partial / depends on discipline &nbsp;·&nbsp; ✕ not covered</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How this fits together</span>
+      <h2>Connected to the modules you already run</h2>
+    </div>
+    <div class="module-note">
+      <span class="n-ico">💰</span>
+      <div>
+        <h3>Connects to FinanceCenter &amp; Job Costing</h3>
+        <p>Every freight estimate and actual carrier cost this module produces posts to the job's cost record, alongside material and labor — so a job built at the wrong site shows up in the numbers immediately, not at closeout. See the <a href="financecenter.html" style="color:var(--accent);font-weight:600;">FinanceCenter</a> module, including material requisition, PO &amp; receiving.</p>
+      </div>
+    </div>
+    <div class="module-note">
+      <span class="n-ico">🏭</span>
+      <div>
+        <h3>Connects to Maintenance &amp; Asset Manager</h3>
+        <p>A site's real machine uptime and crew availability feed its capacity score here — a shop with a saw down for repair scores lower for new work until that's resolved. See the <a href="maintenance.html" style="color:var(--accent);font-weight:600;">Maintenance &amp; Asset Manager</a> module.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>© <span data-year>2026</span> Rock River Consulting</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#modules">Project Center 2.0</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---------- nav toggle ----------
+  document.getElementById('navToggle').addEventListener('click', function(){
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  var yearEl = document.querySelector('[data-year]');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // ---------- "Our Offerings" nav dropdown ----------
+  (function(){
+    var drop = document.getElementById('offeringsDrop');
+    var toggle = document.getElementById('offeringsToggle');
+    if (!drop || !toggle) return;
+    toggle.addEventListener('click', function(e){
+      e.preventDefault();
+      var open = drop.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function(e){
+      if (!drop.contains(e.target)){
+        drop.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+
+</script>
+
+</body>
+</html>
