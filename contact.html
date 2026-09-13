@@ -425,40 +425,31 @@
       btn.disabled = true;
       btn.textContent = 'Sending…';
 
+      // mode: 'no-cors' is required here — Google Apps Script /exec responses
+      // don't include an Access-Control-Allow-Origin header, so the browser
+      // blocks JS from ever reading the response (fetch() rejects with
+      // "TypeError: Failed to fetch" even when Apps Script ran doPost() and
+      // sent the email successfully). no-cors lets the request go through and
+      // the script still runs server-side — we just can't see what it
+      // returned. So success here means "the request didn't error," not "the
+      // server confirmed success." A genuine failure (offline, wrong/undeployed
+      // URL, real network error) still rejects the promise and falls back to
+      // mailto.
       fetch(APPS_SCRIPT_ENDPOINT, {
         method: 'POST',
+        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ name: name, email: email, message: message })
-      }).then(function(res){
-        // DIAGNOSTIC: log the raw response so the browser console shows exactly
-        // what Apps Script sent back (or that the browser never got a usable
-        // response at all). Safe to remove once this is confirmed working.
-        console.log('[contact form] HTTP status:', res.status, res.statusText);
-        return res.text().then(function(raw){
-          console.log('[contact form] raw response body:', raw);
-          try {
-            return JSON.parse(raw);
-          } catch (parseErr){
-            console.error('[contact form] response was not valid JSON — Apps Script likely returned an HTML page (often a sign-in/permission page) instead of your doPost() output. Raw body logged above.', parseErr);
-            throw parseErr;
-          }
-        });
-      }).then(function(json){
-        console.log('[contact form] parsed JSON:', json);
-        if (json && json.status === 'success'){
-          success.textContent = 'Thanks — your message has been sent. We\'ll be in touch shortly.';
-          success.classList.add('show');
-          form.reset();
-        } else {
-          console.error('[contact form] Apps Script responded but did not report success:', json);
-          sendByMailto(name, email, message);
-        }
+      }).then(function(){
+        console.log('[contact form] request sent (no-cors: response is opaque, this only confirms it did not error)');
+        success.textContent = 'Thanks — your message has been sent. We\'ll be in touch shortly.';
+        success.classList.add('show');
+        form.reset();
       }).catch(function(err){
-        // A TypeError with message like "Failed to fetch" here almost always
-        // means the browser blocked or couldn't complete the request itself
-        // (CORS rejection, no network, wrong/undeployed URL) — the request may
-        // not have even reached Apps Script. Check this message first.
-        console.error('[contact form] fetch to Apps Script failed before/while getting a response:', err);
+        // A TypeError with message like "Failed to fetch" here means the
+        // browser couldn't send the request at all (offline, wrong/undeployed
+        // URL, DNS failure, etc.) — genuinely didn't go out.
+        console.error('[contact form] fetch to Apps Script failed:', err);
         sendByMailto(name, email, message);
       }).finally(function(){
         btn.disabled = false;
