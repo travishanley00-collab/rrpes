@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Maintenance & Asset Manager — Rock River Consulting</title>
-<meta name="description" content="Maintenance & Asset Manager is Rock River Consulting's CMMS module for Project Center 2.0 — an asset register, preventive-maintenance scheduling, hour-meter triggers, repair history, and safety alerts for every machine on the floor, on the same platform as production." />
+<meta name="description" content="Maintenance & Asset Manager is Rock River Consulting's CMMS module integrated directly with MES and production scheduling. Features QR-code daily checks, operator issue logging, automated vendor routing, and spare part procurement." />
 <style>
   :root{
     --bg:#f5f7fb;
@@ -78,6 +78,28 @@
   .nav-toggle::before{top:11px;}
   .nav-toggle span{top:17px;}
   .nav-toggle::after{top:23px;}
+  .nav-drop{position:relative;}
+  .nav-drop-toggle{
+    display:inline-flex;align-items:center;gap:5px;background:none;border:0;cursor:pointer;
+    font:inherit;color:var(--ink-500);padding:6px 0;transition:color .15s ease;
+  }
+  .nav-drop-toggle:hover{color:var(--ink-900);}
+  .nav-drop-toggle .caret{font-size:.62em;transition:transform .15s ease;}
+  .nav-drop.open .nav-drop-toggle .caret{transform:rotate(180deg);}
+  .nav-drop-menu{
+    position:absolute;top:100%;left:0;margin-top:12px;min-width:290px;
+    background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);
+    padding:8px;display:none;flex-direction:column;gap:2px;z-index:70;
+  }
+  .nav-drop-menu a{display:block;padding:9px 12px;border-radius:8px;color:var(--ink-900) !important;}
+  .nav-drop-menu a:hover{background:var(--surface-2);}
+  .nav-drop-menu a strong{display:block;font-size:.85rem;font-weight:600;}
+  .nav-drop-menu a span{display:block;font-size:.73rem;color:var(--ink-500);margin-top:2px;}
+  .nav-drop.open .nav-drop-menu{display:flex;}
+  @media (hover:hover){
+    .nav-drop:hover .nav-drop-menu{display:flex;}
+    .nav-drop:hover .nav-drop-toggle .caret{transform:rotate(180deg);}
+  }
 
   /* ---------- hero ---------- */
   .hero{
@@ -140,7 +162,7 @@
   .section-head h2{font-size:clamp(1.6rem,3vw,2.15rem);margin-bottom:14px;}
   .section-head p{font-size:1.02rem;}
 
-  /* ---------- feature grid (reused module-card look) ---------- */
+  /* ---------- feature grid ---------- */
   .module-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
   .module-card{
     position:relative;border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--surface);
@@ -235,6 +257,8 @@
     .nav-toggle{display:block;}
     .module-grid{grid-template-columns:1fr;}
     .how-step{flex-direction:column;}
+    .nav-drop-menu{position:static;box-shadow:none;border:none;padding:0 0 0 10px;margin-top:8px;width:100%;}
+    .nav-drop-menu a{padding:8px 0;}
   }
 </style>
 </head>
@@ -251,7 +275,19 @@
       <a href="#features">Features</a>
       <a href="#how">How it works</a>
       <a href="#compare">Compare</a>
-      <a href="#contact" class="nav-cta">Get in touch</a>
+      <a href="#realtime">MES &amp; Procurement</a>
+      <div class="nav-drop" id="offeringsDrop">
+        <button type="button" class="nav-drop-toggle" id="offeringsToggle" aria-haspopup="true" aria-expanded="false">Our Offerings <span class="caret">▾</span></button>
+        <div class="nav-drop-menu">
+          <a href="maintenance.html"><strong>Maintenance &amp; Asset Manager</strong><span>CMMS for machines &amp; assets</span></a>
+          <a href="hrcenter.html"><strong>HR Onboarding, SOPs &amp; Reviews</strong><span>Onboarding, SOP library, review cycles</span></a>
+          <a href="admincenter.html"><strong>AdminCenter</strong><span>Company-wide admin &amp; access control</span></a>
+          <a href="roomdesigner.html"><strong>RoomDesigner</strong><span>Cabinetry &amp; millwork layout</span></a>
+          <a href="financecenter.html"><strong>FinanceCenter</strong><span>Draws, commissions &amp; breakeven</span></a>
+          <a href="it.html"><strong>For IT</strong><span>System requirements &amp; architecture</span></a>
+        </div>
+      </div>
+      <a href="contact.html" class="nav-cta">Get in touch</a>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span></button>
   </nav>
@@ -261,22 +297,17 @@
   <div class="hero-inner">
     <div>
       <span class="eyebrow"><span class="dot"></span> Rock River Consulting · A Project Center 2.0 module</span>
-      <h1>Know what's due <span>before it breaks down.</span></h1>
+      <h1>Production runs when <span>maintenance is connected.</span></h1>
       <p class="lead">
-        Maintenance &amp; Asset Manager is a real CMMS for the shop floor — an
-        asset register with tags and serial numbers, preventive-maintenance
-        scheduling by calendar or by hour meter, repair history, and safety
-        alerts — running on the same platform and the same database as
-        estimating, scheduling, and production. No separate system to buy,
-        license, or log into.
+        Maintenance &amp; Asset Manager is a real CMMS for the shop floor. Features QR-based daily checks, operator issue logging, automated vendor routing, and spare parts procurement—all directly integrated with your MES and active production schedule so maintenance never blind-sides the shop floor.
       </p>
       <div class="hero-actions">
         <a href="#how" class="btn btn-primary">See how it works →</a>
-        <a href="#contact" class="btn btn-ghost">Talk to us</a>
+        <a href="contact.html" class="btn btn-ghost">Talk to us</a>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat"><strong>1</strong><span>Asset register, tagged &amp; serialized</span></div>
-        <div class="hero-stat"><strong>0</strong><span>Separate CMMS logins</span></div>
+        <div class="hero-stat"><strong>MES</strong><span>Production schedule sync</span></div>
+        <div class="hero-stat"><strong>QR</strong><span>Instant operator logs</span></div>
         <div class="hero-stat"><strong>24/7</strong><span>Due-now visibility</span></div>
       </div>
     </div>
@@ -289,11 +320,11 @@
         <span class="hero-card-title">projectcenter.internal / maintenance / due-now</span>
       </div>
       <div class="hero-card-body">
-        <div class="hero-card-row"><span>Edgebander — MC-014</span><span class="tag bad">Overdue · safety flag</span></div>
+        <div class="hero-card-row"><span>Forklift — FL-04</span><span class="tag bad">Failed daily check</span></div>
+        <div class="hero-card-row"><span>Edgebander — MC-014</span><span class="tag bad">Production Down — Safety Flag</span></div>
         <div class="hero-card-row"><span>CNC Router — MC-021</span><span class="tag warm">240 run hrs to service</span></div>
-        <div class="hero-card-row"><span>Table Saw #2 — MC-007</span><span class="tag blue">PM due in 3 days</span></div>
-        <div class="hero-card-row"><span>Dust Collector — MC-030</span><span class="tag green">Serviced — up to date</span></div>
-        <div class="hero-card-row"><span>Assets tracked</span><b>34 machines</b></div>
+        <div class="hero-card-row"><span>Production Schedule Sync</span><span class="tag green">Active</span></div>
+        <div class="hero-card-row"><span>Vendor Routing</span><b>Auto-queuing active</b></div>
         <div class="hero-card-row"><span>Lifetime cost view</span><b>Per asset, always current</b></div>
       </div>
     </div>
@@ -309,49 +340,49 @@
     <div class="section-head">
       <span class="kicker">What it does</span>
       <h2>Everything a shop's maintenance program actually needs</h2>
-      <p>Not a checklist app bolted on after the fact — a real asset register and PM engine built for a shop that runs machines every day.</p>
+      <p>Not a checklist app bolted on after the fact — an MES-integrated asset register and PM engine built for a shop that runs machines every day.</p>
     </div>
 
     <div class="module-grid">
       <div class="module-card">
-        <div class="m-icon">TAG</div>
-        <h4>Asset Register</h4>
-        <p>Every machine tagged with a unique asset code and serial number — searchable, retireable, and tied to every task and repair logged against it.</p>
+        <div class="m-icon">QR</div>
+        <h4>QR-Tagged Asset Register</h4>
+        <p>Every machine and vehicle is tagged with a QR code. Scan it from any mobile device to open its history, start a work order, or log a daily shift check.</p>
       </div>
       <div class="module-card">
-        <div class="m-icon">PM</div>
-        <h4>Preventive Maintenance Engine</h4>
-        <p>Recurring PM tasks per asset, with a due list that surfaces automatically — nothing to remember, nothing tracked on a clipboard.</p>
+        <div class="m-icon">MES</div>
+        <h4>MES &amp; Production Sync</h4>
+        <p>Maintenance doesn't live in a vacuum. PMs sync directly with the manufacturing schedule, ensuring scheduled downtime minimizes impact to actual production.</p>
       </div>
       <div class="module-card">
-        <div class="m-icon">CAL</div>
-        <h4>Maintenance Calendar</h4>
-        <p>A rolling calendar view of what's due and what's coming — the same way project milestones show up on the production schedule.</p>
-      </div>
-      <div class="module-card">
-        <div class="m-icon">HRS</div>
-        <h4>Hour-Meter Triggers</h4>
-        <p>Service intervals that fire off actual run hours, not just calendar days — for equipment that wears by use, not by the clock.</p>
-      </div>
-      <div class="module-card">
-        <div class="m-icon">REP</div>
-        <h4>Repair History &amp; Downtime</h4>
-        <p>Every repair logged against the asset it happened to, so you can see a machine's full history — and what its downtime has actually cost.</p>
+        <div class="m-icon">LOG</div>
+        <h4>Operator Daily Checks</h4>
+        <p>Shift starts with a QR scan. Operators complete daily safety and operational logs (like forklift checks). A failed check instantly flags the maintenance manager.</p>
       </div>
       <div class="module-card">
         <div class="m-icon">ALT</div>
-        <h4>Safety Alerts</h4>
-        <p>A maintenance issue can be flagged major or minor with a safety callout — so a real hazard doesn't sit quietly in a routine ticket queue.</p>
+        <h4>Operator-Triggered Issue Logs</h4>
+        <p>Production workers can scan a machine, signal it’s down, and start an issue log that instantly feeds the maintenance queue and flags the production schedule.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">PO</div>
+        <h4>Integrated Procurement</h4>
+        <p>Need a spare part? Scan the machine, check the integrated inventory, and trigger a quick Purchase Order straight to the procurement module.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">VND</div>
+        <h4>Automated Vendor Routing</h4>
+        <p>When an asset fails a check, the system automatically queues an internal work order—or instantly drafts a request to your preferred external vendor.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">SAF</div>
+        <h4>Closed-Loop Safety &amp; Repair</h4>
+        <p>Safety flags halt production. Technicians log the fix, attach photo evidence of repair, and clear the safety block in real-time, leaving a permanent audit trail.</p>
       </div>
       <div class="module-card">
         <div class="m-icon">$</div>
-        <h4>Lifetime Cost per Asset</h4>
+        <h4>Lifetime Cost &amp; Downtime</h4>
         <p>Parts, labor, and downtime roll up into one running number per machine — the real cost of keeping it, not just what it cost to buy.</p>
-      </div>
-      <div class="module-card">
-        <div class="m-icon">SHR</div>
-        <h4>Shared, Multi-User Data</h4>
-        <p>One shared record everyone on the floor and in the office reads from — not a spreadsheet on one machine that only shows its own day.</p>
       </div>
     </div>
   </div>
@@ -361,43 +392,43 @@
   <div class="wrap">
     <div class="section-head">
       <span class="kicker">How it works</span>
-      <h2>From "tag the machine" to "know its full history"</h2>
+      <h2>A connected lifecycle, from daily check to final repair</h2>
     </div>
 
     <div class="how-steps">
       <div class="how-step">
         <div class="how-num">1</div>
         <div>
-          <h3>Tag the asset</h3>
-          <p>Every machine gets an asset code and serial number the first time it's added to the register — from a table saw to a dust collector.</p>
+          <h3>Scan to start the shift</h3>
+          <p>Operators use a wireless device to scan an asset's QR code (like a forklift) at the start of their shift. This instantly opens the required daily safety and operational log.</p>
         </div>
       </div>
       <div class="how-step">
         <div class="how-num">2</div>
         <div>
-          <h3>Set the maintenance schedule</h3>
-          <p>Pick calendar-based service (every 90 days) or hour-meter-based service (every 500 run hours) — whichever actually matches how that machine wears.</p>
+          <h3>Operators signal issues instantly</h3>
+          <p>If a daily check fails, or if a machine breaks mid-shift, production workers flag it as "down." This instantly alerts the maintenance manager, flags the production schedule, and creates a work order tagged for safety hazards.</p>
         </div>
       </div>
       <div class="how-step">
         <div class="how-num">3</div>
         <div>
-          <h3>The due list builds itself</h3>
-          <p>Nobody has to remember. What's due — and what's overdue — surfaces on its own, the same way a billing application or a submittal shows up when it's ready.</p>
+          <h3>Procure parts and auto-route vendors</h3>
+          <p>The failure triggers action: the system queues an internal ticket or automatically routes an alert to your preferred external vendor. If a spare part is needed internally, technicians scan the machine and create a quick PO in the procurement platform instantly.</p>
         </div>
       </div>
       <div class="how-step">
         <div class="how-num">4</div>
         <div>
-          <h3>Log the work, flag what's unsafe</h3>
-          <p>A completed task or repair gets logged against the asset. Anything that's a real hazard gets flagged major or minor so it doesn't wait quietly in line.</p>
+          <h3>Fix and prove safety</h3>
+          <p>Maintenance performs the fix, logging their time and attaching photo evidence of the repair directly to the work order. This clears the safety block and re-authorizes the asset for production use.</p>
         </div>
       </div>
       <div class="how-step">
         <div class="how-num">5</div>
         <div>
-          <h3>Cost rolls up automatically</h3>
-          <p>Every logged repair adds to that asset's lifetime cost — visible on its own, and available to roll into the same margin reporting the rest of the platform already does.</p>
+          <h3>Plan PMs around production (MES Sync)</h3>
+          <p>For preventive maintenance, the scheduled downtime talks to the MES. PMs are planned intelligently around active manufacturing jobs to ensure a routine oil change doesn't blow up a client's delivery date.</p>
         </div>
       </div>
     </div>
@@ -418,13 +449,12 @@
           <tr><th>Capability</th><th class="center">Paper / whiteboard</th><th class="center">Standalone CMMS software</th><th class="center">Maintenance &amp; Asset Manager</th></tr>
         </thead>
         <tbody>
-          <tr><td>Asset register with tags &amp; serial numbers</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
-          <tr><td>PM scheduling — calendar or hour-meter</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
-          <tr><td>Repair history &amp; downtime log</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
-          <tr><td>Safety alerts tied to a specific asset</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
-          <tr><td>Lifetime cost per asset</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Direct sync with production schedule (MES)</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>QR-code daily operator checks &amp; safety logs</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Spare parts procurement / quick POs</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Operator-triggered production down flags</td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
+          <tr><td>Automated routing to external vendors</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
           <tr><td>Same login &amp; database as production scheduling</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
-          <tr><td>Feeds the same GM-level margin reporting</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
           <tr><td>Requires its own vendor contract &amp; login</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge yes">✓</span></td><td class="center"><span class="badge no">✕</span></td></tr>
         </tbody>
       </table>
@@ -433,7 +463,25 @@
   </div>
 </section>
 
-<section class="soft">
+<section class="soft" id="realtime">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">MES &amp; Procurement Integration</span>
+      <h2>Feed live equipment data back into the system</h2>
+      <p>Beyond scheduled PM tasks, a machine can report its own condition back into its asset record as it happens — so a problem shows up the moment it starts, not at the next scheduled check.</p>
+    </div>
+    <div class="module-note">
+      <span class="n-ico">📡</span>
+      <div>
+        <h3>Every machine and every plant is wired differently</h3>
+        <p>Real-time condition monitoring — sensor, PLC, or hour-meter data streaming back into the asset record automatically — is genuinely possible on this platform, but it's highly custom: what data your equipment can actually expose, how it's networked, and what should trigger an alert all differ machine to machine and plant to plant. This isn't a checkbox we turn on — our consulting team scopes it with you, equipment by equipment.</p>
+        <a href="contact.html" class="btn btn-primary" style="margin-top:6px;">Talk to our consulting team →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
   <div class="wrap">
     <div class="section-head">
       <span class="kicker">How this fits together</span>
@@ -449,53 +497,6 @@
   </div>
 </section>
 
-<section id="contact">
-  <div class="wrap">
-    <div class="contact-grid">
-      <div class="contact-info">
-        <span class="kicker">Get in touch</span>
-        <h2>Want to see the maintenance module in action?</h2>
-        <p>Tell us how your team tracks machine maintenance today — a whiteboard, a spreadsheet, a separate CMMS — and we'll show you what it looks like running inside Project Center 2.0 instead.</p>
-        <div class="contact-methods">
-          <div class="contact-method">
-            <div class="cm-icon">☎</div>
-            <div><b>Call or text</b><span>720.412.3639</span></div>
-          </div>
-          <div class="contact-method">
-            <div class="cm-icon">✉</div>
-            <div><b>Send an inquiry</b><span>Use the form — we'll reply directly to you</span></div>
-          </div>
-        </div>
-      </div>
-
-      <form class="contact-form" id="inquiryForm">
-        <!-- Submits via Formspree (see FORMSPREE_ENDPOINT below) — no email address
-             appears anywhere in this page's markup. Formspree sets the subject
-             line from the hidden _subject field and uses the "email" field to
-             set Reply-To automatically, so replying just works. If Formspree
-             isn't connected yet, or a submission ever fails, this automatically
-             falls back to opening the visitor's own email app instead. -->
-        <input type="hidden" name="_subject" value="Maintenance & Asset Manager Inquiry" />
-        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-        <div class="form-row">
-          <label for="cName">Name</label>
-          <input type="text" id="cName" name="Name" required />
-        </div>
-        <div class="form-row">
-          <label for="cEmail">Your email</label>
-          <input type="email" id="cEmail" name="email" required />
-        </div>
-        <div class="form-row">
-          <label for="cMsg">What are you looking to solve?</label>
-          <textarea id="cMsg" name="Message" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Submit Inquiry</button>
-        <p class="form-note" id="formNote">Sent straight to our team — we'll reply to the email address you enter above.</p>
-        <div class="form-success" id="formSuccess">Thanks — your message has been sent. We'll be in touch shortly.</div>
-      </form>
-    </div>
-  </div>
-</section>
 
 <footer class="site-footer">
   <div class="wrap footer-inner">
@@ -503,7 +504,7 @@
     <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="index.html#modules">Project Center 2.0</a>
-      <a href="#contact">Contact</a>
+      <a href="contact.html">Contact</a>
     </div>
   </div>
 </footer>
@@ -516,72 +517,24 @@
   var yearEl = document.querySelector('[data-year]');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // ---------- contact form ----------
-  // Primary path: Formspree (silent submit, no email address in this page's markup).
-  //   1. Sign up free at https://formspree.io using travishanley00@gmail.com
-  //   2. Create a form there and verify it from the confirmation email Formspree sends
-  //   3. Copy the endpoint it gives you (looks like https://formspree.io/f/xxxxabcd)
-  //   4. Paste it in place of the placeholder below
-  // Until that's done (or if the request ever fails), the form automatically falls
-  // back to opening the visitor's own email app, addressed to us — so "Submit
-  // Inquiry" always does SOMETHING useful, never just sits there looking broken.
-  var FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_ENDPOINT_ID';
-  var FALLBACK_USER = ['t','r','a','v','i','s','h','a','n','l','e','y','0','0'].join('');
-  var FALLBACK_DOMAIN = ['gmail','com'].join('.');
-  var FALLBACK_ADDRESS = FALLBACK_USER + '@' + FALLBACK_DOMAIN;
-
+  // ---------- "Our Offerings" nav dropdown ----------
   (function(){
-    var form = document.getElementById('inquiryForm');
-    var note = document.getElementById('formNote');
-    var success = document.getElementById('formSuccess');
-    var formspreeReady = FORMSPREE_ENDPOINT.indexOf('YOUR_ENDPOINT_ID') === -1;
-
-    function sendByMailto(){
-      var name = document.getElementById('cName').value.trim();
-      var from = document.getElementById('cEmail').value.trim();
-      var msg = document.getElementById('cMsg').value.trim();
-      var subject = encodeURIComponent('Maintenance & Asset Manager Inquiry');
-      var body = encodeURIComponent('Name: ' + name + '\nReply-to: ' + from + '\n\n' + msg);
-      success.textContent = 'Thanks — your email app should now be open with your message ready to send.';
-      success.classList.add('show');
-      window.location.href = 'mailto:' + FALLBACK_ADDRESS + '?subject=' + subject + '&body=' + body;
-    }
-
-    form.addEventListener('submit', function(e){
+    var drop = document.getElementById('offeringsDrop');
+    var toggle = document.getElementById('offeringsToggle');
+    if (!drop || !toggle) return;
+    toggle.addEventListener('click', function(e){
       e.preventDefault();
-      success.classList.remove('show');
-      note.style.color = '';
-
-      if (!formspreeReady){
-        sendByMailto();
-        return;
+      var open = drop.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function(e){
+      if (!drop.contains(e.target)){
+        drop.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
       }
-
-      var btn = form.querySelector('button[type="submit"]');
-      var originalLabel = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = 'Sending…';
-
-      fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
-      }).then(function(res){
-        if (res.ok){
-          success.textContent = 'Thanks — your message has been sent. We\'ll be in touch shortly.';
-          success.classList.add('show');
-          form.reset();
-        } else {
-          sendByMailto();
-        }
-      }).catch(function(){
-        sendByMailto();
-      }).finally(function(){
-        btn.disabled = false;
-        btn.textContent = originalLabel;
-      });
     });
   })();
+
 </script>
 
 </body>
