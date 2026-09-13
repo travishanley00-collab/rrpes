@@ -253,20 +253,20 @@
         </div>
       </div>
 
-      <form class="contact-form" id="inquiryForm">
-        <!-- Submits to a Google Apps Script Web App bound to travishanley00@gmail.com
-             (see APPS_SCRIPT_ENDPOINT below) — no email address appears anywhere in
-             this page's markup, and MailApp sends straight from that Gmail account
-             with Reply-To set to whatever the visitor typed, so replying just works.
-             Unlike Formspree, Apps Script has no plain-HTML form-post fallback that
-             matches its JSON contract, so this form has no action/method attribute —
-             it's JS-only. If Apps Script isn't deployed yet, or a submission ever
-             fails outright, this automatically falls back to opening the visitor's
-             own email app instead. -->
+      <form class="contact-form" id="inquiryForm" action="https://api.web3forms.com/submit" method="POST">
+        <!-- Submits to Web3Forms (api.web3forms.com) — a hosted form-relay service
+             tied to an access key below, not a mailbox address. Web3Forms answers
+             CORS properly (unlike a raw Google Apps Script endpoint), so the JS
+             below can read the real success/failure response instead of guessing.
+             The action/method attributes above are a plain-HTML fallback: if a
+             visitor has JavaScript disabled, the browser submits the form to
+             Web3Forms directly and it works the same way, just with a page
+             redirect afterward instead of staying on this page. -->
+        <input type="hidden" name="access_key" value="047de071-cdb7-4086-bca4-9afc064fd9dc" />
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
         <div class="form-row">
           <label for="cName">Name</label>
-          <input type="text" id="cName" name="Name" required />
+          <input type="text" id="cName" name="name" required />
         </div>
         <div class="form-row">
           <label for="cEmail">Your email</label>
@@ -274,7 +274,7 @@
         </div>
         <div class="form-row">
           <label for="cMsg">What are you looking to solve?</label>
-          <textarea id="cMsg" name="Message" required></textarea>
+          <textarea id="cMsg" name="message" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Submit Inquiry</button>
         <p class="form-note" id="formNote">Sent straight to our team — we'll reply to the email address you enter above.</p>
@@ -335,48 +335,17 @@
   })();
 
   // ---------- contact form ----------
-  // Primary path: a Google Apps Script Web App bound to travishanley00@gmail.com,
-  //   sending mail natively through MailApp — no email address appears anywhere
-  //   in this page's markup, and the visitor never leaves the page.
+  // Submits to Web3Forms (api.web3forms.com) using the access key in the hidden
+  // "access_key" field above. Unlike the earlier Google Apps Script approach,
+  // Web3Forms' API answers CORS properly, so this can send a real fetch() with
+  // Accept: application/json and read back a genuine success/failure response
+  // instead of guessing. Web3Forms relays the message to the inbox tied to
+  // that access key — no email address appears anywhere in this page's markup.
   //
-  //   1. Go to https://script.google.com while signed in as travishanley00@gmail.com
-  //      and create a new project with this doPost(e) function:
-  //
-  //        function doPost(e) {
-  //          try {
-  //            var data = JSON.parse(e.postData.contents);
-  //            MailApp.sendEmail({
-  //              to: "travishanley00@gmail.com",
-  //              replyTo: data.email,
-  //              subject: "New Project Center Inquiry from " + data.name,
-  //              body: "Name: " + data.name + "\nEmail: " + data.email + "\n\nMessage:\n" + data.message
-  //            });
-  //            return ContentService.createTextOutput(JSON.stringify({status:"success"}))
-  //              .setMimeType(ContentService.MimeType.JSON);
-  //          } catch (error) {
-  //            return ContentService.createTextOutput(JSON.stringify({status:"error", message: error.toString()}))
-  //              .setMimeType(ContentService.MimeType.JSON);
-  //          }
-  //        }
-  //
-  //   2. Deploy → New deployment → type "Web app" → Execute as "Me"
-  //      → Who has access "Anyone" → Deploy. Authorize it when Google prompts.
-  //   3. Copy the /exec URL it gives you (looks like
-  //      https://script.google.com/macros/s/AKfycb.../exec) and paste it in
-  //      place of the placeholder below.
-  //
-  //   Note the request below is sent with Content-Type: text/plain rather than
-  //   application/json — that's deliberate. Apps Script has no way to answer a
-  //   CORS preflight (an OPTIONS request), so a "real" JSON content-type would
-  //   make the browser preflight the request and the whole thing would silently
-  //   fail. text/plain is one of the browser's built-in "simple request" types,
-  //   so no preflight is sent — Apps Script still reads the raw text body fine
-  //   and JSON.parses it itself in doPost, exactly like the reference function above.
-  //
-  // Until the endpoint below is set (or if a submission ever fails), this falls
-  // back to opening the visitor's own email app instead — "Submit Inquiry"
-  // always does SOMETHING useful, never just sits there looking broken.
-  var APPS_SCRIPT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwtZsJgDtISjt5fCybacJL6-QGkaUd8ZdqQLULHghiRSGPd74IbPA5OtE2YwveMSMXu-Q/exec';
+  // Only a real send failure (offline, DNS failure, Web3Forms itself reporting
+  // an error) falls back to opening the visitor's own email app — "Submit
+  // Inquiry" always does SOMETHING useful, never just sits there looking broken.
+  var WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
   var FALLBACK_USER = ['t','r','a','v','i','s','h','a','n','l','e','y','0','0'].join('');
   var FALLBACK_DOMAIN = ['gmail','com'].join('.');
   var FALLBACK_ADDRESS = FALLBACK_USER + '@' + FALLBACK_DOMAIN;
@@ -386,7 +355,6 @@
     var note = document.getElementById('formNote');
     var success = document.getElementById('formSuccess');
     var errorBox = document.getElementById('formError');
-    var endpointReady = APPS_SCRIPT_ENDPOINT.indexOf('YOUR_DEPLOYMENT_ID') === -1;
 
     function sendByMailto(name, from, msg){
       var subject = encodeURIComponent('Project Center 2.0 Inquiry');
@@ -406,6 +374,7 @@
       var name = document.getElementById('cName').value.trim();
       var email = document.getElementById('cEmail').value.trim();
       var message = document.getElementById('cMsg').value.trim();
+      var accessKey = form.querySelector('[name="access_key"]').value;
 
       // Honeypot: a real visitor never fills this in. A bot that does gets a
       // fake "success" and nothing is actually sent anywhere.
@@ -417,46 +386,46 @@
         return;
       }
 
-      if (!endpointReady){
-        sendByMailto(name, email, message);
-        return;
-      }
-
       var btn = form.querySelector('button[type="submit"]');
       var originalLabel = btn.textContent;
       btn.disabled = true;
       btn.textContent = 'Sending…';
 
-      // mode: 'no-cors' is required here — Google Apps Script /exec responses
-      // don't include an Access-Control-Allow-Origin header, so the browser
-      // blocks JS from ever reading the response (fetch() rejects with
-      // "TypeError: Failed to fetch" even when Apps Script ran doPost() and
-      // sent the email successfully). no-cors lets the request go through and
-      // the script still runs server-side — we just can't see what it
-      // returned. So success here means "the request didn't error," not "the
-      // server confirmed success." A genuine failure (offline, wrong/undeployed
-      // URL, real network error) still rejects the promise and falls back to
-      // mailto.
-      fetch(APPS_SCRIPT_ENDPOINT, {
+      fetch(WEB3FORMS_ENDPOINT, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ name: name, email: email, message: message })
-      }).then(function(){
-        console.log('[contact form] request sent (no-cors: response is opaque, this only confirms it did not error)');
-        success.textContent = 'Thanks — your message has been sent. We\'ll be in touch shortly.';
-        success.classList.add('show');
-        form.reset();
-      }).catch(function(err){
-        // A TypeError with message like "Failed to fetch" here means the
-        // browser couldn't send the request at all (offline, wrong/undeployed
-        // URL, DNS failure, etc.) — genuinely didn't go out.
-        console.error('[contact form] fetch to Apps Script failed:', err);
-        sendByMailto(name, email, message);
-      }).finally(function(){
-        btn.disabled = false;
-        btn.textContent = originalLabel;
-      });
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: name,
+          email: email,
+          message: message,
+          subject: 'New Project Center 2.0 Inquiry from ' + name,
+          replyto: email
+        })
+      }).then(function(res){ return res.json(); })
+        .then(function(json){
+          console.log('[contact form] Web3Forms response:', json);
+          if (json && json.success){
+            success.textContent = 'Thanks — your message has been sent. We\'ll be in touch shortly.';
+            success.classList.add('show');
+            form.reset();
+          } else {
+            console.error('[contact form] Web3Forms reported failure:', json);
+            sendByMailto(name, email, message);
+          }
+        }).catch(function(err){
+          // A TypeError with message like "Failed to fetch" here means the
+          // browser couldn't complete the request at all (offline, DNS
+          // failure, etc.) — it genuinely didn't go out.
+          console.error('[contact form] fetch to Web3Forms failed:', err);
+          sendByMailto(name, email, message);
+        }).finally(function(){
+          btn.disabled = false;
+          btn.textContent = originalLabel;
+        });
     });
   })();
 </script>
