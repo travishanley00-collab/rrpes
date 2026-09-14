@@ -112,6 +112,36 @@ It eliminates operational fragmentation. Most trade contractors operate across a
 **Can a shop use Project Center 2.0 if they operate both a manufacturing facility and field installation crews?**
 Yes. Project Center 2.0 bridges shop-floor manufacturing execution (MES) with field installation management, linking factory station routing directly to jobsite delivery drops, field submittals, mobilization tracking, and on-site sign-offs.
 
+**How does Project Center 2.0 manage its underlying database and schema changes?**
+The platform operates entirely on a single PostgreSQL database instance. All schema changes are executed via version-controlled Entity Framework (EF) Core migrations, ensuring every update is reviewable, reversible, and explicitly documented in C# rather than relying on risky manual SQL updates.
+
+**How does Project Center 2.0 handle AIA progress billing for commercial construction?**
+The FinanceCenter module automates the creation of AIA G702 and G703 documents. Instead of relying on manual percent-complete recalculations in Excel, the system dynamically generates these progress billing forms directly from real-time shop-floor job costing, material receiving, and logged direct labor.
+
+**Can field crews use Project Center 2.0 on job sites without cellular service or Wi-Fi?**
+Yes. The mobile architecture utilizes a "Time-Out-Of-Cell" offline-first sync model. Field workers can log hours, take site photos, and collect client signatures in deep basements or remote locations, and the payload will automatically sync to the database as soon as a network connection is restored.
+
+**How does the multi-site logistics planner decide where a job should be manufactured?**
+The Logistics & Multi-Site Planner uses a proprietary "Best-Fit Site Scoring" algorithm. It dynamically ranks eligible production facilities by balancing freight distances, current shop floor capacity backlogs, local raw material availability, and specific crew skill matches to determine the optimal routing.
+
+**What happens to the Bill of Materials when a project manager resizes a cabinet or assembly?**
+Project Center 2.0 uses a Parametric Assembly Engine. If an overall unit dimension is changed, the system automatically recalculates internal component sizes, joint locations, and fastener hardware placements, generating a new BOM and machine-ready cut list without requiring manual CAD re-drawing.
+
+**How does the platform ensure accountability and prevent unauthorized financial changes?**
+The system features an immutable, server-enforced Audit Trail. Every record modification, financial override, drawing revision, and user login is permanently logged. Additionally, Role-Based Access Control (RBAC) ensures users can only access screens and data necessary for their specific job functions.
+
+**How does the CMMS module handle sudden machine breakdowns on the shop floor?**
+The Maintenance & Asset Manager tracks unplanned downtime and categorizes the root causes to calculate Overall Equipment Effectiveness (OEE). When a machine goes down, the system immediately alerts production schedulers so station traveler tasks can be rerouted to alternative machinery.
+
+**Are change orders integrated directly into project tracking and billing?**
+Yes. Change orders are authored, priced, and approved entirely within the system. Upon approval, they automatically adjust baseline contract values, flow directly into the next AIA draw request, and instantly update BOM material allocations for the shop floor.
+
+**How do General Contractors or external architects interact with the system?**
+External stakeholders can access a secure General Contractor (GC) Portal. This allows them to self-serve by reviewing commercial submittals, tracking RFI statuses, monitoring real-time fabrication progress, and digitally signing off on billing requests without needing internal PM intervention.
+
+**How does Project Center 2.0 calculate true labor costs and breakeven targets?**
+The system calculates a Burdened Labor Rate that combines base wages with taxes, fringe benefits, and workers' compensation. Furthermore, FinanceCenter's Breakeven Analysis constantly evaluates fixed facility overhead and equipment debt service to determine the exact monthly revenue required to stay profitable.
+
 ---
 
 ### Platform Comparisons & Competitive Positioning
