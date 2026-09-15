@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Rock River — Quality Management System Manual (QMS-00 Rev. B)</title>
-<meta name="description" content="Rock River Quality Management System Manual, conforming to ISO 9001:2015.">
+<title>Quality Management System Manual — Rock River Consulting (QMS-00 Rev. B)</title>
+<meta name="description" content="Rock River Consulting Quality Management System Manual, conforming to ISO 9001:2015.">
 <style>
 :root{
   --ink:#15181B; --ink-2:#565D64; --ink-3:#848B92;
@@ -25,6 +25,9 @@ body{margin:0;background:var(--shell);color:var(--ink);font-family:var(--serif);
   background:var(--paper);border-bottom:1px solid var(--rule);padding:.6rem 1.25rem;
   font-family:var(--sans);font-size:12px;letter-spacing:.01em;color:var(--ink-2)}
 .topbar b{color:var(--ink);font-weight:600}
+.topbar .home{color:var(--ink);font-weight:600;text-decoration:none;white-space:nowrap}
+.topbar .home:hover{color:var(--accent)}
+@media print{.topbar .home{display:none}}
 .topbar .sp{flex:1}
 .topbar button{font:inherit;color:var(--ink);background:none;border:1px solid var(--rule);
   border-radius:3px;padding:.35rem .7rem;cursor:pointer}
@@ -167,7 +170,7 @@ colgroup{display:none}
 <body>
 <div class="topbar">
   <button id="menu" aria-label="Show contents">Contents</button>
-  <b>Rock River</b><span>Quality Management System Manual</span>
+  <a class="home" href="index.html">&larr; Rock River Consulting</a><span>Quality Management System Manual</span>
   <span class="sp"></span>
   <span>QMS-00 &middot; Rev. B</span>
   <button onclick="window.print()">Print</button>
@@ -177,7 +180,7 @@ colgroup{display:none}
 <main><div class="wrap">
 <section class="cover" id="top">
   <p class="stamp">For information only — not a controlled document if printed</p>
-  <p class="org">Rock River</p>
+  <p class="org">Rock River Consulting</p>
   <h1 class="doctitle">Quality Management System Manual</h1>
   <p class="conform">Conforming to ISO 9001:2015</p>
   <dl class="docctl">
@@ -224,7 +227,7 @@ colgroup{display:none}
 </tbody>
 </table></div>
 
-<p class="proprietary"><b>Rock River proprietary information.</b> The information contained in this document is Rock River proprietary information and is disclosed in confidence. It is the property of Rock River and shall not be used, disclosed to others, or reproduced without the express written consent of Rock River. If consent is given for reproduction in whole or in part, this notice shall appear in any such reproduction.</p></section>
+<p class="proprietary"><b>Rock River Consulting proprietary information.</b> The information contained in this document is Rock River Consulting proprietary information and is disclosed in confidence. It is the property of Rock River Consulting and shall not be used, disclosed to others, or reproduced without the express written consent of Rock River Consulting. If consent is given for reproduction in whole or in part, this notice shall appear in any such reproduction.</p></section>
 <h1 id="revision-history-and-document-status" class="lvl1"><span class="ctitle">Revision History and Document Status</span></h1>
 <div class="tw"><table>
 <colgroup>
@@ -259,23 +262,23 @@ colgroup{display:none}
 <p>This manual is maintained under document control in accordance with Section 7.5, Documented Information, and QOP-42-01, Control of Documents. The controlled master copy is held by the Quality Assurance Manager. Printed copies are uncontrolled unless stamped "CONTROLLED COPY."</p>
 <h1 id="table-of-contents" class="lvl1"><span class="ctitle">Contents</span></h1><ol class="toc"><li class="t1"><a href="#1-0-scope"><span>1.0</span>Scope</a></li><li class="t2"><a href="#1-1-general"><span>1.1</span>General</a></li><li class="t2"><a href="#1-2-scope-of-the-quality-management-system"><span>1.2</span>Scope of the Quality Management System</a></li><li class="t2"><a href="#1-3-application-and-justification-of-non-applicable-requirem"><span>1.3</span>Application and Justification of Non-Applicable Requirements</a></li><li class="t2"><a href="#1-4-purpose-of-this-manual"><span>1.4</span>Purpose of This Manual</a></li><li class="t1"><a href="#2-0-normative-references"><span>2.0</span>Normative References</a></li><li class="t1"><a href="#3-0-terms-and-definitions"><span>3.0</span>Terms and Definitions</a></li><li class="t1"><a href="#4-0-context-of-the-organization"><span>4.0</span>Context of the Organization</a></li><li class="t2"><a href="#4-1-understanding-the-organization-and-its-context"><span>4.1</span>Understanding the Organization and Its Context</a></li><li class="t2"><a href="#4-2-understanding-the-needs-and-expectations-of-interested-p"><span>4.2</span>Understanding the Needs and Expectations of Interested Parties</a></li><li class="t2"><a href="#4-3-determining-the-scope-of-the-quality-management-system"><span>4.3</span>Determining the Scope of the Quality Management System</a></li><li class="t2"><a href="#4-4-quality-management-system-and-its-processes"><span>4.4</span>Quality Management System and Its Processes</a></li><li class="t1"><a href="#5-0-leadership"><span>5.0</span>Leadership</a></li><li class="t2"><a href="#5-1-leadership-and-commitment"><span>5.1</span>Leadership and Commitment</a></li><li class="t2"><a href="#5-2-policy"><span>5.2</span>Policy</a></li><li class="t2"><a href="#5-3-organizational-roles-responsibilities-and-authorities"><span>5.3</span>Organizational Roles, Responsibilities and Authorities</a></li><li class="t1"><a href="#6-0-planning"><span>6.0</span>Planning</a></li><li class="t2"><a href="#6-1-actions-to-address-risks-and-opportunities"><span>6.1</span>Actions to Address Risks and Opportunities</a></li><li class="t2"><a href="#6-2-quality-objectives-and-planning-to-achieve-them"><span>6.2</span>Quality Objectives and Planning to Achieve Them</a></li><li class="t2"><a href="#6-3-planning-of-changes"><span>6.3</span>Planning of Changes</a></li><li class="t1"><a href="#7-0-support"><span>7.0</span>Support</a></li><li class="t2"><a href="#7-1-resources"><span>7.1</span>Resources</a></li><li class="t2"><a href="#7-2-competence"><span>7.2</span>Competence</a></li><li class="t2"><a href="#7-3-awareness"><span>7.3</span>Awareness</a></li><li class="t2"><a href="#7-4-communication"><span>7.4</span>Communication</a></li><li class="t2"><a href="#7-5-documented-information"><span>7.5</span>Documented Information</a></li><li class="t1"><a href="#8-0-operation"><span>8.0</span>Operation</a></li><li class="t2"><a href="#8-1-operational-planning-and-control"><span>8.1</span>Operational Planning and Control</a></li><li class="t2"><a href="#8-2-requirements-for-products-and-services"><span>8.2</span>Requirements for Products and Services</a></li><li class="t2"><a href="#8-3-design-and-development-of-products-and-services"><span>8.3</span>Design and Development of Products and Services</a></li><li class="t2"><a href="#8-4-control-of-externally-provided-processes-products-and-se"><span>8.4</span>Control of Externally Provided Processes, Products and Services</a></li><li class="t2"><a href="#8-5-production-and-service-provision"><span>8.5</span>Production and Service Provision</a></li><li class="t2"><a href="#8-6-release-of-products-and-services"><span>8.6</span>Release of Products and Services</a></li><li class="t2"><a href="#8-7-control-of-nonconforming-outputs"><span>8.7</span>Control of Nonconforming Outputs</a></li><li class="t1"><a href="#9-0-performance-evaluation"><span>9.0</span>Performance Evaluation</a></li><li class="t2"><a href="#9-1-monitoring-measurement-analysis-and-evaluation"><span>9.1</span>Monitoring, Measurement, Analysis and Evaluation</a></li><li class="t2"><a href="#9-2-internal-audit"><span>9.2</span>Internal Audit</a></li><li class="t2"><a href="#9-3-management-review"><span>9.3</span>Management Review</a></li><li class="t1"><a href="#10-0-improvement"><span>10.0</span>Improvement</a></li><li class="t2"><a href="#10-1-general"><span>10.1</span>General</a></li><li class="t2"><a href="#10-2-nonconformity-and-corrective-action"><span>10.2</span>Nonconformity and Corrective Action</a></li><li class="t2"><a href="#10-3-continual-improvement"><span>10.3</span>Continual Improvement</a></li><li class="t1"><a href="#appendix-a-quality-system-process-matrix"><span>App. A</span>Quality System Process Matrix</a></li><li class="t1"><a href="#appendix-b-cross-reference-iso-9001-2008-to-iso-9001-2015"><span>App. B</span>Cross-reference: ISO 9001:2008 to ISO 9001:2015</a></li><li class="t1"><a href="#appendix-c-operational-procedure-index"><span>App. C</span>Operational Procedure Index</a></li></ol><h1 id="1-0-scope" class="lvl1"><span class="cnum">1.0</span><span class="ctitle">Scope</span></h1>
 <h2 id="1-1-general" class="lvl2"><span class="cnum">1.1</span><span class="ctitle">General</span></h2>
-<p>1.1.1 This manual describes the Quality Management System (QMS) established, documented, implemented and maintained by Rock River to demonstrate its ability to consistently provide products and services that meet customer, statutory and regulatory requirements, and to enhance customer satisfaction through the effective application of the system, including processes for improvement and the assurance of conformity.</p>
+<p>1.1.1 This manual describes the Quality Management System (QMS) established, documented, implemented and maintained by Rock River Consulting to demonstrate its ability to consistently provide products and services that meet customer, statutory and regulatory requirements, and to enhance customer satisfaction through the effective application of the system, including processes for improvement and the assurance of conformity.</p>
 <p>1.1.2 The QMS described in this manual conforms to ISO 9001:2015, Quality management systems — Requirements.</p>
 <p>1.1.3 The QMS also takes into account the applicable requirements and guidance of the American Institute of Architects (AIA), the Architectural Woodwork Institute (AWI), and Underwriters Laboratories (UL), as referenced in Section 2.</p>
 <h2 id="1-2-scope-of-the-quality-management-system" class="lvl2"><span class="cnum">1.2</span><span class="ctitle">Scope of the Quality Management System</span></h2>
-<p>1.2.1 The QMS defined in this manual applies to the design, manufacturing, installation, troubleshooting and associated support services provided by Rock River at the following locations:</p>
+<p>1.2.1 The QMS defined in this manual applies to the design, manufacturing, installation, troubleshooting and associated support services provided by Rock River Consulting at the following locations:</p>
 <ul>
 <li><p><mark class="fill">[Facility / address 1]</mark></p></li>
 <li><p><mark class="fill">[Facility / address 2 — add or delete rows as applicable]</mark></p></li>
 </ul>
-<p>1.2.2 In determining the scope, Rock River has considered the external and internal issues identified under Section 4.1, the requirements of relevant interested parties identified under Section 4.2, and the products and services it provides.</p>
+<p>1.2.2 In determining the scope, Rock River Consulting has considered the external and internal issues identified under Section 4.1, the requirements of relevant interested parties identified under Section 4.2, and the products and services it provides.</p>
 <p>1.2.3 The scope of the QMS is maintained as documented information and is made available to interested parties on request.</p>
 <h2 id="1-3-application-and-justification-of-non-applicable-requirem" class="lvl2"><span class="cnum">1.3</span><span class="ctitle">Application and Justification of Non-Applicable Requirements</span></h2>
-<p>1.3.1 ISO 9001:2015 does not permit "exclusions" in the sense used by earlier editions of the standard. Where Rock River determines that a requirement of the standard cannot be applied, that determination is justified in this section. A requirement may be determined not applicable only where it does not affect the ability or responsibility of Rock River to ensure the conformity of its products and services or to enhance customer satisfaction.</p>
+<p>1.3.1 ISO 9001:2015 does not permit "exclusions" in the sense used by earlier editions of the standard. Where Rock River Consulting determines that a requirement of the standard cannot be applied, that determination is justified in this section. A requirement may be determined not applicable only where it does not affect the ability or responsibility of Rock River Consulting to ensure the conformity of its products and services or to enhance customer satisfaction.</p>
 <p>1.3.2 Processes that are applicable but are performed by external providers do not qualify as non-applicable. Such processes are controlled in accordance with Section 8.4, Control of Externally Provided Processes, Products and Services.</p>
 <p>1.3.3 The Quality Assurance Manager is responsible for identifying any requirement considered not applicable and for presenting the justification to top management. Top management evaluates and approves such determinations within the framework of the management review (Section 9.3 and QOP-56-01, Management Review).</p>
 <p><strong>1.3.4 DETERMINATIONS OF NON-APPLICABILITY:</strong></p>
-<p>None. All requirements of ISO 9001:2015 are applicable to the Rock River Quality Management System.</p>
+<p>None. All requirements of ISO 9001:2015 are applicable to the Rock River Consulting Quality Management System.</p>
 <h2 id="1-4-purpose-of-this-manual" class="lvl2"><span class="cnum">1.4</span><span class="ctitle">Purpose of This Manual</span></h2>
 <p>1.4.1 The purpose of this manual is to:</p>
 <ul>
@@ -283,9 +286,9 @@ colgroup{display:none}
 <li><p>Define the interaction and sequence of the processes that make up the QMS;</p></li>
 <li><p>Define the roles, responsibilities and authorities of personnel involved in the operation of the system;</p></li>
 <li><p>Reference the operational procedures, work instructions and forms that provide the detailed methods; and</p></li>
-<li><p>Inform customers, external providers and other interested parties of the controls implemented at Rock River to assure quality.</p></li>
+<li><p>Inform customers, external providers and other interested parties of the controls implemented at Rock River Consulting to assure quality.</p></li>
 </ul>
-<p>1.4.2 ISO 9001:2015 does not require a quality manual. Rock River maintains this manual as documented information because it is useful for training, for customer and third-party assessment, and for defining the interaction of processes as required by Clause 4.4.</p>
+<p>1.4.2 ISO 9001:2015 does not require a quality manual. Rock River Consulting maintains this manual as documented information because it is useful for training, for customer and third-party assessment, and for defining the interaction of processes as required by Clause 4.4.</p>
 <h1 id="2-0-normative-references" class="lvl1"><span class="cnum">2.0</span><span class="ctitle">Normative References</span></h1>
 <p>2.1 The following documents are referred to in this manual. For dated references, only the edition cited applies. For undated references, the latest edition applies.</p>
 <div class="tw"><table>
@@ -330,11 +333,11 @@ colgroup{display:none}
 </tr>
 <tr class="even">
 <td>HC-PM-01</td>
-<td>Rock River Procedure Manual for Purchases</td>
+<td>Rock River Consulting Procedure Manual for Purchases</td>
 </tr>
 <tr class="odd">
 <td>HC-SPM-01</td>
-<td>Rock River Safety Program Manual</td>
+<td>Rock River Consulting Safety Program Manual</td>
 </tr>
 </tbody>
 </table></div>
@@ -359,11 +362,11 @@ colgroup{display:none}
 </tr>
 <tr class="even">
 <td>External provider</td>
-<td>A party outside Rock River that supplies a product, service or process. Replaces the term "supplier" used in earlier editions. Includes subcontractors, vendors and outsourced service providers.</td>
+<td>A party outside Rock River Consulting that supplies a product, service or process. Replaces the term "supplier" used in earlier editions. Includes subcontractors, vendors and outsourced service providers.</td>
 </tr>
 <tr class="odd">
 <td>Interested party</td>
-<td>A person or organization that can affect, be affected by, or perceive itself to be affected by a decision or activity of Rock River. See Section 4.2.</td>
+<td>A person or organization that can affect, be affected by, or perceive itself to be affected by a decision or activity of Rock River Consulting. See Section 4.2.</td>
 </tr>
 <tr class="even">
 <td>Output</td>
@@ -393,7 +396,7 @@ colgroup{display:none}
 </table></div>
 <h1 id="4-0-context-of-the-organization" class="lvl1"><span class="cnum">4.0</span><span class="ctitle">Context of the Organization</span></h1>
 <h2 id="4-1-understanding-the-organization-and-its-context" class="lvl2"><span class="cnum">4.1</span><span class="ctitle">Understanding the Organization and Its Context</span><span class="badge new">new in 2015</span></h2>
-<p>4.1.1 Rock River determines the external and internal issues that are relevant to its purpose and strategic direction and that affect its ability to achieve the intended results of the QMS.</p>
+<p>4.1.1 Rock River Consulting determines the external and internal issues that are relevant to its purpose and strategic direction and that affect its ability to achieve the intended results of the QMS.</p>
 <p>4.1.2 These issues are identified and reviewed by top management at least annually within the framework of the management review (Section 9.3), and whenever a significant change in the business, market, regulatory or organizational environment occurs. The current analysis is retained as documented information in the management review record.</p>
 <p>4.1.3 Issues considered include, as applicable:</p>
 <ul>
@@ -402,7 +405,7 @@ colgroup{display:none}
 </ul>
 <p>4.1.4 Information arising from the monitoring and review of these issues is an input to the determination of risks and opportunities under Section 6.1.</p>
 <h2 id="4-2-understanding-the-needs-and-expectations-of-interested-p" class="lvl2"><span class="cnum">4.2</span><span class="ctitle">Understanding the Needs and Expectations of Interested Parties</span><span class="badge new">new in 2015</span></h2>
-<p>4.2.1 Rock River determines the interested parties that are relevant to the QMS and their requirements, because of their effect or potential effect on the ability of Rock River to consistently provide products and services that meet customer, statutory and regulatory requirements.</p>
+<p>4.2.1 Rock River Consulting determines the interested parties that are relevant to the QMS and their requirements, because of their effect or potential effect on the ability of Rock River Consulting to consistently provide products and services that meet customer, statutory and regulatory requirements.</p>
 <p>4.2.2 Interested parties and their relevant requirements are identified and reviewed at the same frequency and within the same framework as Section 4.1.</p>
 <p>4.2.3 The interested parties currently determined to be relevant are:</p>
 <div class="tw"><table>
@@ -451,9 +454,9 @@ colgroup{display:none}
 </tr>
 </tbody>
 </table></div>
-<p>4.2.4 Requirements of interested parties become requirements of the QMS only where Rock River determines them to be relevant. Only those requirements adopted by Rock River, or made mandatory by statute or regulation, are binding on the QMS.</p>
+<p>4.2.4 Requirements of interested parties become requirements of the QMS only where Rock River Consulting determines them to be relevant. Only those requirements adopted by Rock River Consulting, or made mandatory by statute or regulation, are binding on the QMS.</p>
 <h2 id="4-3-determining-the-scope-of-the-quality-management-system" class="lvl2"><span class="cnum">4.3</span><span class="ctitle">Determining the Scope of the Quality Management System</span><span class="badge new">new in 2015</span></h2>
-<p>4.3.1 The scope of the QMS, including its boundaries and applicability, is stated in Section 1.2 of this manual. In determining the scope, Rock River considered the external and internal issues of Section 4.1, the requirements of the interested parties of Section 4.2, and the products and services it provides.</p>
+<p>4.3.1 The scope of the QMS, including its boundaries and applicability, is stated in Section 1.2 of this manual. In determining the scope, Rock River Consulting considered the external and internal issues of Section 4.1, the requirements of the interested parties of Section 4.2, and the products and services it provides.</p>
 <p>4.3.2 All requirements of ISO 9001:2015 that are applicable within the determined scope are applied. Any determination that a requirement is not applicable is documented and justified in Section 1.3.</p>
 <h2 id="4-4-quality-management-system-and-its-processes" class="lvl2"><span class="cnum">4.4</span><span class="ctitle">Quality Management System and Its Processes</span><span class="badge expanded">expanded in 2015</span></h2>
 <h3 id="4-4-1-process-approach" class="lvl3"><span class="cnum">4.4.1</span><span class="ctitle">Process approach</span></h3>
@@ -464,7 +467,7 @@ colgroup{display:none}
 <li><p>Leadership and Planning Processes — Sections 5 and 6</p></li>
 <li><p>Support Processes — Section 7</p></li>
 </ul>
-<p>4.4.1.2 For each QSP, Rock River determines:</p>
+<p>4.4.1.2 For each QSP, Rock River Consulting determines:</p>
 <ul>
 <li><p>The required inputs and the expected outputs;</p></li>
 <li><p>The sequence and interaction of the process with other processes;</p></li>
@@ -478,7 +481,7 @@ colgroup{display:none}
 <p>4.4.1.3 The sequence and interaction of the QSPs are illustrated in the QMS Process Map and defined in detail in the Quality System Process Matrix at Appendix A. Each QSP is further documented in this manual and in the associated operational procedures and work instructions.</p>
 <p class="todo">[INSERT QMS PROCESS MAP DIAGRAM HERE — the flowchart from the previous revision should be updated to show the ten-clause structure and the Plan-Do-Check-Act loop, then inserted at this point.]</p>
 <h3 id="4-4-2-documented-information-for-qms-processes" class="lvl3"><span class="cnum">4.4.2</span><span class="ctitle">Documented information for QMS processes</span></h3>
-<p>4.4.2.1 Rock River maintains documented information to support the operation of its processes — this manual, the operational procedures, work instructions, drawings and specifications — and retains documented information to have confidence that the processes are being carried out as planned.</p>
+<p>4.4.2.1 Rock River Consulting maintains documented information to support the operation of its processes — this manual, the operational procedures, work instructions, drawings and specifications — and retains documented information to have confidence that the processes are being carried out as planned.</p>
 <p>4.4.2.2 Requirements for the control of documented information are given in Section 7.5 and in QOP-42-01, Control of Documents, and QOP-42-02, Control of Records.</p>
 <h3 id="4-4-3-resources-information-and-monitoring" class="lvl3"><span class="cnum">4.4.3</span><span class="ctitle">Resources, information and monitoring</span></h3>
 <p>4.4.3.1 The Quality Assurance Manager is responsible for determining the resource and information requirements necessary to support the operation and monitoring of QMS processes, and for communicating these requirements to top management. Top management is responsible for ensuring the availability of necessary resources and information (Section 7.1).</p>
@@ -486,15 +489,15 @@ colgroup{display:none}
 <p>4.4.3.3 QMS processes are reviewed and analyzed at the management review of the quality system (Section 9.3 and QOP-56-01, Management Review). Actions necessary to address actual or potential problems and to improve the system are implemented through corrective action and through quality objectives (Sections 10.2 and 6.2).</p>
 <h3 id="4-4-4-outsourced-processes" class="lvl3"><span class="cnum">4.4.4</span><span class="ctitle">Outsourced processes</span></h3>
 <p>4.4.4.1 Where processes that affect the conformity of products and services are outsourced, controls are applied in accordance with Section 8.4. Such controls include, as applicable: evaluation and pre-qualification of external providers; flow-down of customer and contract requirements; monitoring of external provider performance; requirements for process control, inspection, testing and other records demonstrating conformity; and receiving inspection of the supplied product.</p>
-<p>4.4.4.2 Control over outsourced processes does not absolve Rock River of the responsibility to conform to all customer, statutory and regulatory requirements.</p>
+<p>4.4.4.2 Control over outsourced processes does not absolve Rock River Consulting of the responsibility to conform to all customer, statutory and regulatory requirements.</p>
 <h1 id="5-0-leadership" class="lvl1"><span class="cnum">5.0</span><span class="ctitle">Leadership</span></h1>
 <h2 id="5-1-leadership-and-commitment" class="lvl2"><span class="cnum">5.1</span><span class="ctitle">Leadership and Commitment</span><span class="badge changed">changed in 2015</span></h2>
 <h3 id="5-1-1-general" class="lvl3"><span class="cnum">5.1.1</span><span class="ctitle">General</span></h3>
 <p>5.1.1.1 Top management demonstrates leadership and commitment with respect to the QMS by:</p>
 <ul>
 <li><p>Taking accountability for the effectiveness of the QMS;</p></li>
-<li><p>Ensuring that the quality policy and quality objectives are established for the QMS and are compatible with the context and strategic direction of Rock River;</p></li>
-<li><p>Ensuring the integration of the QMS requirements into the business processes of Rock River;</p></li>
+<li><p>Ensuring that the quality policy and quality objectives are established for the QMS and are compatible with the context and strategic direction of Rock River Consulting;</p></li>
+<li><p>Ensuring the integration of the QMS requirements into the business processes of Rock River Consulting;</p></li>
 <li><p>Promoting the use of the process approach and risk-based thinking;</p></li>
 <li><p>Ensuring that the resources needed for the QMS are available;</p></li>
 <li><p>Communicating the importance of effective quality management and of conforming to the QMS requirements;</p></li>
@@ -504,7 +507,7 @@ colgroup{display:none}
 <li><p>Supporting other relevant management roles to demonstrate their leadership as it applies to their areas of responsibility.</p></li>
 </ul>
 <p>5.1.1.2 Accountability for the effectiveness of the QMS rests with top management and is not delegated. This is a change from the previous revision of this manual, in which certain of these duties were assigned to a Management Representative.</p>
-<p>5.1.1.3 Top management periodically reviews the QMS to ensure its continuing suitability, adequacy, effectiveness and alignment with the strategic direction of Rock River. The process for conducting management reviews is defined in Section 9.3 and QOP-56-01, Management Review.</p>
+<p>5.1.1.3 Top management periodically reviews the QMS to ensure its continuing suitability, adequacy, effectiveness and alignment with the strategic direction of Rock River Consulting. The process for conducting management reviews is defined in Section 9.3 and QOP-56-01, Management Review.</p>
 <h3 id="5-1-2-customer-focus" class="lvl3"><span class="cnum">5.1.2</span><span class="ctitle">Customer focus</span></h3>
 <p>5.1.2.1 Top management demonstrates leadership and commitment with respect to customer focus by ensuring that:</p>
 <ul>
@@ -515,11 +518,11 @@ colgroup{display:none}
 <p>5.1.2.2 Top management ensures that customer requirements are met through verification of products and services at the appropriate stages, as defined in Sections 8.5, 8.6 and 9.1.</p>
 <h2 id="5-2-policy" class="lvl2"><span class="cnum">5.2</span><span class="ctitle">Policy</span></h2>
 <h3 id="5-2-1-establishing-the-quality-policy" class="lvl3"><span class="cnum">5.2.1</span><span class="ctitle">Establishing the quality policy</span></h3>
-<p>5.2.1.1 The Quality Policy is established by the Chief Executive Officer and the Chief Operating Officer. In formulating the policy, they ensure that it is appropriate to the purpose and context of Rock River, supports its strategic direction, provides a framework for setting quality objectives, includes a commitment to satisfy applicable requirements, and includes a commitment to continual improvement of the QMS.</p>
-<p><strong>5.2.1.2 THE HIGH COUNTRY QUALITY POLICY:</strong></p>
+<p>5.2.1.1 The Quality Policy is established by the Chief Executive Officer and the Chief Operating Officer. In formulating the policy, they ensure that it is appropriate to the purpose and context of Rock River Consulting, supports its strategic direction, provides a framework for setting quality objectives, includes a commitment to satisfy applicable requirements, and includes a commitment to continual improvement of the QMS.</p>
+<p><strong>5.2.1.2 THE ROCK RIVER CONSULTING QUALITY POLICY:</strong></p>
 <blockquote>
-<blockquote class="policy"><p><strong>Rock River is committed to meeting customer requirements and enhancing customer satisfaction through continual improvement of its products, services and quality management system.</strong></p></blockquote>
-<p>In support of this policy, Rock River will:</p>
+<blockquote class="policy"><p><strong>Rock River Consulting is committed to meeting customer requirements and enhancing customer satisfaction through continual improvement of its products, services and quality management system.</strong></p></blockquote>
+<p>In support of this policy, Rock River Consulting will:</p>
 </blockquote>
 <ul>
 <li><p>Be responsive to customer needs;</p></li>
@@ -533,21 +536,21 @@ colgroup{display:none}
 </ul>
 <h3 id="5-2-2-communicating-the-quality-policy" class="lvl3"><span class="cnum">5.2.2</span><span class="ctitle">Communicating the quality policy</span></h3>
 <p>5.2.2.1 The Quality Policy is maintained as documented information in this section of the manual.</p>
-<p>5.2.2.2 The policy is communicated, understood and applied within Rock River. It is issued to all personnel, posted at each facility, and explained and discussed during general orientation training and in subsequent awareness activities (Section 7.3 and QOP-62-01).</p>
+<p>5.2.2.2 The policy is communicated, understood and applied within Rock River Consulting. It is issued to all personnel, posted at each facility, and explained and discussed during general orientation training and in subsequent awareness activities (Section 7.3 and QOP-62-01).</p>
 <p>5.2.2.3 The policy is available to relevant interested parties, as appropriate, and is provided to customers and external providers on request.</p>
 <p>5.2.2.4 The policy is reviewed at each management review for continuing relevance and suitability (Section 9.3 and QOP-56-01).</p>
 <h2 id="5-3-organizational-roles-responsibilities-and-authorities" class="lvl2"><span class="cnum">5.3</span><span class="ctitle">Organizational Roles, Responsibilities and Authorities</span><span class="badge changed">changed in 2015</span></h2>
-<p>5.3.1 Top management ensures that the responsibilities and authorities for relevant roles are assigned, communicated and understood within Rock River. The interrelation of all personnel who manage, perform and verify work affecting quality is shown in the Organizational Chart at the end of this section and is further defined in the operational procedures.</p>
+<p>5.3.1 Top management ensures that the responsibilities and authorities for relevant roles are assigned, communicated and understood within Rock River Consulting. The interrelation of all personnel who manage, perform and verify work affecting quality is shown in the Organizational Chart at the end of this section and is further defined in the operational procedures.</p>
 <p>5.3.2 Top management ensures that personnel assigned quality responsibilities have sufficient independence and authority to perform them — in particular internal auditors and personnel responsible for monitoring post-delivery experience and reporting adverse events.</p>
 <p>5.3.3 Top management assigns the responsibility and authority for:</p>
 <ul>
 <li><p>Ensuring that the QMS conforms to the requirements of ISO 9001:2015 — assigned to the Quality Assurance Manager;</p></li>
 <li><p>Ensuring that the processes are delivering their intended outputs — assigned to the designated process owners identified in Appendix A;</p></li>
 <li><p>Reporting on the performance of the QMS and on opportunities for improvement, in particular to top management — assigned to the Quality Assurance Manager;</p></li>
-<li><p>Ensuring the promotion of customer focus throughout Rock River — assigned to top management collectively, supported by the Quality Assurance Manager; and</p></li>
+<li><p>Ensuring the promotion of customer focus throughout Rock River Consulting — assigned to top management collectively, supported by the Quality Assurance Manager; and</p></li>
 <li><p>Ensuring that the integrity of the QMS is maintained when changes to the QMS are planned and implemented — assigned to the Quality Assurance Manager, with approval of changes by top management (Section 6.3).</p></li>
 </ul>
-<p>5.3.4 ISO 9001:2015 no longer requires the appointment of a Management Representative. Rock River retains the Quality Assurance Manager role as the focal point for the QMS and as the coordinator of communication with external parties on matters relating to the QMS and ISO 9001. This assignment does not transfer accountability for the QMS away from top management.</p>
+<p>5.3.4 ISO 9001:2015 no longer requires the appointment of a Management Representative. Rock River Consulting retains the Quality Assurance Manager role as the focal point for the QMS and as the coordinator of communication with external parties on matters relating to the QMS and ISO 9001. This assignment does not transfer accountability for the QMS away from top management.</p>
 <p>5.3.5 Specific responsibilities by role:</p>
 <div class="tw"><table>
 <colgroup>
@@ -592,24 +595,24 @@ colgroup{display:none}
 <h1 id="6-0-planning" class="lvl1"><span class="cnum">6.0</span><span class="ctitle">Planning</span></h1>
 <h2 id="6-1-actions-to-address-risks-and-opportunities" class="lvl2"><span class="cnum">6.1</span><span class="ctitle">Actions to Address Risks and Opportunities</span><span class="badge new">new in 2015</span></h2>
 <h3 id="6-1-1-determining-risks-and-opportunities" class="lvl3"><span class="cnum">6.1.1</span><span class="ctitle">Determining risks and opportunities</span></h3>
-<p>6.1.1.1 When planning the QMS, Rock River considers the issues determined under Section 4.1 and the requirements determined under Section 4.2, and determines the risks and opportunities that need to be addressed in order to:</p>
+<p>6.1.1.1 When planning the QMS, Rock River Consulting considers the issues determined under Section 4.1 and the requirements determined under Section 4.2, and determines the risks and opportunities that need to be addressed in order to:</p>
 <ul>
 <li><p>Give assurance that the QMS can achieve its intended results;</p></li>
 <li><p>Enhance desirable effects;</p></li>
 <li><p>Prevent, or reduce, undesired effects; and</p></li>
 <li><p>Achieve improvement.</p></li>
 </ul>
-<p>6.1.1.2 Risk-based thinking replaces the separate requirement for preventive action contained in earlier editions of ISO 9001. The determination of risks and opportunities described in this section is the mechanism by which Rock River now satisfies the intent of preventive action. QOP-85-03 has been retained and its scope adjusted accordingly; preventive action requests raised under that procedure feed the risk register maintained under this section.</p>
+<p>6.1.1.2 Risk-based thinking replaces the separate requirement for preventive action contained in earlier editions of ISO 9001. The determination of risks and opportunities described in this section is the mechanism by which Rock River Consulting now satisfies the intent of preventive action. QOP-85-03 has been retained and its scope adjusted accordingly; preventive action requests raised under that procedure feed the risk register maintained under this section.</p>
 <h3 id="6-1-2-planning-actions" class="lvl3"><span class="cnum">6.1.2</span><span class="ctitle">Planning actions</span></h3>
-<p>6.1.2.1 Rock River plans the actions to address the determined risks and opportunities, how to integrate and implement those actions into its QMS processes (Section 4.4), and how to evaluate the effectiveness of those actions.</p>
+<p>6.1.2.1 Rock River Consulting plans the actions to address the determined risks and opportunities, how to integrate and implement those actions into its QMS processes (Section 4.4), and how to evaluate the effectiveness of those actions.</p>
 <p>6.1.2.2 Actions taken are proportionate to the potential effect on the conformity of products and services. Options to address risk include avoiding the risk, taking the risk in order to pursue an opportunity, eliminating the risk source, changing the likelihood or consequences, sharing the risk, or accepting the risk by informed decision. Opportunities can lead to the adoption of new practices, launching of new products, opening of new markets, addressing new customers, building partnerships, using new technology, or other desirable and feasible possibilities.</p>
 <p>6.1.2.3 Risks and opportunities are identified at the process level by the process owners and at the system level by top management. They are recorded in the Risk and Opportunity Register maintained by the Quality Assurance Manager. Each entry records the process affected, the risk or opportunity, an assessment of likelihood and consequence, the planned action, the responsible person, the target date, and the evaluation of effectiveness.</p>
 <p>6.1.2.4 The register is reviewed at each management review (Section 9.3) and is updated whenever a change of context, a significant nonconformity, a customer complaint, a change in the organization, or a new or revised statutory or regulatory requirement makes it necessary.</p>
 <p>6.1.2.5 Risks and opportunities are also considered as part of order and contract review (Section 8.2.3), design and development planning (Section 8.3.2), external provider evaluation (Section 8.4.1) and the planning of changes (Sections 6.3 and 8.5.6).</p>
-<p class="note">Note: ISO 9001:2015 does not require a documented risk management method or a formal risk register. Rock River has chosen to maintain one because it provides objective evidence of risk-based thinking for audit purposes and supports the analysis required under Section 9.1.3.</p>
+<p class="note">Note: ISO 9001:2015 does not require a documented risk management method or a formal risk register. Rock River Consulting has chosen to maintain one because it provides objective evidence of risk-based thinking for audit purposes and supports the analysis required under Section 9.1.3.</p>
 <h2 id="6-2-quality-objectives-and-planning-to-achieve-them" class="lvl2"><span class="cnum">6.2</span><span class="ctitle">Quality Objectives and Planning to Achieve Them</span></h2>
 <h3 id="6-2-1-establishing-quality-objectives" class="lvl3"><span class="cnum">6.2.1</span><span class="ctitle">Establishing quality objectives</span></h3>
-<p>6.2.1.1 Quality objectives are established at relevant functions, levels and processes throughout Rock River in order to implement the quality policy, to meet requirements for products, services and processes, and to improve the QMS and quality performance.</p>
+<p>6.2.1.1 Quality objectives are established at relevant functions, levels and processes throughout Rock River Consulting in order to implement the quality policy, to meet requirements for products, services and processes, and to improve the QMS and quality performance.</p>
 <p>6.2.1.2 Quality objectives are:</p>
 <ul>
 <li><p>Consistent with the quality policy;</p></li>
@@ -622,7 +625,7 @@ colgroup{display:none}
 </ul>
 <p>6.2.1.3 Quality objectives are maintained as documented information in the management review record and in the departmental objective sheets held by each Division.</p>
 <h3 id="6-2-2-planning-to-achieve-quality-objectives" class="lvl3"><span class="cnum">6.2.2</span><span class="ctitle">Planning to achieve quality objectives</span></h3>
-<p>6.2.2.1 In planning how to achieve its quality objectives, Rock River determines what will be done, what resources will be required, who will be responsible, when it will be completed, and how the results will be evaluated.</p>
+<p>6.2.2.1 In planning how to achieve its quality objectives, Rock River Consulting determines what will be done, what resources will be required, who will be responsible, when it will be completed, and how the results will be evaluated.</p>
 <p>6.2.2.2 Quality objectives are established, assigned and monitored at the management reviews of the QMS. The processes for establishing, implementing and monitoring quality objectives are defined in QOP-56-01, Management Review. Quality objectives define the direction and priorities for continual improvement (Section 10.3 and QOP-85-01).</p>
 <div class="tw"><table>
 <colgroup>
@@ -671,8 +674,8 @@ colgroup{display:none}
 </tbody>
 </table></div>
 <h2 id="6-3-planning-of-changes" class="lvl2"><span class="cnum">6.3</span><span class="ctitle">Planning of Changes</span><span class="badge new">new in 2015</span></h2>
-<p>6.3.1 Where Rock River determines the need for changes to the QMS, the changes are carried out in a planned manner. Changes are not made on an ad hoc basis.</p>
-<p>6.3.2 In planning a change, Rock River considers:</p>
+<p>6.3.1 Where Rock River Consulting determines the need for changes to the QMS, the changes are carried out in a planned manner. Changes are not made on an ad hoc basis.</p>
+<p>6.3.2 In planning a change, Rock River Consulting considers:</p>
 <ul>
 <li><p>The purpose of the change and its potential consequences;</p></li>
 <li><p>The integrity of the QMS;</p></li>
@@ -684,14 +687,14 @@ colgroup{display:none}
 <h1 id="7-0-support" class="lvl1"><span class="cnum">7.0</span><span class="ctitle">Support</span></h1>
 <h2 id="7-1-resources" class="lvl2"><span class="cnum">7.1</span><span class="ctitle">Resources</span></h2>
 <h3 id="7-1-1-general" class="lvl3"><span class="cnum">7.1.1</span><span class="ctitle">General</span></h3>
-<p>7.1.1.1 Rock River determines and provides the resources needed for the establishment, implementation, maintenance and continual improvement of the QMS. Resources include personnel, infrastructure, process environment, monitoring and measuring resources, organizational knowledge, materials, information and financial resources.</p>
-<p>7.1.1.2 In determining resources, Rock River considers the capabilities of, and constraints on, existing internal resources, and what needs to be obtained from external providers.</p>
+<p>7.1.1.1 Rock River Consulting determines and provides the resources needed for the establishment, implementation, maintenance and continual improvement of the QMS. Resources include personnel, infrastructure, process environment, monitoring and measuring resources, organizational knowledge, materials, information and financial resources.</p>
+<p>7.1.1.2 In determining resources, Rock River Consulting considers the capabilities of, and constraints on, existing internal resources, and what needs to be obtained from external providers.</p>
 <p>7.1.1.3 Determination of resource needs for a specific activity is integrated with the process of defining and initiating that activity. It may take the form of personnel assignments, allocation of space or equipment, training, procurement decisions or budgets. Depending on the nature of the activity, resource requirements are defined in this manual and the operational procedures (QOP-42-01), in product and process drawings and specifications (QOP-71-01, QOP-73-01), in production plans (QOP-75-01), in job descriptions, competence matrices and training programs (QOP-62-01), and in the records of management review, quality objectives and corrective action (QOP-56-01, QOP-85-03).</p>
 <p>7.1.1.4 Top management has the responsibility and authority for the provision of resources. The management review is the principal forum for determining resource requirements (Section 9.3).</p>
 <h3 id="7-1-2-people" class="lvl3"><span class="cnum">7.1.2</span><span class="ctitle">People</span></h3>
-<p>7.1.2.1 Rock River determines and provides the persons necessary for the effective implementation of the QMS and for the operation and control of its processes. Requirements for competence are given in Section 7.2.</p>
+<p>7.1.2.1 Rock River Consulting determines and provides the persons necessary for the effective implementation of the QMS and for the operation and control of its processes. Requirements for competence are given in Section 7.2.</p>
 <h3 id="7-1-3-infrastructure" class="lvl3"><span class="cnum">7.1.3</span><span class="ctitle">Infrastructure</span></h3>
-<p>7.1.3.1 Rock River determines, provides and maintains the infrastructure necessary for the operation of its processes and to achieve conformity of products and services. Infrastructure includes:</p>
+<p>7.1.3.1 Rock River Consulting determines, provides and maintains the infrastructure necessary for the operation of its processes and to achieve conformity of products and services. Infrastructure includes:</p>
 <ul>
 <li><p>Buildings, workspaces and associated utilities;</p></li>
 <li><p>Process equipment, machines, hardware and software;</p></li>
@@ -703,33 +706,33 @@ colgroup{display:none}
 <p>7.1.3.4 Equipment, machines, hardware and software are maintained in accordance with plans specified by the equipment manufacturer or by the departmental manager responsible for the equipment. Requirements for the maintenance of production equipment are specified in QOP-63-01, Equipment.</p>
 <p>7.1.3.5 The Information Technology department provides computer and online communication support for both staff and clients. IT systems are designed and implemented by external consultants; day-to-day operation is the responsibility of the IT Manager, who is also responsible for selecting IT consultants and administering IT contracts. Transportation and communication services are purchased and controlled in accordance with QOP-74-01 and QOP-74-02.</p>
 <h3 id="7-1-4-environment-for-the-operation-of-processes" class="lvl3"><span class="cnum">7.1.4</span><span class="ctitle">Environment for the operation of processes</span></h3>
-<p>7.1.4.1 Rock River determines, provides and maintains the environment necessary for the operation of its processes and to achieve conformity of products and services. A suitable environment can be a combination of human and physical factors.</p>
+<p>7.1.4.1 Rock River Consulting determines, provides and maintains the environment necessary for the operation of its processes and to achieve conformity of products and services. A suitable environment can be a combination of human and physical factors.</p>
 <p>7.1.4.2 Human and social factors. Human Resources and Managers are responsible for ensuring suitable social and psychological conditions in the workplace, including interaction and communication between employees, prevention of harassment, conflict resolution, and the avoidance of stress and burnout. Relevant workplace policies are implemented mainly through training and awareness programs and, where necessary, through disciplinary action (QOP-62-01).</p>
 <p>7.1.4.3 Physical factors. Managers and Project Managers are responsible for identifying operations where environmental conditions could affect the quality performance of personnel or result in product nonconformities. For job site conditions and controlled environment requirements, refer to AWI Section 1700-G-3. Where appropriate, limits of exposure or mitigating measures are defined and implemented for these operations, including temperature, humidity, light, airflow, noise and cleanliness.</p>
-<p>7.1.4.4 Health and safety is managed under a system independent of the QMS and is documented in the Rock River Safety Program Manual. Where a safety condition affects the quality of an output, it is addressed under this section.</p>
+<p>7.1.4.4 Health and safety is managed under a system independent of the QMS and is documented in the Rock River Consulting Safety Program Manual. Where a safety condition affects the quality of an output, it is addressed under this section.</p>
 <h3 id="7-1-5-monitoring-and-measuring-resources" class="lvl3"><span class="cnum">7.1.5</span><span class="ctitle">Monitoring and measuring resources</span></h3>
-<p>7.1.5.1 General. Rock River determines and provides the resources needed to ensure valid and reliable results when monitoring or measuring is used to verify the conformity of products and services. These resources are suitable for the specific type of monitoring and measurement activity being undertaken, and are maintained to ensure their continued fitness for purpose. Appropriate documented information is retained as evidence of fitness for purpose.</p>
+<p>7.1.5.1 General. Rock River Consulting determines and provides the resources needed to ensure valid and reliable results when monitoring or measuring is used to verify the conformity of products and services. These resources are suitable for the specific type of monitoring and measurement activity being undertaken, and are maintained to ensure their continued fitness for purpose. Appropriate documented information is retained as evidence of fitness for purpose.</p>
 <p>7.1.5.2 The scope of the control system extends to measuring and test equipment, comparative reference hardware such as gauges and templates, and test software used for: setup and monitoring of production processes; monitoring of environmental conditions; verification of product conformity; and operations where a defined measurement accuracy is required to assure conformity. QOP-76-01, Measuring and Monitoring Equipment, defines the calibration and control system.</p>
-<p>7.1.5.3 Measurement traceability. Where measurement traceability is a requirement, or is considered by Rock River to be an essential part of providing confidence in the validity of measurement results, measuring equipment is:</p>
+<p>7.1.5.3 Measurement traceability. Where measurement traceability is a requirement, or is considered by Rock River Consulting to be an essential part of providing confidence in the validity of measurement results, measuring equipment is:</p>
 <ul>
 <li><p>Calibrated or verified, or both, at specified intervals or prior to use, against measurement standards traceable to international or national measurement standards; where no such standards exist, the basis used for calibration or verification is retained as documented information;</p></li>
 <li><p>Identified in order to determine its calibration status;</p></li>
 <li><p>Safeguarded from adjustments, damage or deterioration that would invalidate the calibration status and subsequent measurement results.</p></li>
 </ul>
 <p>7.1.5.4 Quality Assurance is responsible for calibrating and maintaining measuring and monitoring devices. All active devices are inventoried in a controlled list indicating calibration status and location. Calibration is recorded in a calibration log and calibrated devices are labeled with a calibration sticker.</p>
-<p>7.1.5.5 When measuring equipment is found to be unfit for its intended purpose, Rock River determines whether the validity of previous measurement results has been adversely affected and takes appropriate action on the equipment and on any product or service affected. Records of the assessment and of the action taken are retained.</p>
+<p>7.1.5.5 When measuring equipment is found to be unfit for its intended purpose, Rock River Consulting determines whether the validity of previous measurement results has been adversely affected and takes appropriate action on the equipment and on any product or service affected. Records of the assessment and of the action taken are retained.</p>
 <p>7.1.5.6 Software used in monitoring and measurement of specified requirements is confirmed as fit for the intended application prior to initial use and reconfirmed as necessary. In-house developed inspection, test and monitoring software is validated before use. Commercial software is purchased with validation certificates where available, and is revalidated when the conditions for which it was initially validated are materially changed.</p>
 <h3 id="7-1-6-organizational-knowledge" class="lvl3"><span class="cnum">7.1.6</span><span class="ctitle">Organizational knowledge</span><span class="badge new">new in 2015</span></h3>
-<p>7.1.6.1 Rock River determines the knowledge necessary for the operation of its processes and to achieve conformity of products and services. This knowledge is maintained and made available to the extent necessary. This is a requirement introduced by ISO 9001:2015 and was not addressed in the previous revision of this manual.</p>
-<p>7.1.6.2 Organizational knowledge at Rock River includes:</p>
+<p>7.1.6.1 Rock River Consulting determines the knowledge necessary for the operation of its processes and to achieve conformity of products and services. This knowledge is maintained and made available to the extent necessary. This is a requirement introduced by ISO 9001:2015 and was not addressed in the previous revision of this manual.</p>
+<p>7.1.6.2 Organizational knowledge at Rock River Consulting includes:</p>
 <ul>
 <li><p>Internal sources: lessons learned from completed projects, from nonconformities and corrective actions, and from customer complaints; undocumented know-how and experience of long-service personnel; results of design verification and validation; shop practice, setup sheets and tooling records; and the results of process improvement activity.</p></li>
 <li><p>External sources: AWI, AIA and UL standards and their revisions; building codes and regulatory requirements; manufacturer and external provider technical data; conferences, trade associations and training providers; and customer-supplied specifications.</p></li>
 </ul>
 <p>7.1.6.3 Methods used to capture and retain organizational knowledge include: work instructions and setup sheets; project close-out and lessons-learned entries in the project file; the corrective action database; mentoring and cross-training of personnel identified in the competence matrix; retention of design output and calculation files; and a controlled library of current industry standards.</p>
-<p>7.1.6.4 When addressing changing needs and trends, Rock River considers its current knowledge and determines how to acquire or access any necessary additional knowledge. Gaps in organizational knowledge — including knowledge at risk from retirement or personnel turnover — are an input to the management review (Section 9.3) and may generate a quality objective or a risk register entry.</p>
+<p>7.1.6.4 When addressing changing needs and trends, Rock River Consulting considers its current knowledge and determines how to acquire or access any necessary additional knowledge. Gaps in organizational knowledge — including knowledge at risk from retirement or personnel turnover — are an input to the management review (Section 9.3) and may generate a quality objective or a risk register entry.</p>
 <h2 id="7-2-competence" class="lvl2"><span class="cnum">7.2</span><span class="ctitle">Competence</span></h2>
-<p>7.2.1 Rock River:</p>
+<p>7.2.1 Rock River Consulting:</p>
 <ul>
 <li><p>Determines the necessary competence of persons doing work under its control that affects the performance and effectiveness of the QMS;</p></li>
 <li><p>Ensures that these persons are competent on the basis of appropriate education, training or experience;</p></li>
@@ -742,7 +745,7 @@ colgroup{display:none}
 <p>7.2.5 Each division maintains a personnel file for every technical individual documenting job-related experience and technical certifications. The Manager is responsible for ensuring that personnel maintain technical certifications at the required frequencies. Where a customer contract specifies a technical certification, evidence of that certification becomes part of the customer project records.</p>
 <p>7.2.6 Training opportunities may be identified by any level of management. Managers identify training needs within their areas. The Quality Assurance Manager identifies quality-related training opportunities and their frequency. Division Directors or Managers designate internal auditors and ensure they receive appropriate training to perform audits (Section 9.2).</p>
 <h2 id="7-3-awareness" class="lvl2"><span class="cnum">7.3</span><span class="ctitle">Awareness</span><span class="badge new">new in 2015</span></h2>
-<p>7.3.1 Rock River ensures that persons doing work under its control are aware of:</p>
+<p>7.3.1 Rock River Consulting ensures that persons doing work under its control are aware of:</p>
 <ul>
 <li><p>The quality policy;</p></li>
 <li><p>The relevant quality objectives;</p></li>
@@ -750,9 +753,9 @@ colgroup{display:none}
 <li><p>The implications of not conforming to the QMS requirements.</p></li>
 </ul>
 <p>7.3.2 Awareness is established during general orientation and is reinforced through departmental meetings, toolbox talks, required-reading assignments, posting of the quality policy and current objectives, and the communication of management review outcomes under Section 9.3. Awareness activities are recorded under QOP-62-01.</p>
-<p>7.3.3 Awareness requirements extend to persons doing work under the control of Rock River who are not employees — including temporary staff and subcontractor personnel working on Rock River projects or at Rock River facilities.</p>
+<p>7.3.3 Awareness requirements extend to persons doing work under the control of Rock River Consulting who are not employees — including temporary staff and subcontractor personnel working on Rock River Consulting projects or at Rock River Consulting facilities.</p>
 <h2 id="7-4-communication" class="lvl2"><span class="cnum">7.4</span><span class="ctitle">Communication</span><span class="badge expanded">expanded in 2015</span></h2>
-<p>7.4.1 Rock River determines the internal and external communications relevant to the QMS, including:</p>
+<p>7.4.1 Rock River Consulting determines the internal and external communications relevant to the QMS, including:</p>
 <ul>
 <li><p>On what it will communicate;</p></li>
 <li><p>When to communicate;</p></li>
@@ -820,12 +823,12 @@ colgroup{display:none}
 </table></div>
 <h2 id="7-5-documented-information" class="lvl2"><span class="cnum">7.5</span><span class="ctitle">Documented Information</span><span class="badge changed">changed in 2015</span></h2>
 <h3 id="7-5-1-general" class="lvl3"><span class="cnum">7.5.1</span><span class="ctitle">General</span></h3>
-<p>7.5.1.1 The QMS of Rock River includes:</p>
+<p>7.5.1.1 The QMS of Rock River Consulting includes:</p>
 <ul>
 <li><p>Documented information required by ISO 9001:2015; and</p></li>
-<li><p>Documented information determined by Rock River as being necessary for the effectiveness of the QMS.</p></li>
+<li><p>Documented information determined by Rock River Consulting as being necessary for the effectiveness of the QMS.</p></li>
 </ul>
-<p>7.5.1.2 ISO 9001:2015 uses the single term "documented information" in place of the terms "document," "documentation" and "record." Documented information that is maintained corresponds to what was previously called a document; documented information that is retained corresponds to what was previously called a record. The existing Rock River procedures QOP-42-01, Control of Documents, and QOP-42-02, Control of Records, together satisfy this clause and are retained under their existing identifiers.</p>
+<p>7.5.1.2 ISO 9001:2015 uses the single term "documented information" in place of the terms "document," "documentation" and "record." Documented information that is maintained corresponds to what was previously called a document; documented information that is retained corresponds to what was previously called a record. The existing Rock River Consulting procedures QOP-42-01, Control of Documents, and QOP-42-02, Control of Records, together satisfy this clause and are retained under their existing identifiers.</p>
 <p>7.5.1.3 The QMS documentation comprises the following categories:</p>
 <ul>
 <li><p>This QMS manual, including the quality policy and quality objectives;</p></li>
@@ -838,7 +841,7 @@ colgroup{display:none}
 </ul>
 <p>7.5.1.4 The extent of documented information can differ from one organization to another due to the size of the organization and its type of activities, processes, products and services; the complexity of processes and their interactions; and the competence of persons.</p>
 <h3 id="7-5-2-creating-and-updating" class="lvl3"><span class="cnum">7.5.2</span><span class="ctitle">Creating and updating</span></h3>
-<p>7.5.2.1 When creating and updating documented information, Rock River ensures appropriate:</p>
+<p>7.5.2.1 When creating and updating documented information, Rock River Consulting ensures appropriate:</p>
 <ul>
 <li><p>Identification and description — for example title, date, author, reference number and revision level;</p></li>
 <li><p>Format — for example language, software version, graphics — and media, for example paper or electronic; and</p></li>
@@ -846,7 +849,7 @@ colgroup{display:none}
 </ul>
 <h3 id="7-5-3-control-of-documented-information" class="lvl3"><span class="cnum">7.5.3</span><span class="ctitle">Control of documented information</span></h3>
 <p>7.5.3.1 Documented information required by the QMS and by ISO 9001:2015 is controlled to ensure that it is available and suitable for use where and when it is needed, and that it is adequately protected — for example from loss of confidentiality, improper use, or loss of integrity.</p>
-<p>7.5.3.2 For the control of documented information, Rock River addresses the following activities as applicable: distribution, access, retrieval and use; storage and preservation, including preservation of legibility; control of changes, including revision control; retention and disposition.</p>
+<p>7.5.3.2 For the control of documented information, Rock River Consulting addresses the following activities as applicable: distribution, access, retrieval and use; storage and preservation, including preservation of legibility; control of changes, including revision control; retention and disposition.</p>
 <p>7.5.3.3 The document control system defined in QOP-42-01 ensures that:</p>
 <ul>
 <li><p>Documented information is reviewed for adequacy and approved prior to release;</p></li>
@@ -857,7 +860,7 @@ colgroup{display:none}
 <li><p>Distribution is controlled; and</p></li>
 <li><p>Obsolete information is withdrawn from points of use or is clearly identified to prevent unintended use.</p></li>
 </ul>
-<p>7.5.3.4 Rock River is transitioning from paper to electronic control of documented information. Both systems are currently in use and are defined in QOP-42-01.</p>
+<p>7.5.3.4 Rock River Consulting is transitioning from paper to electronic control of documented information. Both systems are currently in use and are defined in QOP-42-01.</p>
 <p>7.5.3.5 Documented information of external origin — including customer drawings and specifications, AWI and AIA standards, UL procedures and codes — is identified as appropriate and is controlled. The Quality Assurance Manager verifies at least annually that the editions of external standards in use are current.</p>
 <p>7.5.3.6 Documented information retained as evidence of conformity is protected from unintended alteration.</p>
 <p>7.5.3.7 Retained documented information is established and maintained to provide evidence of conformity to requirements and of the effective operation of the QMS. It remains legible, readily identifiable and retrievable. Records are organized into the following categories:</p>
@@ -870,7 +873,7 @@ colgroup{display:none}
 <li><p>Subcontractor and external provider quality records.</p></li>
 </ul>
 <p>7.5.3.8 QOP-42-02, Control of Records, defines what is retained in each category and designates storage locations and retention periods. It also defines the process for ensuring that retained information is clearly identified, stored in appropriate locations and conditions, adequately protected, and easily retrievable.</p>
-<p>7.5.3.9 Documented information explicitly required by ISO 9001:2015 and where it is addressed at Rock River:</p>
+<p>7.5.3.9 Documented information explicitly required by ISO 9001:2015 and where it is addressed at Rock River Consulting:</p>
 <div class="tw"><table>
 <colgroup>
 <col style="width: 14%" />
@@ -994,7 +997,7 @@ colgroup{display:none}
 </table></div>
 <h1 id="8-0-operation" class="lvl1"><span class="cnum">8.0</span><span class="ctitle">Operation</span></h1>
 <h2 id="8-1-operational-planning-and-control" class="lvl2"><span class="cnum">8.1</span><span class="ctitle">Operational Planning and Control</span></h2>
-<p>8.1.1 Rock River plans, implements and controls the processes needed to meet the requirements for the provision of products and services, and to implement the actions determined in Section 6, by:</p>
+<p>8.1.1 Rock River Consulting plans, implements and controls the processes needed to meet the requirements for the provision of products and services, and to implement the actions determined in Section 6, by:</p>
 <ul>
 <li><p>Determining the requirements for the products and services;</p></li>
 <li><p>Establishing criteria for the processes and for the acceptance of products and services;</p></li>
@@ -1002,10 +1005,10 @@ colgroup{display:none}
 <li><p>Implementing control of the processes in accordance with the criteria;</p></li>
 <li><p>Determining, maintaining and retaining documented information to the extent necessary to have confidence that the processes have been carried out as planned and to demonstrate conformity of products and services to their requirements.</p></li>
 </ul>
-<p>8.1.2 The output of this planning is suitable for the operations of Rock River. Plans are specified by contract and in supporting documentation such as QA workbooks, engineering requirements, drawings, specifications and test requirements. QOP-71-01, Planning of Product Realization, assigns responsibilities and creates the framework for implementing planning activities. Results of production and quality planning are documented in the work order (QOP-75-01).</p>
+<p>8.1.2 The output of this planning is suitable for the operations of Rock River Consulting. Plans are specified by contract and in supporting documentation such as QA workbooks, engineering requirements, drawings, specifications and test requirements. QOP-71-01, Planning of Product Realization, assigns responsibilities and creates the framework for implementing planning activities. Results of production and quality planning are documented in the work order (QOP-75-01).</p>
 <p>8.1.3 Where a customer or an applicable government specification requires it, a project-specific Quality Plan is prepared. In the absence of specific customer references to quality procedures, this QMS establishes the management practices to be applied.</p>
-<p>8.1.4 Rock River controls planned changes and reviews the consequences of unintended changes, taking action to mitigate any adverse effects as necessary (Sections 6.3 and 8.5.6).</p>
-<p>8.1.5 Rock River ensures that outsourced processes are controlled in accordance with Section 8.4.</p>
+<p>8.1.4 Rock River Consulting controls planned changes and reviews the consequences of unintended changes, taking action to mitigate any adverse effects as necessary (Sections 6.3 and 8.5.6).</p>
+<p>8.1.5 Rock River Consulting ensures that outsourced processes are controlled in accordance with Section 8.4.</p>
 <h2 id="8-2-requirements-for-products-and-services" class="lvl2"><span class="cnum">8.2</span><span class="ctitle">Requirements for Products and Services</span></h2>
 <h3 id="8-2-1-customer-communication" class="lvl3"><span class="cnum">8.2.1</span><span class="ctitle">Customer communication</span></h3>
 <p>8.2.1.1 Communication with customers includes:</p>
@@ -1019,33 +1022,33 @@ colgroup{display:none}
 <p>8.2.1.2 Arrangements for communicating with customers regarding enquiries and order handling are defined in QOP-72-01, Order Processing and Review. Arrangements for feedback and complaints are defined in QOP-82-01, Customer Satisfaction, and QOP-85-02, Customer Feedback and Complaints. Requests for information during construction are handled in accordance with the AIA RFI process.</p>
 <p>8.2.1.3 Requirements for contingency actions — for example alternate material sources, alternate transportation, recovery of critical records, or continuity of key personnel — are established where the customer requires them or where the risk assessment of Section 6.1 indicates they are warranted.</p>
 <h3 id="8-2-2-determining-the-requirements-for-products-and-services" class="lvl3"><span class="cnum">8.2.2</span><span class="ctitle">Determining the requirements for products and services</span></h3>
-<p>8.2.2.1 When determining the requirements for the products and services to be offered to customers, Rock River ensures that:</p>
+<p>8.2.2.1 When determining the requirements for the products and services to be offered to customers, Rock River Consulting ensures that:</p>
 <ul>
-<li><p>The requirements for the products and services are defined, including any applicable statutory and regulatory requirements, and those considered necessary by Rock River; and</p></li>
-<li><p>Rock River can meet the claims for the products and services it offers.</p></li>
+<li><p>The requirements for the products and services are defined, including any applicable statutory and regulatory requirements, and those considered necessary by Rock River Consulting; and</p></li>
+<li><p>Rock River Consulting can meet the claims for the products and services it offers.</p></li>
 </ul>
-<p>8.2.2.2 Product and service requirements determined include: requirements specified by the customer, including requirements for delivery and post-delivery activities; requirements not stated by the customer but necessary for the specified or intended use, where known; statutory and regulatory requirements applicable to the product or service; and any additional requirements determined by Rock River. Any documentation from the customer that authorizes work is treated as a customer contract for the purposes of this section. QOP-72-01 explains how requirements are determined.</p>
+<p>8.2.2.2 Product and service requirements determined include: requirements specified by the customer, including requirements for delivery and post-delivery activities; requirements not stated by the customer but necessary for the specified or intended use, where known; statutory and regulatory requirements applicable to the product or service; and any additional requirements determined by Rock River Consulting. Any documentation from the customer that authorizes work is treated as a customer contract for the purposes of this section. QOP-72-01 explains how requirements are determined.</p>
 <h3 id="8-2-3-review-of-the-requirements-for-products-and-services" class="lvl3"><span class="cnum">8.2.3</span><span class="ctitle">Review of the requirements for products and services</span></h3>
-<p>8.2.3.1 Rock River ensures that it has the ability to meet the requirements for products and services to be offered to customers. A review is conducted before committing to supply, and includes:</p>
+<p>8.2.3.1 Rock River Consulting ensures that it has the ability to meet the requirements for products and services to be offered to customers. A review is conducted before committing to supply, and includes:</p>
 <ul>
 <li><p>Requirements specified by the customer, including requirements for delivery and post-delivery activities;</p></li>
 <li><p>Requirements not stated by the customer but necessary for the specified or intended use, where known;</p></li>
-<li><p>Requirements specified by Rock River;</p></li>
+<li><p>Requirements specified by Rock River Consulting;</p></li>
 <li><p>Statutory and regulatory requirements applicable to the products and services; and</p></li>
 <li><p>Contract or order requirements differing from those previously expressed.</p></li>
 </ul>
-<p>8.2.3.2 Rock River ensures that contract or order requirements differing from those previously defined are resolved. Where the customer does not provide a documented statement of requirements — as with a verbal order — the customer requirements are confirmed before acceptance.</p>
+<p>8.2.3.2 Rock River Consulting ensures that contract or order requirements differing from those previously defined are resolved. Where the customer does not provide a documented statement of requirements — as with a verbal order — the customer requirements are confirmed before acceptance.</p>
 <p>8.2.3.3 Documented information is retained on the results of the review and on any new requirements for the products and services.</p>
 <p>8.2.3.4 Risks and opportunities relevant to the order — including capacity, schedule, material availability, and unfamiliar specification or code requirements — are considered as part of the review in accordance with Section 6.1.</p>
 <p>8.2.3.5 Processes for handling and reviewing orders are defined in QOP-72-01, Order Processing and Review.</p>
 <h3 id="8-2-4-changes-to-requirements-for-products-and-services" class="lvl3"><span class="cnum">8.2.4</span><span class="ctitle">Changes to requirements for products and services</span></h3>
-<p>8.2.4.1 Where the requirements for products and services are changed, Rock River ensures that the relevant documented information is amended and that relevant persons are made aware of the changed requirements.</p>
+<p>8.2.4.1 Where the requirements for products and services are changed, Rock River Consulting ensures that the relevant documented information is amended and that relevant persons are made aware of the changed requirements.</p>
 <p>8.2.4.2 Change orders and amendments are processed and reviewed using the same procedures that apply to initial orders, and are communicated to all functions within the organization that may be affected (QOP-72-01).</p>
 <h2 id="8-3-design-and-development-of-products-and-services" class="lvl2"><span class="cnum">8.3</span><span class="ctitle">Design and Development of Products and Services</span></h2>
 <h3 id="8-3-1-general" class="lvl3"><span class="cnum">8.3.1</span><span class="ctitle">General</span></h3>
-<p>8.3.1.1 Rock River establishes, implements and maintains a design and development process appropriate to ensure the subsequent provision of products and services. Rock River designs customer-specified products and modifications when required by contract. The design control system is defined in QOP-73-01, Design Control.</p>
+<p>8.3.1.1 Rock River Consulting establishes, implements and maintains a design and development process appropriate to ensure the subsequent provision of products and services. Rock River Consulting designs customer-specified products and modifications when required by contract. The design control system is defined in QOP-73-01, Design Control.</p>
 <h3 id="8-3-2-design-and-development-planning" class="lvl3"><span class="cnum">8.3.2</span><span class="ctitle">Design and development planning</span></h3>
-<p>8.3.2.1 In determining the stages and controls for design and development, Rock River considers:</p>
+<p>8.3.2.1 In determining the stages and controls for design and development, Rock River Consulting considers:</p>
 <ul>
 <li><p>The nature, duration and complexity of the design and development activities;</p></li>
 <li><p>The required process stages, including applicable design and development reviews;</p></li>
@@ -1060,18 +1063,18 @@ colgroup{display:none}
 </ul>
 <p>8.3.2.2 The Manager is responsible for scheduling the project, assigning qualified personnel, and controlling organizational and technical interfaces. The design project plan is documented on Form QF-73-01-1, Design Project Plan. The assigned Design Project Manager is responsible for the planning of design projects, including the identification of design, review, verification and validation activities. Planning output is updated as the design progresses.</p>
 <h3 id="8-3-3-design-and-development-inputs" class="lvl3"><span class="cnum">8.3.3</span><span class="ctitle">Design and development inputs</span></h3>
-<p>8.3.3.1 Rock River determines the requirements essential for the specific types of products and services being designed and developed, considering:</p>
+<p>8.3.3.1 Rock River Consulting determines the requirements essential for the specific types of products and services being designed and developed, considering:</p>
 <ul>
 <li><p>Functional and performance requirements;</p></li>
 <li><p>Information derived from previous similar design and development activities;</p></li>
 <li><p>Statutory and regulatory requirements, including applicable building codes and UL listing requirements;</p></li>
-<li><p>Standards or codes of practice that Rock River has committed to implement, including AWI and AIA requirements; and</p></li>
+<li><p>Standards or codes of practice that Rock River Consulting has committed to implement, including AWI and AIA requirements; and</p></li>
 <li><p>The potential consequences of failure due to the nature of the products and services.</p></li>
 </ul>
 <p>8.3.3.2 Inputs are adequate for design and development purposes, complete, and unambiguous. Conflicting design inputs are resolved before design proceeds. Design input requirements are developed by the Design Project Manager from product concepts such as briefs, sketches, models and prototypes, and are reviewed and approved before use.</p>
 <p>8.3.3.3 Documented information on design and development inputs is retained in the design project file.</p>
 <h3 id="8-3-4-design-and-development-controls" class="lvl3"><span class="cnum">8.3.4</span><span class="ctitle">Design and development controls</span></h3>
-<p>8.3.4.1 Rock River applies controls to the design and development process to ensure that:</p>
+<p>8.3.4.1 Rock River Consulting applies controls to the design and development process to ensure that:</p>
 <ul>
 <li><p>The results to be achieved are defined;</p></li>
 <li><p>Reviews are conducted to evaluate the ability of the results to meet requirements;</p></li>
@@ -1084,7 +1087,7 @@ colgroup{display:none}
 <p>8.3.4.3 Verification confirms that design output meets design input. Validation confirms that the resulting product is capable of meeting the requirements for the specified application or intended use. Wherever practical, validation is completed prior to delivery or implementation of the product.</p>
 <p>8.3.4.4 In-house developed software used for design or for critical calculations is reviewed and approved prior to use in design.</p>
 <h3 id="8-3-5-design-and-development-outputs" class="lvl3"><span class="cnum">8.3.5</span><span class="ctitle">Design and development outputs</span></h3>
-<p>8.3.5.1 Rock River ensures that design and development outputs:</p>
+<p>8.3.5.1 Rock River Consulting ensures that design and development outputs:</p>
 <ul>
 <li><p>Meet the input requirements;</p></li>
 <li><p>Are adequate for the subsequent processes for the provision of products and services;</p></li>
@@ -1095,40 +1098,40 @@ colgroup{display:none}
 <p>8.3.5.3 Design output documents are checked and approved by the Quality Assurance Manager before release for production, and are controlled in accordance with Section 7.5 and QOP-42-01.</p>
 <p>8.3.5.4 Documented information on design and development outputs is retained.</p>
 <h3 id="8-3-6-design-and-development-changes" class="lvl3"><span class="cnum">8.3.6</span><span class="ctitle">Design and development changes</span></h3>
-<p>8.3.6.1 Rock River identifies, reviews and controls changes made during, or subsequent to, the design and development of products and services, to the extent necessary to ensure that there is no adverse impact on conformity to requirements.</p>
+<p>8.3.6.1 Rock River Consulting identifies, reviews and controls changes made during, or subsequent to, the design and development of products and services, to the extent necessary to ensure that there is no adverse impact on conformity to requirements.</p>
 <p>8.3.6.2 The review of design changes includes evaluation of the effect of the change on constituent parts and on product already delivered. Changes are reviewed, verified and validated as appropriate, and are approved before implementation.</p>
 <p>8.3.6.3 Documented information is retained on design and development changes, the results of reviews, the authorization of the changes, and the actions taken to prevent adverse impacts.</p>
 <h2 id="8-4-control-of-externally-provided-processes-products-and-se" class="lvl2"><span class="cnum">8.4</span><span class="ctitle">Control of Externally Provided Processes, Products and Services</span><span class="badge changed">changed in 2015</span></h2>
 <h3 id="8-4-1-general" class="lvl3"><span class="cnum">8.4.1</span><span class="ctitle">General</span></h3>
-<p>8.4.1.1 Rock River ensures that externally provided processes, products and services conform to requirements. The term "external provider" is used in place of "supplier" and covers vendors, subcontractors, outsourced service providers and corporate or affiliated sources.</p>
+<p>8.4.1.1 Rock River Consulting ensures that externally provided processes, products and services conform to requirements. The term "external provider" is used in place of "supplier" and covers vendors, subcontractors, outsourced service providers and corporate or affiliated sources.</p>
 <p>8.4.1.2 Controls are applied to externally provided processes, products and services when:</p>
 <ul>
-<li><p>Products and services from external providers are intended for incorporation into the products and services of Rock River;</p></li>
-<li><p>Products and services are provided directly to the customer by external providers on behalf of Rock River; or</p></li>
-<li><p>A process, or part of a process, is provided by an external provider as a result of a decision by Rock River.</p></li>
+<li><p>Products and services from external providers are intended for incorporation into the products and services of Rock River Consulting;</p></li>
+<li><p>Products and services are provided directly to the customer by external providers on behalf of Rock River Consulting; or</p></li>
+<li><p>A process, or part of a process, is provided by an external provider as a result of a decision by Rock River Consulting.</p></li>
 </ul>
-<p>8.4.1.3 Rock River determines and applies criteria for the evaluation, selection, monitoring of performance, and re-evaluation of external providers, based on their ability to provide processes, products and services in accordance with requirements. Criteria are established from specifications, client requests and contract requirements. Documented information of these activities and of any necessary actions arising from the evaluations is retained.</p>
+<p>8.4.1.3 Rock River Consulting determines and applies criteria for the evaluation, selection, monitoring of performance, and re-evaluation of external providers, based on their ability to provide processes, products and services in accordance with requirements. Criteria are established from specifications, client requests and contract requirements. Documented information of these activities and of any necessary actions arising from the evaluations is retained.</p>
 <p>8.4.1.4 Purchasing maintains an Approved Supplier List. Orders for materials, components and subcontracted services may be placed only with external providers on that list. QOP-74-01, Supplier Evaluation and Monitoring, defines the evaluation and monitoring process.</p>
-<p>8.4.1.5 Rock River employees follow the purchasing practices established in the Rock River Procedure Manual for Purchases. The CEO, COO, CFO and properly designated personnel such as the Contracts Manager are authorized to execute contracts. Only the Purchasing Agent is authorized to sign a purchase contract. In the absence of a Purchasing Agent, the Operations Director designates an acting Purchasing Agent.</p>
+<p>8.4.1.5 Rock River Consulting employees follow the purchasing practices established in the Rock River Consulting Procedure Manual for Purchases. The CEO, COO, CFO and properly designated personnel such as the Contracts Manager are authorized to execute contracts. Only the Purchasing Agent is authorized to sign a purchase contract. In the absence of a Purchasing Agent, the Operations Director designates an acting Purchasing Agent.</p>
 <h3 id="8-4-2-type-and-extent-of-control" class="lvl3"><span class="cnum">8.4.2</span><span class="ctitle">Type and extent of control</span></h3>
-<p>8.4.2.1 Rock River ensures that externally provided processes, products and services do not adversely affect its ability to consistently deliver conforming products and services to its customers. Rock River:</p>
+<p>8.4.2.1 Rock River Consulting ensures that externally provided processes, products and services do not adversely affect its ability to consistently deliver conforming products and services to its customers. Rock River Consulting:</p>
 <ul>
 <li><p>Ensures that externally provided processes remain within the control of its QMS;</p></li>
 <li><p>Defines both the controls that it intends to apply to an external provider and those it intends to apply to the resulting output;</p></li>
-<li><p>Takes into consideration the potential impact of the externally provided processes, products and services on the ability of Rock River to consistently meet customer and applicable statutory and regulatory requirements, and the effectiveness of the controls applied by the external provider; and</p></li>
+<li><p>Takes into consideration the potential impact of the externally provided processes, products and services on the ability of Rock River Consulting to consistently meet customer and applicable statutory and regulatory requirements, and the effectiveness of the controls applied by the external provider; and</p></li>
 <li><p>Determines the verification, or other activities, necessary to ensure that the externally provided processes, products and services meet requirements.</p></li>
 </ul>
-<p>8.4.2.2 For job-related materials, the quality management requirements contractually applied to Rock River are flowed down by Rock River to its external providers.</p>
+<p>8.4.2.2 For job-related materials, the quality management requirements contractually applied to Rock River Consulting are flowed down by Rock River Consulting to its external providers.</p>
 <h3 id="8-4-3-information-for-external-providers" class="lvl3"><span class="cnum">8.4.3</span><span class="ctitle">Information for external providers</span></h3>
-<p>8.4.3.1 Rock River ensures the adequacy of requirements prior to their communication to the external provider.</p>
-<p>8.4.3.2 Rock River communicates to external providers its requirements for:</p>
+<p>8.4.3.1 Rock River Consulting ensures the adequacy of requirements prior to their communication to the external provider.</p>
+<p>8.4.3.2 Rock River Consulting communicates to external providers its requirements for:</p>
 <ul>
 <li><p>The processes, products and services to be provided;</p></li>
 <li><p>The approval of products and services, methods, processes and equipment, and the release of products and services;</p></li>
 <li><p>Competence, including any required qualification of persons;</p></li>
-<li><p>Interactions of the external provider with Rock River;</p></li>
-<li><p>Control and monitoring of the external provider’s performance to be applied by Rock River; and</p></li>
-<li><p>Verification or validation activities that Rock River, or its customer, intends to perform at the external provider’s premises.</p></li>
+<li><p>Interactions of the external provider with Rock River Consulting;</p></li>
+<li><p>Control and monitoring of the external provider’s performance to be applied by Rock River Consulting; and</p></li>
+<li><p>Verification or validation activities that Rock River Consulting, or its customer, intends to perform at the external provider’s premises.</p></li>
 </ul>
 <p>8.4.3.3 Purchasing documents are prepared by the Purchasing Agents within each division or department. They clearly and completely describe ordered products, including precise product identification and quality requirements, and are reviewed and approved prior to release (QOP-74-02, Purchasing). Purchasing requirements for a service are based on the qualifications of the individual needed to perform the service. For general office supplies, including computing materials, the normal competitive process is used.</p>
 <h3 id="8-4-4-verification-of-externally-provided-products" class="lvl3"><span class="cnum">8.4.4</span><span class="ctitle">Verification of externally provided products</span></h3>
@@ -1136,7 +1139,7 @@ colgroup{display:none}
 <p>8.4.4.2 Where verification at the external provider’s premises is intended, the purchasing documents state the intended verification arrangements and the method of product release.</p>
 <h2 id="8-5-production-and-service-provision" class="lvl2"><span class="cnum">8.5</span><span class="ctitle">Production and Service Provision</span></h2>
 <h3 id="8-5-1-control-of-production-and-service-provision" class="lvl3"><span class="cnum">8.5.1</span><span class="ctitle">Control of production and service provision</span><span class="badge expanded">expanded in 2015</span></h3>
-<p>8.5.1.1 Rock River implements production and service provision, including installation and associated services, under controlled conditions. Controlled conditions include, as applicable:</p>
+<p>8.5.1.1 Rock River Consulting implements production and service provision, including installation and associated services, under controlled conditions. Controlled conditions include, as applicable:</p>
 <ul>
 <li><p>The availability of documented information that defines the characteristics of the products to be produced, the services to be provided, or the activities to be performed, and the results to be achieved;</p></li>
 <li><p>The availability and use of suitable monitoring and measuring resources;</p></li>
@@ -1150,19 +1153,19 @@ colgroup{display:none}
 <p>8.5.1.2 Process validation applies to processes where deficiencies become apparent only after the product is in use or the service has been delivered. Arrangements for such processes include: defined criteria for review and approval of the processes; approval of equipment and qualification of personnel; use of specific methods and procedures; requirements for retained documented information; and revalidation.</p>
 <p>8.5.1.3 Actions to prevent human error include mistake-proofing of setups and fixtures, first-article verification, standardized work instructions, checklists for submittal and release, independent checking of critical dimensions and calculations, and competence requirements for critical operations. This is a requirement introduced by ISO 9001:2015 and was not addressed in the previous revision of this manual.</p>
 <h3 id="8-5-2-identification-and-traceability" class="lvl3"><span class="cnum">8.5.2</span><span class="ctitle">Identification and traceability</span></h3>
-<p>8.5.2.1 Rock River uses suitable means to identify outputs when it is necessary to ensure conformity of products and services.</p>
-<p>8.5.2.2 Rock River identifies the status of outputs with respect to monitoring and measurement requirements throughout production and service provision. Inspection status identification is applied and maintained in accordance with QOP-75-04.</p>
-<p>8.5.2.3 Where traceability is a requirement, Rock River controls the unique identification of the outputs and retains the documented information necessary to enable traceability.</p>
+<p>8.5.2.1 Rock River Consulting uses suitable means to identify outputs when it is necessary to ensure conformity of products and services.</p>
+<p>8.5.2.2 Rock River Consulting identifies the status of outputs with respect to monitoring and measurement requirements throughout production and service provision. Inspection status identification is applied and maintained in accordance with QOP-75-04.</p>
+<p>8.5.2.3 Where traceability is a requirement, Rock River Consulting controls the unique identification of the outputs and retains the documented information necessary to enable traceability.</p>
 <h3 id="8-5-3-property-belonging-to-customers-or-external-providers" class="lvl3"><span class="cnum">8.5.3</span><span class="ctitle">Property belonging to customers or external providers</span><span class="badge expanded">expanded in 2015</span></h3>
-<p>8.5.3.1 Rock River exercises care with property belonging to customers or external providers while it is under the control of Rock River or being used by Rock River. Such property is identified, verified, protected and safeguarded.</p>
-<p>8.5.3.2 Customer property may include materials, components, tools, equipment, premises, intellectual property and personal data. Customer software, documents and other intellectual property are protected to the same extent as Rock River internal documents of similar content, unless contractual requirements specify special measures.</p>
+<p>8.5.3.1 Rock River Consulting exercises care with property belonging to customers or external providers while it is under the control of Rock River Consulting or being used by Rock River Consulting. Such property is identified, verified, protected and safeguarded.</p>
+<p>8.5.3.2 Customer property may include materials, components, tools, equipment, premises, intellectual property and personal data. Customer software, documents and other intellectual property are protected to the same extent as Rock River Consulting internal documents of similar content, unless contractual requirements specify special measures.</p>
 <p>8.5.3.3 Customer-supplied products are received and inspected following the same procedure that applies to purchased products (QOP-74-03). Where supplied products fail receiving inspection or are otherwise unsuitable, the customer is contacted.</p>
-<p>8.5.3.4 When the property of a customer or external provider is lost, damaged or otherwise found to be unsuitable for use, Rock River reports this to the customer or external provider immediately and retains documented information on what has occurred.</p>
-<p>8.5.3.5 Where specified in a contract, special handling instructions from a customer take precedence over standard Rock River procedures.</p>
+<p>8.5.3.4 When the property of a customer or external provider is lost, damaged or otherwise found to be unsuitable for use, Rock River Consulting reports this to the customer or external provider immediately and retains documented information on what has occurred.</p>
+<p>8.5.3.5 Where specified in a contract, special handling instructions from a customer take precedence over standard Rock River Consulting procedures.</p>
 <h3 id="8-5-4-preservation" class="lvl3"><span class="cnum">8.5.4</span><span class="ctitle">Preservation</span></h3>
-<p>8.5.4.1 Rock River preserves the outputs during production and service provision, to the extent necessary to ensure conformity to requirements. Preservation includes identification, handling, contamination control, packaging, storage, transmission or transportation, and protection. Preservation also applies to the constituent parts of a product.</p>
+<p>8.5.4.1 Rock River Consulting preserves the outputs during production and service provision, to the extent necessary to ensure conformity to requirements. Preservation includes identification, handling, contamination control, packaging, storage, transmission or transportation, and protection. Preservation also applies to the constituent parts of a product.</p>
 <h3 id="8-5-5-post-delivery-activities" class="lvl3"><span class="cnum">8.5.5</span><span class="ctitle">Post-delivery activities</span></h3>
-<p>8.5.5.1 Rock River meets requirements for post-delivery activities associated with the products and services. In determining the extent of post-delivery activities required, Rock River considers:</p>
+<p>8.5.5.1 Rock River Consulting meets requirements for post-delivery activities associated with the products and services. In determining the extent of post-delivery activities required, Rock River Consulting considers:</p>
 <ul>
 <li><p>Statutory and regulatory requirements;</p></li>
 <li><p>The potential undesired consequences associated with its products and services;</p></li>
@@ -1170,20 +1173,20 @@ colgroup{display:none}
 <li><p>Customer requirements; and</p></li>
 <li><p>Customer feedback.</p></li>
 </ul>
-<p>8.5.5.2 Post-delivery activities can include actions under warranty provisions, contractual obligations such as maintenance services, punch-list and remedial work following installation, and supplementary services such as recycling or final disposal. In a limited fashion, Rock River provides review procedures to holders of Rock River software when a client is experiencing significant difficulty operating the software.</p>
+<p>8.5.5.2 Post-delivery activities can include actions under warranty provisions, contractual obligations such as maintenance services, punch-list and remedial work following installation, and supplementary services such as recycling or final disposal. In a limited fashion, Rock River Consulting provides review procedures to holders of Rock River Consulting software when a client is experiencing significant difficulty operating the software.</p>
 <h3 id="8-5-6-control-of-changes" class="lvl3"><span class="cnum">8.5.6</span><span class="ctitle">Control of changes</span></h3>
-<p>8.5.6.1 Rock River reviews and controls changes for production or service provision, to the extent necessary to ensure continuing conformity with requirements.</p>
+<p>8.5.6.1 Rock River Consulting reviews and controls changes for production or service provision, to the extent necessary to ensure continuing conformity with requirements.</p>
 <p>8.5.6.2 Documented information is retained describing the results of the review of changes, the persons authorizing the change, and any necessary actions arising from the review.</p>
 <h2 id="8-6-release-of-products-and-services" class="lvl2"><span class="cnum">8.6</span><span class="ctitle">Release of Products and Services</span></h2>
-<p>8.6.1 Rock River implements planned arrangements, at appropriate stages, to verify that product and service requirements have been met. The monitoring and measurement program is defined in drawings and specifications, production work orders, purchasing documents, and inspection and testing procedures. These documents are collectively referred to as control plans.</p>
+<p>8.6.1 Rock River Consulting implements planned arrangements, at appropriate stages, to verify that product and service requirements have been met. The monitoring and measurement program is defined in drawings and specifications, production work orders, purchasing documents, and inspection and testing procedures. These documents are collectively referred to as control plans.</p>
 <p>8.6.2 In-process inspections take the form of first-article inspections, operator and QC inspections, continuous verification by automated inspection equipment, and statistical process control. The focus is on defect prevention rather than detection (QOP-82-03, In-process Inspections).</p>
 <p>8.6.3 Final acceptance inspection. Finished products are subject to a final inspection. Inspectors first verify that all specified receiving and in-process inspections have been satisfactorily completed, then perform the remaining inspections and tests necessary to complete the evidence of conformity (QOP-82-04, Final Inspection).</p>
 <p>8.6.4 The release of products and services to the customer does not proceed until the planned arrangements have been satisfactorily completed, unless otherwise approved by a relevant authority and, as applicable, by the customer. Only personnel performing final inspections and tests have the authority to release product.</p>
-<p>8.6.5 Rock River retains documented information on the release of products and services. This includes evidence of conformity with the acceptance criteria and traceability to the person authorizing the release. Filing and retention of inspection records are governed by QOP-75-01 and QOP-42-02.</p>
+<p>8.6.5 Rock River Consulting retains documented information on the release of products and services. This includes evidence of conformity with the acceptance criteria and traceability to the person authorizing the release. Filing and retention of inspection records are governed by QOP-75-01 and QOP-42-02.</p>
 <h2 id="8-7-control-of-nonconforming-outputs" class="lvl2"><span class="cnum">8.7</span><span class="ctitle">Control of Nonconforming Outputs</span><span class="badge changed">changed in 2015</span></h2>
-<p>8.7.1 Rock River ensures that outputs that do not conform to their requirements are identified and controlled to prevent their unintended use or delivery. This applies to nonconforming products and services detected during or after production, during or after the provision of services, and after delivery.</p>
+<p>8.7.1 Rock River Consulting ensures that outputs that do not conform to their requirements are identified and controlled to prevent their unintended use or delivery. This applies to nonconforming products and services detected during or after production, during or after the provision of services, and after delivery.</p>
 <p>8.7.2 To prevent unintended use or shipment, nonconforming outputs are marked with a REJECTED label or tag and are segregated where practicable.</p>
-<p>8.7.3 Rock River takes appropriate action based on the nature of the nonconformity and its effect on the conformity of products and services. Actions may include one or more of the following:</p>
+<p>8.7.3 Rock River Consulting takes appropriate action based on the nature of the nonconformity and its effect on the conformity of products and services. Actions may include one or more of the following:</p>
 <ul>
 <li><p>Correction — rework or repair;</p></li>
 <li><p>Segregation, containment, return or suspension of provision of products and services;</p></li>
@@ -1193,21 +1196,21 @@ colgroup{display:none}
 <p>8.7.4 Quality Assurance is responsible for reviewing nonconformities and deciding the disposition of nonconforming outputs. In simple and routine cases this responsibility is delegated to production supervisors. Disposition may be to rework, repair, accept as-is under concession, regrade or scrap.</p>
 <p>8.7.5 Conformity to requirements is verified when nonconforming outputs are corrected. Reworked products are re-inspected to demonstrate conformity to the original requirements. Repaired and regraded products are inspected to verify that they meet the modified specification (QOP-82-03, QOP-82-04).</p>
 <p>8.7.6 Where nonconforming product is detected after delivery or after use has started, the effects or potential effects of the nonconformity are evaluated by Quality Assurance and appropriate action is taken, including notification of the customer and, where applicable, the certification body or regulatory authority.</p>
-<p>8.7.7 Rock River retains documented information that describes the nonconformity, describes the actions taken, describes any concessions obtained, and identifies the authority deciding the action in respect of the nonconformity. Nonconforming outputs are documented on the Product Nonconformity Report, Form QF-83-01. The use and processing of the PNR are defined in QOP-83-01, Control of Nonconforming Product.</p>
+<p>8.7.7 Rock River Consulting retains documented information that describes the nonconformity, describes the actions taken, describes any concessions obtained, and identifies the authority deciding the action in respect of the nonconformity. Nonconforming outputs are documented on the Product Nonconformity Report, Form QF-83-01. The use and processing of the PNR are defined in QOP-83-01, Control of Nonconforming Product.</p>
 <p>8.7.8 Where a nonconformity indicates a systemic cause, a corrective action is raised in accordance with Section 10.2.</p>
 <h1 id="9-0-performance-evaluation" class="lvl1"><span class="cnum">9.0</span><span class="ctitle">Performance Evaluation</span></h1>
 <h2 id="9-1-monitoring-measurement-analysis-and-evaluation" class="lvl2"><span class="cnum">9.1</span><span class="ctitle">Monitoring, Measurement, Analysis and Evaluation</span></h2>
 <h3 id="9-1-1-general" class="lvl3"><span class="cnum">9.1.1</span><span class="ctitle">General</span></h3>
-<p>9.1.1.1 Rock River determines:</p>
+<p>9.1.1.1 Rock River Consulting determines:</p>
 <ul>
 <li><p>What needs to be monitored and measured;</p></li>
 <li><p>The methods for monitoring, measurement, analysis and evaluation needed to ensure valid results;</p></li>
 <li><p>When the monitoring and measuring is to be performed; and</p></li>
 <li><p>When the results from monitoring and measurement are to be analyzed and evaluated.</p></li>
 </ul>
-<p>9.1.1.2 Rock River evaluates the performance and the effectiveness of the QMS, and retains appropriate documented information as evidence of the results.</p>
+<p>9.1.1.2 Rock River Consulting evaluates the performance and the effectiveness of the QMS, and retains appropriate documented information as evidence of the results.</p>
 <h3 id="9-1-2-customer-satisfaction" class="lvl3"><span class="cnum">9.1.2</span><span class="ctitle">Customer satisfaction</span></h3>
-<p>9.1.2.1 Rock River monitors customer perceptions of the degree to which their needs and expectations have been fulfilled, and determines the methods for obtaining, monitoring and reviewing this information.</p>
+<p>9.1.2.1 Rock River Consulting monitors customer perceptions of the degree to which their needs and expectations have been fulfilled, and determines the methods for obtaining, monitoring and reviewing this information.</p>
 <p>9.1.2.2 Information relating to customer satisfaction is collected from the following sources:</p>
 <ul>
 <li><p>Customer surveys;</p></li>
@@ -1222,7 +1225,7 @@ colgroup{display:none}
 <p>9.1.2.3 QOP-82-01, Customer Satisfaction, defines the responsibilities and methods for collecting the information. Marketing is responsible for developing suitable indicators of customer satisfaction and for defining methods for collecting and analyzing the pertinent information.</p>
 <p>9.1.2.4 Customer satisfaction is used as one of the measures of the performance of the QMS. Customer satisfaction information is reported to, and evaluated by, the management review (Section 9.3 and QOP-56-01).</p>
 <h3 id="9-1-3-analysis-and-evaluation" class="lvl3"><span class="cnum">9.1.3</span><span class="ctitle">Analysis and evaluation</span></h3>
-<p>9.1.3.1 Rock River analyzes and evaluates appropriate data and information arising from monitoring and measurement. Data and information recorded in the retained documented information are compiled and analyzed periodically to determine trends in performance and effectiveness and to identify opportunities for improvement.</p>
+<p>9.1.3.1 Rock River Consulting analyzes and evaluates appropriate data and information arising from monitoring and measurement. Data and information recorded in the retained documented information are compiled and analyzed periodically to determine trends in performance and effectiveness and to identify opportunities for improvement.</p>
 <p>9.1.3.2 The results of analysis are used to evaluate:</p>
 <ul>
 <li><p>Conformity of products and services;</p></li>
@@ -1243,14 +1246,14 @@ colgroup{display:none}
 </ul>
 <p>9.1.3.4 Methods of analysis may include statistical techniques. Quality Assurance is responsible for coordinating these activities and for reporting conclusions and trends to top management, normally within the framework of the management review (QOP-56-01).</p>
 <h2 id="9-2-internal-audit" class="lvl2"><span class="cnum">9.2</span><span class="ctitle">Internal Audit</span></h2>
-<p>9.2.1 Rock River conducts internal audits at planned intervals to provide information on whether the QMS:</p>
+<p>9.2.1 Rock River Consulting conducts internal audits at planned intervals to provide information on whether the QMS:</p>
 <ul>
-<li><p>Conforms to the requirements of Rock River for its QMS and to the requirements of ISO 9001:2015; and</p></li>
+<li><p>Conforms to the requirements of Rock River Consulting for its QMS and to the requirements of ISO 9001:2015; and</p></li>
 <li><p>Is effectively implemented and maintained.</p></li>
 </ul>
-<p>9.2.2 Rock River:</p>
+<p>9.2.2 Rock River Consulting:</p>
 <ul>
-<li><p>Plans, establishes, implements and maintains an audit program, including the frequency, methods, responsibilities, planning requirements and reporting, which takes into consideration the importance of the processes concerned, changes affecting Rock River, and the results of previous audits;</p></li>
+<li><p>Plans, establishes, implements and maintains an audit program, including the frequency, methods, responsibilities, planning requirements and reporting, which takes into consideration the importance of the processes concerned, changes affecting Rock River Consulting, and the results of previous audits;</p></li>
 <li><p>Defines the audit criteria and scope for each audit;</p></li>
 <li><p>Selects auditors and conducts audits to ensure objectivity and the impartiality of the audit process — auditors do not audit their own work;</p></li>
 <li><p>Ensures that the results of the audits are reported to relevant management;</p></li>
@@ -1262,7 +1265,7 @@ colgroup{display:none}
 <p>9.2.5 QOP-82-02, Internal Quality Audits, defines the responsibilities and requirements for planning and conducting audits, and for reporting and retaining audit information. ISO 19011 is used as guidance.</p>
 <h2 id="9-3-management-review" class="lvl2"><span class="cnum">9.3</span><span class="ctitle">Management Review</span><span class="badge expanded">expanded in 2015</span></h2>
 <h3 id="9-3-1-general" class="lvl3"><span class="cnum">9.3.1</span><span class="ctitle">General</span></h3>
-<p>9.3.1.1 Top management reviews the QMS at planned intervals to ensure its continuing suitability, adequacy, effectiveness and alignment with the strategic direction of Rock River.</p>
+<p>9.3.1.1 Top management reviews the QMS at planned intervals to ensure its continuing suitability, adequacy, effectiveness and alignment with the strategic direction of Rock River Consulting.</p>
 <p>9.3.1.2 Management reviews are conducted at least once each year. More frequent reviews are scheduled in periods when organizational, technological, product or other changes require increased attention and input from top management.</p>
 <p>9.3.1.3 Management reviews are chaired by the CEO or COO and are attended by the Division Directors and the Quality Assurance Manager. The processes for initiating and conducting management reviews and for documenting their conclusions are defined in QOP-56-01, Management Review.</p>
 <p>9.3.1.4 In addition, the Quality Assurance Manager reports to the CEO or COO monthly, preferably at the monthly management meeting, on any significant deficiency requiring immediate process improvement. The Quality Assurance Manager and the internal auditors meet as required to review quality issues arising from internal audits or from responses to nonconformities.</p>
@@ -1277,7 +1280,7 @@ colgroup{display:none}
 <li><p>The effectiveness of actions taken to address risks and opportunities (Section 6.1); and</p></li>
 <li><p>Opportunities for improvement.</p></li>
 </ul>
-<p>9.3.2.2 Additional inputs considered at Rock River include new or revised statutory and regulatory requirements, changes to AWI, AIA and UL standards, the status of organizational knowledge and knowledge at risk (Section 7.1.6), and the status of any determination of non-applicability under Section 1.3.</p>
+<p>9.3.2.2 Additional inputs considered at Rock River Consulting include new or revised statutory and regulatory requirements, changes to AWI, AIA and UL standards, the status of organizational knowledge and knowledge at risk (Section 7.1.6), and the status of any determination of non-applicability under Section 1.3.</p>
 <h3 id="9-3-3-management-review-outputs" class="lvl3"><span class="cnum">9.3.3</span><span class="ctitle">Management review outputs</span></h3>
 <p>9.3.3.1 The outputs of the management review include decisions and actions related to:</p>
 <ul>
@@ -1286,11 +1289,11 @@ colgroup{display:none}
 <li><p>Resource needs.</p></li>
 </ul>
 <p>9.3.3.2 Management reviews conclude with the setting of new quality objectives and the initiation of actions to improve the QMS, its processes, and its products and services.</p>
-<p>9.3.3.3 Rock River retains documented information as evidence of the results of management reviews. Results are documented in the minutes of the review meeting, which record improvement actions and assign responsibilities and resources for their implementation.</p>
-<p>9.3.3.4 Improvements are communicated to all Rock River personnel in accordance with Section 7.4, and to specific customers as necessary. Division Directors hold annual meetings with their Managers and affected personnel following the management review — documenting topics and attendance — to communicate the importance of maintaining the quality process, implement specific recommendations from the review, and assign action items.</p>
+<p>9.3.3.3 Rock River Consulting retains documented information as evidence of the results of management reviews. Results are documented in the minutes of the review meeting, which record improvement actions and assign responsibilities and resources for their implementation.</p>
+<p>9.3.3.4 Improvements are communicated to all Rock River Consulting personnel in accordance with Section 7.4, and to specific customers as necessary. Division Directors hold annual meetings with their Managers and affected personnel following the management review — documenting topics and attendance — to communicate the importance of maintaining the quality process, implement specific recommendations from the review, and assign action items.</p>
 <h1 id="10-0-improvement" class="lvl1"><span class="cnum">10.0</span><span class="ctitle">Improvement</span></h1>
 <h2 id="10-1-general" class="lvl2"><span class="cnum">10.1</span><span class="ctitle">General</span></h2>
-<p>10.1.1 Rock River determines and selects opportunities for improvement and implements any necessary actions to meet customer requirements and enhance customer satisfaction.</p>
+<p>10.1.1 Rock River Consulting determines and selects opportunities for improvement and implements any necessary actions to meet customer requirements and enhance customer satisfaction.</p>
 <p>10.1.2 These include:</p>
 <ul>
 <li><p>Improving products and services to meet requirements as well as to address future needs and expectations;</p></li>
@@ -1299,7 +1302,7 @@ colgroup{display:none}
 </ul>
 <p>10.1.3 Improvement can include correction, corrective action, continual improvement, breakthrough change, innovation and reorganization.</p>
 <h2 id="10-2-nonconformity-and-corrective-action" class="lvl2"><span class="cnum">10.2</span><span class="ctitle">Nonconformity and Corrective Action</span><span class="badge changed">changed in 2015</span></h2>
-<p>10.2.1 When a nonconformity occurs, including any arising from complaints, Rock River:</p>
+<p>10.2.1 When a nonconformity occurs, including any arising from complaints, Rock River Consulting:</p>
 <ul>
 <li><p>Reacts to the nonconformity and, as applicable, takes action to control and correct it, and deals with the consequences;</p></li>
 <li><p>Evaluates the need for action to eliminate the cause of the nonconformity, in order that it does not recur or occur elsewhere, by reviewing and analyzing the nonconformity, determining the causes of the nonconformity, and determining whether similar nonconformities exist or could potentially occur;</p></li>
@@ -1309,12 +1312,12 @@ colgroup{display:none}
 <li><p>Makes changes to the QMS, if necessary.</p></li>
 </ul>
 <p>10.2.2 Corrective actions are appropriate to the effects of the nonconformities encountered.</p>
-<p>10.2.3 Rock River retains documented information as evidence of the nature of the nonconformities and any subsequent actions taken, and of the results of any corrective action.</p>
+<p>10.2.3 Rock River Consulting retains documented information as evidence of the nature of the nonconformities and any subsequent actions taken, and of the results of any corrective action.</p>
 <p>10.2.4 The process for requesting, implementing and verifying corrective action is defined in QOP-85-03. ISO 9001:2015 no longer contains a separate requirement for preventive action; the intent of preventive action is now achieved through the risk-based thinking described in Section 6.1. Where a corrective action review identifies that a similar nonconformity could occur elsewhere, the risk register is updated accordingly.</p>
 <p>10.2.5 Customer complaints. Complaints that allege deficiencies related to the identity, quality, durability, reliability, safety, effectiveness or performance of a product or service are logged and documented. Complaints that involve a possible failure of a product, labeling or packaging to meet any of its specifications are always investigated, and the results of the investigation are documented. The system for receiving, logging, investigating and responding to customer complaints is defined in QOP-85-02, Customer Feedback and Complaints.</p>
 <h2 id="10-3-continual-improvement" class="lvl2"><span class="cnum">10.3</span><span class="ctitle">Continual Improvement</span></h2>
-<p>10.3.1 Rock River continually improves the suitability, adequacy and effectiveness of the QMS.</p>
-<p>10.3.2 Rock River considers the results of analysis and evaluation (Section 9.1.3) and the outputs from management review (Section 9.3) to determine whether there are needs or opportunities that shall be addressed as part of continual improvement.</p>
+<p>10.3.1 Rock River Consulting continually improves the suitability, adequacy and effectiveness of the QMS.</p>
+<p>10.3.2 Rock River Consulting considers the results of analysis and evaluation (Section 9.1.3) and the outputs from management review (Section 9.3) to determine whether there are needs or opportunities that shall be addressed as part of continual improvement.</p>
 <p>10.3.3 Continual improvement is driven through the use of the quality policy, quality objectives, audit results, analysis of data, corrective action, risk and opportunity actions, and management review. QOP-85-01, Continual Improvement, defines this process.</p>
 <p>10.3.4 Internal audit results and quality performance data are analyzed at the management review to assess the effectiveness of the QMS and current organizational performance. Opportunities and priorities for improvement are identified by comparing present quality performance to the goals and aspirations defined in the quality policy.</p>
 <p>10.3.5 Improvement projects are defined either as corrective actions or as quality objectives, in accordance with QOP-85-03 and QOP-56-01 respectively.</p>
