@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operational Procedures Manual — Rock River Consulting (QOP-00 Rev. A)</title>
+<meta name="description" content="Rock River Consulting Operational Procedures Manual (QOP series), the companion volume to the Quality Management System Manual, conforming to ISO 9001:2015.">
+<style>
+:root{
+  --ink:#15181B; --ink-2:#565D64; --ink-3:#848B92;
+  --paper:#FFFFFF; --shell:#EEEFEA; --rule:#DBDDD6;
+  --accent:#23503F; --accent-soft:#EBF1EC;
+  --flag:#8A5A10; --flag-soft:#FBF2DF;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+  --sans:ui-sans-serif,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--shell);color:var(--ink);font-family:var(--serif);
+  font-size:16.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:1.5rem;
+  background:var(--paper);border-bottom:1px solid var(--rule);padding:.6rem 1.25rem;
+  font-family:var(--sans);font-size:12px;letter-spacing:.01em;color:var(--ink-2)}
+.topbar b{color:var(--ink);font-weight:600}
+.topbar .home{color:var(--ink);font-weight:600;text-decoration:none;white-space:nowrap}
+.topbar .home:hover{color:var(--accent)}
+@media print{.topbar .home{display:none}}
+.topbar .sp{flex:1}
+.topbar button,.topbar a.btn{font:inherit;color:var(--ink);background:none;border:1px solid var(--rule);
+  border-radius:3px;padding:.35rem .7rem;cursor:pointer;text-decoration:none;white-space:nowrap}
+.topbar button:hover,.topbar a.btn:hover{border-color:var(--accent);color:var(--accent)}
+.topbar button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#menu{display:none}
+
+.layout{display:grid;grid-template-columns:288px minmax(0,1fr);align-items:start}
+nav.side{position:sticky;top:41px;height:calc(100vh - 41px);overflow-y:auto;
+  background:var(--shell);padding:1.5rem 1rem 4rem 1.25rem;font-family:var(--sans)}
+nav.side a{display:flex;gap:.55rem;text-decoration:none;color:var(--ink-2);padding:.22rem 0 .22rem .5rem;
+  border-left:2px solid transparent;font-size:12.5px;line-height:1.35}
+nav.side a span{flex:0 0 auto;min-width:2.5em;color:var(--ink-3);font-variant-numeric:tabular-nums}
+nav.side a.n1{margin-top:.9rem;color:var(--ink);font-weight:600;font-size:13px}
+nav.side a.n1 span{color:var(--accent)}
+nav.side a:hover{color:var(--accent);border-left-color:var(--rule)}
+nav.side a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft)}
+
+main{background:var(--paper);min-height:100vh;border-left:1px solid var(--rule);
+  padding:3.5rem 3.25rem 8rem;max-width:74rem}
+.wrap{max-width:46rem}
+
+.cover{border-bottom:3px double var(--rule);padding-bottom:2.25rem;margin-bottom:2.5rem}
+.stamp{font-family:var(--sans);font-size:11px;color:var(--flag);background:var(--flag-soft);
+  display:inline-block;padding:.3rem .6rem;border-radius:2px;margin:0 0 2rem}
+.org{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);margin:0 0 .4rem}
+.doctitle{font-size:2.6rem;line-height:1.12;font-weight:600;margin:0 0 .6rem;letter-spacing:-.01em}
+.conform{font-size:1.05rem;color:var(--ink-2);margin:0 0 2rem;font-style:italic}
+.docctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:1rem 1.5rem;
+  margin:0 0 2.25rem;padding:1rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.docctl dt{font-family:var(--sans);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 .2rem}
+.docctl dd{margin:0;font-weight:600}
+.approval-lead{font-family:var(--sans);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 .5rem}
+.proprietary{font-size:14px;color:var(--ink-2);margin-top:1.75rem}
+
+h1.lvl1,h2.lvl2,h3.lvl3{position:relative;font-weight:600;letter-spacing:-.005em}
+h1.lvl1{font-size:1.85rem;line-height:1.2;margin:4.5rem 0 1.5rem;padding-bottom:.6rem;
+  border-bottom:1px solid var(--rule)}
+h2.lvl2{font-size:1.28rem;margin:2.75rem 0 .85rem;color:var(--accent)}
+h3.lvl3{font-size:1.02rem;margin:1.9rem 0 .6rem}
+.cnum{font-family:var(--sans);font-variant-numeric:tabular-nums;color:var(--ink-3);
+  font-weight:500;margin-right:.6rem}
+h1.lvl1 .cnum{color:var(--accent)}
+@media (min-width:1100px){
+  .cnum{position:absolute;right:calc(100% + 1rem);margin:0;font-size:.82em;line-height:inherit;
+    padding-top:.15em;white-space:nowrap}
+  main{padding-left:7rem}
+}
+.badge{font-family:var(--sans);font-size:10.5px;letter-spacing:.01em;
+  vertical-align:.35em;margin-left:.7rem;padding:.2rem .45rem;border-radius:2px;
+  font-weight:600;color:var(--flag);background:var(--flag-soft);white-space:nowrap}
+
+p{margin:0 0 .85rem;max-width:44rem}
+ul{margin:.1rem 0 1.1rem;padding-left:1.15rem;max-width:44rem}
+li{margin-bottom:.3rem}
+li::marker{color:var(--accent)}
+strong{font-weight:600}
+blockquote.policy{margin:1.25rem 0 1.5rem;padding:1.15rem 1.4rem;background:var(--accent-soft);
+  border-left:3px solid var(--accent);max-width:44rem}
+blockquote.policy p{margin:0;font-size:1.06rem}
+.note{font-size:14.5px;color:var(--ink-2);border-left:2px solid var(--rule);padding-left:.9rem;
+  margin:1.2rem 0;max-width:44rem}
+.todo,mark.fill{background:var(--flag-soft);color:var(--flag)}
+.todo{display:block;font-family:var(--sans);font-size:13px;padding:.7rem .9rem;
+  border-left:3px solid var(--flag);margin:1.2rem 0;max-width:44rem}
+mark.fill{padding:0 .2em;border-radius:2px}
+.endmark{font-family:var(--sans);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);text-align:center;margin:4rem 0 0;padding-top:1.5rem;border-top:1px solid var(--rule)}
+
+ol.toc{list-style:none;margin:0;padding:0;max-width:44rem;columns:1}
+ol.toc li{margin:0;border-bottom:1px solid var(--rule)}
+ol.toc a{display:flex;gap:1rem;text-decoration:none;color:var(--ink);padding:.5rem .2rem}
+ol.toc a span{min-width:3.2em;color:var(--ink-3);font-variant-numeric:tabular-nums;
+  font-family:var(--sans);font-size:13px}
+ol.toc li.t1 a{font-weight:600}
+ol.toc li.t1 a span{color:var(--accent)}
+ol.toc li.t2 a{padding-left:1.6rem;font-size:15px;color:var(--ink-2)}
+ol.toc a:hover{color:var(--accent);background:var(--accent-soft)}
+
+table{border-collapse:collapse;width:100%;max-width:58rem;margin:1.1rem 0 1.9rem;
+  font-size:14px;font-family:var(--sans);line-height:1.45}
+th,td{border:1px solid var(--rule);padding:.5rem .65rem;text-align:left;vertical-align:top}
+thead th{background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:12.5px;
+  letter-spacing:.01em}
+tbody tr:nth-child(even){background:#FAFAF8}
+colgroup{display:none}
+.tw{max-width:58rem;overflow-x:auto;margin:1.1rem 0 1.9rem}
+.tw table{margin:0;min-width:34rem}
+
+@media (max-width:1000px){
+  body{overflow-x:hidden}
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .topbar{gap:.7rem;font-size:11.5px;flex-wrap:nowrap;white-space:nowrap;overflow:hidden}
+  .topbar>span:not(.sp){display:none}
+  main>.wrap{min-width:0}
+  nav.side{position:fixed;inset:41px auto 0 0;width:min(84vw,300px);z-index:25;
+    border-right:1px solid var(--rule);transform:translateX(-102%);transition:transform .2s ease}
+  nav.side.open{transform:none}
+  @media (prefers-reduced-motion:reduce){nav.side{transition:none}}
+  main{border-left:0;padding:2rem 1.25rem 5rem}
+  #menu{display:block}
+  .doctitle{font-size:1.75rem}
+  .cnum{position:static}
+  .tw table{min-width:28rem;font-size:13px}
+  .docctl{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media print{
+  :root{--shell:#fff}
+  body{background:#fff;font-size:10.5pt;line-height:1.45}
+  .topbar,nav.side{display:none}
+  .layout{display:block}
+  main{border:0;padding:0;max-width:none}
+  h1.lvl1{page-break-before:always;page-break-after:avoid;margin-top:0}
+  .cover+*,.cover{page-break-before:auto}
+  h2.lvl2,h3.lvl3{page-break-after:avoid}
+  table,blockquote,ul{page-break-inside:avoid}
+  .tw{overflow:visible;max-width:100%}
+  .tw table,table{min-width:0;max-width:100%;font-size:9pt}
+  p,ul,blockquote,.note,.todo,ol.toc{max-width:100%}
+  .doctitle{font-size:22pt}
+  h1.lvl1{font-size:16pt}h2.lvl2{font-size:12.5pt}h3.lvl3{font-size:10.5pt}
+  .badge{border:1px solid currentColor}
+  thead{display:table-header-group}
+  a{color:inherit;text-decoration:none}
+  @page{margin:18mm 16mm;size:letter}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <button id="menu" aria-label="Show contents">Contents</button>
+  <a class="home" href="quality.html">&larr; QMS Manual</a><span>Operational Procedures Manual</span>
+  <span class="sp"></span>
+  <span>QOP-00 &middot; Rev. A</span>
+  <a class="btn" href="quality.html">QMS Manual</a>
+  <button onclick="window.print()">Print</button>
+</div>
+<div class="layout">
+<nav class="side" aria-label="Manual contents"><a class="n1" href="#top">Revision History and Document Status</a><a class="n1" href="#table-of-contents">Table of Contents</a><a class="n1" href="#how-to-use">How This Manual Is Organized</a><a class="n1" href="#qop-42-01"><span>QOP-42-01</span>Control of Documents</a><a class="n1" href="#qop-42-02"><span>QOP-42-02</span>Control of Records</a><a class="n1" href="#qop-56-01"><span>QOP-56-01</span>Management Review</a><a class="n1" href="#qop-62-01"><span>QOP-62-01</span>Competence, Awareness and Training</a><a class="n1" href="#qop-63-01"><span>QOP-63-01</span>Equipment</a><a class="n1" href="#qop-71-01"><span>QOP-71-01</span>Planning of Product Realization</a><a class="n1" href="#qop-72-01"><span>QOP-72-01</span>Order Processing and Review</a><a class="n1" href="#qop-73-01"><span>QOP-73-01</span>Design Control</a><a class="n1" href="#qop-74-01"><span>QOP-74-01</span>Supplier Evaluation and Monitoring</a><a class="n1" href="#qop-74-02"><span>QOP-74-02</span>Purchasing</a><a class="n1" href="#qop-74-03"><span>QOP-74-03</span>Verification of Purchased Product</a><a class="n1" href="#qop-75-01"><span>QOP-75-01</span>Work Order and Production Records</a><a class="n1" href="#qop-75-03"><span>QOP-75-03</span>Work Instructions</a><a class="n1" href="#qop-75-04"><span>QOP-75-04</span>Inspection Status Identification</a><a class="n1" href="#qop-76-01"><span>QOP-76-01</span>Measuring and Monitoring Equipment</a><a class="n1" href="#qop-82-01"><span>QOP-82-01</span>Customer Satisfaction</a><a class="n1" href="#qop-82-02"><span>QOP-82-02</span>Internal Quality Audits</a><a class="n1" href="#qop-82-03"><span>QOP-82-03</span>In-process Inspections</a><a class="n1" href="#qop-82-04"><span>QOP-82-04</span>Final Inspection</a><a class="n1" href="#qop-83-01"><span>QOP-83-01</span>Control of Nonconforming Product</a><a class="n1" href="#qop-85-01"><span>QOP-85-01</span>Continual Improvement</a><a class="n1" href="#qop-85-02"><span>QOP-85-02</span>Customer Feedback and Complaints</a><a class="n1" href="#qop-85-03"><span>QOP-85-03</span>Corrective Action</a><a class="n1" href="#appendix-a-form-index">Appendix A: Quality Form Index</a></nav>
+<main><div class="wrap">
+<section class="cover" id="top">
+  <p class="stamp">For information only — not a controlled document if printed</p>
+  <p class="org">Rock River Consulting</p>
+  <h1 class="doctitle">Operational Procedures Manual</h1>
+  <p class="conform">Quality System Operational Procedures (QOP series) supporting the Quality Management System Manual, QMS-00, conforming to ISO 9001:2015</p>
+  <dl class="docctl">
+    <div><dt>Document</dt><dd>QOP-00</dd></div>
+    <div><dt>Revision</dt><dd>A</dd></div>
+    <div><dt>Issue date</dt><dd class="fill"><mark class="fill">[Insert date]</mark></dd></div>
+    <div><dt>Companion document</dt><dd><a href="quality.html">QMS-00 Rev. B</a></dd></div>
+  </dl>
+  <p class="approval-lead">Approval</p>
+<div class="tw"><table style="width:100%;">
+<colgroup><col style="width: 24%" /><col style="width: 26%" /><col style="width: 26%" /><col style="width: 22%" /></colgroup>
+<thead><tr class="header"><th></th><th><strong>Name / Title</strong></th><th><strong>Signature</strong></th><th><strong>Date</strong></th></tr></thead>
+<tbody>
+<tr class="odd"><td>Prepared by</td><td><mark class="fill">[Name]</mark>, Quality Assurance Manager</td><td></td><td></td></tr>
+<tr class="even"><td>Reviewed by</td><td><mark class="fill">[Name]</mark>, Chief Operating Officer</td><td></td><td></td></tr>
+<tr class="odd"><td>Approved by</td><td><mark class="fill">[Name]</mark>, Chief Executive Officer</td><td></td><td></td></tr>
+</tbody>
+</table></div>
+
+<p class="proprietary"><b>Rock River Consulting proprietary information.</b> The information contained in this document is Rock River Consulting proprietary information and is disclosed in confidence. It is the property of Rock River Consulting and shall not be used, disclosed to others, or reproduced without the express written consent of Rock River Consulting. If consent is given for reproduction in whole or in part, this notice shall appear in any such reproduction.</p></section>
+
+<div class="tw"><table>
+<colgroup><col style="width: 12%" /><col style="width: 16%" /><col style="width: 50%" /><col style="width: 21%" /></colgroup>
+<thead><tr class="header"><th><strong>Rev.</strong></th><th><strong>Date</strong></th><th><strong>Description of Change</strong></th><th><strong>Approved By</strong></th></tr></thead>
+<tbody>
+<tr class="odd"><td>A</td><td><mark class="fill">[Insert Date]</mark></td><td>Initial issue as a companion volume to QMS-00 Rev. B. The 26 legacy QOP-series procedures inherited from the prior ISO 9001:2000-format manual were reviewed, consolidated to 23 procedures, and rewritten in the current-standard terminology and numbering of QMS-00 (Sections 1&ndash;10, ISO 9001:2015). Each procedure is now cross-referenced directly to its supporting clause(s) of QMS-00 and to the Appendix C index of that manual.</td><td><mark class="fill">[Name]</mark></td></tr>
+</tbody>
+</table></div>
+<p>This manual is maintained under document control in accordance with QOP-42-01, Control of Documents, and is indexed at Appendix C of the QMS Manual (QMS-00). The controlled master copy is held by the Quality Assurance Manager. Printed copies are uncontrolled unless stamped &ldquo;CONTROLLED COPY.&rdquo;</p>
+
+<h1 id="table-of-contents" class="lvl1"><span class="ctitle">Contents</span></h1>
+<ol class="toc"><li class="t1"><a href="#how-to-use">How This Manual Is Organized</a></li><li class="t1"><a href="#qop-42-01"><span>QOP-42-01</span>Control of Documents</a></li><li class="t1"><a href="#qop-42-02"><span>QOP-42-02</span>Control of Records</a></li><li class="t1"><a href="#qop-56-01"><span>QOP-56-01</span>Management Review</a></li><li class="t1"><a href="#qop-62-01"><span>QOP-62-01</span>Competence, Awareness and Training</a></li><li class="t1"><a href="#qop-63-01"><span>QOP-63-01</span>Equipment</a></li><li class="t1"><a href="#qop-71-01"><span>QOP-71-01</span>Planning of Product Realization</a></li><li class="t1"><a href="#qop-72-01"><span>QOP-72-01</span>Order Processing and Review</a></li><li class="t1"><a href="#qop-73-01"><span>QOP-73-01</span>Design Control</a></li><li class="t1"><a href="#qop-74-01"><span>QOP-74-01</span>Supplier Evaluation and Monitoring</a></li><li class="t1"><a href="#qop-74-02"><span>QOP-74-02</span>Purchasing</a></li><li class="t1"><a href="#qop-74-03"><span>QOP-74-03</span>Verification of Purchased Product</a></li><li class="t1"><a href="#qop-75-01"><span>QOP-75-01</span>Work Order and Production Records</a></li><li class="t1"><a href="#qop-75-03"><span>QOP-75-03</span>Work Instructions</a></li><li class="t1"><a href="#qop-75-04"><span>QOP-75-04</span>Inspection Status Identification</a></li><li class="t1"><a href="#qop-76-01"><span>QOP-76-01</span>Measuring and Monitoring Equipment</a></li><li class="t1"><a href="#qop-82-01"><span>QOP-82-01</span>Customer Satisfaction</a></li><li class="t1"><a href="#qop-82-02"><span>QOP-82-02</span>Internal Quality Audits</a></li><li class="t1"><a href="#qop-82-03"><span>QOP-82-03</span>In-process Inspections</a></li><li class="t1"><a href="#qop-82-04"><span>QOP-82-04</span>Final Inspection</a></li><li class="t1"><a href="#qop-83-01"><span>QOP-83-01</span>Control of Nonconforming Product</a></li><li class="t1"><a href="#qop-85-01"><span>QOP-85-01</span>Continual Improvement</a></li><li class="t1"><a href="#qop-85-02"><span>QOP-85-02</span>Customer Feedback and Complaints</a></li><li class="t1"><a href="#qop-85-03"><span>QOP-85-03</span>Corrective Action</a></li><li class="t1"><a href="#appendix-a-form-index">Appendix A: Quality Form Index</a></li></ol>
+
+<h1 id="how-to-use" class="lvl1"><span class="ctitle">How This Manual Is Organized</span></h1>
+<p>This Operational Procedures Manual is the second-level document of the Rock River Consulting Quality Management System. It sits beneath the <a href="quality.html">Quality Management System Manual (QMS-00)</a>, which defines the QMS at the level of the ten ISO 9001:2015 clauses, and above the individual work instructions and forms used at the point of work.</p>
+<p>Each procedure in this manual is numbered <strong>QOP-SS-NN</strong>, where <em>SS</em> is the clause of QMS-00 the procedure principally supports and <em>NN</em> is the sequence number of the procedure within that clause &mdash; the same numbering convention introduced in Section 2.2 and Appendix C of QMS-00. Each procedure states its Purpose, Scope, Responsibilities, step-by-step Procedure, the Records it generates, and the Forms (QF series) it uses, and links back to the corresponding section of QMS-00.</p>
+<p>The two documents are maintained together: a revision to a clause of QMS-00 that changes a control is reflected in the corresponding QOP at the next revision, and a change in practice discovered while executing a QOP is brought back to QMS-00 through the corrective action and management review processes (QOP-85-03 and QOP-56-01).</p>
+<div class="tw"><table>
+<colgroup><col style="width: 30%" /><col style="width: 70%" /></colgroup>
+<thead><tr class="header"><th><strong>Document</strong></th><th><strong>Level and Purpose</strong></th></tr></thead>
+<tbody>
+<tr class="odd"><td><a href="quality.html">QMS-00, Quality Management System Manual</a></td><td>Top-level document. Defines the QMS to the structure of ISO 9001:2015 Clauses 1&ndash;10: scope, context, leadership, planning, support, operation, performance evaluation and improvement.</td></tr>
+<tr class="even"><td>QOP-00, Operational Procedures Manual (this document)</td><td>Second-level document. Defines, for each QMS process, the responsible roles and the step-by-step method used to carry it out and to generate objective evidence of conformity.</td></tr>
+<tr class="odd"><td>Work instructions (WI) and Quality Forms (QF)</td><td>Third-level documents. Guide a specific task (a setup, an inspection, a calibration) or provide the template for a specific record.</td></tr>
+</tbody>
+</table></div>
+
+<h1 id="qop-42-01" class="lvl1"><span class="cnum">QOP-42-01</span><span class="ctitle">Control of Documents</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>7.5.2, 7.5.3</td><td>Quality Assurance Manager</td><td>Rev. A</td><td><a href="quality.html#7-5-2-creating-and-updating">quality.html § 7.5.2</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To ensure that documented information required by the Quality Management System — this manual, operational procedures, work instructions, drawings, specifications, and external standards and codes — is reviewed, approved, identified, distributed, and kept current before it is used, and that obsolete documents are prevented from unintended use.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to all controlled documents of the QMS, including this manual, the QOP series, QF-series forms, work instructions, engineering drawings and specifications, and documents of external origin (AWI, AIA and UL standards, building codes, customer specifications) that are relied upon in performing work.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Quality Assurance Manager</td><td>Maintains the master list of controlled documents (Form QF-42-01-1); administers the review, approval, revision and withdrawal of controlled documents; verifies annually that external standards in use are current editions.</td></tr>
+<tr class="even"><td>Document originator / process owner</td><td>Drafts and proposes revisions to documents within their process area; routes drafts for review.</td></tr>
+<tr class="odd"><td>Division Directors and Managers</td><td>Review and approve documents affecting their area prior to release; ensure current revisions are in use at points of use.</td></tr>
+<tr class="even"><td>All personnel</td><td>Use only current, controlled copies; report suspected obsolete or illegible documents to the Quality Assurance Manager.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Identification of documents</span></h3>
+<p>Each controlled document is assigned a unique identifier consistent with the numbering convention of Appendix C (QOP-SS-NN for operational procedures; QF-SS-NN-M for forms), a title, a revision level, and an effective date.</p>
+<h3 class="lvl3"><span class="ctitle">2. Drafting and review</span></h3>
+<ul>
+<li><p>A new or revised document is drafted by the responsible process owner and circulated to the functions it affects for review and comment.</p></li>
+<li><p>Comments are resolved before the document is submitted for approval. Where a document affects product conformity or a customer commitment, the Quality Assurance Manager is included in the review.</p></li>
+</ul>
+<h3 class="lvl3"><span class="ctitle">3. Approval and release</span></h3>
+<ul>
+<li><p>Documents are approved by the process owner's Manager or Division Director and, for this manual and QOP-series procedures, by the Quality Assurance Manager, prior to release.</p></li>
+<li><p>Approval is recorded on the document itself (signature block or approval log) and on the master list.</p></li>
+</ul>
+<h3 class="lvl3"><span class="ctitle">4. Distribution and access</span></h3>
+<ul>
+<li><p>Current controlled documents are made available electronically through the document management system, and in printed form only where stamped “CONTROLLED COPY.” Uncontrolled printed copies bear the notice “For information only — not a controlled document if printed.”</p></li>
+<li><p>The Quality Assurance Manager ensures documents are available at the point of use, including job sites, where applicable.</p></li>
+</ul>
+<h3 class="lvl3"><span class="ctitle">5. Revision</span></h3>
+<ul>
+<li><p>Revisions are numbered sequentially (Rev. A, B, C …) and re-approved through the same review and approval process as the original document. A revision summary is recorded in the document's change history.</p></li>
+<li><p>Revised documents supersede and replace the prior revision at all points of use upon release.</p></li>
+</ul>
+<h3 class="lvl3"><span class="ctitle">6. Control of obsolete documents</span></h3>
+<ul>
+<li><p>Obsolete controlled documents are removed from points of use or are clearly marked “OBSOLETE” if retained for reference (for example, in project or legal records).</p></li>
+<li><p>The Quality Assurance Manager retains one marked copy of each superseded revision for the retention period defined in QOP-42-02.</p></li>
+</ul>
+<h3 class="lvl3"><span class="ctitle">7. Documents of external origin</span></h3>
+<ul>
+<li><p>AWI, AIA and UL standards, building codes, and customer-supplied drawings and specifications are logged on the master list with their edition or issue date. The Quality Assurance Manager verifies at least annually, and whenever a project requires it, that the edition in use is current.</p></li>
+<li><p>Superseded external standards are withdrawn from points of use in the same manner as internal documents.</p></li>
+</ul>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Document Control Master List</td><td>Quality Assurance Manager</td><td>Life of the QMS, superseded by current revision</td></tr>
+<tr class="even"><td>Superseded document revisions</td><td>Quality Assurance Manager</td><td>6 years</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Forms</span></h2><ul>
+<li><p><strong>QF-42-01-1</strong> — Document Control Master List</p></li>
+</ul>
+<p class="note">Related: QOP-42-02, Control of Records; Section 7.5, Documented Information.</p>
+<h1 id="qop-42-02" class="lvl1"><span class="cnum">QOP-42-02</span><span class="ctitle">Control of Records</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>7.5.3</td><td>Quality Assurance Manager</td><td>Rev. A</td><td><a href="quality.html#7-5-3-control-of-documented-information">quality.html § 7.5.3</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To ensure that documented information retained as evidence of conformity and of the effective operation of the QMS is identified, stored, protected, retrievable, retained for a defined period, and dispositioned in a controlled manner.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to all quality records generated by QMS processes, including project deliverable documentation, inspection and test records, training records, audit records, management review minutes, calibration records, nonconformity reports, corrective action records, and supplier evaluation records.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Quality Assurance Manager</td><td>Maintains the Records Retention Schedule; audits record-keeping practice during internal audits.</td></tr>
+<tr class="even"><td>Record originator (each Manager / department)</td><td>Identifies, protects, and files records generated within their function in accordance with the retention schedule.</td></tr>
+<tr class="odd"><td>Division Directors</td><td>Ensure storage conditions in their division protect records from loss, damage and unauthorized alteration.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Identification and filing</span></h3>
+<p>Records are identified by document/form number, project or work order number, and date. Records are filed by category — project files, QMS master records, training files, calibration files, subcontractor and external provider records, annual quality assessments — as defined in the Records Retention Schedule.</p>
+<h3 class="lvl3"><span class="ctitle">2. Storage and protection</span></h3>
+<p>Paper records are stored in facilities that protect against fire, moisture and unauthorized access; electronic records are stored on the company's managed servers, which are backed up on a defined schedule. Access to records is restricted to personnel who need it to perform their duties.</p>
+<h3 class="lvl3"><span class="ctitle">3. Retention</span></h3>
+<p>The Records Retention Schedule specifies, for each category of record, the retention period and the responsible custodian. Retention periods take into account statutory, contractual (including AWI and UL follow-up service) and warranty requirements.</p>
+<h3 class="lvl3"><span class="ctitle">4. Retrieval</span></h3>
+<p>Records are indexed so that any record can be retrieved within one business day. Records supporting an active nonconformity, audit finding or customer claim are retrieved and made available on request without delay.</p>
+<h3 class="lvl3"><span class="ctitle">5. Disposition</span></h3>
+<p>At the end of the retention period, records are reviewed by the Quality Assurance Manager and either destroyed by secure means or retained further if subject to legal hold, open warranty, or ongoing litigation. Disposition is logged.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Records Retention Schedule</td><td>Quality Assurance Manager</td><td>Reviewed annually</td></tr>
+<tr class="even"><td>Record disposition log</td><td>Quality Assurance Manager</td><td>6 years after disposition</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Forms</span></h2><ul>
+<li><p><strong>QF-42-02-1</strong> — Records Retention Schedule / Index</p></li>
+</ul>
+<p class="note">Related: QOP-42-01, Control of Documents; Section 7.5.3.7–9, Documented Information.</p>
+<h1 id="qop-56-01" class="lvl1"><span class="cnum">QOP-56-01</span><span class="ctitle">Management Review</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>6.2, 6.3, 9.3</td><td>Chief Executive Officer / Chief Operating Officer</td><td>Rev. A</td><td><a href="quality.html#9-3-management-review">quality.html § 9.3</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To provide top management with a structured, periodic review of the QMS sufficient to ensure its continuing suitability, adequacy, effectiveness and alignment with the strategic direction of Rock River Consulting, and to establish and monitor quality objectives and planned changes to the QMS.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to the annual (or more frequent) management review meeting and to the establishment, communication and monitoring of quality objectives throughout the year.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>CEO / COO</td><td>Chairs the management review; approves the QMS scope, quality policy, quality objectives, and any determination of non-applicability.</td></tr>
+<tr class="even"><td>Quality Assurance Manager</td><td>Schedules the review; compiles and presents the review inputs; records and distributes the minutes; tracks action items to closure.</td></tr>
+<tr class="odd"><td>Division Directors</td><td>Attend the review; report performance and resource needs for their division; hold divisional communication meetings following the review.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Scheduling</span></h3>
+<p>Management review is conducted at least annually. Additional reviews are scheduled when significant organizational, technological, product, regulatory or market changes warrant more frequent top-management attention.</p>
+<h3 class="lvl3"><span class="ctitle">2. Inputs</span></h3>
+<p>The Quality Assurance Manager compiles, for presentation at the review: status of actions from prior reviews; changes in external/internal issues (Section 4.1) and interested-party requirements (Section 4.2); QMS performance data — customer satisfaction and feedback, quality objective attainment, process performance and product conformity, nonconformities and corrective actions, monitoring and measurement results, audit results, and external provider performance; adequacy of resources; effectiveness of actions on risks and opportunities (Section 6.1); status of organizational knowledge and knowledge at risk; and opportunities for improvement.</p>
+<h3 class="lvl3"><span class="ctitle">3. Conduct of the review</span></h3>
+<p>The CEO or COO chairs the meeting. Each input is presented and discussed with the Division Directors and Quality Assurance Manager. Decisions are made in real time where possible.</p>
+<h3 class="lvl3"><span class="ctitle">4. Outputs</span></h3>
+<p>The review concludes with: decisions and actions on opportunities for improvement; any needed changes to the QMS (planned in accordance with Section 6.3); resource decisions; and new or revised quality objectives for the coming period, each assigned an owner, a target, and a target date.</p>
+<h3 class="lvl3"><span class="ctitle">5. Recording and communication</span></h3>
+<p>The Quality Assurance Manager records the review in meeting minutes within ten business days, distributes the minutes and action items to attendees, and updates the Quality Objectives Record (Form QF-56-01-1). Division Directors hold a divisional communication meeting, documenting topics and attendance, within 30 days of the review to communicate outcomes and assign related action items.</p>
+<h3 class="lvl3"><span class="ctitle">6. Follow-up</span></h3>
+<p>The Quality Assurance Manager tracks open action items between reviews and reports status at the next review as a standing input.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Management review minutes</td><td>Quality Assurance Manager</td><td>6 years</td></tr>
+<tr class="even"><td>Quality Objectives Record</td><td>Quality Assurance Manager</td><td>Current + 3 prior years</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Forms</span></h2><ul>
+<li><p><strong>QF-56-01-1</strong> — Quality Objectives Record</p></li>
+</ul>
+<p class="note">Related: Sections 6.2, 6.3 and 9.3; QOP-85-01, Continual Improvement.</p>
+<h1 id="qop-62-01" class="lvl1"><span class="cnum">QOP-62-01</span><span class="ctitle">Competence, Awareness and Training</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>7.2, 7.3</td><td>Human Resources, with Managers and the Quality Assurance Manager</td><td>Rev. A</td><td><a href="quality.html#7-2-competence">quality.html § 7.2</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To ensure that persons doing work under the control of Rock River Consulting are competent on the basis of appropriate education, training or experience, and are aware of the quality policy, relevant quality objectives, their contribution to the QMS, and the implications of nonconformity.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to all employees, and to temporary staff and subcontractor personnel performing work under Rock River Consulting's control, including general orientation, position-specific training, technical certification, and internal auditor training.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Human Resources</td><td>Administers company-wide orientation and general training programs; maintains the master training record system.</td></tr>
+<tr class="even"><td>Managers</td><td>Identify competency requirements and training needs within their division; assign qualified personnel, including Technical Associates; evaluate training effectiveness.</td></tr>
+<tr class="odd"><td>Quality Assurance Manager</td><td>Identifies quality-related training needs and frequency; ensures internal auditors are trained per QOP-82-02.</td></tr>
+<tr class="even"><td>Division Directors</td><td>Designate internal auditors and ensure competence of assigned personnel.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Determining competence requirements</span></h3>
+<p>For each position affecting the performance or effectiveness of the QMS, the responsible Manager defines the required education, training, technical certification, and experience, recorded on a Job Description (Form QF-62-01-2) or competence matrix.</p>
+<h3 class="lvl3"><span class="ctitle">2. Identifying and closing gaps</span></h3>
+<p>Managers compare current personnel qualifications to requirements and identify training needs. Actions to close a gap may include training, mentoring, reassignment, or hiring/contracting competent persons.</p>
+<h3 class="lvl3"><span class="ctitle">3. General orientation</span></h3>
+<p>All new personnel, including subcontractor and temporary personnel working at Rock River Consulting facilities or on Rock River Consulting projects, receive orientation covering the quality policy, applicable quality objectives, safety requirements, and the implications of nonconformity, before beginning unsupervised work.</p>
+<h3 class="lvl3"><span class="ctitle">4. Position and technical training</span></h3>
+<p>Managers provide or arrange training on equipment, processes, inspection and test methods, and analytical techniques relevant to the position. Where a customer contract specifies a technical certification, Managers ensure the individual holds and maintains it, and file evidence in the project records.</p>
+<h3 class="lvl3"><span class="ctitle">5. Evaluating effectiveness</span></h3>
+<p>Where practicable, the effectiveness of training is evaluated through on-the-job observation, testing, or performance monitoring, and the result is recorded on the Employee Training Record (Form QF-62-01-3).</p>
+<h3 class="lvl3"><span class="ctitle">6. Awareness</span></h3>
+<p>Awareness of the quality policy and current quality objectives is reinforced through posting, departmental meetings, toolbox talks, and communication of management review outcomes (Section 7.4).</p>
+<h3 class="lvl3"><span class="ctitle">7. Records</span></h3>
+<p>Training records, certifications, and job descriptions are retained in each employee's training file and in the division's technical personnel files.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Employee training records</td><td>Human Resources / Division files</td><td>Duration of employment + 3 years</td></tr>
+<tr class="even"><td>Technical certifications</td><td>Division files</td><td>Duration of certification validity + 3 years</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Forms</span></h2><ul>
+<li><p><strong>QF-62-01-1</strong> — Training Participation Summary</p></li>
+<li><p><strong>QF-62-01-2</strong> — Job Description</p></li>
+<li><p><strong>QF-62-01-3</strong> — Employee Training Record</p></li>
+<li><p><strong>QF-62-01-4</strong> — Employee Certification</p></li>
+<li><p><strong>QF-62-01-5</strong> — Training Plan</p></li>
+</ul>
+<p class="note">Related: Sections 7.2 Competence and 7.3 Awareness; QOP-82-02, Internal Quality Audits.</p>
+<h1 id="qop-63-01" class="lvl1"><span class="cnum">QOP-63-01</span><span class="ctitle">Equipment</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>7.1.3</td><td>Departmental Managers, with the IT Manager for information systems</td><td>Rev. A</td><td><a href="quality.html#7-1-3-infrastructure">quality.html § 7.1.3</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To ensure that production equipment, machines, hardware, software and supporting infrastructure are maintained in a condition suitable to achieve conformity of products and services.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to woodworking and finishing machinery, material handling equipment, hand and power tools, production software (CAD/CAM, CNC programming, scheduling), and information technology infrastructure.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Departmental Manager</td><td>Identifies infrastructure and equipment needs; schedules and documents preventive maintenance; requests repair or replacement of unsuitable equipment.</td></tr>
+<tr class="even"><td>Equipment operators</td><td>Perform pre-use checks; report malfunctions or damage immediately; do not operate equipment known to be out of adjustment.</td></tr>
+<tr class="odd"><td>IT Manager</td><td>Maintains information and communication technology infrastructure and selects and administers IT service contracts.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Identifying equipment needs</span></h3>
+<p>Departmental Managers identify the need for new equipment or for modification or repair of existing equipment and submit requests to top management for review and approval.</p>
+<h3 class="lvl3"><span class="ctitle">2. Preventive maintenance</span></h3>
+<p>Production equipment is maintained on a schedule specified by the manufacturer or by the responsible Manager. Maintenance activities and dates are logged against each piece of equipment.</p>
+<h3 class="lvl3"><span class="ctitle">3. Corrective maintenance</span></h3>
+<p>Equipment found to be out of adjustment or malfunctioning is tagged out of service and is not used for production until repaired and verified suitable. Where the malfunction may have affected product already produced, the affected output is evaluated under QOP-83-01.</p>
+<h3 class="lvl3"><span class="ctitle">4. Software</span></h3>
+<p>In-house developed software used for production or design (including CNC programs and cut-list/optimization software) is verified before initial use and revalidated when materially changed. Commercial software is maintained under vendor support and license agreements administered by the IT Manager.</p>
+<h3 class="lvl3"><span class="ctitle">5. Facilities</span></h3>
+<p>Maintenance of buildings and facilities — lighting, HVAC, landscaping, cleaning — is performed by external contractors on a scheduled basis and controlled as an externally provided service under QOP-74-01.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Equipment maintenance log</td><td>Departmental Manager</td><td>Life of equipment</td></tr>
+<tr class="even"><td>Out-of-service / repair tags</td><td>Departmental Manager</td><td>1 year after equipment return to service</td></tr>
+</tbody></table></div>
+<p class="note">Related: Section 7.1.3, Infrastructure; QOP-76-01, Measuring and Monitoring Equipment.</p>
+<h1 id="qop-71-01" class="lvl1"><span class="cnum">QOP-71-01</span><span class="ctitle">Planning of Product Realization</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>8.1</td><td>Engineering and Production, with Quality Assurance</td><td>Rev. A</td><td><a href="quality.html#8-1-operational-planning-and-control">quality.html § 8.1</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To assign responsibility and establish the framework for planning the processes needed to meet the requirements for a project's products and services, consistent with the criteria and acceptance requirements of the contract.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies from contract award through the release of production planning documentation, for all design, manufacturing and installation projects.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Manager / Project Manager</td><td>Assigns qualified personnel; schedules the project; determines resource requirements; controls organizational and technical interfaces.</td></tr>
+<tr class="even"><td>Engineering</td><td>Develops production-ready drawings, cut lists and specifications from approved design output.</td></tr>
+<tr class="odd"><td>Quality Assurance</td><td>Establishes verification and acceptance criteria consistent with the contract and AWI grade requirements.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Planning inputs</span></h3>
+<p>Planning begins from the reviewed and accepted order or contract (QOP-72-01) and, where applicable, the approved design output (QOP-73-01).</p>
+<h3 class="lvl3"><span class="ctitle">2. Determining requirements and resources</span></h3>
+<p>For each project, the Manager determines: quality objectives and product/service requirements; the processes, documents and resources needed; required verification, inspection and test activities and acceptance criteria; and the records needed to evidence conformity.</p>
+<h3 class="lvl3"><span class="ctitle">3. Documenting the plan</span></h3>
+<p>Planning output is documented in the work order (QOP-75-01), together with drawings, specifications, and, where required by the customer or an applicable government specification, a project-specific Quality Plan.</p>
+<h3 class="lvl3"><span class="ctitle">4. Updating the plan</span></h3>
+<p>Planning output is updated as the project progresses to reflect approved change orders, engineering changes, or field conditions, and changes are reviewed under Section 8.5.6 / QOP-73-01 as applicable.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Work order and production plan</td><td>Production / Project file</td><td>Life of project + 6 years</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Forms</span></h2><ul>
+<li><p><strong>QF-75-01-1</strong> — Production Work Order</p></li>
+</ul>
+<p class="note">Related: Section 8.1, Operational Planning and Control; QOP-75-01; QOP-73-01.</p>
+<h1 id="qop-72-01" class="lvl1"><span class="cnum">QOP-72-01</span><span class="ctitle">Order Processing and Review</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>8.2.1–8.2.4</td><td>Project Manager / Sales</td><td>Rev. A</td><td><a href="quality.html#8-2-requirements-for-products-and-services">quality.html § 8.2</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To ensure that customer requirements — including delivery, statutory, regulatory and unstated but necessary requirements — are determined, are reviewed for the ability of Rock River Consulting to meet them prior to commitment, and are consistently communicated and controlled through any subsequent change.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to all inquiries, bids, contracts, purchase orders and verbal orders accepted by Rock River Consulting, and to change orders and amendments arising during a project.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Sales / Project Manager</td><td>Determines and reviews product and service requirements prior to commitment; resolves differing requirements; confirms verbal orders.</td></tr>
+<tr class="even"><td>Quality Assurance Manager</td><td>Supports review of unfamiliar specification, code or AWI grade requirements; supports risk assessment of the order (Section 6.1).</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Determining requirements</span></h3>
+<p>Any documentation from the customer that authorizes work is treated as the customer's contract for purposes of this procedure. Requirements determined include those stated by the customer (including delivery and post-delivery activities), requirements necessary for intended use though not stated, applicable statutory/regulatory and AWI/UL requirements, and additional requirements Rock River Consulting determines are necessary.</p>
+<h3 class="lvl3"><span class="ctitle">2. Review prior to commitment</span></h3>
+<p>Before committing to supply, the order is reviewed to confirm requirements are defined, that differences between the order and any prior quotation are resolved, and that Rock River Consulting has the capacity, schedule and material availability to meet the order. Risks and opportunities identified during the review (capacity, schedule, unfamiliar specification, material lead time) are logged in accordance with Section 6.1.</p>
+<h3 class="lvl3"><span class="ctitle">3. Verbal orders</span></h3>
+<p>Where the customer provides no documented statement of requirements, the requirements are confirmed in writing before acceptance.</p>
+<h3 class="lvl3"><span class="ctitle">4. Change orders</span></h3>
+<p>Change orders and amendments are processed and reviewed using the same procedure as initial orders and are communicated to all functions that may be affected. Requests for information during construction are handled per the AIA RFI process.</p>
+<h3 class="lvl3"><span class="ctitle">5. Records</span></h3>
+<p>The results of the review, and any new or changed requirements, are retained in the project file.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Order/contract review record</td><td>Project file</td><td>Life of project + 6 years</td></tr>
+<tr class="even"><td>Change order log</td><td>Project file</td><td>Life of project + 6 years</td></tr>
+</tbody></table></div>
+<p class="note">Related: Section 8.2, Requirements for Products and Services.</p>
+<h1 id="qop-73-01" class="lvl1"><span class="cnum">QOP-73-01</span><span class="ctitle">Design Control</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>8.3</td><td>Engineering, Design Project Manager, and the Quality Assurance Manager</td><td>Rev. A</td><td><a href="quality.html#8-3-design-and-development-of-products-and-services">quality.html § 8.3</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To plan, execute and control the design and development of customer-specified products and modifications so that design output meets design input and the resulting product is suitable for its intended use.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies whenever Rock River Consulting designs or modifies a customer-specified product under contract, from planning through release of design output for production and through any subsequent design change.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Manager</td><td>Schedules the project, assigns qualified personnel, and controls organizational and technical interfaces.</td></tr>
+<tr class="even"><td>Design Project Manager</td><td>Plans design activities (Form QF-73-01-1); identifies design, review, verification and validation activities; updates the plan as design progresses.</td></tr>
+<tr class="odd"><td>Quality Assurance Manager</td><td>Checks and approves design output prior to release for production.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Planning</span></h3>
+<p>The Design Project Manager documents the design project plan (Form QF-73-01-1), considering the nature, duration and complexity of the work; required review, verification and validation stages; responsibilities and authorities; resource needs; interfaces between functions; and the level of customer involvement expected.</p>
+<h3 class="lvl3"><span class="ctitle">2. Inputs</span></h3>
+<p>Design inputs — functional and performance requirements, applicable statutory/regulatory and building code requirements, UL listing requirements, AWI and AIA standards, information from previous similar designs, and the potential consequences of failure — are reviewed for adequacy, completeness and freedom from conflict before use. Inputs are retained in the design project file.</p>
+<h3 class="lvl3"><span class="ctitle">3. Controls, reviews, verification and validation</span></h3>
+<p>Design reviews are held at planned stages with representatives of the functions concerned, to evaluate the ability of the design to meet requirements and to identify needed actions. Verification confirms design output meets design input; validation confirms the resulting product meets the requirements for its specified application or intended use, completed prior to delivery wherever practical. In-house software used for design or critical calculations is reviewed and approved before use.</p>
+<h3 class="lvl3"><span class="ctitle">4. Outputs</span></h3>
+<p>Design output — drawings, cut bills, samples, models, math data and software specifying manufacture, packaging, labeling, installation and servicing, together with acceptance criteria — meets input requirements, is adequate for downstream processes, and specifies characteristics essential to safe and proper provision. Engineering design and modification documents include manufacture, layout, assembly, piping/isometric, and installation drawings, and UL point-to-point wiring/cabling diagrams as applicable.</p>
+<h3 class="lvl3"><span class="ctitle">5. Release</span></h3>
+<p>Design output is checked and approved by the Quality Assurance Manager before release for production, and is then controlled under QOP-42-01.</p>
+<h3 class="lvl3"><span class="ctitle">6. Changes</span></h3>
+<p>Design changes are identified, reviewed (including their effect on constituent parts and product already delivered), verified and validated as appropriate, and approved before implementation. Records of changes, reviews, authorization and any actions to prevent adverse impact are retained.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Design project file (inputs, reviews, verification, validation, outputs, changes)</td><td>Engineering</td><td>Life of project + 6 years</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Forms</span></h2><ul>
+<li><p><strong>QF-73-01-1</strong> — Design Project Plan</p></li>
+<li><p><strong>QF-73-02-1</strong> — Engineering Change Request</p></li>
+</ul>
+<p class="note">Related: Section 8.3, Design and Development of Products and Services.</p>
+<h1 id="qop-74-01" class="lvl1"><span class="cnum">QOP-74-01</span><span class="ctitle">Supplier Evaluation and Monitoring</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>8.4.1</td><td>Purchasing, with Quality Assurance</td><td>Rev. A</td><td><a href="quality.html#8-4-1-general">quality.html § 8.4.1</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To evaluate, select, monitor and re-evaluate external providers based on their ability to supply processes, products and services conforming to Rock River Consulting's requirements, and to maintain the Approved Supplier List.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to all external providers of materials, components, subcontracted labor, and outsourced services whose output is incorporated into, or provided on behalf of, Rock River Consulting's products and services.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Purchasing</td><td>Maintains the Approved Supplier List; conducts initial evaluation and periodic re-evaluation; issues corrective action requests to underperforming external providers.</td></tr>
+<tr class="even"><td>Quality Assurance</td><td>Establishes evaluation criteria appropriate to the risk posed by the process, product or service; reviews evaluation results.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Initial evaluation</span></h3>
+<p>A prospective external provider is evaluated against criteria derived from specifications, client requirements and contract requirements — which may include quality system evidence, references, sample or trial orders, and, for critical processes, a supplier audit (Form QF-74-01-1). Evaluation results are recorded (Form QF-74-01-2).</p>
+<h3 class="lvl3"><span class="ctitle">2. Approval and listing</span></h3>
+<p>Approved external providers are added to the Approved Supplier List. Orders for materials, components and subcontracted services are placed only with listed external providers, except where Purchasing documents and justifies a one-time exception.</p>
+<h3 class="lvl3"><span class="ctitle">3. Ongoing monitoring</span></h3>
+<p>External provider performance is monitored on an ongoing basis using receiving inspection results (QOP-74-03), on-time delivery performance, and nonconformity history (QOP-83-01).</p>
+<h3 class="lvl3"><span class="ctitle">4. Re-evaluation</span></h3>
+<p>Each listed external provider is formally re-evaluated at a frequency determined by the risk of the process, product or service supplied, and always following a significant quality failure.</p>
+<h3 class="lvl3"><span class="ctitle">5. Corrective action and removal</span></h3>
+<p>Recurring or significant nonconformance is addressed with the external provider under QOP-85-03. An external provider that fails to sustain acceptable performance is placed on probationary status or removed from the Approved Supplier List.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Approved Supplier List</td><td>Purchasing</td><td>Current + 3 prior versions</td></tr>
+<tr class="even"><td>Supplier evaluation and audit records</td><td>Purchasing</td><td>6 years</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Forms</span></h2><ul>
+<li><p><strong>QF-74-01-1</strong> — Supplier Audit Report</p></li>
+<li><p><strong>QF-74-01-2</strong> — Supplier Evaluation</p></li>
+</ul>
+<p class="note">Related: Section 8.4, Control of Externally Provided Processes, Products and Services.</p>
+<h1 id="qop-74-02" class="lvl1"><span class="cnum">QOP-74-02</span><span class="ctitle">Purchasing</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>8.4.3</td><td>Purchasing Agent</td><td>Rev. A</td><td><a href="quality.html#8-4-3-information-for-external-providers">quality.html § 8.4.3</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To ensure that purchasing documents clearly and completely describe the products, services or processes ordered, including quality requirements, and are reviewed and approved before release to the external provider.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to purchase orders and subcontract agreements for materials, components, and services placed with external providers on the Approved Supplier List.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Purchasing Agent</td><td>Prepares, reviews and releases purchasing documents; is the only individual authorized to sign a purchase contract, in accordance with the Rock River Consulting Procedure Manual for Purchases.</td></tr>
+<tr class="even"><td>CEO / COO / CFO / Contracts Manager</td><td>Authorized to execute contracts within their delegated authority.</td></tr>
+<tr class="odd"><td>Operations Director</td><td>Designates an acting Purchasing Agent in the absence of the Purchasing Agent.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Determining purchasing information</span></h3>
+<p>Purchasing information describes the product, service or process to be purchased, including, as appropriate, requirements for approval of product, process and equipment; qualification of personnel; and applicable QMS requirements. The Purchasing Agent verifies the adequacy of requirements before they are communicated to the external provider.</p>
+<h3 class="lvl3"><span class="ctitle">2. Preparing purchasing documents</span></h3>
+<p>Purchasing documents precisely identify the product or service, applicable specifications, revision level, quantity, delivery requirements, and any required certifications (mill certs, UL listing, grade certification). For job-related materials, contractual quality requirements applicable to Rock River Consulting are flowed down to the external provider.</p>
+<h3 class="lvl3"><span class="ctitle">3. Review and release</span></h3>
+<p>Purchasing documents are reviewed and approved for adequacy prior to release. General office supplies, including computing materials, are procured through the normal competitive process without a formal purchasing document.</p>
+<h3 class="lvl3"><span class="ctitle">4. Verification arrangements</span></h3>
+<p>Where Rock River Consulting or its customer intends to verify product at the external provider's premises, the purchasing document states the intended verification arrangements and the method of product release.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Purchase orders / subcontracts</td><td>Purchasing</td><td>6 years</td></tr>
+</tbody></table></div>
+<p class="note">Related: QOP-74-01, Supplier Evaluation and Monitoring; QOP-74-03, Verification of Purchased Product.</p>
+<h1 id="qop-74-03" class="lvl1"><span class="cnum">QOP-74-03</span><span class="ctitle">Verification of Purchased Product</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>8.4.4</td><td>Quality Assurance / Receiving</td><td>Rev. A</td><td><a href="quality.html#8-4-4-verification-of-externally-provided-products">quality.html § 8.4.4</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To verify that purchased products meet specified purchase requirements before use in production or dispatch to customers.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to all materials, components and subcontracted work received from external providers, including customer-supplied product received for incorporation into the work.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Receiving clerk</td><td>Performs visual inspection of all incoming shipments against the packing list and purchase order.</td></tr>
+<tr class="even"><td>Quality Assurance</td><td>Selects appropriate verification and acceptance methods for designated products; performs detailed technical inspection where required.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Receiving inspection</span></h3>
+<p>All purchased products receive a visual inspection for identity, quantity, and shipping damage upon receipt (Form QF-74-03-1).</p>
+<h3 class="lvl3"><span class="ctitle">2. Technical inspection</span></h3>
+<p>Products designated by the control plan, drawing or specification as requiring further verification — dimensional check, material certification review, grade or finish inspection — receive a documented technical inspection by Quality Assurance before release to production.</p>
+<h3 class="lvl3"><span class="ctitle">3. Identification of status</span></h3>
+<p>Product awaiting inspection, accepted, and rejected is identified in accordance with QOP-75-04, Inspection Status Identification.</p>
+<h3 class="lvl3"><span class="ctitle">4. Disposition of nonconforming receipts</span></h3>
+<p>Product failing receiving or technical inspection is handled under QOP-83-01, Control of Nonconforming Product, and the external provider is notified.</p>
+<h3 class="lvl3"><span class="ctitle">5. Customer-supplied product</span></h3>
+<p>Customer-supplied product is received and inspected under this same procedure. Product failing inspection, or otherwise unsuitable, is reported to the customer, and records of the occurrence are retained.</p>
+<h3 class="lvl3"><span class="ctitle">6. Verification at the external provider's premises</span></h3>
+<p>Where verification at the supplier's premises is intended, the arrangements and method of release are stated in the purchasing document (QOP-74-02) and are executed by Quality Assurance or the customer as specified.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Incoming inspection records</td><td>Quality Assurance</td><td>6 years</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Forms</span></h2><ul>
+<li><p><strong>QF-74-03-1</strong> — Incoming Inspection Form</p></li>
+</ul>
+<p class="note">Related: QOP-75-04, Inspection Status Identification; QOP-83-01, Control of Nonconforming Product.</p>
+<h1 id="qop-75-01" class="lvl1"><span class="cnum">QOP-75-01</span><span class="ctitle">Work Order and Production Records</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>8.1, 8.5.1, 8.6</td><td>Production, with the assigned Project Manager</td><td>Rev. A</td><td><a href="quality.html#8-1-operational-planning-and-control">quality.html § 8.1</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To document, for each project or shop order, the characteristics of the product to be produced, the activities to be performed, and the results achieved, providing evidence that production was carried out under controlled conditions.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to every shop work order from release to production through final release of the finished product.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Project Manager / Production Manager</td><td>Issues the work order (Form QF-75-01-1) with the drawings, specifications, and acceptance criteria needed for the work; reviews and closes the work order at completion.</td></tr>
+<tr class="even"><td>Production personnel</td><td>Record process data, in-process inspection results, and any deviations on the work order or attached travelers.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Issuing the work order</span></h3>
+<p>The work order references the governing drawings, specifications, cut lists, AWI grade, and any customer-specific acceptance criteria, and defines the monitoring and measurement activities required at each stage (Section 8.1).</p>
+<h3 class="lvl3"><span class="ctitle">2. Controlled conditions</span></h3>
+<p>Production is carried out under controlled conditions: availability of current documented information; use of suitable, maintained equipment (QOP-63-01) and monitoring/measuring resources (QOP-76-01); competent, qualified personnel (QOP-62-01); and implementation of actions to prevent human error, such as first-article verification, standardized work instructions, and independent checking of critical dimensions.</p>
+<h3 class="lvl3"><span class="ctitle">3. Recording production activity</span></h3>
+<p>Set-up, in-process inspection, rework and deviation events are recorded against the work order as they occur, providing a traceable history of the item from raw material to finished, released product.</p>
+<h3 class="lvl3"><span class="ctitle">4. Closing the work order</span></h3>
+<p>On completion, the work order is reviewed for completeness against the required inspections and sign-offs before the product proceeds to final inspection and release (QOP-82-04).</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Completed work orders and production travelers</td><td>Production / Project file</td><td>Life of project + 6 years</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Forms</span></h2><ul>
+<li><p><strong>QF-75-01-1</strong> — Production Work Order</p></li>
+</ul>
+<p class="note">Related: QOP-71-01, Planning of Product Realization; QOP-82-04, Final Inspection.</p>
+<h1 id="qop-75-03" class="lvl1"><span class="cnum">QOP-75-03</span><span class="ctitle">Work Instructions</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>8.5.1</td><td>Production Manager, with Engineering</td><td>Rev. A</td><td><a href="quality.html#8-5-1-control-of-production-and-service-provision">quality.html § 8.5.1</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To provide standardized, documented instructions for operations where the absence of such instructions could adversely affect conformity, ensuring production and service provision are carried out consistently under controlled conditions.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to critical or complex shop operations, setup procedures, finishing processes, and field installation tasks designated by the Production Manager or required by the AWI Standards, customer specification, or UL listing.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Production Manager / Engineering</td><td>Determines which operations require a documented work instruction; drafts, reviews and issues instructions (Form QF-75-08-1).</td></tr>
+<tr class="even"><td>Operators / installers</td><td>Follow current work instructions; report ambiguity or a needed change to their Manager.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Determining the need</span></h3>
+<p>A work instruction is developed where an operation is complex, safety-critical, unique to a customer's requirements, or has been a source of nonconformity or process variation.</p>
+<h3 class="lvl3"><span class="ctitle">2. Content</span></h3>
+<p>Work instructions specify the sequence of steps, required tooling and settings, acceptance criteria, and any mistake-proofing or verification checkpoint (first-article check, independent verification of a critical dimension).</p>
+<h3 class="lvl3"><span class="ctitle">3. Issue and control</span></h3>
+<p>Work instructions are controlled documents under QOP-42-01, posted at the point of use, and revised through the same review and approval process as other controlled documents.</p>
+<h3 class="lvl3"><span class="ctitle">4. Validation</span></h3>
+<p>Where the result of a process cannot be fully verified by subsequent inspection, the work instruction is validated in accordance with the process validation criteria of Section 8.5.1.2, including approval of equipment, qualification of personnel, and periodic revalidation.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Work instructions (current and superseded)</td><td>Production file, under QOP-42-01</td><td>Per QOP-42-01 / QOP-42-02</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Forms</span></h2><ul>
+<li><p><strong>QF-75-08-1</strong> — Work Instruction</p></li>
+</ul>
+<p class="note">Related: Section 8.5.1, Control of Production and Service Provision.</p>
+<h1 id="qop-75-04" class="lvl1"><span class="cnum">QOP-75-04</span><span class="ctitle">Inspection Status Identification</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>8.5.2</td><td>Quality Assurance / Production</td><td>Rev. A</td><td><a href="quality.html#8-5-2-identification-and-traceability">quality.html § 8.5.2</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To identify the inspection and monitoring status of product throughout production and service provision, so that only product that has passed the required inspections and tests proceeds to the next stage, shipment, or installation.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to raw material, work-in-process, and finished product at receiving, in-process, and final inspection stages, and to installed work pending punch-list closeout.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Quality Assurance / Production Supervisors</td><td>Apply and maintain status identification (tags, stamps, routers, or system status flags) at each inspection stage; segregate rejected product.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Status categories</span></h3>
+<p>Product status is identified as: Awaiting Inspection, Accepted, Rejected (REJECTED tag), or Hold/Concession Pending.</p>
+<h3 class="lvl3"><span class="ctitle">2. Application</span></h3>
+<p>Status is applied at receiving (QOP-74-03), at each in-process inspection point defined on the work order (QOP-75-01), and at final inspection (QOP-82-04), using physical tags, route-card sign-off, or the equivalent status field in the production tracking system.</p>
+<h3 class="lvl3"><span class="ctitle">3. Segregation</span></h3>
+<p>Rejected product is physically segregated where practicable, or clearly and unambiguously marked, to prevent unintended use or shipment, pending disposition under QOP-83-01.</p>
+<h3 class="lvl3"><span class="ctitle">4. Traceability</span></h3>
+<p>Where traceability is a project requirement, the unique identification applied at receiving is carried through production and installation records in accordance with QOP-71-01.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Inspection status tags / route cards</td><td>Production file</td><td>Retained with the associated work order</td></tr>
+</tbody></table></div>
+<p class="note">Related: QOP-74-03; QOP-82-03, In-process Inspections; QOP-82-04, Final Inspection; QOP-83-01.</p>
+<h1 id="qop-76-01" class="lvl1"><span class="cnum">QOP-76-01</span><span class="ctitle">Measuring and Monitoring Equipment</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>7.1.5</td><td>Quality Assurance</td><td>Rev. A</td><td><a href="quality.html#7-1-5-monitoring-and-measuring-resources">quality.html § 7.1.5</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To ensure that measuring and monitoring equipment used to verify conformity of products and services provides valid and reliable results, and is calibrated, identified, safeguarded and controlled.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to measuring and test equipment, comparative reference hardware (gauges, templates), and test/measurement software used for production setup and monitoring, environmental monitoring, and verification of product conformity.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Quality Assurance</td><td>Maintains the inventory of active measuring and monitoring equipment, calibrates or arranges external calibration, maintains the calibration log, and labels equipment with its calibration status.</td></tr>
+<tr class="even"><td>Equipment users</td><td>Use only currently calibrated equipment; report suspected damage or out-of-tolerance condition immediately and remove the item from service.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Inventory and identification</span></h3>
+<p>All measuring and monitoring equipment within scope is entered in the controlled equipment list with a unique identifier, calibration interval, and current status.</p>
+<h3 class="lvl3"><span class="ctitle">2. Calibration</span></h3>
+<p>Equipment is calibrated or verified at specified intervals, or prior to use, against measurement standards traceable to national or international standards; where no such standard exists, the basis for calibration is documented. Calibration results are recorded in the calibration log, and calibrated equipment is labeled with a calibration sticker showing status and next due date.</p>
+<h3 class="lvl3"><span class="ctitle">3. Safeguarding</span></h3>
+<p>Calibrated equipment is safeguarded from adjustment, damage or deterioration that would invalidate its calibration status, through controlled storage and handling.</p>
+<h3 class="lvl3"><span class="ctitle">4. Out-of-tolerance equipment</span></h3>
+<p>When equipment is found unfit for its intended purpose, Quality Assurance assesses whether prior measurement results were affected, and takes action on the equipment and on any product or service affected, per QOP-83-01 as applicable. Assessment and corrective action are recorded.</p>
+<h3 class="lvl3"><span class="ctitle">5. Software</span></h3>
+<p>Software used for monitoring and measurement is confirmed fit for the intended application before initial use and reconfirmed after any material change. In-house developed software is validated before use; commercial software is used within its vendor validation, where available.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Calibration log and equipment inventory</td><td>Quality Assurance</td><td>Life of equipment + 3 years</td></tr>
+<tr class="even"><td>Out-of-tolerance assessment records</td><td>Quality Assurance</td><td>6 years</td></tr>
+</tbody></table></div>
+<p class="note">Related: Section 7.1.5, Monitoring and Measuring Resources.</p>
+<h1 id="qop-82-01" class="lvl1"><span class="cnum">QOP-82-01</span><span class="ctitle">Customer Satisfaction</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>9.1.2</td><td>Marketing / Quality Assurance</td><td>Rev. A</td><td><a href="quality.html#9-1-2-customer-satisfaction">quality.html § 9.1.2</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To monitor customer perceptions of the degree to which Rock River Consulting has met their requirements, and to compile this information as an input to management review and continual improvement.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to information gathered from customer surveys, direct feedback, spontaneous expressions of satisfaction or dissatisfaction, warranty and punch-list claims, repeat business, and referrals.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Marketing</td><td>Develops indicators of customer satisfaction; issues surveys and compiles results.</td></tr>
+<tr class="even"><td>Quality Assurance Manager</td><td>Reports customer satisfaction data and trends to management review.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Data collection</span></h3>
+<p>Customer satisfaction information is collected from customer surveys, feedback on delivered work, complaints (QOP-85-02), spontaneous expressions of satisfaction, awards and recognitions, warranty and punch-list claims, repeat business, referrals, and, where applicable, dealer/agent reports.</p>
+<h3 class="lvl3"><span class="ctitle">2. Compilation and analysis</span></h3>
+<p>Marketing compiles collected information on a defined schedule (at minimum, quarterly) and analyzes it for trends by customer segment and project type.</p>
+<h3 class="lvl3"><span class="ctitle">3. Reporting</span></h3>
+<p>Customer satisfaction results and trends are reported to management review (QOP-56-01) as a standing input, and to the affected division for local action where warranted.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Survey results and satisfaction summaries</td><td>Marketing</td><td>3 years</td></tr>
+</tbody></table></div>
+<p class="note">Related: Section 9.1.2, Customer Satisfaction; QOP-85-02, Customer Feedback and Complaints.</p>
+<h1 id="qop-82-02" class="lvl1"><span class="cnum">QOP-82-02</span><span class="ctitle">Internal Quality Audits</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>9.2</td><td>Quality Assurance Manager</td><td>Rev. A</td><td><a href="quality.html#9-2-internal-audit">quality.html § 9.2</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To provide objective, planned and systematic verification that the QMS conforms to Rock River Consulting's own requirements and to ISO 9001:2015, and that it is effectively implemented and maintained.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to all QMS processes identified in the Quality System Process Matrix (Appendix A), audited over a defined cycle by trained, independent internal auditors.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Quality Assurance Manager</td><td>Establishes and maintains the audit program and schedule (Form QF-82-02-1); selects auditors; ensures audit results are reported to relevant management.</td></tr>
+<tr class="even"><td>Internal auditors</td><td>Plan and conduct assigned audits objectively and impartially; do not audit their own work; report findings and follow up on corrective action.</td></tr>
+<tr class="odd"><td>Audited area Manager</td><td>Takes appropriate correction and corrective action without undue delay for findings in their area.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Audit program</span></h3>
+<p>The Quality Assurance Manager establishes an annual audit program covering the full QMS over each cycle, with the interval for each process weighted by its importance and past performance; every process is audited not less than once every 12 months. The program takes into account the results of previous audits and changes affecting Rock River Consulting.</p>
+<h3 class="lvl3"><span class="ctitle">2. Planning individual audits</span></h3>
+<p>For each audit, the criteria and scope are defined and communicated to the audited area in advance. ISO 19011 is used as guidance on audit methodology.</p>
+<h3 class="lvl3"><span class="ctitle">3. Conducting the audit</span></h3>
+<p>The auditor examines objective evidence of conformity to this manual, the referenced QOP-series procedures, and ISO 9001:2015, and evaluates whether the process is effectively implemented and maintained. Auditors are selected to be independent of the area audited.</p>
+<h3 class="lvl3"><span class="ctitle">4. Reporting findings</span></h3>
+<p>Findings are documented and communicated to the responsible Manager at the close of the audit and in a written report.</p>
+<h3 class="lvl3"><span class="ctitle">5. Correction and corrective action</span></h3>
+<p>The Manager responsible for the audited area takes appropriate correction and corrective action without undue delay, per QOP-85-03.</p>
+<h3 class="lvl3"><span class="ctitle">6. Follow-up</span></h3>
+<p>The auditor verifies that actions taken are implemented and effective and reports the verification result. Unresolved or overdue findings are escalated to management review.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Audit program and schedule</td><td>Quality Assurance Manager</td><td>3 years</td></tr>
+<tr class="even"><td>Individual audit reports and follow-up</td><td>Quality Assurance Manager</td><td>6 years</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Forms</span></h2><ul>
+<li><p><strong>QF-82-02-1</strong> — Internal Audit Plan</p></li>
+</ul>
+<p class="note">Related: Section 9.2, Internal Audit; Appendix A, Quality System Process Matrix; QOP-85-03.</p>
+<h1 id="qop-82-03" class="lvl1"><span class="cnum">QOP-82-03</span><span class="ctitle">In-process Inspections</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>8.6</td><td>Quality Assurance and Production</td><td>Rev. A</td><td><a href="quality.html#8-6-release-of-products-and-services">quality.html § 8.6</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To verify conformity of product at defined stages during production, with emphasis on defect prevention rather than detection.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to first-article inspections, operator self-checks, QC in-process inspections, and, where applicable, automated inspection and statistical process control.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Production operators</td><td>Perform self-checks and first-article verification at the frequency defined on the work order or work instruction.</td></tr>
+<tr class="even"><td>Quality Assurance</td><td>Performs designated in-process QC inspections and maintains related records.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. First-article inspection</span></h3>
+<p>Before a production run proceeds, the first article is inspected against the governing drawing/specification and, where conforming, is used as the standard for the balance of the run.</p>
+<h3 class="lvl3"><span class="ctitle">2. In-process checks</span></h3>
+<p>Operators and, where designated on the control plan, QC inspectors perform checks at defined stages (as specified on the work order) covering critical dimensions, joinery, finish and assembly requirements.</p>
+<h3 class="lvl3"><span class="ctitle">3. Statistical methods</span></h3>
+<p>Where applicable to a repetitive process, statistical process control or equivalent monitoring is used to detect adverse trends before nonconformity occurs.</p>
+<h3 class="lvl3"><span class="ctitle">4. Status and disposition</span></h3>
+<p>Inspection status is applied per QOP-75-04. Nonconforming in-process product is handled per QOP-83-01 before further processing continues.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>In-process inspection records</td><td>Production / Quality Assurance</td><td>Retained with the work order</td></tr>
+</tbody></table></div>
+<p class="note">Related: QOP-75-01; QOP-75-04; QOP-83-01; QOP-82-04, Final Inspection.</p>
+<h1 id="qop-82-04" class="lvl1"><span class="cnum">QOP-82-04</span><span class="ctitle">Final Inspection</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>8.6</td><td>Quality Assurance</td><td>Rev. A</td><td><a href="quality.html#8-6-release-of-products-and-services">quality.html § 8.6</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To confirm, before release, that a finished product has satisfactorily completed all specified receiving and in-process inspections and meets the acceptance criteria of the governing drawings, specifications, contract and AWI grade requirements.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to all finished products prior to shipment, delivery, or installation acceptance.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Final inspector (Quality Assurance)</td><td>Verifies completion of prior inspections; performs remaining inspections and tests; authorizes release.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Pre-check</span></h3>
+<p>The inspector confirms that all specified receiving inspections (QOP-74-03) and in-process inspections (QOP-82-03) have been satisfactorily completed and recorded.</p>
+<h3 class="lvl3"><span class="ctitle">2. Final inspection and test</span></h3>
+<p>The inspector performs the remaining inspections and tests defined by the drawings, specifications, contract, and AWI grade requirements necessary to complete the evidence of conformity.</p>
+<h3 class="lvl3"><span class="ctitle">3. Release</span></h3>
+<p>Release does not proceed until planned arrangements are satisfactorily completed, unless otherwise approved by a relevant authority and, as applicable, the customer. Only personnel performing final inspection have the authority to release product. The identity of the releasing authority is recorded.</p>
+<h3 class="lvl3"><span class="ctitle">4. Nonconforming findings</span></h3>
+<p>Product failing final inspection is handled per QOP-83-01 and is not released until dispositioned.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Final inspection and release records</td><td>Quality Assurance</td><td>6 years</td></tr>
+</tbody></table></div>
+<p class="note">Related: Section 8.6, Release of Products and Services; QOP-83-01.</p>
+<h1 id="qop-83-01" class="lvl1"><span class="cnum">QOP-83-01</span><span class="ctitle">Control of Nonconforming Product</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>8.7</td><td>Quality Assurance and Production</td><td>Rev. A</td><td><a href="quality.html#8-7-control-of-nonconforming-outputs">quality.html § 8.7</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To identify, document, segregate and disposition outputs that do not conform to their requirements, to prevent their unintended use or delivery, and to evaluate and act on nonconformity discovered after delivery.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to nonconforming raw material, work-in-process, finished product, and installed work, however and whenever the nonconformity is detected.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Any employee</td><td>Identifies and reports a suspected nonconformity immediately.</td></tr>
+<tr class="even"><td>Quality Assurance</td><td>Reviews nonconformities and decides disposition; in simple, routine cases this authority is delegated to production supervisors.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Identification and marking</span></h3>
+<p>A nonconforming output is documented on a Product Nonconformity Report (Form QF-83-01) and is marked with a REJECTED label or tag and segregated where practicable to prevent unintended use or delivery.</p>
+<h3 class="lvl3"><span class="ctitle">2. Review and disposition</span></h3>
+<p>Quality Assurance (or, in routine cases, the production supervisor) reviews the nonconformity and decides disposition: rework, repair, accept-as-is under concession, regrade, or scrap. Disposition considers the effect of the nonconformity on conformity of the product or service.</p>
+<h3 class="lvl3"><span class="ctitle">3. Verification after correction</span></h3>
+<p>Reworked product is re-inspected against original requirements. Repaired or regraded product is inspected against the modified specification, per QOP-82-03/QOP-82-04, before release.</p>
+<h3 class="lvl3"><span class="ctitle">4. Nonconformity discovered after delivery</span></h3>
+<p>Where nonconformity is discovered after delivery or after use has started, Quality Assurance evaluates the effects or potential effects and takes appropriate action, including notifying the customer and, where applicable, the certification body or regulatory authority.</p>
+<h3 class="lvl3"><span class="ctitle">5. Records</span></h3>
+<p>The PNR records the nature of the nonconformity, the actions taken, any concessions obtained, and the authority deciding the disposition.</p>
+<h3 class="lvl3"><span class="ctitle">6. Systemic cause</span></h3>
+<p>Where a nonconformity indicates a systemic cause, a corrective action is raised under QOP-85-03.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Product Nonconformity Reports (PNR)</td><td>Quality Assurance</td><td>6 years</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Forms</span></h2><ul>
+<li><p><strong>QF-83-01</strong> — Product Nonconformity Report</p></li>
+</ul>
+<p class="note">Related: Section 8.7, Control of Nonconforming Outputs; QOP-85-03, Corrective Action.</p>
+<h1 id="qop-85-01" class="lvl1"><span class="cnum">QOP-85-01</span><span class="ctitle">Continual Improvement</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>10.1, 10.3</td><td>Quality Assurance Manager, with all Managers</td><td>Rev. A</td><td><a href="quality.html#10-3-continual-improvement">quality.html § 10.3</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To drive continual improvement of the suitability, adequacy and effectiveness of the QMS through the coordinated use of the quality policy, quality objectives, audit results, data analysis, corrective action, and risk and opportunity management.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies across all QMS processes, coordinated through management review.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Quality Assurance Manager</td><td>Coordinates analysis of performance data (Section 9.1.3) and presents improvement opportunities at management review.</td></tr>
+<tr class="even"><td>All Managers</td><td>Identify and pursue improvement opportunities within their process area and report them to the Quality Assurance Manager.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Sources of improvement input</span></h3>
+<p>Internal audit results, quality performance data, corrective actions, risk and opportunity register entries, customer feedback, and quality objective performance are analyzed at management review to assess QMS effectiveness and organizational performance.</p>
+<h3 class="lvl3"><span class="ctitle">2. Identifying opportunities</span></h3>
+<p>Opportunities and priorities for improvement are identified by comparing current quality performance to the goals of the quality policy and current quality objectives.</p>
+<h3 class="lvl3"><span class="ctitle">3. Defining improvement projects</span></h3>
+<p>Improvement projects are defined either as corrective actions (QOP-85-03, where a nonconformity has occurred) or as quality objectives (QOP-56-01, where the aim is to raise performance or capability).</p>
+<h3 class="lvl3"><span class="ctitle">4. Tracking</span></h3>
+<p>The Quality Assurance Manager tracks improvement projects to completion and reports status at subsequent management reviews.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Improvement project log</td><td>Quality Assurance Manager</td><td>3 years</td></tr>
+</tbody></table></div>
+<p class="note">Related: Section 10, Improvement; QOP-56-01; QOP-85-03.</p>
+<h1 id="qop-85-02" class="lvl1"><span class="cnum">QOP-85-02</span><span class="ctitle">Customer Feedback and Complaints</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>8.2.1, 9.1.2, 10.2</td><td>Quality Assurance / Customer Service</td><td>Rev. A</td><td><a href="quality.html#9-1-2-customer-satisfaction">quality.html § 9.1.2</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To receive, log, investigate and respond to customer feedback and complaints in a timely and documented manner, and to feed complaint data into corrective action and customer satisfaction monitoring.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to any written, electronic or oral communication from a customer alleging a deficiency related to the identity, quality, durability, reliability, safety, effectiveness or performance of a product or service.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Customer Service / Project Manager</td><td>Receives and logs complaints (Form QF-85-03-1); acknowledges receipt to the customer; coordinates the investigation.</td></tr>
+<tr class="even"><td>Quality Assurance</td><td>Investigates complaints alleging a possible failure to meet specification; determines whether a corrective action is warranted.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Receiving and logging</span></h3>
+<p>Every complaint is logged on receipt, regardless of channel, with the customer, project, product/service, and nature of the complaint.</p>
+<h3 class="lvl3"><span class="ctitle">2. Investigation</span></h3>
+<p>Complaints alleging a possible failure of a product, labeling or packaging to meet its specification are always investigated, and the investigation and its results are documented.</p>
+<h3 class="lvl3"><span class="ctitle">3. Response</span></h3>
+<p>The customer receives a documented response addressing the disposition of the complaint and, where applicable, the corrective action taken or planned.</p>
+<h3 class="lvl3"><span class="ctitle">4. Escalation to corrective action</span></h3>
+<p>Complaints indicating a systemic or recurring cause are escalated to QOP-85-03, Corrective Action.</p>
+<h3 class="lvl3"><span class="ctitle">5. Reporting</span></h3>
+<p>Complaint data is compiled and reported as an input to customer satisfaction monitoring (QOP-82-01) and to management review.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Customer complaint and feedback log</td><td>Customer Service / Quality Assurance</td><td>6 years</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Forms</span></h2><ul>
+<li><p><strong>QF-85-03-1</strong> — Customer Complaint and Feedback Report</p></li>
+</ul>
+<p class="note">Related: QOP-82-01, Customer Satisfaction; QOP-85-03, Corrective Action.</p>
+<h1 id="qop-85-03" class="lvl1"><span class="cnum">QOP-85-03</span><span class="ctitle">Corrective Action</span></h1>
+<div class="tw"><table><colgroup><col style="width:22%"/><col style="width:28%"/><col style="width:25%"/><col style="width:25%"/></colgroup>
+<thead><tr class="header"><th><strong>Supports Clause(s)</strong></th><th><strong>Process Owner</strong></th><th><strong>Revision</strong></th><th><strong>Companion Manual Section</strong></th></tr></thead>
+<tbody><tr><td>10.2; preventive intent now addressed under 6.1</td><td>Quality Assurance Manager</td><td>Rev. A</td><td><a href="quality.html#10-2-nonconformity-and-corrective-action">quality.html § 10.2</a></td></tr></tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Purpose</span></h2><p>To eliminate the cause of a nonconformity so that it does not recur or occur elsewhere, through a structured process of correction, cause analysis, action, verification, and update of the risk register where warranted.</p>
+<h2 class="lvl2"><span class="ctitle">Scope</span></h2><p>Applies to nonconformities arising from any source — internal audit, customer complaint, PNR, process monitoring, or external audit. Risk-based thinking under Section 6.1 addresses the intent formerly met by a separate preventive action clause; where a corrective action review identifies that a similar nonconformity could occur elsewhere, the risk register is updated accordingly.</p>
+<h2 class="lvl2"><span class="ctitle">Responsibilities</span></h2>
+<div class="tw"><table><colgroup><col style="width:28%"/><col style="width:71%"/></colgroup>
+<thead><tr class="header"><th><strong>Role</strong></th><th><strong>Responsibility</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Originator</td><td>Raises a Corrective Action Request (Form QF-85-04-1) when a nonconformity, audit finding, or significant complaint is identified.</td></tr>
+<tr class="even"><td>Responsible Manager</td><td>Investigates cause, determines and implements corrective action, and reports completion.</td></tr>
+<tr class="odd"><td>Quality Assurance Manager</td><td>Reviews the adequacy of proposed actions, verifies effectiveness, updates the risk and opportunity register where indicated, and tracks requests to closure.</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Procedure</span></h2>
+<h3 class="lvl3"><span class="ctitle">1. Initiation</span></h3>
+<p>A Corrective Action Request is raised for a nonconformity, an audit finding, a significant or recurring customer complaint, or a systemic issue identified through data analysis (Section 9.1.3).</p>
+<h3 class="lvl3"><span class="ctitle">2. Reaction</span></h3>
+<p>The immediate condition is controlled and corrected, and its consequences are addressed, before root-cause analysis is completed.</p>
+<h3 class="lvl3"><span class="ctitle">3. Cause analysis</span></h3>
+<p>The responsible Manager evaluates the need for action to eliminate the cause, reviewing and analyzing the nonconformity, determining its cause(s), and determining whether similar nonconformities exist or could occur elsewhere.</p>
+<h3 class="lvl3"><span class="ctitle">4. Action</span></h3>
+<p>Corrective action appropriate to the effects of the nonconformity encountered is determined and implemented, including, where necessary, changes to the QMS, work instructions, or training.</p>
+<h3 class="lvl3"><span class="ctitle">5. Verification of effectiveness</span></h3>
+<p>The Quality Assurance Manager reviews the effectiveness of the action taken, typically at the next relevant audit cycle or a defined follow-up interval.</p>
+<h3 class="lvl3"><span class="ctitle">6. Update of risk register</span></h3>
+<p>Where the review indicates the nonconformity could recur or occur elsewhere, the Risk and Opportunity Register (Section 6.1) is updated with the associated risk and any additional preventive measure.</p>
+<h3 class="lvl3"><span class="ctitle">7. Closure</span></h3>
+<p>The request is closed by the Quality Assurance Manager once effectiveness is verified and evidence is retained.</p>
+<h2 class="lvl2"><span class="ctitle">Records</span></h2>
+<div class="tw"><table><colgroup><col style="width:46%"/><col style="width:27%"/><col style="width:27%"/></colgroup>
+<thead><tr class="header"><th><strong>Record</strong></th><th><strong>Retained By</strong></th><th><strong>Retention</strong></th></tr></thead><tbody>
+<tr class="odd"><td>Corrective Action Requests (CAR) and supporting evidence</td><td>Quality Assurance Manager</td><td>6 years</td></tr>
+</tbody></table></div>
+<h2 class="lvl2"><span class="ctitle">Forms</span></h2><ul>
+<li><p><strong>QF-85-04-1</strong> — Corrective Action Request</p></li>
+</ul>
+<p class="note">Related: Section 10.2, Nonconformity and Corrective Action; Section 6.1, Actions to Address Risks and Opportunities; QOP-82-02; QOP-83-01; QOP-85-02.</p>
+
+<h1 id="appendix-a-form-index" class="lvl1"><span class="cnum">App. A</span><span class="ctitle">Quality Form Index</span></h1>
+<p>The following forms (QF series) are referenced throughout this manual. Each form is a controlled document under QOP-42-01, Control of Documents.</p>
+<div class="tw"><table>
+<colgroup><col style="width: 20%" /><col style="width: 50%" /><col style="width: 30%" /></colgroup>
+<thead><tr class="header"><th><strong>Form</strong></th><th><strong>Title</strong></th><th><strong>Associated Procedure(s)</strong></th></tr></thead>
+<tbody>
+<tr class="odd"><td>QF-42-01-1</td><td>Document Control Master List</td><td>QOP-42-01</td></tr>
+<tr class="even"><td>QF-42-02-1</td><td>Records Retention Schedule / Index</td><td>QOP-42-02</td></tr>
+<tr class="odd"><td>QF-56-01-1</td><td>Quality Objectives Record</td><td>QOP-56-01</td></tr>
+<tr class="even"><td>QF-62-01-1</td><td>Training Participation Summary</td><td>QOP-62-01</td></tr>
+<tr class="odd"><td>QF-62-01-2</td><td>Job Description</td><td>QOP-62-01</td></tr>
+<tr class="even"><td>QF-62-01-3</td><td>Employee Training Record</td><td>QOP-62-01</td></tr>
+<tr class="odd"><td>QF-62-01-4</td><td>Employee Certification</td><td>QOP-62-01</td></tr>
+<tr class="even"><td>QF-62-01-5</td><td>Training Plan</td><td>QOP-62-01</td></tr>
+<tr class="odd"><td>QF-73-01-1</td><td>Design Project Plan</td><td>QOP-73-01</td></tr>
+<tr class="even"><td>QF-73-02-1</td><td>Engineering Change Request (ECR)</td><td>QOP-73-01</td></tr>
+<tr class="odd"><td>QF-74-01-1</td><td>Supplier Audit Report</td><td>QOP-74-01</td></tr>
+<tr class="even"><td>QF-74-01-2</td><td>Supplier Evaluation</td><td>QOP-74-01</td></tr>
+<tr class="odd"><td>QF-74-03-1</td><td>Incoming Inspection Form</td><td>QOP-74-03</td></tr>
+<tr class="even"><td>QF-75-01-1</td><td>Production Work Order</td><td>QOP-71-01, QOP-75-01</td></tr>
+<tr class="odd"><td>QF-75-08-1</td><td>Work Instruction</td><td>QOP-75-03</td></tr>
+<tr class="even"><td>QF-82-02-1</td><td>Internal Audit Plan</td><td>QOP-82-02</td></tr>
+<tr class="odd"><td>QF-83-01</td><td>Product Nonconformity Report (PNR)</td><td>QOP-83-01</td></tr>
+<tr class="even"><td>QF-85-03-1</td><td>Customer Complaint and Feedback Report</td><td>QOP-85-02</td></tr>
+<tr class="odd"><td>QF-85-04-1</td><td>Corrective Action Request (CAR)</td><td>QOP-85-03</td></tr>
+</tbody>
+</table></div>
+<p class="endmark">End of manual</p>
+
+</div></main>
+</div>
+<script>
+const nav=document.querySelector('nav.side');
+document.getElementById('menu').onclick=()=>nav.classList.toggle('open');
+nav.addEventListener('click',e=>{if(e.target.tagName==='A')nav.classList.remove('open')});
+const links=[...nav.querySelectorAll('a')];
+const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(a=>a.classList.remove('active'));
+      const a=map.get(e.target.id);
+      if(a){a.classList.add('active');
+        if(a.offsetTop<nav.scrollTop||a.offsetTop>nav.scrollTop+nav.clientHeight-40)
+          nav.scrollTop=a.offsetTop-nav.clientHeight/2;}
+    }
+  });
+},{rootMargin:'-80px 0px -75% 0px'});
+document.querySelectorAll('h1[id],h2[id]').forEach(h=>obs.observe(h));
+</script>
+</body>
+</html>
