@@ -522,64 +522,6 @@
     .nav-drop-menu{position:static;box-shadow:none;border:none;padding:0 0 0 10px;margin-top:8px;width:100%;}
     .nav-drop-menu a{padding:8px 0;}
   }
-
-  /* ---------- quality & compliance ---------- */
-  .quality-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:40px;align-items:start;}
-  .policy-card{
-    background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent-2);
-    border-radius:12px;padding:28px 30px;box-shadow:var(--shadow);
-  }
-  .policy-card .policy-label{
-    display:block;font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
-    color:var(--accent-2);margin-bottom:14px;
-  }
-  .policy-card blockquote{
-    margin:0 0 18px;font-size:1.1rem;line-height:1.48;color:var(--ink-900);font-weight:600;
-  }
-  .policy-card .policy-intro{font-size:.9rem;margin:0 0 10px;}
-  .policy-commitments{display:grid;gap:9px;}
-  .policy-commitments li{display:flex;gap:10px;font-size:.9rem;color:var(--ink-700);line-height:1.45;}
-  .policy-commitments li::before{
-    content:"\2713";flex:none;width:19px;height:19px;border-radius:50%;margin-top:2px;
-    background:#e2f7ee;color:var(--accent-2);font-size:.7rem;font-weight:700;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .policy-sign{
-    margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line);
-    font-size:.82rem;color:var(--ink-500);
-  }
-  .quality-side h3{font-size:1.05rem;margin-bottom:14px;}
-  .quality-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;}
-  .quality-actions .btn{flex:1 1 170px;justify-content:center;}
-  .quality-note{
-    margin-top:20px;font-size:.82rem;color:var(--ink-500);
-    background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;
-  }
-  @media (max-width:880px){
-    .quality-grid{grid-template-columns:1fr;gap:30px;}
-  }
-  /* header: collapse to the menu button earlier, now that Quality is in the nav */
-  @media (max-width:1080px){
-    .nav-links{
-      position:absolute;top:100%;left:0;right:0;background:var(--surface);
-      border-bottom:1px solid var(--line);
-      flex-direction:column;align-items:flex-start;padding:18px 24px;gap:16px;display:none;
-    }
-    .nav-links.open{display:flex;}
-    .nav-toggle{display:block;}
-    .nav-drop{width:100%;}
-    .nav-drop-menu{position:static;box-shadow:none;border:none;padding:0 0 0 10px;margin-top:8px;width:100%;}
-    .nav-drop-menu a{padding:8px 0;}
-  }
-  @media (min-width:1081px){
-    .nav{gap:16px;}
-    .nav-links{gap:11px;font-size:.79rem;flex-wrap:nowrap;}
-    .nav-links a,.nav-drop-toggle{white-space:nowrap;}
-    .nav-cta{padding:7px 13px;}
-    .brand{font-size:.94rem;gap:8px;}
-    .brand-mark{width:32px;height:32px;}
-    .brand-text small{display:none;}
-  }
 </style>
 </head>
 <body>
@@ -612,7 +554,6 @@
       <a href="#roi">ROI</a>
       <a href="#about">About</a>
       <a href="comparison.html">Why This Platform</a>
-      <a href="quality.html">Quality</a>
       <a href="contact.html" class="nav-cta">Get in touch</a>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span></button>
@@ -688,7 +629,7 @@
         </div>
       </div>
       <div class="mto-row">
-        <div class="mto-row-label">Procore — strong in the field, stops before the shop</div>
+        <div class="mto-row-label">Procore / BuilderTrend — strong in the field, stops before the shop</div>
         <div class="mto-bar">
           <div class="mto-seg partial">Bidding &amp; Contracts</div>
           <div class="mto-seg nogap">No Priced Catalog</div>
@@ -764,7 +705,7 @@
         <p>Grids and automations help, but production tracking, shop-floor time, and margin reporting still live somewhere else entirely — usually back in Excel.</p>
       </div>
       <div class="problem-card">
-        <div class="p-tool">Procore</div>
+        <div class="p-tool">Procore / BuilderTrend</div>
         <h3>Built for the GC's field, not your shop</h3>
         <p>Strong at submittals, RFIs, and jobsite tracking on the construction-management side. Neither one carries a tiered price book, a Bill of Operations, a cutlist, or a shop floor — because that's not the job they're built for.</p>
       </div>
@@ -779,13 +720,13 @@
     <div class="section-head">
       <span class="kicker">Replace the stack, not add to it</span>
       <h2>What each tool actually covers</h2>
-      <p>An honest comparison — not every gap below is a flaw in these tools, they simply weren't built for this job. Procore is genuinely strong at construction-management field work; they're just solving the general contractor's problem, not the manufacturer's.</p>
+      <p>An honest comparison — not every gap below is a flaw in these tools, they simply weren't built for this job. Procore and BuilderTrend are genuinely strong at construction-management field work; they're just solving the general contractor's problem, not the manufacturer's.</p>
     </div>
 
     <div class="cmp-wrap">
       <table class="cmp">
         <thead>
-          <tr><th>Capability</th><th class="center">Excel</th><th class="center">Monday / Smartsheet</th><th class="center">Procore</th><th class="center">Project Center 2.0</th></tr>
+          <tr><th>Capability</th><th class="center">Excel</th><th class="center">Monday / Smartsheet</th><th class="center">Procore / BuilderTrend</th><th class="center">Project Center 2.0</th></tr>
         </thead>
         <tbody>
           <tr><td>Estimating &amp; tiered pricing</td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge no">✕</span></td><td class="center"><span class="badge partial">~</span></td><td class="center"><span class="badge yes">✓</span></td></tr>
@@ -1147,79 +1088,6 @@
   </div>
 </section>
 
-<section id="quality">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="kicker">Quality</span>
-      <h2>Our quality policy, and the system behind it</h2>
-      <p>Anyone can say they care about quality. We maintain a documented quality management system built to ISO&nbsp;9001:2015 &mdash; and we will show you the whole thing.</p>
-    </div>
-
-    <div class="quality-grid">
-      <div class="policy-card">
-        <span class="policy-label">Quality Policy</span>
-        <blockquote>Rock River Consulting is committed to meeting customer requirements and enhancing customer satisfaction through continual improvement of its products, services and quality management system.</blockquote>
-        <p class="policy-intro">In support of this policy, we will:</p>
-        <ul class="policy-commitments">
-          <li>Be responsive to customer needs.</li>
-          <li>Provide effective engineering solutions.</li>
-          <li>Provide reliable consultation and support.</li>
-          <li>Ensure effective and efficient use of resources.</li>
-          <li>Satisfy applicable customer, statutory and regulatory requirements.</li>
-          <li>Enhance customer satisfaction through a feedback process.</li>
-          <li>Continually improve our products, services and quality management system.</li>
-          <li>Identify and act on improvement opportunities and on risks to quality.</li>
-        </ul>
-        <p class="policy-sign">Approved by the Chief Executive Officer &middot; Quality Management System Manual QMS-00, Rev.&nbsp;B</p>
-      </div>
-
-      <div class="quality-side">
-        <h3>What that means on your project</h3>
-        <ul class="principle-list">
-          <li>
-            <span class="principle-num">1</span>
-            <div>
-              <h4>Requirements get reviewed before we commit</h4>
-              <p>Every order and contract is reviewed against what you specified, what the code requires, and what we can actually deliver on your schedule &mdash; before anyone says yes.</p>
-            </div>
-          </li>
-          <li>
-            <span class="principle-num">2</span>
-            <div>
-              <h4>Problems are recorded, not absorbed</h4>
-              <p>Nonconformities are documented, dispositioned by a named authority, and closed out with verification. Root cause gets addressed so the same issue does not reach the next job.</p>
-            </div>
-          </li>
-          <li>
-            <span class="principle-num">3</span>
-            <div>
-              <h4>Our suppliers are held to your requirements</h4>
-              <p>Subcontractors and external providers are evaluated, monitored, and held to the same contract requirements you hold us to. Outsourcing a process never outsources the responsibility.</p>
-            </div>
-          </li>
-          <li>
-            <span class="principle-num">4</span>
-            <div>
-              <h4>Leadership reviews the system, on the record</h4>
-              <p>The system is audited internally and reviewed by top management at least annually against measured results: customer satisfaction, on-time delivery, conformity, and audit findings.</p>
-            </div>
-          </li>
-        </ul>
-
-        <div class="quality-actions">
-          <a class="btn btn-primary" href="quality.html">Read the quality manual</a>
-          <a class="btn btn-ghost" href="procedures.html">Operational procedures</a>
-          <a class="btn btn-ghost" href="forms.html">Quality forms</a>
-          <a class="btn btn-ghost" href="capa-app.html">CAPA tracker</a>
-          <a class="btn btn-ghost" href="contact.html">Request QMS records</a>
-        </div>
-
-        <p class="quality-note"><strong>Certification status:</strong> [Confirm before publishing. State either that the QMS is third-party registered to ISO&nbsp;9001:2015, naming the registrar and certificate number, or that it is built to conform to ISO&nbsp;9001:2015 and is not currently third-party registered.]</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="soft">
   <div class="wrap">
     <div class="section-head">
@@ -1252,7 +1120,7 @@
       <div class="project-card">
         <div class="project-icon">M</div>
         <h3>Maintenance &amp; Asset Manager</h3>
-        <p>A real CMMS — asset register, preventive-maintenance scheduling, repair history, and safety alerts for every machine on the floor.</p>
+        <p>A real CMMS — asset register, preventive-maintenance scheduling, repair history, safety alerts, digital lockout/tagout, and tool &amp; instrument calibration for every machine on the floor.</p>
         <div class="project-meta"><span class="chip">CMMS</span><span class="chip">Maintenance</span></div>
         <a class="project-link" href="maintenance.html">See the module →</a>
       </div>
@@ -1296,7 +1164,6 @@
       <a href="#top">Home</a>
       <a href="#flythrough">Project Center 2.0</a>
       <a href="maintenance.html">Maintenance Module</a>
-      <a href="quality.html">Quality</a>
       <a href="contact.html">Contact</a>
     </div>
   </div>
@@ -1575,6 +1442,15 @@
         ['QC', 'Quality Control', 'Sign-off checkpoints before anything ships to site.'],
         ['TIM', 'Time Tracking', 'Crew clock-ins tied to real jobs and operations, rolling into actual cost.'],
         ['TV', 'Shop TV', 'A floor-facing status display of what’s in production right now.']
+      ]
+    },
+    {
+      key: 'quality', label: 'Quality & Compliance',
+      modules: [
+        ['QMS', 'Quality Management System', 'Documented procedures and corrective/preventive action (CAPA) tied directly into the production board — a quality issue is a record on the same job, not a separate binder.'],
+        ['CAL', 'Calibration Records', 'Calibration due dates, certificates, and history for every gauge and measuring instrument, on the same due-list logic as preventive maintenance.'],
+        ['INSP', 'In-Process Inspection', 'Inspection checkpoints built into the production sequence itself — cut, edge-band, assemble, finish — not just one sign-off before it ships.'],
+        ['NCR', 'Nonconformance & CAPA', 'A defect logs against the exact operation and unit it happened on. A recurring issue opens a corrective/preventive action instead of just another ticket.']
       ]
     },
     {
