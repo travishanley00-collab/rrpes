@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CAPA Tracker — Corrective &amp; Preventive Action — Rock River Consulting</title>
+<meta name="description" content="Standalone Corrective and Preventive Action (CAPA) tracker: full CAR/CAPA form plus a Kanban workflow board. Rock River Consulting QMS, ISO 9001:2015, supports QOP-85-03 and Form QF-85-04-1.">
+<style>
+:root{
+  --ink:#15181B; --ink-2:#565D64; --ink-3:#848B92;
+  --paper:#FFFFFF; --shell:#EEEFEA; --shell-2:#E4E6DF; --rule:#DBDDD6;
+  --accent:#23503F; --accent-dark:#173629; --accent-soft:#EBF1EC;
+  --flag:#8A5A10; --flag-soft:#FBF2DF;
+  --crit:#A32B22; --crit-soft:#FBEAE8;
+  --hi:#B45A12; --hi-soft:#FCEEE1;
+  --med:#8A5A10; --med-soft:#FBF2DF;
+  --low:#2F6B4F; --low-soft:#E9F3ED;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+  --sans:ui-sans-serif,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+  --shadow:0 1px 3px rgba(21,24,27,.08),0 1px 2px rgba(21,24,27,.05);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--shell);color:var(--ink);font-family:var(--sans);
+  font-size:14.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-.005em;margin:0}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+a{color:var(--accent)}
+
+/* ---------- topbar ---------- */
+.topbar{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;gap:1rem;padding:.55rem 1rem;flex-wrap:wrap}
+.topbar .home{text-decoration:none;color:var(--ink);font-weight:600;font-size:12.5px;white-space:nowrap}
+.topbar .home:hover{color:var(--accent)}
+.apptitle{display:flex;align-items:baseline;gap:.5rem;margin-right:.5rem}
+.apptitle b{font-family:var(--serif);font-size:1.05rem}
+.apptitle span{font-size:10.5px;color:var(--ink-3);letter-spacing:.03em;text-transform:uppercase}
+.tabs{display:flex;gap:.3rem;background:var(--shell);border:1px solid var(--rule);border-radius:8px;padding:.2rem}
+.tabs button{border:none;background:none;padding:.4rem .85rem;border-radius:6px;cursor:pointer;font-weight:600;
+  font-size:12.5px;color:var(--ink-2);white-space:nowrap}
+.tabs button.active{background:var(--paper);color:var(--accent);box-shadow:var(--shadow)}
+.sp{flex:1}
+.topbar input[type=search]{border:1px solid var(--rule);border-radius:6px;padding:.4rem .6rem;min-width:11rem;background:var(--shell)}
+.topbar input[type=search]:focus{outline:none;border-color:var(--accent);background:var(--paper)}
+.btn{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--rule);background:var(--paper);
+  color:var(--ink);border-radius:6px;padding:.42rem .8rem;font-weight:600;font-size:12.5px;cursor:pointer;
+  text-decoration:none;white-space:nowrap}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent-dark);color:#fff}
+.btn.danger:hover{border-color:var(--crit);color:var(--crit)}
+.btn[hidden]{display:none}
+
+/* ---------- layout / views ---------- */
+.view{display:none;padding:1.25rem 1.5rem 4rem}
+.view.active{display:block}
+.viewhead{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.viewhead h1{font-size:1.5rem}
+.filters{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.filters select{border:1px solid var(--rule);border-radius:6px;padding:.4rem .55rem;background:var(--paper)}
+.filters label{display:flex;align-items:center;gap:.35rem;font-size:12.5px;color:var(--ink-2)}
+
+/* ---------- stat tiles ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.8rem;margin-bottom:1.2rem}
+.stat{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:.85rem 1rem}
+.stat b{display:block;font-size:1.6rem;font-family:var(--serif);line-height:1.1}
+.stat span{font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.stat.warn b{color:var(--crit)}
+
+/* ---------- kanban board ---------- */
+.board{display:flex;gap:.9rem;align-items:flex-start;overflow-x:auto;padding-bottom:1rem}
+.col{flex:0 0 16.5rem;background:var(--shell-2);border-radius:10px;border:1px solid var(--rule);display:flex;flex-direction:column;max-height:calc(100vh - 15rem)}
+.col.over{outline:2px dashed var(--accent);outline-offset:-2px}
+.colhead{padding:.7rem .8rem .55rem;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--rule);position:sticky;top:0;background:var(--shell-2);border-radius:10px 10px 0 0}
+.colhead b{font-size:12.5px;letter-spacing:.01em}
+.colhead .count{font-family:var(--sans);font-size:11px;background:var(--paper);border:1px solid var(--rule);
+  border-radius:99px;padding:.05rem .5rem;color:var(--ink-2)}
+.colbody{padding:.65rem;display:flex;flex-direction:column;gap:.6rem;overflow-y:auto;min-height:3rem}
+.card{background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--ink-3);border-radius:7px;
+  padding:.6rem .7rem;cursor:grab;box-shadow:var(--shadow)}
+.card:active{cursor:grabbing}
+.card.crit{border-left-color:var(--crit)}
+.card.hi{border-left-color:var(--hi)}
+.card.med{border-left-color:var(--med)}
+.card.low{border-left-color:var(--low)}
+.card .cid{font-family:var(--sans);font-size:10.5px;font-weight:700;color:var(--accent);letter-spacing:.02em}
+.card .ctitle{display:block;font-size:13px;font-weight:600;margin:.25rem 0 .4rem;line-height:1.35}
+.card .crow{display:flex;align-items:center;justify-content:space-between;gap:.4rem;margin-top:.3rem}
+.badge{font-family:var(--sans);font-size:9.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
+  padding:.15rem .4rem;border-radius:3px;white-space:nowrap}
+.badge.crit{background:var(--crit-soft);color:var(--crit)}
+.badge.hi{background:var(--hi-soft);color:var(--hi)}
+.badge.med{background:var(--med-soft);color:var(--med)}
+.badge.low{background:var(--low-soft);color:var(--low)}
+.badge.type-c{background:var(--accent-soft);color:var(--accent)}
+.badge.type-p{background:#EAF0FB;color:#2A4C86}
+.card .owner{font-size:11px;color:var(--ink-2)}
+.card .due{font-size:10.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.card .due.overdue{color:var(--crit);font-weight:700}
+.card .due::before{content:"Due ";opacity:.7}
+.colfoot{padding:.5rem .65rem .75rem}
+.addcard{width:100%;border:1px dashed var(--rule);background:transparent;border-radius:6px;padding:.4rem;
+  color:var(--ink-3);font-size:12px;cursor:pointer}
+.addcard:hover{border-color:var(--accent);color:var(--accent)}
+.empty{font-size:11.5px;color:var(--ink-3);text-align:center;padding:1rem .4rem}
+
+/* ---------- form ---------- */
+.formcard{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:1.75rem 2rem;max-width:56rem}
+.formhead{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.4rem}
+.formhead h1{font-size:1.4rem}
+.stagepill{font-family:var(--sans);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;
+  padding:.2rem .55rem;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+fieldset{border:none;margin:1.6rem 0 0;padding:0}
+fieldset legend{font-family:var(--sans);font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--accent);padding:0 0 .5rem;border-bottom:1px solid var(--rule);width:100%;margin-bottom:1rem}
+.ffgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:1rem 1.4rem}
+.ffield{display:flex;flex-direction:column;gap:.3rem}
+.ffield.wide{grid-column:1/-1}
+.ffield label{font-family:var(--sans);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
+.ffield label .req{color:var(--crit)}
+.ffield input[type=text],.ffield input[type=date],.ffield select,.ffield textarea{
+  border:1px solid var(--rule);border-radius:6px;padding:.5rem .6rem;background:var(--paper);width:100%}
+.ffield input:focus,.ffield select:focus,.ffield textarea:focus{outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-soft)}
+.ffield textarea{resize:vertical;line-height:1.5;font-family:var(--serif);font-size:14.5px}
+.hint{font-size:11px;color:var(--ink-3);margin-top:.15rem}
+.formfoot{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.2rem;border-top:1px solid var(--rule)}
+.formfoot .sp{flex:1}
+.history{margin-top:1.6rem}
+.history ol{list-style:none;margin:0;padding:0;font-size:12px;color:var(--ink-2)}
+.history li{padding:.35rem 0;border-bottom:1px dotted var(--rule)}
+.history time{font-variant-numeric:tabular-nums;color:var(--ink-3);margin-right:.5rem}
+
+/* ---------- table view ---------- */
+table.records{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--rule);border-radius:8px;overflow:hidden;font-size:13px}
+table.records th,table.records td{padding:.55rem .7rem;border-bottom:1px solid var(--rule);text-align:left;vertical-align:middle}
+table.records th{background:var(--shell-2);font-family:var(--sans);font-size:11px;letter-spacing:.03em;text-transform:uppercase;
+  color:var(--ink-2);cursor:pointer;user-select:none;white-space:nowrap}
+table.records th:hover{color:var(--accent)}
+table.records tbody tr:hover{background:var(--accent-soft)}
+table.records td.idcol{font-weight:700;color:var(--accent);white-space:nowrap}
+table.records select.statusSelect{border:1px solid var(--rule);border-radius:5px;padding:.25rem .4rem;background:var(--paper)}
+.rowactions{display:flex;gap:.4rem}
+.rowactions button{border:1px solid var(--rule);background:var(--paper);border-radius:5px;padding:.25rem .5rem;cursor:pointer;font-size:11.5px}
+.rowactions button:hover{border-color:var(--accent);color:var(--accent)}
+.rowactions button.danger:hover{border-color:var(--crit);color:var(--crit)}
+
+/* ---------- toast ---------- */
+#toast{position:fixed;bottom:1.25rem;left:50%;transform:translateX(-50%) translateY(120%);
+  background:var(--ink);color:#fff;padding:.65rem 1.1rem;border-radius:7px;font-size:12.5px;
+  box-shadow:0 4px 14px rgba(0,0,0,.22);z-index:60;transition:transform .22s ease;max-width:90vw}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ---------- empty state ---------- */
+.emptystate{text-align:center;padding:3rem 1rem;color:var(--ink-3);font-size:13px}
+
+/* ---------- print (single record) ---------- */
+#printSheet{display:none}
+@media print{
+  body *{visibility:hidden}
+  #printSheet,#printSheet *{visibility:visible}
+  #printSheet{display:block !important;position:absolute;top:0;left:0;width:100%;padding:0}
+  .topbar,.tabs{display:none}
+}
+
+@media (max-width:900px){
+  .topbar{gap:.6rem}
+  .apptitle span{display:none}
+  .view{padding:1rem .9rem 4rem}
+  .formcard{padding:1.2rem 1.2rem}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="home" href="quality.html">&larr; Rock River Consulting QMS</a>
+  <div class="apptitle"><b>CAPA Tracker</b><span>QF-85-04-1 &middot; QOP-85-03</span></div>
+  <div class="tabs" role="tablist">
+    <button data-tab="board" class="active">Board</button>
+    <button data-tab="form">New CAPA</button>
+    <button data-tab="table">All Records</button>
+  </div>
+  <span class="sp"></span>
+  <input type="search" id="search" placeholder="Search CAR #, description, owner…">
+  <a class="btn" href="procedures.html#qop-85-03">QOP-85-03</a>
+  <a class="btn" href="forms/qf-85-04-1.html">Print blank CAR</a>
+  <button class="btn" id="exportBtn">Export JSON</button>
+  <button class="btn" id="importBtn">Import JSON</button>
+  <input type="file" id="importFile" accept="application/json" hidden>
+  <button class="btn primary" id="newBtn">+ New CAPA</button>
+</div>
+
+<!-- ===================== BOARD ===================== -->
+<section class="view active" id="view-board">
+  <div class="viewhead">
+    <h1>CAPA Board</h1>
+    <div class="filters">
+      <select id="fType"><option value="">All types</option><option>Corrective</option><option>Preventive</option></select>
+      <select id="fPriority"><option value="">All priorities</option><option>Critical</option><option>High</option><option>Medium</option><option>Low</option></select>
+      <label><input type="checkbox" id="fOverdue"> Overdue only</label>
+    </div>
+  </div>
+  <div class="stats" id="stats"></div>
+  <div class="board" id="board"></div>
+</section>
+
+<!-- ===================== FORM ===================== -->
+<section class="view" id="view-form">
+  <div class="formcard">
+    <form id="capaForm" autocomplete="off">
+      <div class="formhead">
+        <h1 id="formTitle">New CAPA</h1>
+        <span class="stagepill" id="stagePill">Opened</span>
+      </div>
+      <p class="hint" id="formSub">Fields marked <span class="req">*</span> are required before this record can move to Closed.</p>
+
+      <fieldset>
+        <legend>Identification</legend>
+        <div class="ffgrid">
+          <div class="ffield"><label>CAR / CAPA No.</label><input type="text" id="f_id" readonly></div>
+          <div class="ffield"><label>Type <span class="req">*</span></label>
+            <select id="f_type" required><option>Corrective</option><option>Preventive</option></select></div>
+          <div class="ffield"><label>Priority <span class="req">*</span></label>
+            <select id="f_priority" required><option>Low</option><option selected>Medium</option><option>High</option><option>Critical</option></select></div>
+          <div class="ffield"><label>Status</label>
+            <select id="f_status">
+              <option value="opened">Opened</option>
+              <option value="investigation">Investigation / Root Cause</option>
+              <option value="planned">Action Planned</option>
+              <option value="implementation">Implementation</option>
+              <option value="verification">Verification</option>
+              <option value="closed">Closed</option>
+            </select></div>
+          <div class="ffield"><label>Date Raised <span class="req">*</span></label><input type="date" id="f_dateRaised" required></div>
+          <div class="ffield"><label>Originator <span class="req">*</span></label><input type="text" id="f_originator" required></div>
+          <div class="ffield"><label>Source</label>
+            <select id="f_source"><option>Audit</option><option>Complaint</option><option>PNR</option><option>Data Analysis</option><option>Management Review</option><option>Other</option></select></div>
+          <div class="ffield"><label>Source Reference No.</label><input type="text" id="f_sourceRef" placeholder="e.g. PNR-2026-014"></div>
+          <div class="ffield wide"><label>Affected Product / Process / Area</label><input type="text" id="f_area"></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Problem &amp; Containment</legend>
+        <div class="ffgrid">
+          <div class="ffield wide"><label>Description of Nonconformity / Issue <span class="req">*</span></label>
+            <textarea id="f_description" rows="3" required></textarea></div>
+          <div class="ffield wide"><label>Immediate / Containment Action</label>
+            <textarea id="f_containment" rows="2"></textarea></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Investigation</legend>
+        <div class="ffgrid">
+          <div class="ffield"><label>Root Cause Method</label>
+            <select id="f_rcMethod"><option value="">— Select —</option><option>5 Whys</option><option>Fishbone / Ishikawa</option><option>Fault Tree</option><option>Pareto Analysis</option><option>Other</option></select></div>
+          <div class="ffield wide"><label>Root Cause Analysis</label><textarea id="f_rootCause" rows="3"></textarea></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Corrective &amp; Preventive Action</legend>
+        <div class="ffgrid">
+          <div class="ffield wide"><label>Corrective Action Taken (eliminates the cause of this nonconformity)</label>
+            <textarea id="f_correctiveAction" rows="3"></textarea></div>
+          <div class="ffield wide"><label>Preventive Action (eliminates the cause of similar potential nonconformities elsewhere)</label>
+            <textarea id="f_preventiveAction" rows="3"></textarea></div>
+          <div class="ffield"><label>Responsible Person <span class="req">*</span></label><input type="text" id="f_responsible" required></div>
+          <div class="ffield"><label>Target Completion Date</label><input type="date" id="f_targetDate"></div>
+          <div class="ffield"><label>Actual Completion Date</label><input type="date" id="f_actualDate"></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Verification &amp; Closure</legend>
+        <div class="ffgrid">
+          <div class="ffield wide"><label>Verification of Effectiveness</label><textarea id="f_verification" rows="2"></textarea></div>
+          <div class="ffield"><label>Effectiveness Result</label>
+            <select id="f_effectiveness"><option value="">— Pending —</option><option>Effective</option><option>Not Effective — reopened</option></select></div>
+          <div class="ffield"><label>Risk &amp; Opportunity Register Updated</label>
+            <select id="f_riskUpdated"><option value="">— Select —</option><option>Yes</option><option>No</option><option>N/A</option></select></div>
+          <div class="ffield"><label>Closed By</label><input type="text" id="f_closedBy" placeholder="Required to move to Closed"></div>
+          <div class="ffield"><label>Date Closed</label><input type="date" id="f_dateClosed"></div>
+          <div class="ffield"><label>Approved By (Quality Assurance Manager)</label><input type="text" id="f_approvedBy" placeholder="Required to move to Closed"></div>
+          <div class="ffield wide"><label>Notes</label><textarea id="f_notes" rows="2"></textarea></div>
+        </div>
+      </fieldset>
+
+      <div class="history" id="historyBlock" hidden>
+        <fieldset><legend>Status History</legend><ol id="historyList"></ol></fieldset>
+      </div>
+
+      <div class="formfoot">
+        <button type="submit" class="btn primary">Save</button>
+        <button type="button" class="btn" id="printOneBtn">Print / Save as PDF</button>
+        <span class="sp"></span>
+        <button type="button" class="btn danger" id="deleteBtn" hidden>Delete record</button>
+        <button type="button" class="btn" id="cancelBtn">Cancel</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ===================== TABLE ===================== -->
+<section class="view" id="view-table">
+  <div class="viewhead">
+    <h1>All CAPA Records</h1>
+    <div class="filters">
+      <select id="tType"><option value="">All types</option><option>Corrective</option><option>Preventive</option></select>
+      <select id="tPriority"><option value="">All priorities</option><option>Critical</option><option>High</option><option>Medium</option><option>Low</option></select>
+      <select id="tStatus">
+        <option value="">All statuses</option>
+        <option value="opened">Opened</option><option value="investigation">Investigation</option>
+        <option value="planned">Action Planned</option><option value="implementation">Implementation</option>
+        <option value="verification">Verification</option><option value="closed">Closed</option>
+      </select>
+    </div>
+  </div>
+  <div id="tableWrap"></div>
+</section>
+
+<div id="printSheet"></div>
+<div id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------------- config ---------------- */
+var STAGES = [
+  {key:"opened",         label:"Opened"},
+  {key:"investigation",  label:"Investigation / Root Cause"},
+  {key:"planned",        label:"Action Planned"},
+  {key:"implementation", label:"Implementation"},
+  {key:"verification",   label:"Verification"},
+  {key:"closed",         label:"Closed"}
+];
+var STAGE_LABEL = {}; STAGES.forEach(function(s){ STAGE_LABEL[s.key]=s.label; });
+var PRI_CLASS = {Critical:"crit", High:"hi", Medium:"med", Low:"low"};
+var STORE_KEY = "rrc_capa_records_v1";
+var SEEDED_KEY = "rrc_capa_seeded_v1";
+
+/* ---------------- state ---------------- */
+var records = [];
+var editingId = null;
+var currentTab = "board";
+var sortCol = "id", sortDir = 1;
+
+/* ---------------- storage ---------------- */
+function load(){
+  try{
+    var raw = localStorage.getItem(STORE_KEY);
+    records = raw ? JSON.parse(raw) : [];
+  }catch(e){ records = []; }
+  if(!records.length && !localStorage.getItem(SEEDED_KEY)){
+    seed();
+    localStorage.setItem(SEEDED_KEY,"1");
+    save();
+  }
+}
+function save(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(records)); }
+  catch(e){ toast("Could not save — browser storage may be full or blocked."); }
+}
+function today(){ return new Date().toISOString().slice(0,10); }
+
+function seed(){
+  var y = new Date().getFullYear();
+  records = [
+    {
+      id:"CAR-"+y+"-001", type:"Corrective", status:"implementation", priority:"High",
+      dateRaised: today(), originator:"J. Alvarez (QA)", source:"Internal Audit", sourceRef:"IA-"+y+"-03",
+      area:"Millwork finishing line", description:"Stain color mismatch found on 4 of 12 panels during internal audit of Job 4471.",
+      containment:"Held remaining unfinished panels; quarantined 4 nonconforming panels per QOP-83-01.",
+      rcMethod:"5 Whys", rootCause:"Finish batch was mixed without verifying the current color-match card; the prior card was left at the mix station.",
+      correctiveAction:"Re-stained and re-inspected the 4 panels; released after passing color match.",
+      preventiveAction:"Added a mandatory color-card scan/log step to the finishing work instruction (QF-75-08-1) before any batch mix.",
+      responsible:"T. Nguyen (Production Manager)", targetDate:"", actualDate:"", verification:"", effectiveness:"",
+      riskUpdated:"", closedBy:"", dateClosed:"", approvedBy:"", notes:"Sample record — edit or delete freely.",
+      history:[{ts:new Date().toISOString(), from:null, to:"opened", note:"Created (sample record)"},
+               {ts:new Date().toISOString(), from:"opened", to:"implementation", note:"Advanced (sample record)"}],
+      createdAt:new Date().toISOString(), updatedAt:new Date().toISOString()
+    },
+    {
+      id:"CAR-"+y+"-002", type:"Preventive", status:"verification", priority:"Medium",
+      dateRaised: today(), originator:"M. Ortiz (Sales)", source:"Data Analysis", sourceRef:"",
+      area:"Estimating — price book", description:"Trend review of the last 6 months shows recurring change orders tied to hardware lead times not flagged at estimating.",
+      containment:"",
+      rcMethod:"Pareto Analysis", rootCause:"Price book does not surface current supplier lead times to estimators at time of quote.",
+      correctiveAction:"", preventiveAction:"Added a live lead-time column to the price book, refreshed weekly from the purchasing system.",
+      responsible:"S. Patel (Estimating Lead)", targetDate:"", actualDate: today(), verification:"Reviewing next 4 weeks of quotes for lead-time-related change orders.",
+      effectiveness:"", riskUpdated:"Yes", closedBy:"", dateClosed:"", approvedBy:"", notes:"Sample record — edit or delete freely.",
+      history:[{ts:new Date().toISOString(), from:null, to:"opened", note:"Created (sample record)"},
+               {ts:new Date().toISOString(), from:"opened", to:"verification", note:"Advanced (sample record)"}],
+      createdAt:new Date().toISOString(), updatedAt:new Date().toISOString()
+    },
+    {
+      id:"CAR-"+y+"-003", type:"Corrective", status:"closed", priority:"Low",
+      dateRaised: today(), originator:"D. Kim (Installer)", source:"Complaint", sourceRef:"QF-85-03-1 #22",
+      area:"Site delivery", description:"Customer reported one drawer box delivered with a chipped edge.",
+      containment:"Replacement drawer box built and delivered same week.",
+      rcMethod:"Other", rootCause:"Packaging did not corner-protect drawer boxes for this SKU size.",
+      correctiveAction:"Replaced unit; issued corner protectors to shipping for the affected SKU size range.",
+      preventiveAction:"Updated packing work instruction to require corner protection on all drawer boxes over 24 in.",
+      responsible:"R. Chen (Logistics)", targetDate: today(), actualDate: today(),
+      verification:"No repeat complaints in this SKU range over the following month.", effectiveness:"Effective",
+      riskUpdated:"N/A", closedBy:"R. Chen", dateClosed: today(), approvedBy:"J. Alvarez (QA Manager)",
+      notes:"Sample record — edit or delete freely.",
+      history:[{ts:new Date().toISOString(), from:null, to:"opened", note:"Created (sample record)"},
+               {ts:new Date().toISOString(), from:"opened", to:"closed", note:"Closed (sample record)"}],
+      createdAt:new Date().toISOString(), updatedAt:new Date().toISOString()
+    }
+  ];
+}
+
+/* ---------------- id generation ---------------- */
+function nextId(){
+  var y = new Date().getFullYear();
+  var prefix = "CAR-"+y+"-";
+  var max = 0;
+  records.forEach(function(r){
+    if(r.id && r.id.indexOf(prefix)===0){
+      var n = parseInt(r.id.slice(prefix.length),10);
+      if(!isNaN(n) && n>max) max = n;
+    }
+  });
+  var seq = String(max+1).padStart(3,"0");
+  return prefix+seq;
+}
+
+/* ---------------- helpers ---------------- */
+function esc(s){
+  return String(s==null?"":s).replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+  });
+}
+function isOverdue(r){
+  return r.status!=="closed" && r.targetDate && r.targetDate < today();
+}
+function toast(msg){
+  var t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toast._h);
+  toast._h = setTimeout(function(){ t.classList.remove("show"); }, 2600);
+}
+function matchesFilters(r, q, type, priority, overdueOnly, status){
+  if(status && r.status!==status) return false;
+  if(type && r.type!==type) return false;
+  if(priority && r.priority!==priority) return false;
+  if(overdueOnly && !isOverdue(r)) return false;
+  if(q){
+    var hay = [r.id,r.description,r.originator,r.responsible,r.area,r.sourceRef].join(" ").toLowerCase();
+    if(hay.indexOf(q.toLowerCase())===-1) return false;
+  }
+  return true;
+}
+
+/* ---------------- tabs ---------------- */
+function setTab(tab){
+  currentTab = tab;
+  document.querySelectorAll(".tabs button").forEach(function(b){
+    b.classList.toggle("active", b.dataset.tab===tab);
+  });
+  document.querySelectorAll(".view").forEach(function(v){
+    v.classList.toggle("active", v.id==="view-"+tab);
+  });
+  document.getElementById("printOneBtn").hidden = (tab!=="form");
+  if(tab==="board") renderBoard();
+  if(tab==="table") renderTable();
+}
+document.querySelectorAll(".tabs button").forEach(function(b){
+  b.addEventListener("click", function(){ setTab(b.dataset.tab); });
+});
+
+/* ---------------- board render ---------------- */
+function renderStats(){
+  var open = records.filter(function(r){return r.status!=="closed";}).length;
+  var overdue = records.filter(isOverdue).length;
+  var thisMonth = new Date().toISOString().slice(0,7);
+  var closedThisMonth = records.filter(function(r){return r.status==="closed" && r.dateClosed && r.dateClosed.slice(0,7)===thisMonth;}).length;
+  var wrap = document.getElementById("stats");
+  wrap.innerHTML =
+    '<div class="stat"><b>'+records.length+'</b><span>Total CAPAs</span></div>'+
+    '<div class="stat"><b>'+open+'</b><span>Open</span></div>'+
+    '<div class="stat'+(overdue?' warn':'')+'"><b>'+overdue+'</b><span>Overdue</span></div>'+
+    '<div class="stat"><b>'+closedThisMonth+'</b><span>Closed this month</span></div>';
+}
+
+function renderBoard(){
+  renderStats();
+  var q = document.getElementById("search").value.trim();
+  var type = document.getElementById("fType").value;
+  var priority = document.getElementById("fPriority").value;
+  var overdueOnly = document.getElementById("fOverdue").checked;
+  var board = document.getElementById("board");
+  board.innerHTML = "";
+  STAGES.forEach(function(stage){
+    var col = document.createElement("div");
+    col.className = "col";
+    col.dataset.stage = stage.key;
+    var items = records.filter(function(r){ return r.status===stage.key && matchesFilters(r,q,type,priority,overdueOnly,null); });
+    col.innerHTML =
+      '<div class="colhead"><b>'+esc(stage.label)+'</b><span class="count">'+items.length+'</span></div>'+
+      '<div class="colbody" data-stage="'+stage.key+'"></div>'+
+      (stage.key==="opened" ? '<div class="colfoot"><button class="addcard" data-add="1">+ Add CAPA</button></div>' : '');
+    board.appendChild(col);
+    var body = col.querySelector(".colbody");
+    if(!items.length){
+      body.innerHTML = '<div class="empty">No records</div>';
+    }else{
+      items.forEach(function(r){ body.appendChild(cardEl(r)); });
+    }
+  });
+  wireDragDrop();
+  var addBtn = board.querySelector('[data-add]');
+  if(addBtn) addBtn.addEventListener("click", function(){ openForm(null); });
+}
+
+function cardEl(r){
+  var el = document.createElement("div");
+  el.className = "card "+(PRI_CLASS[r.priority]||"med");
+  el.draggable = true;
+  el.dataset.id = r.id;
+  var overdue = isOverdue(r);
+  el.innerHTML =
+    '<span class="cid">'+esc(r.id)+'</span>'+
+    '<span class="ctitle">'+esc(r.description || "(no description yet)")+'</span>'+
+    '<div class="crow">'+
+      '<span class="badge '+(r.type==="Preventive"?"type-p":"type-c")+'">'+esc(r.type)+'</span>'+
+      '<span class="badge '+(PRI_CLASS[r.priority]||"med")+'">'+esc(r.priority)+'</span>'+
+    '</div>'+
+    '<div class="crow">'+
+      '<span class="owner">'+esc(r.responsible||r.originator||"")+'</span>'+
+      (r.targetDate ? '<span class="due'+(overdue?' overdue':'')+'">'+esc(r.targetDate)+'</span>' : '<span></span>')+
+    '</div>';
+  el.addEventListener("click", function(){ openForm(r.id); });
+  el.addEventListener("dragstart", function(ev){
+    ev.dataTransfer.setData("text/plain", r.id);
+    ev.dataTransfer.effectAllowed = "move";
+  });
+  return el;
+}
+
+function wireDragDrop(){
+  document.querySelectorAll(".col").forEach(function(col){
+    col.addEventListener("dragover", function(ev){ ev.preventDefault(); col.classList.add("over"); });
+    col.addEventListener("dragleave", function(){ col.classList.remove("over"); });
+    col.addEventListener("drop", function(ev){
+      ev.preventDefault();
+      col.classList.remove("over");
+      var id = ev.dataTransfer.getData("text/plain");
+      moveStage(id, col.dataset.stage);
+    });
+  });
+}
+
+function moveStage(id, newStage){
+  var r = records.find(function(x){ return x.id===id; });
+  if(!r || r.status===newStage) return;
+  if(newStage==="closed" && !canClose(r)){
+    toast("Can't close "+id+" yet — verification, closed-by and approved-by are required. Opening record…");
+    openForm(id);
+    return;
+  }
+  var from = r.status;
+  r.status = newStage;
+  r.updatedAt = new Date().toISOString();
+  r.history = r.history || [];
+  r.history.push({ts:r.updatedAt, from:from, to:newStage, note:"Moved on board"});
+  save();
+  toast(id+" moved to "+STAGE_LABEL[newStage]);
+  renderBoard();
+}
+
+function canClose(r){
+  return !!(r.verification && r.closedBy && r.approvedBy);
+}
+
+/* ---------------- form ---------------- */
+var FIELD_IDS = ["type","priority","status","dateRaised","originator","source","sourceRef","area",
+  "description","containment","rcMethod","rootCause","correctiveAction","preventiveAction",
+  "responsible","targetDate","actualDate","verification","effectiveness","riskUpdated",
+  "closedBy","dateClosed","approvedBy","notes"];
+
+function openForm(id){
+  editingId = id;
+  var r = id ? records.find(function(x){ return x.id===id; }) : null;
+  document.getElementById("formTitle").textContent = r ? ("Edit "+r.id) : "New CAPA";
+  document.getElementById("stagePill").textContent = STAGE_LABEL[r ? r.status : "opened"];
+  document.getElementById("f_id").value = r ? r.id : nextId();
+  FIELD_IDS.forEach(function(key){
+    var el = document.getElementById("f_"+key);
+    if(!el) return;
+    el.value = r ? (r[key]||"") : (key==="type"?"Corrective":key==="priority"?"Medium":key==="status"?"opened":key==="dateRaised"?today():"");
+  });
+  document.getElementById("deleteBtn").hidden = !r;
+  var histBlock = document.getElementById("historyBlock");
+  var histList = document.getElementById("historyList");
+  if(r && r.history && r.history.length){
+    histBlock.hidden = false;
+    histList.innerHTML = r.history.slice().reverse().map(function(h){
+      return '<li><time>'+esc((h.ts||"").slice(0,16).replace("T"," "))+'</time>'+
+        (h.from? esc(STAGE_LABEL[h.from]||h.from)+' &rarr; ':'')+esc(STAGE_LABEL[h.to]||h.to)+
+        (h.note? ' — '+esc(h.note):'')+'</li>';
+    }).join("");
+  }else{
+    histBlock.hidden = true; histList.innerHTML = "";
+  }
+  setTab("form");
+}
+
+document.getElementById("newBtn").addEventListener("click", function(){ openForm(null); });
+document.getElementById("cancelBtn").addEventListener("click", function(){ setTab(editingId?"table":"board"); });
+
+document.getElementById("capaForm").addEventListener("submit", function(ev){
+  ev.preventDefault();
+  var data = {};
+  FIELD_IDS.forEach(function(key){
+    var el = document.getElementById("f_"+key);
+    data[key] = el ? el.value.trim() : "";
+  });
+  if(!data.description || !data.originator || !data.dateRaised || !data.responsible){
+    toast("Please fill in the required fields (marked *) before saving.");
+    return;
+  }
+  var isNew = !editingId;
+  var id = document.getElementById("f_id").value;
+  var now = new Date().toISOString();
+  if(isNew){
+    data.id = id;
+    data.history = [{ts:now, from:null, to:data.status||"opened", note:"Created"}];
+    data.createdAt = now; data.updatedAt = now;
+    records.push(data);
+  }else{
+    var r = records.find(function(x){ return x.id===editingId; });
+    var prevStatus = r.status;
+    Object.assign(r, data);
+    r.updatedAt = now;
+    if(prevStatus !== r.status){
+      r.history = r.history || [];
+      r.history.push({ts:now, from:prevStatus, to:r.status, note:"Status changed from form"});
+    }
+    if(r.status==="closed" && !canClose(r)){
+      toast("Note: Closed status set, but verification / closed-by / approved-by are incomplete.");
+    }
+  }
+  save();
+  toast("Saved "+id);
+  editingId = null;
+  setTab("board");
+});
+
+document.getElementById("deleteBtn").addEventListener("click", function(){
+  if(!editingId) return;
+  if(!confirm("Delete "+editingId+"? This cannot be undone.")) return;
+  records = records.filter(function(r){ return r.id!==editingId; });
+  save();
+  toast("Deleted "+editingId);
+  editingId = null;
+  setTab("board");
+});
+
+document.getElementById("printOneBtn").addEventListener("click", function(){
+  var id = document.getElementById("f_id").value;
+  var r = records.find(function(x){ return x.id===id; }) || collectFormAsObject();
+  buildPrintSheet(r);
+  window.print();
+});
+
+function collectFormAsObject(){
+  var data = {id: document.getElementById("f_id").value};
+  FIELD_IDS.forEach(function(key){
+    var el = document.getElementById("f_"+key);
+    data[key] = el ? el.value.trim() : "";
+  });
+  return data;
+}
+
+function buildPrintSheet(r){
+  var rows = [
+    ["CAR / CAPA No.", r.id], ["Type", r.type], ["Priority", r.priority], ["Status", STAGE_LABEL[r.status]||r.status],
+    ["Date Raised", r.dateRaised], ["Originator", r.originator], ["Source", r.source], ["Source Reference", r.sourceRef],
+    ["Affected Area", r.area]
+  ];
+  var block = function(label, val){
+    return '<h3 style="font-family:sans-serif;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#23503F;margin:1.4rem 0 .3rem">'+esc(label)+'</h3><p style="margin:0 0 .5rem;white-space:pre-wrap">'+esc(val||"—")+'</p>';
+  };
+  var html = '<div style="font-family:Georgia,serif;max-width:44rem;margin:0 auto;padding:1rem">'+
+    '<h1 style="font-size:1.5rem;margin:0 0 .3rem">Corrective / Preventive Action Report</h1>'+
+    '<p style="color:#565D64;margin:0 0 1rem">Rock River Consulting QMS &middot; Form QF-85-04-1 &middot; supports QOP-85-03</p>'+
+    '<table style="width:100%;border-collapse:collapse;font-family:sans-serif;font-size:12px;margin-bottom:1rem">'+
+    rows.map(function(pair){
+      return '<tr><td style="border:1px solid #ccc;padding:.4rem .6rem;background:#f4f4f2;font-weight:600;width:35%">'+esc(pair[0])+'</td>'+
+             '<td style="border:1px solid #ccc;padding:.4rem .6rem">'+esc(pair[1]||"—")+'</td></tr>';
+    }).join("")+
+    '</table>'+
+    block("Description of Nonconformity / Issue", r.description)+
+    block("Immediate / Containment Action", r.containment)+
+    block("Root Cause Method", r.rcMethod)+
+    block("Root Cause Analysis", r.rootCause)+
+    block("Corrective Action Taken", r.correctiveAction)+
+    block("Preventive Action", r.preventiveAction)+
+    block("Responsible Person / Target / Actual Completion", (r.responsible||"—")+"  |  Target: "+(r.targetDate||"—")+"  |  Actual: "+(r.actualDate||"—"))+
+    block("Verification of Effectiveness", r.verification)+
+    block("Effectiveness Result", r.effectiveness)+
+    block("Risk & Opportunity Register Updated", r.riskUpdated)+
+    block("Closed By / Date Closed / Approved By", (r.closedBy||"—")+"  |  "+(r.dateClosed||"—")+"  |  "+(r.approvedBy||"—"))+
+    block("Notes", r.notes)+
+    '</div>';
+  document.getElementById("printSheet").innerHTML = html;
+}
+
+/* ---------------- table view ---------------- */
+var TABLE_COLS = [
+  {key:"id", label:"CAR #"}, {key:"type", label:"Type"}, {key:"priority", label:"Priority"},
+  {key:"status", label:"Status"}, {key:"originator", label:"Originator"}, {key:"responsible", label:"Responsible"},
+  {key:"targetDate", label:"Target Date"}
+];
+
+function renderTable(){
+  var q = document.getElementById("search").value.trim();
+  var type = document.getElementById("tType").value;
+  var priority = document.getElementById("tPriority").value;
+  var status = document.getElementById("tStatus").value;
+  var rows = records.filter(function(r){ return matchesFilters(r,q,type,priority,false,status); });
+  rows.sort(function(a,b){
+    var av = (a[sortCol]||"").toString().toLowerCase(), bv = (b[sortCol]||"").toString().toLowerCase();
+    if(av<bv) return -1*sortDir; if(av>bv) return 1*sortDir; return 0;
+  });
+  var wrap = document.getElementById("tableWrap");
+  if(!rows.length){
+    wrap.innerHTML = '<div class="emptystate">No CAPA records match these filters.</div>';
+    return;
+  }
+  var thead = '<tr>'+TABLE_COLS.map(function(c){
+    return '<th data-col="'+c.key+'">'+esc(c.label)+(sortCol===c.key?(sortDir===1?' &uarr;':' &darr;'):'')+'</th>';
+  }).join("")+'<th>Overdue</th><th>Actions</th></tr>';
+  var tbody = rows.map(function(r){
+    var statusOpts = STAGES.map(function(s){
+      return '<option value="'+s.key+'"'+(r.status===s.key?" selected":"")+'>'+esc(s.label)+'</option>';
+    }).join("");
+    return '<tr>'+
+      '<td class="idcol">'+esc(r.id)+'</td>'+
+      '<td><span class="badge '+(r.type==="Preventive"?"type-p":"type-c")+'">'+esc(r.type)+'</span></td>'+
+      '<td><span class="badge '+(PRI_CLASS[r.priority]||"med")+'">'+esc(r.priority)+'</span></td>'+
+      '<td><select class="statusSelect" data-id="'+esc(r.id)+'">'+statusOpts+'</select></td>'+
+      '<td>'+esc(r.originator)+'</td>'+
+      '<td>'+esc(r.responsible)+'</td>'+
+      '<td>'+esc(r.targetDate)+'</td>'+
+      '<td>'+(isOverdue(r) ? '<span class="badge crit">Overdue</span>' : '')+'</td>'+
+      '<td class="rowactions"><button data-edit="'+esc(r.id)+'">Edit</button><button class="danger" data-del="'+esc(r.id)+'">Delete</button></td>'+
+      '</tr>';
+  }).join("");
+  wrap.innerHTML = '<table class="records"><thead>'+thead+'</thead><tbody>'+tbody+'</tbody></table>';
+
+  wrap.querySelectorAll("th[data-col]").forEach(function(th){
+    th.addEventListener("click", function(){
+      var col = th.dataset.col;
+      if(sortCol===col) sortDir *= -1; else { sortCol = col; sortDir = 1; }
+      renderTable();
+    });
+  });
+  wrap.querySelectorAll(".statusSelect").forEach(function(sel){
+    sel.addEventListener("change", function(){ moveStage(sel.dataset.id, sel.value); renderTable(); });
+  });
+  wrap.querySelectorAll("[data-edit]").forEach(function(b){
+    b.addEventListener("click", function(){ openForm(b.dataset.edit); });
+  });
+  wrap.querySelectorAll("[data-del]").forEach(function(b){
+    b.addEventListener("click", function(){
+      if(confirm("Delete "+b.dataset.del+"? This cannot be undone.")){
+        records = records.filter(function(r){ return r.id!==b.dataset.del; });
+        save(); toast("Deleted "+b.dataset.del); renderTable(); renderBoard();
+      }
+    });
+  });
+}
+
+/* ---------------- filters wiring ---------------- */
+["fType","fPriority","fOverdue"].forEach(function(id){
+  document.getElementById(id).addEventListener("input", renderBoard);
+  document.getElementById(id).addEventListener("change", renderBoard);
+});
+["tType","tPriority","tStatus"].forEach(function(id){
+  document.getElementById(id).addEventListener("change", renderTable);
+});
+document.getElementById("search").addEventListener("input", function(){
+  if(currentTab==="board") renderBoard(); else if(currentTab==="table") renderTable();
+});
+
+/* ---------------- export / import ---------------- */
+document.getElementById("exportBtn").addEventListener("click", function(){
+  var blob = new Blob([JSON.stringify(records, null, 2)], {type:"application/json"});
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "capa-records-"+today()+".json";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  toast("Exported "+records.length+" record(s).");
+});
+document.getElementById("importBtn").addEventListener("click", function(){
+  document.getElementById("importFile").click();
+});
+document.getElementById("importFile").addEventListener("change", function(ev){
+  var file = ev.target.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(){
+    try{
+      var incoming = JSON.parse(reader.result);
+      if(!Array.isArray(incoming)) throw new Error("not an array");
+      var replace = confirm("Import "+incoming.length+" record(s).\n\nOK = merge with existing records (matching CAR # is overwritten)\nCancel = replace all existing records");
+      if(replace){
+        incoming.forEach(function(rec){
+          var i = records.findIndex(function(r){ return r.id===rec.id; });
+          if(i>=0) records[i] = rec; else records.push(rec);
+        });
+      }else{
+        records = incoming;
+      }
+      save();
+      toast("Imported "+incoming.length+" record(s).");
+      renderBoard(); renderTable();
+    }catch(e){
+      toast("Import failed — file is not valid CAPA JSON.");
+    }
+    ev.target.value = "";
+  };
+  reader.readAsText(file);
+});
+
+/* ---------------- init ---------------- */
+load();
+setTab("board");
+
+})();
+</script>
+</body>
+</html>
