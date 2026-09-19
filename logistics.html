@@ -166,7 +166,7 @@
   /* ---------- network map ---------- */
   .map-card{
     border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow);
-    padding:28px;max-width:960px;margin:0 auto 64px;
+    padding:28px;max-width:960px;margin:0 auto;
   }
   .map-legend{display:flex;flex-wrap:wrap;gap:22px;justify-content:center;margin-top:18px;font-size:.85rem;color:var(--ink-700);}
   .map-legend span{display:inline-flex;align-items:center;gap:8px;}
@@ -277,6 +277,7 @@
       <div class="nav-drop" id="offeringsDrop">
         <button type="button" class="nav-drop-toggle" id="offeringsToggle" aria-haspopup="true" aria-expanded="false">Our Offerings <span class="caret">▾</span></button>
         <div class="nav-drop-menu">
+          <a href="index.html#quality"><strong>Quality &amp; Compliance</strong><span>QMS, calibration &amp; in-process QC</span></a>
           <a href="maintenance.html"><strong>Maintenance &amp; Asset Manager</strong><span>CMMS for machines &amp; assets</span></a>
           <a href="arcflashsurvey.html"><strong>Arc Flash Site Survey</strong><span>NFPA 70E survey, labels &amp; proposals</span></a>
           <a href="hrcenter.html"><strong>HR Onboarding, SOPs &amp; Reviews</strong><span>Onboarding, SOP library, review cycles</span></a>
@@ -284,10 +285,10 @@
           <a href="roomdesigner.html"><strong>RoomDesigner</strong><span>Cabinetry &amp; millwork layout</span></a>
           <a href="financecenter.html"><strong>FinanceCenter</strong><span>Draws, commissions &amp; breakeven</span></a>
           <a href="logistics.html"><strong>Logistics &amp; Multi-Site Planner</strong><span>Site selection, freight &amp; scheduling</span></a>
-          <a href="comparison.html"><strong>Platform Comparison</strong><span>vs. email, Excel, Monday &amp; more</span></a>
           <a href="it.html"><strong>For IT</strong><span>System requirements &amp; architecture</span></a>
         </div>
       </div>
+      <a href="comparison.html">Why This Platform</a>
       <a href="contact.html" class="nav-cta">Get in touch</a>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span></button>
@@ -350,11 +351,7 @@
       <p>Every shop, every open job, and every lane between them lives in one model, so "which site should build this" and "who has room this week" are answered from the same live data instead of a phone call to each shop.</p>
     </div>
 
-
-
-
-
-<div class="map-card">
+    <div class="map-card">
       <svg viewBox="0 0 620 380" role="img" aria-labelledby="netTitle netDesc" style="width:100%;height:auto;">
         <title id="netTitle">Multi-site manufacturing and freight network diagram</title>
         <desc id="netDesc">Three manufacturing sites connect via freight lanes to distribution hubs and active job sites across the region.</desc>
@@ -374,49 +371,49 @@
 
         <!-- freight lanes: manufacturing sites -> job sites -->
         <g stroke="#2563eb" stroke-width="2" fill="none" opacity="0.55">
-          <path d="M300,190 L400,130"></path>
-          <path d="M300,190 L420,330"></path>
-          <path d="M300,190 L190,140"></path>
-          <path d="M300,190 L200,120"></path>
-          <path d="M200,120 L420,330" stroke-dasharray="4 5" opacity="0.5"></path>
+          <path d="M300,190 L460,120"></path>
+          <path d="M300,190 L470,260"></path>
+          <path d="M300,190 L210,300"></path>
+          <path d="M300,190 L120,110"></path>
+          <path d="M120,110 L470,260" stroke-dasharray="4 5" opacity="0.5"></path>
         </g>
         <g stroke="#b45309" stroke-width="2" fill="none" opacity="0.5">
-          <path d="M430,80 L400,130"></path>
-          <path d="M430,80 L420,330"></path>
+          <path d="M470,80 L460,120"></path>
+          <path d="M470,80 L470,260"></path>
         </g>
 
         <!-- job site nodes (green) -->
         <g fill="#0d9268">
-          <circle cx="400" cy="130" r="7"></circle>
-          <circle cx="420" cy="330" r="7"></circle>
-          <circle cx="190" cy="140" r="7"></circle>
+          <circle cx="460" cy="120" r="7"></circle>
+          <circle cx="470" cy="260" r="7"></circle>
+          <circle cx="210" cy="300" r="7"></circle>
         </g>
         <g font-size="12" font-family="Segoe UI, sans-serif" fill="#101827">
-          <text x="410" y="126">Charlotte job</text>
-          <text x="430" y="334">Orlando job</text>
-          <text x="120" y="156">Nashville job</text>
+          <text x="472" y="116">Charlotte job</text>
+          <text x="482" y="264">Orlando job</text>
+          <text x="140" y="316">Nashville job</text>
         </g>
 
         <!-- distribution hub (blue) -->
         <g fill="#2563eb">
-          <circle cx="430" cy="80" r="8"></circle>
+          <circle cx="470" cy="80" r="8"></circle>
         </g>
-        <text x="444" y="84" font-size="12" font-family="Segoe UI, sans-serif" fill="#101827">Regional freight hub</text>
+        <text x="484" y="76" font-size="12" font-family="Segoe UI, sans-serif" fill="#101827">Regional freight hub</text>
 
-        <!-- manufacturing sites (warm/orange, larger, "AC" style ring) -->
+        <!-- manufacturing sites (warm/orange, larger, "AC" style ring like reference) -->
         <g>
           <circle cx="300" cy="190" r="17" fill="none" stroke="#b45309" stroke-width="2"></circle>
           <circle cx="300" cy="190" r="9" fill="#b45309"></circle>
-          <text x="250" y="222" font-size="13" font-weight="700" font-family="Segoe UI, sans-serif" fill="#101827">Atlanta — HQ shop</text>
+          <text x="270" y="216" font-size="13" font-weight="700" font-family="Segoe UI, sans-serif" fill="#101827">Atlanta — HQ shop</text>
         </g>
         <g>
-          <circle cx="200" cy="120" r="14" fill="none" stroke="#b45309" stroke-width="2"></circle>
-          <circle cx="200" cy="120" r="7" fill="#b45309"></circle>
-          <text x="146" y="96" font-size="13" font-weight="700" font-family="Segoe UI, sans-serif" fill="#101827">Nashville shop</text>
+          <circle cx="120" cy="110" r="14" fill="none" stroke="#b45309" stroke-width="2"></circle>
+          <circle cx="120" cy="110" r="7" fill="#b45309"></circle>
+          <text x="60" y="94" font-size="13" font-weight="700" font-family="Segoe UI, sans-serif" fill="#101827">Nashville shop</text>
         </g>
         <g>
-          <circle cx="420" cy="330" r="12" fill="none" stroke="#b45309" stroke-width="2" opacity="0.7"></circle>
-          <circle cx="420" cy="330" r="6" fill="#b45309" opacity="0.85"></circle>
+          <circle cx="470" cy="260" r="12" fill="none" stroke="#b45309" stroke-width="2" opacity="0.7"></circle>
+          <circle cx="470" cy="260" r="6" fill="#b45309" opacity="0.85"></circle>
         </g>
       </svg>
 
@@ -427,11 +424,98 @@
       </div>
       <p class="map-note">Illustrative network — every site, hub, and job on this map is a real row in the database, scored and re-ranked as jobs, freight rates, and shop schedules change.</p>
     </div>
+  </div>
+</section>
 
+<section class="soft" id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">What the module does</span>
+      <h2>Site selection, freight, and scheduling — together</h2>
+      <p>These aren't three separate spreadsheets. Picking a site changes the freight estimate, which changes the job cost, which changes whether that site's schedule can absorb the job.</p>
+    </div>
 
+    <div class="module-grid">
+      <div class="module-card">
+        <div class="m-icon">FIT</div>
+        <h4>Best-Fit Site Scoring</h4>
+        <p>For a given job destination, every eligible manufacturing site is scored on freight distance and cost, current capacity, crew skill match, and material availability — ranked, not guessed at.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">FRT</div>
+        <h4>Freight &amp; Landed-Cost Modeling</h4>
+        <p>Distance-based freight and delivery-mode estimates (LTL, FTL, company truck, or crew-carried) per lane, so the "cheapest site to build at" and "cheapest site to ship from" get reconciled before you commit.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">CAP</div>
+        <h4>Capacity-Aware Multi-Site Scheduling</h4>
+        <p>One production calendar across every shop — see what percentage of each site's near-term capacity is already booked before assigning a new job there, not after.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">LANE</div>
+        <h4>Standing Freight Lanes</h4>
+        <p>Recurring routes between a shop and a job cluster (a metro area, a GC's regional footprint) can be saved as a lane with a known rate, so repeat business skips the estimate step entirely.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">JC</div>
+        <h4>Job Costing Tie-In</h4>
+        <p>Whichever site and freight lane get selected for a job, the actual freight and site-labor cost post straight to that job's cost record in FinanceCenter — no separate reconciliation later.</p>
+      </div>
+      <div class="module-card">
+        <div class="m-icon">RE</div>
+        <h4>Re-Score on Change</h4>
+        <p>A shop goes over capacity, a freight rate changes, or a job's destination moves — re-run the fit score and see whether a different site now wins, before material gets cut at the wrong one.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>From a new job to an assigned shop and route</h2>
+    </div>
 
-
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-num">1</div>
+        <div>
+          <h3>Job destination and requirements come in</h3>
+          <p>Delivery address, target install date, and any crew/skill or material requirements attach to the job as soon as it's won — the same job record FinanceCenter and the material requisition workflow already use.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">2</div>
+        <div>
+          <h3>Every eligible site gets scored</h3>
+          <p>Freight distance and mode, current booked capacity for the target week, and material/crew fit are weighed together into one fit score per site — ties broken in favor of the site with more open capacity.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">3</div>
+        <div>
+          <h3>The best-fit site (and a runner-up) is presented</h3>
+          <p>The recommendation shows its reasoning — freight estimate, capacity load, and score breakdown — so a scheduler can accept it or override it with a documented reason.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">4</div>
+        <div>
+          <h3>The job lands on that site's production calendar</h3>
+          <p>Assigning the job books capacity at the chosen site immediately, so the next job's fit score sees the updated load — no two jobs get double-booked into the same week by two different estimators.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">5</div>
+        <div>
+          <h3>Freight and site cost post to the job automatically</h3>
+          <p>The freight estimate — and the actual carrier cost once shipped — write straight to the job's cost record, so the delivered job cost reflects exactly which shop built it and how it got there.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="soft" id="compare">
   <div class="wrap">
@@ -466,14 +550,14 @@
       <h2>Connected to the modules you already run</h2>
     </div>
     <div class="module-note">
-      <span class="n-ico"> </span>
+      <span class="n-ico">💰</span>
       <div>
         <h3>Connects to FinanceCenter &amp; Job Costing</h3>
         <p>Every freight estimate and actual carrier cost this module produces posts to the job's cost record, alongside material and labor — so a job built at the wrong site shows up in the numbers immediately, not at closeout. See the <a href="financecenter.html" style="color:var(--accent);font-weight:600;">FinanceCenter</a> module, including material requisition, PO &amp; receiving.</p>
       </div>
     </div>
     <div class="module-note">
-      <span class="n-ico"></span>
+      <span class="n-ico">🏭</span>
       <div>
         <h3>Connects to Maintenance &amp; Asset Manager</h3>
         <p>A site's real machine uptime and crew availability feed its capacity score here — a shop with a saw down for repair scores lower for new work until that's resolved. See the <a href="maintenance.html" style="color:var(--accent);font-weight:600;">Maintenance &amp; Asset Manager</a> module.</p>

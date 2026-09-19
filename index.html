@@ -534,11 +534,21 @@
     </a>
     <div class="nav-links" id="navLinks">
       <a href="#problem">The Problem</a>
-      <a href="#flythrough">Project Center 2.0</a>
-      <a href="#modules">Platform</a>
+      <div class="nav-drop" id="platformDrop">
+        <button type="button" class="nav-drop-toggle" id="platformToggle" aria-haspopup="true" aria-expanded="false">Platform <span class="caret">▾</span></button>
+        <div class="nav-drop-menu">
+          <a href="#flythrough"><strong>Project Center 2.0</strong><span>Fly-through, start to finish</span></a>
+          <a href="#modules"><strong>Full Platform Depth</strong><span>Every module, by category</span></a>
+          <a href="#gm-home"><strong>GM Home</strong><span>Company-wide executive view</span></a>
+          <a href="#kanban-demo"><strong>Automation</strong><span>Self-advancing workflow demo</span></a>
+          <a href="#roi"><strong>ROI Calculator</strong><span>What double-entry is costing you</span></a>
+          <a href="#about"><strong>About</strong><span>How we build this platform</span></a>
+        </div>
+      </div>
       <div class="nav-drop" id="offeringsDrop">
         <button type="button" class="nav-drop-toggle" id="offeringsToggle" aria-haspopup="true" aria-expanded="false">Our Offerings <span class="caret">▾</span></button>
         <div class="nav-drop-menu">
+          <a href="#quality"><strong>Quality &amp; Compliance</strong><span>QMS, calibration &amp; in-process QC</span></a>
           <a href="maintenance.html"><strong>Maintenance &amp; Asset Manager</strong><span>CMMS for machines &amp; assets</span></a>
           <a href="arcflashsurvey.html"><strong>Arc Flash Site Survey</strong><span>NFPA 70E survey, labels &amp; proposals</span></a>
           <a href="hrcenter.html"><strong>HR Onboarding, SOPs &amp; Reviews</strong><span>Onboarding, SOP library, review cycles</span></a>
@@ -549,10 +559,6 @@
           <a href="it.html"><strong>For IT</strong><span>System requirements &amp; architecture</span></a>
         </div>
       </div>
-      <a href="#gm-home">GM Home</a>
-      <a href="#kanban-demo">Automation</a>
-      <a href="#roi">ROI</a>
-      <a href="#about">About</a>
       <a href="comparison.html">Why This Platform</a>
       <a href="contact.html" class="nav-cta">Get in touch</a>
     </div>
@@ -1177,10 +1183,10 @@
   var yearEl = document.querySelector('[data-year]');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // ---------- "Our Offerings" nav dropdown ----------
-  (function(){
-    var drop = document.getElementById('offeringsDrop');
-    var toggle = document.getElementById('offeringsToggle');
+  // ---------- nav dropdowns ("Platform", "Our Offerings") ----------
+  [['platformDrop','platformToggle'], ['offeringsDrop','offeringsToggle']].forEach(function(ids){
+    var drop = document.getElementById(ids[0]);
+    var toggle = document.getElementById(ids[1]);
     if (!drop || !toggle) return;
     toggle.addEventListener('click', function(e){
       e.preventDefault();
@@ -1193,7 +1199,7 @@
         toggle.setAttribute('aria-expanded', 'false');
       }
     });
-  })();
+  });
 
   // ---------- fly-through ----------
   var stages = [
@@ -1486,13 +1492,34 @@
   document.getElementById('tabBar').innerHTML = tabBarHtml;
   document.getElementById('tabPanels').innerHTML = panelsHtml;
 
+  function activateModuleTab(key){
+    var btn = document.querySelector('.tab-btn[data-key="' + key + '"]');
+    if (!btn) return false;
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active', b === btn); });
+    document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.toggle('active', p.getAttribute('data-key') === key); });
+    return true;
+  }
+
   document.querySelectorAll('.tab-btn').forEach(function(btn){
     btn.addEventListener('click', function(){
-      var key = this.getAttribute('data-key');
-      document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active', b === btn); });
-      document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.toggle('active', p.getAttribute('data-key') === key); });
+      activateModuleTab(this.getAttribute('data-key'));
     });
   });
+
+  // ---------- deep link into a specific module tab, e.g. index.html#quality ----------
+  (function(){
+    var validKeys = categories.map(function(c){ return c.key; });
+    function openFromHash(){
+      var key = window.location.hash.replace('#', '');
+      if (validKeys.indexOf(key) === -1) return;
+      if (activateModuleTab(key)){
+        var modulesSection = document.getElementById('modules');
+        if (modulesSection) setTimeout(function(){ modulesSection.scrollIntoView({behavior:'smooth', block:'start'}); }, 30);
+      }
+    }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+  })();
 
   // ---------- working Kanban demo: the app's real default Bid Pipeline ----------
   var kbColumns = [

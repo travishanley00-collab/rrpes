@@ -209,6 +209,7 @@
       <div class="nav-drop" id="offeringsDrop">
         <button type="button" class="nav-drop-toggle" id="offeringsToggle" aria-haspopup="true" aria-expanded="false">Our Offerings <span class="caret">▾</span></button>
         <div class="nav-drop-menu">
+          <a href="index.html#quality"><strong>Quality &amp; Compliance</strong><span>QMS, calibration &amp; in-process QC</span></a>
           <a href="maintenance.html"><strong>Maintenance &amp; Asset Manager</strong><span>CMMS for machines &amp; assets</span></a>
           <a href="arcflashsurvey.html"><strong>Arc Flash Site Survey</strong><span>NFPA 70E survey, labels &amp; proposals</span></a>
           <a href="hrcenter.html"><strong>HR Onboarding, SOPs &amp; Reviews</strong><span>Onboarding, SOP library, review cycles</span></a>
@@ -244,7 +245,7 @@
         <div class="contact-methods">
           <div class="contact-method">
             <div class="cm-icon">☎</div>
-            <div><b>Call or text</b><span>470.794.2771</span></div>
+            <div><b>Call or text</b><span>720.412.3639</span></div>
           </div>
           <div class="contact-method">
             <div class="cm-icon">✉</div>
@@ -253,45 +254,35 @@
         </div>
       </div>
 
-<form class="contact-form" id="inquiryForm" action="https://api.web3forms.com/submit" method="POST">
-  <!-- Submits to Web3Forms (api.web3forms.com) — a hosted form-relay service
-       tied to an access key below, not a mailbox address. Web3Forms answers
-       CORS properly (unlike a raw Google Apps Script endpoint), so the JS
-       below can read the real success/failure response instead of guessing.
-       The action/method attributes above are a plain-HTML fallback: if a
-       visitor has JavaScript disabled, the browser submits the form to
-       Web3Forms directly and it works the same way, just with a page
-       redirect afterward instead of staying on this page. -->
-  <input type="hidden" name="access_key" value="047de071-cdb7-4086-bca4-9afc064fd9dc" />
-  <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-  
-  <div class="form-row">
-    <label for="cName">Name</label>
-    <input type="text" id="cName" name="name" required />
-  </div>
-  
-  <div class="form-row">
-    <label for="cEmail">Your email</label>
-    <input type="email" id="cEmail" name="email" required />
-  </div>
-
-  <div class="form-row">
-    <label for="cPhone">Phone number</label>
-    <input type="tel" id="cPhone" name="phone" required />
-  </div>
-  
-  <div class="form-row">
-    <label for="cMsg">What are you looking to solve?</label>
-    <textarea id="cMsg" name="message" required></textarea>
-  </div>
-  
-  <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Submit Inquiry</button>
-  <p class="form-note" id="formNote">Sent straight to our team — we'll reply to the email address you enter above.</p>
-  <div class="form-success" id="formSuccess">Thanks — your message has been sent. We'll be in touch shortly.</div>
-  <div class="form-error" id="formError">Something went wrong sending that — please try again, or reach us directly at the number above.</div>
-</form>
-  
-   </div>
+      <form class="contact-form" id="inquiryForm" action="https://api.web3forms.com/submit" method="POST">
+        <!-- Submits to Web3Forms (api.web3forms.com) — a hosted form-relay service
+             tied to an access key below, not a mailbox address. Web3Forms answers
+             CORS properly (unlike a raw Google Apps Script endpoint), so the JS
+             below can read the real success/failure response instead of guessing.
+             The action/method attributes above are a plain-HTML fallback: if a
+             visitor has JavaScript disabled, the browser submits the form to
+             Web3Forms directly and it works the same way, just with a page
+             redirect afterward instead of staying on this page. -->
+        <input type="hidden" name="access_key" value="047de071-cdb7-4086-bca4-9afc064fd9dc" />
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+        <div class="form-row">
+          <label for="cName">Name</label>
+          <input type="text" id="cName" name="name" required />
+        </div>
+        <div class="form-row">
+          <label for="cEmail">Your email</label>
+          <input type="email" id="cEmail" name="email" required />
+        </div>
+        <div class="form-row">
+          <label for="cMsg">What are you looking to solve?</label>
+          <textarea id="cMsg" name="message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Submit Inquiry</button>
+        <p class="form-note" id="formNote">Sent straight to our team — we'll reply to the email address you enter above.</p>
+        <div class="form-success" id="formSuccess">Thanks — your message has been sent. We'll be in touch shortly.</div>
+        <div class="form-error" id="formError">Something went wrong sending that — please try again, or reach us directly at the number above.</div>
+      </form>
+    </div>
 
     <div class="also-see">
       <h3>Looking for a specific module?</h3>
